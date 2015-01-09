@@ -15,13 +15,32 @@ public class ThriftServer {
     private static Logger log = LoggerFactory.getLogger(ThriftServer.class);
 
     public static void main(String [] args) {
+
+        Integer arg0 = 0;
+
+        if (args.length > 0)
+        {
+            try {
+                arg0 = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[0] + " must be an integer.");
+                System.exit(1);
+            }
+        }
+        else
+        {
+            System.err.println("Usage: ./server port");
+            System.exit(1);
+        }
+
+        final Integer port = arg0;
         try {
             ThriftServerHandler handler = new ThriftServerHandler();
             final NodeService.Processor processor = new NodeService.Processor(handler);
 
             Runnable simple = new Runnable() {
                 public void run() {
-                    simple(processor,9090);
+                    simple(processor,port);
                 }
             };
 

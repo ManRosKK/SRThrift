@@ -4,6 +4,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -20,6 +21,12 @@ public class ThriftServerTest {
         return s.hasNext() ? s.next() : "";
     }
 
+    private void runserver(int port) throws IOException {
+        Process proc = Runtime.getRuntime().exec("java -jar " +
+                "C:\\currentProjects\\SR\\SRThrift\\java-server\\target\\server-1.0-SNAPSHOT-jar-with-dependencies.jar " +
+                port);
+    }
+
     @BeforeMethod
     public void setUp() throws Exception {
 
@@ -31,30 +38,52 @@ public class ThriftServerTest {
     }
 
     @Test
-    public void testMain() throws Exception {
-       //runjar
-        Process proc = Runtime.getRuntime().exec("java -jar " +
-            "C:\\currentProjects\\SR\\SRThrift\\java-server\\target\\server-1.0-SNAPSHOT-jar-with-dependencies.jar");
-
-        Thread.sleep(100);
+    public void testPingAndKill9080() throws Exception {
+        //run server
+        int port = 9080;
+        runserver(port);
 
         //ping server
-        ThriftTestClient.pingserver(9090);
+        ThriftTestClient.pingserver(port);
 
         //kill server - should fail with transport
         try{
-            //ping again - should throw TTransport
-            ThriftTestClient.killserver(9090);
+            ThriftTestClient.killserver(port);
+        }
+        catch (TTransportException e){};
+
+        try{
+            //ping again - ping should throw an exception
+            ThriftTestClient.pingserver(port);
             fail();
         }
         catch (TTransportException e)
         {
             return;
         }
+    }
+
+    @Test
+    public void testPingAndKill9090() throws Exception {
+        //run server
+        int port = 9090;
+        runserver(port);
+
+        //ping server
+        ThriftTestClient.pingserver(port);
+
+        //kill server - should fail with transport
+        try{
+            ThriftTestClient.killserver(port);
+        }
+        catch (TTransportException e)
+        {
+
+        }
 
         try{
             //ping again - should fail
-            ThriftTestClient.pingserver(9090);
+            ThriftTestClient.pingserver(port);
             fail();
         }
         catch (TTransportException e)
