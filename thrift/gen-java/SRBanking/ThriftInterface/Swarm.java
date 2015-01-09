@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, java.io.Serializable, Cloneable, Comparable<Swarm> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Swarm");
 
-  private static final org.apache.thrift.protocol.TField LEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("Leader", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-  private static final org.apache.thrift.protocol.TField MEMBERS_FIELD_DESC = new org.apache.thrift.protocol.TField("Members", org.apache.thrift.protocol.TType.LIST, (short)2);
-  private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("Transfer", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+  private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+  private static final org.apache.thrift.protocol.TField LEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("leader", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+  private static final org.apache.thrift.protocol.TField MEMBERS_FIELD_DESC = new org.apache.thrift.protocol.TField("members", org.apache.thrift.protocol.TType.LIST, (short)3);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -45,15 +45,15 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
     schemes.put(TupleScheme.class, new SwarmTupleSchemeFactory());
   }
 
-  public NodeID Leader; // required
-  public List<NodeID> Members; // required
-  public TransferID Transfer; // required
+  public TransferID transfer; // required
+  public NodeID leader; // required
+  public List<NodeID> members; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    LEADER((short)1, "Leader"),
-    MEMBERS((short)2, "Members"),
-    TRANSFER((short)3, "Transfer");
+    TRANSFER((short)1, "transfer"),
+    LEADER((short)2, "leader"),
+    MEMBERS((short)3, "members");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -68,12 +68,12 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // LEADER
-          return LEADER;
-        case 2: // MEMBERS
-          return MEMBERS;
-        case 3: // TRANSFER
+        case 1: // TRANSFER
           return TRANSFER;
+        case 2: // LEADER
+          return LEADER;
+        case 3: // MEMBERS
+          return MEMBERS;
         default:
           return null;
       }
@@ -117,13 +117,13 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.LEADER, new org.apache.thrift.meta_data.FieldMetaData("Leader", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
+    tmpMap.put(_Fields.LEADER, new org.apache.thrift.meta_data.FieldMetaData("leader", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
-    tmpMap.put(_Fields.MEMBERS, new org.apache.thrift.meta_data.FieldMetaData("Members", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.MEMBERS, new org.apache.thrift.meta_data.FieldMetaData("members", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class))));
-    tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("Transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Swarm.class, metaDataMap);
   }
@@ -132,32 +132,32 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
   }
 
   public Swarm(
-    NodeID Leader,
-    List<NodeID> Members,
-    TransferID Transfer)
+    TransferID transfer,
+    NodeID leader,
+    List<NodeID> members)
   {
     this();
-    this.Leader = Leader;
-    this.Members = Members;
-    this.Transfer = Transfer;
+    this.transfer = transfer;
+    this.leader = leader;
+    this.members = members;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public Swarm(Swarm other) {
+    if (other.isSetTransfer()) {
+      this.transfer = new TransferID(other.transfer);
+    }
     if (other.isSetLeader()) {
-      this.Leader = new NodeID(other.Leader);
+      this.leader = new NodeID(other.leader);
     }
     if (other.isSetMembers()) {
-      List<NodeID> __this__Members = new ArrayList<NodeID>(other.Members.size());
-      for (NodeID other_element : other.Members) {
-        __this__Members.add(new NodeID(other_element));
+      List<NodeID> __this__members = new ArrayList<NodeID>(other.members.size());
+      for (NodeID other_element : other.members) {
+        __this__members.add(new NodeID(other_element));
       }
-      this.Members = __this__Members;
-    }
-    if (other.isSetTransfer()) {
-      this.Transfer = new TransferID(other.Transfer);
+      this.members = __this__members;
     }
   }
 
@@ -167,100 +167,108 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
 
   @Override
   public void clear() {
-    this.Leader = null;
-    this.Members = null;
-    this.Transfer = null;
-  }
-
-  public NodeID getLeader() {
-    return this.Leader;
-  }
-
-  public Swarm setLeader(NodeID Leader) {
-    this.Leader = Leader;
-    return this;
-  }
-
-  public void unsetLeader() {
-    this.Leader = null;
-  }
-
-  /** Returns true if field Leader is set (has been assigned a value) and false otherwise */
-  public boolean isSetLeader() {
-    return this.Leader != null;
-  }
-
-  public void setLeaderIsSet(boolean value) {
-    if (!value) {
-      this.Leader = null;
-    }
-  }
-
-  public int getMembersSize() {
-    return (this.Members == null) ? 0 : this.Members.size();
-  }
-
-  public java.util.Iterator<NodeID> getMembersIterator() {
-    return (this.Members == null) ? null : this.Members.iterator();
-  }
-
-  public void addToMembers(NodeID elem) {
-    if (this.Members == null) {
-      this.Members = new ArrayList<NodeID>();
-    }
-    this.Members.add(elem);
-  }
-
-  public List<NodeID> getMembers() {
-    return this.Members;
-  }
-
-  public Swarm setMembers(List<NodeID> Members) {
-    this.Members = Members;
-    return this;
-  }
-
-  public void unsetMembers() {
-    this.Members = null;
-  }
-
-  /** Returns true if field Members is set (has been assigned a value) and false otherwise */
-  public boolean isSetMembers() {
-    return this.Members != null;
-  }
-
-  public void setMembersIsSet(boolean value) {
-    if (!value) {
-      this.Members = null;
-    }
+    this.transfer = null;
+    this.leader = null;
+    this.members = null;
   }
 
   public TransferID getTransfer() {
-    return this.Transfer;
+    return this.transfer;
   }
 
-  public Swarm setTransfer(TransferID Transfer) {
-    this.Transfer = Transfer;
+  public Swarm setTransfer(TransferID transfer) {
+    this.transfer = transfer;
     return this;
   }
 
   public void unsetTransfer() {
-    this.Transfer = null;
+    this.transfer = null;
   }
 
-  /** Returns true if field Transfer is set (has been assigned a value) and false otherwise */
+  /** Returns true if field transfer is set (has been assigned a value) and false otherwise */
   public boolean isSetTransfer() {
-    return this.Transfer != null;
+    return this.transfer != null;
   }
 
   public void setTransferIsSet(boolean value) {
     if (!value) {
-      this.Transfer = null;
+      this.transfer = null;
+    }
+  }
+
+  public NodeID getLeader() {
+    return this.leader;
+  }
+
+  public Swarm setLeader(NodeID leader) {
+    this.leader = leader;
+    return this;
+  }
+
+  public void unsetLeader() {
+    this.leader = null;
+  }
+
+  /** Returns true if field leader is set (has been assigned a value) and false otherwise */
+  public boolean isSetLeader() {
+    return this.leader != null;
+  }
+
+  public void setLeaderIsSet(boolean value) {
+    if (!value) {
+      this.leader = null;
+    }
+  }
+
+  public int getMembersSize() {
+    return (this.members == null) ? 0 : this.members.size();
+  }
+
+  public java.util.Iterator<NodeID> getMembersIterator() {
+    return (this.members == null) ? null : this.members.iterator();
+  }
+
+  public void addToMembers(NodeID elem) {
+    if (this.members == null) {
+      this.members = new ArrayList<NodeID>();
+    }
+    this.members.add(elem);
+  }
+
+  public List<NodeID> getMembers() {
+    return this.members;
+  }
+
+  public Swarm setMembers(List<NodeID> members) {
+    this.members = members;
+    return this;
+  }
+
+  public void unsetMembers() {
+    this.members = null;
+  }
+
+  /** Returns true if field members is set (has been assigned a value) and false otherwise */
+  public boolean isSetMembers() {
+    return this.members != null;
+  }
+
+  public void setMembersIsSet(boolean value) {
+    if (!value) {
+      this.members = null;
     }
   }
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
+    case TRANSFER:
+      if (value == null) {
+        unsetTransfer();
+      } else {
+        setTransfer((TransferID)value);
+      }
+      break;
+
     case LEADER:
       if (value == null) {
         unsetLeader();
@@ -277,27 +285,19 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
       }
       break;
 
-    case TRANSFER:
-      if (value == null) {
-        unsetTransfer();
-      } else {
-        setTransfer((TransferID)value);
-      }
-      break;
-
     }
   }
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
+    case TRANSFER:
+      return getTransfer();
+
     case LEADER:
       return getLeader();
 
     case MEMBERS:
       return getMembers();
-
-    case TRANSFER:
-      return getTransfer();
 
     }
     throw new IllegalStateException();
@@ -310,12 +310,12 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
     }
 
     switch (field) {
+    case TRANSFER:
+      return isSetTransfer();
     case LEADER:
       return isSetLeader();
     case MEMBERS:
       return isSetMembers();
-    case TRANSFER:
-      return isSetTransfer();
     }
     throw new IllegalStateException();
   }
@@ -333,30 +333,30 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
     if (that == null)
       return false;
 
-    boolean this_present_Leader = true && this.isSetLeader();
-    boolean that_present_Leader = true && that.isSetLeader();
-    if (this_present_Leader || that_present_Leader) {
-      if (!(this_present_Leader && that_present_Leader))
+    boolean this_present_transfer = true && this.isSetTransfer();
+    boolean that_present_transfer = true && that.isSetTransfer();
+    if (this_present_transfer || that_present_transfer) {
+      if (!(this_present_transfer && that_present_transfer))
         return false;
-      if (!this.Leader.equals(that.Leader))
-        return false;
-    }
-
-    boolean this_present_Members = true && this.isSetMembers();
-    boolean that_present_Members = true && that.isSetMembers();
-    if (this_present_Members || that_present_Members) {
-      if (!(this_present_Members && that_present_Members))
-        return false;
-      if (!this.Members.equals(that.Members))
+      if (!this.transfer.equals(that.transfer))
         return false;
     }
 
-    boolean this_present_Transfer = true && this.isSetTransfer();
-    boolean that_present_Transfer = true && that.isSetTransfer();
-    if (this_present_Transfer || that_present_Transfer) {
-      if (!(this_present_Transfer && that_present_Transfer))
+    boolean this_present_leader = true && this.isSetLeader();
+    boolean that_present_leader = true && that.isSetLeader();
+    if (this_present_leader || that_present_leader) {
+      if (!(this_present_leader && that_present_leader))
         return false;
-      if (!this.Transfer.equals(that.Transfer))
+      if (!this.leader.equals(that.leader))
+        return false;
+    }
+
+    boolean this_present_members = true && this.isSetMembers();
+    boolean that_present_members = true && that.isSetMembers();
+    if (this_present_members || that_present_members) {
+      if (!(this_present_members && that_present_members))
+        return false;
+      if (!this.members.equals(that.members))
         return false;
     }
 
@@ -376,12 +376,22 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
 
     int lastComparison = 0;
 
+    lastComparison = Boolean.valueOf(isSetTransfer()).compareTo(other.isSetTransfer());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetTransfer()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transfer, other.transfer);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetLeader()).compareTo(other.isSetLeader());
     if (lastComparison != 0) {
       return lastComparison;
     }
     if (isSetLeader()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Leader, other.Leader);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.leader, other.leader);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -391,17 +401,7 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
       return lastComparison;
     }
     if (isSetMembers()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Members, other.Members);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetTransfer()).compareTo(other.isSetTransfer());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetTransfer()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Transfer, other.Transfer);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.members, other.members);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -426,27 +426,27 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
     StringBuilder sb = new StringBuilder("Swarm(");
     boolean first = true;
 
-    sb.append("Leader:");
-    if (this.Leader == null) {
+    sb.append("transfer:");
+    if (this.transfer == null) {
       sb.append("null");
     } else {
-      sb.append(this.Leader);
+      sb.append(this.transfer);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("Members:");
-    if (this.Members == null) {
+    sb.append("leader:");
+    if (this.leader == null) {
       sb.append("null");
     } else {
-      sb.append(this.Members);
+      sb.append(this.leader);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("Transfer:");
-    if (this.Transfer == null) {
+    sb.append("members:");
+    if (this.members == null) {
       sb.append("null");
     } else {
-      sb.append(this.Transfer);
+      sb.append(this.members);
     }
     first = false;
     sb.append(")");
@@ -456,11 +456,11 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (Leader != null) {
-      Leader.validate();
+    if (transfer != null) {
+      transfer.validate();
     }
-    if (Transfer != null) {
-      Transfer.validate();
+    if (leader != null) {
+      leader.validate();
     }
   }
 
@@ -498,39 +498,39 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
           break;
         }
         switch (schemeField.id) {
-          case 1: // LEADER
+          case 1: // TRANSFER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.Leader = new NodeID();
-              struct.Leader.read(iprot);
+              struct.transfer = new TransferID();
+              struct.transfer.read(iprot);
+              struct.setTransferIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 2: // LEADER
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.leader = new NodeID();
+              struct.leader.read(iprot);
               struct.setLeaderIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // MEMBERS
+          case 3: // MEMBERS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list8 = iprot.readListBegin();
-                struct.Members = new ArrayList<NodeID>(_list8.size);
-                for (int _i9 = 0; _i9 < _list8.size; ++_i9)
+                org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
+                struct.members = new ArrayList<NodeID>(_list0.size);
+                for (int _i1 = 0; _i1 < _list0.size; ++_i1)
                 {
-                  NodeID _elem10;
-                  _elem10 = new NodeID();
-                  _elem10.read(iprot);
-                  struct.Members.add(_elem10);
+                  NodeID _elem2;
+                  _elem2 = new NodeID();
+                  _elem2.read(iprot);
+                  struct.members.add(_elem2);
                 }
                 iprot.readListEnd();
               }
               struct.setMembersIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 3: // TRANSFER
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.Transfer = new TransferID();
-              struct.Transfer.read(iprot);
-              struct.setTransferIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -550,26 +550,26 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.Leader != null) {
-        oprot.writeFieldBegin(LEADER_FIELD_DESC);
-        struct.Leader.write(oprot);
+      if (struct.transfer != null) {
+        oprot.writeFieldBegin(TRANSFER_FIELD_DESC);
+        struct.transfer.write(oprot);
         oprot.writeFieldEnd();
       }
-      if (struct.Members != null) {
+      if (struct.leader != null) {
+        oprot.writeFieldBegin(LEADER_FIELD_DESC);
+        struct.leader.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      if (struct.members != null) {
         oprot.writeFieldBegin(MEMBERS_FIELD_DESC);
         {
-          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.Members.size()));
-          for (NodeID _iter11 : struct.Members)
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.members.size()));
+          for (NodeID _iter3 : struct.members)
           {
-            _iter11.write(oprot);
+            _iter3.write(oprot);
           }
           oprot.writeListEnd();
         }
-        oprot.writeFieldEnd();
-      }
-      if (struct.Transfer != null) {
-        oprot.writeFieldBegin(TRANSFER_FIELD_DESC);
-        struct.Transfer.write(oprot);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -590,30 +590,30 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
     public void write(org.apache.thrift.protocol.TProtocol prot, Swarm struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetLeader()) {
+      if (struct.isSetTransfer()) {
         optionals.set(0);
       }
-      if (struct.isSetMembers()) {
+      if (struct.isSetLeader()) {
         optionals.set(1);
       }
-      if (struct.isSetTransfer()) {
+      if (struct.isSetMembers()) {
         optionals.set(2);
       }
       oprot.writeBitSet(optionals, 3);
+      if (struct.isSetTransfer()) {
+        struct.transfer.write(oprot);
+      }
       if (struct.isSetLeader()) {
-        struct.Leader.write(oprot);
+        struct.leader.write(oprot);
       }
       if (struct.isSetMembers()) {
         {
-          oprot.writeI32(struct.Members.size());
-          for (NodeID _iter12 : struct.Members)
+          oprot.writeI32(struct.members.size());
+          for (NodeID _iter4 : struct.members)
           {
-            _iter12.write(oprot);
+            _iter4.write(oprot);
           }
         }
-      }
-      if (struct.isSetTransfer()) {
-        struct.Transfer.write(oprot);
       }
     }
 
@@ -622,28 +622,28 @@ public class Swarm implements org.apache.thrift.TBase<Swarm, Swarm._Fields>, jav
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(3);
       if (incoming.get(0)) {
-        struct.Leader = new NodeID();
-        struct.Leader.read(iprot);
-        struct.setLeaderIsSet(true);
+        struct.transfer = new TransferID();
+        struct.transfer.read(iprot);
+        struct.setTransferIsSet(true);
       }
       if (incoming.get(1)) {
+        struct.leader = new NodeID();
+        struct.leader.read(iprot);
+        struct.setLeaderIsSet(true);
+      }
+      if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.Members = new ArrayList<NodeID>(_list13.size);
-          for (int _i14 = 0; _i14 < _list13.size; ++_i14)
+          org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.members = new ArrayList<NodeID>(_list5.size);
+          for (int _i6 = 0; _i6 < _list5.size; ++_i6)
           {
-            NodeID _elem15;
-            _elem15 = new NodeID();
-            _elem15.read(iprot);
-            struct.Members.add(_elem15);
+            NodeID _elem7;
+            _elem7 = new NodeID();
+            _elem7.read(iprot);
+            struct.members.add(_elem7);
           }
         }
         struct.setMembersIsSet(true);
-      }
-      if (incoming.get(2)) {
-        struct.Transfer = new TransferID();
-        struct.Transfer.read(iprot);
-        struct.setTransferIsSet(true);
       }
     }
   }

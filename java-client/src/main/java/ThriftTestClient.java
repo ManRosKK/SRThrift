@@ -1,4 +1,4 @@
-import SRBanking.ThriftInterface.NodeService;
+import SRBanking.ThriftInterface.*;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -54,6 +54,42 @@ public class ThriftTestClient {
         client.stop();
 
         log.info("Server killed");
+
+        transport.close();
+    }
+
+    public static long getBalance(int port) throws TException {
+        TTransport transport;
+
+        transport = new TSocket("localhost", port);
+        transport.open();
+
+        TProtocol protocol = new TBinaryProtocol(transport);
+        NodeService.Client client = new NodeService.Client(protocol);
+
+        long balance = client.GetAccountBalance();
+
+        transport.close();
+
+        return balance;
+    }
+
+    public static void makeTransfer(String IPS, int portS,String IPR, int portR, long value) throws TException {
+        TTransport transport;
+
+        transport = new TSocket(IPS, portS);
+        transport.open();
+
+        TProtocol protocol = new TBinaryProtocol(transport);
+        NodeService.Client client = new NodeService.Client(protocol);
+
+        NodeID receiver = new NodeID();
+        receiver.setPort(portR);
+        IPAddress ipAddressR = new IPAddress();
+        ipAddressR.setIP(IPR);
+        receiver.setAddress(ipAddressR);
+
+        client.MakeTransfer(receiver,value);
 
         transport.close();
     }

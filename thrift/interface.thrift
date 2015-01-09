@@ -1,56 +1,73 @@
 namespace * SRBanking.ThriftInterface
 
+typedef i64 AccountBalanceType
+
 struct IPAddress
 {
-  1: list<byte> IP
+  1: string IP
 }
 struct NodeID
 {
-  1: IPAddress Address,
-  2: i32	   Port
+  1: IPAddress address,
+  2: i32  port
 }
 
 struct TransferID
 {
-	1: NodeID Sender,
-	2: NodeID Receiver,
-	3: i64	  LP
+    1: NodeID sender,
+    2: NodeID receiver,
+    3: i64 counter
 }
 struct Swarm
 {
-  1: NodeID Leader,
-  2: list<NodeID> Members,
-  3: TransferID Transfer
+   1: TransferID transfer
+   2: NodeID leader,
+   3: list<NodeID> members,
 }
 struct TransferData
 {
-	1: TransferID transfer,
-	2: i64 Value 
+    1: TransferID transferID,
+    2: AccountBalanceType Value 
 }
+
 exception  NotSwarmMemeber{
-  1: NodeID ReceiverNode,
-  2: TransferID Transfer
+    1: NodeID ReceiverNode,
+    2: TransferID Transfer
 }
 exception  WrongSwarmLeader{
-  1: NodeID ReceiverNode,
-  2: NodeID Leader,
-  3: TransferID Transfer
+    1: NodeID ReceiverNode,
+    2: NodeID Leader,
+    3: TransferID Transfer
 }
 exception  AlreadySwarmMemeber{
-  1: NodeID ReceiverNode,
-  2: NodeID Leader,
-  3: TransferID Transfer
+    1: NodeID ReceiverNode,
+    2: NodeID Leader,
+    3: TransferID Transfer
 }
 service NodeService
 {
-    /**
-	* pings node
-	*/
+   /**
+   * CLIENT INTERFACE
+   */
+      
+  /**
+  *
+  */ 
+  void MakeTransfer(1: NodeID receiver,2: AccountBalanceType value),
+
+  /**
+  *
+  */ 
+  AccountBalanceType GetAccountBalance(),
+  
+  /**
+  * pings node
+  */
   void Ping(),
   /**
   * pings Swarm and checks if leader is a leader
   */
-  void PingSwarm(1:NodeID leader,2:TransferID transfer ) throws (1: NotSwarmMemeber exc),
+  void PingSwarm(1: NodeID leader,2: TransferID transfer ) throws (1: NotSwarmMemeber exc),
   /**
   *
   */
@@ -78,7 +95,7 @@ service NodeService
   /**
   *
   */ 
-  void MakeTransfer(1: TransferData transfer),
+  void DeliverTransfer(1: TransferData transfer),
 
   list<Swarm> GetSwarmList(),
   

@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 public class TransferData implements org.apache.thrift.TBase<TransferData, TransferData._Fields>, java.io.Serializable, Cloneable, Comparable<TransferData> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TransferData");
 
-  private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+  private static final org.apache.thrift.protocol.TField TRANSFER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("transferID", org.apache.thrift.protocol.TType.STRUCT, (short)1);
   private static final org.apache.thrift.protocol.TField VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("Value", org.apache.thrift.protocol.TType.I64, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -44,12 +44,12 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
     schemes.put(TupleScheme.class, new TransferDataTupleSchemeFactory());
   }
 
-  public TransferID transfer; // required
+  public TransferID transferID; // required
   public long Value; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    TRANSFER((short)1, "transfer"),
+    TRANSFER_ID((short)1, "transferID"),
     VALUE((short)2, "Value");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -65,8 +65,8 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // TRANSFER
-          return TRANSFER;
+        case 1: // TRANSFER_ID
+          return TRANSFER_ID;
         case 2: // VALUE
           return VALUE;
         default:
@@ -114,10 +114,10 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.TRANSFER_ID, new org.apache.thrift.meta_data.FieldMetaData("transferID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
     tmpMap.put(_Fields.VALUE, new org.apache.thrift.meta_data.FieldMetaData("Value", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64        , "AccountBalanceType")));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TransferData.class, metaDataMap);
   }
@@ -126,11 +126,11 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
   }
 
   public TransferData(
-    TransferID transfer,
+    TransferID transferID,
     long Value)
   {
     this();
-    this.transfer = transfer;
+    this.transferID = transferID;
     this.Value = Value;
     setValueIsSet(true);
   }
@@ -140,8 +140,8 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
    */
   public TransferData(TransferData other) {
     __isset_bitfield = other.__isset_bitfield;
-    if (other.isSetTransfer()) {
-      this.transfer = new TransferID(other.transfer);
+    if (other.isSetTransferID()) {
+      this.transferID = new TransferID(other.transferID);
     }
     this.Value = other.Value;
   }
@@ -152,32 +152,32 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
 
   @Override
   public void clear() {
-    this.transfer = null;
+    this.transferID = null;
     setValueIsSet(false);
     this.Value = 0;
   }
 
-  public TransferID getTransfer() {
-    return this.transfer;
+  public TransferID getTransferID() {
+    return this.transferID;
   }
 
-  public TransferData setTransfer(TransferID transfer) {
-    this.transfer = transfer;
+  public TransferData setTransferID(TransferID transferID) {
+    this.transferID = transferID;
     return this;
   }
 
-  public void unsetTransfer() {
-    this.transfer = null;
+  public void unsetTransferID() {
+    this.transferID = null;
   }
 
-  /** Returns true if field transfer is set (has been assigned a value) and false otherwise */
-  public boolean isSetTransfer() {
-    return this.transfer != null;
+  /** Returns true if field transferID is set (has been assigned a value) and false otherwise */
+  public boolean isSetTransferID() {
+    return this.transferID != null;
   }
 
-  public void setTransferIsSet(boolean value) {
+  public void setTransferIDIsSet(boolean value) {
     if (!value) {
-      this.transfer = null;
+      this.transferID = null;
     }
   }
 
@@ -206,11 +206,11 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
-    case TRANSFER:
+    case TRANSFER_ID:
       if (value == null) {
-        unsetTransfer();
+        unsetTransferID();
       } else {
-        setTransfer((TransferID)value);
+        setTransferID((TransferID)value);
       }
       break;
 
@@ -227,8 +227,8 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
-    case TRANSFER:
-      return getTransfer();
+    case TRANSFER_ID:
+      return getTransferID();
 
     case VALUE:
       return Long.valueOf(getValue());
@@ -244,8 +244,8 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
     }
 
     switch (field) {
-    case TRANSFER:
-      return isSetTransfer();
+    case TRANSFER_ID:
+      return isSetTransferID();
     case VALUE:
       return isSetValue();
     }
@@ -265,12 +265,12 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
     if (that == null)
       return false;
 
-    boolean this_present_transfer = true && this.isSetTransfer();
-    boolean that_present_transfer = true && that.isSetTransfer();
-    if (this_present_transfer || that_present_transfer) {
-      if (!(this_present_transfer && that_present_transfer))
+    boolean this_present_transferID = true && this.isSetTransferID();
+    boolean that_present_transferID = true && that.isSetTransferID();
+    if (this_present_transferID || that_present_transferID) {
+      if (!(this_present_transferID && that_present_transferID))
         return false;
-      if (!this.transfer.equals(that.transfer))
+      if (!this.transferID.equals(that.transferID))
         return false;
     }
 
@@ -299,12 +299,12 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
 
     int lastComparison = 0;
 
-    lastComparison = Boolean.valueOf(isSetTransfer()).compareTo(other.isSetTransfer());
+    lastComparison = Boolean.valueOf(isSetTransferID()).compareTo(other.isSetTransferID());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetTransfer()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transfer, other.transfer);
+    if (isSetTransferID()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transferID, other.transferID);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -339,11 +339,11 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
     StringBuilder sb = new StringBuilder("TransferData(");
     boolean first = true;
 
-    sb.append("transfer:");
-    if (this.transfer == null) {
+    sb.append("transferID:");
+    if (this.transferID == null) {
       sb.append("null");
     } else {
-      sb.append(this.transfer);
+      sb.append(this.transferID);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -357,8 +357,8 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (transfer != null) {
-      transfer.validate();
+    if (transferID != null) {
+      transferID.validate();
     }
   }
 
@@ -398,11 +398,11 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
           break;
         }
         switch (schemeField.id) {
-          case 1: // TRANSFER
+          case 1: // TRANSFER_ID
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.transfer = new TransferID();
-              struct.transfer.read(iprot);
-              struct.setTransferIsSet(true);
+              struct.transferID = new TransferID();
+              struct.transferID.read(iprot);
+              struct.setTransferIDIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -430,9 +430,9 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.transfer != null) {
-        oprot.writeFieldBegin(TRANSFER_FIELD_DESC);
-        struct.transfer.write(oprot);
+      if (struct.transferID != null) {
+        oprot.writeFieldBegin(TRANSFER_ID_FIELD_DESC);
+        struct.transferID.write(oprot);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldBegin(VALUE_FIELD_DESC);
@@ -456,15 +456,15 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
     public void write(org.apache.thrift.protocol.TProtocol prot, TransferData struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetTransfer()) {
+      if (struct.isSetTransferID()) {
         optionals.set(0);
       }
       if (struct.isSetValue()) {
         optionals.set(1);
       }
       oprot.writeBitSet(optionals, 2);
-      if (struct.isSetTransfer()) {
-        struct.transfer.write(oprot);
+      if (struct.isSetTransferID()) {
+        struct.transferID.write(oprot);
       }
       if (struct.isSetValue()) {
         oprot.writeI64(struct.Value);
@@ -476,9 +476,9 @@ public class TransferData implements org.apache.thrift.TBase<TransferData, Trans
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
-        struct.transfer = new TransferID();
-        struct.transfer.read(iprot);
-        struct.setTransferIsSet(true);
+        struct.transferID = new TransferID();
+        struct.transferID.read(iprot);
+        struct.setTransferIDIsSet(true);
       }
       if (incoming.get(1)) {
         struct.Value = iprot.readI64();

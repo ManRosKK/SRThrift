@@ -1,6 +1,7 @@
 import SRBanking.ThriftInterface.NodeService;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
+import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 
@@ -16,26 +17,33 @@ public class ThriftServer {
 
     public static void main(String [] args) {
 
-        Integer arg0 = 0;
+        String arg0 = "";
+        Integer arg1 = 0;
+        Integer arg2 = 0;
 
-        if (args.length > 0)
+        if (args.length ==  3)
         {
             try {
-                arg0 = Integer.parseInt(args[0]);
+                arg0 = args[0];
+                arg1 = Integer.parseInt(args[1]);
+                arg2 = Integer.parseInt(args[2]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument" + args[0] + " must be an integer.");
+                System.err.println("Argument 1 and argument 2 " + args[0] + " must be integers.");
                 System.exit(1);
             }
         }
         else
         {
-            System.err.println("Usage: ./server port");
+            System.err.println("Usage: ./server ip port balance");
             System.exit(1);
         }
 
-        final Integer port = arg0;
+        final String IP = arg0;
+        final Integer port = arg1;
+        final Integer balance = arg2;
+
         try {
-            ThriftServerHandler handler = new ThriftServerHandler();
+            ThriftServerHandler handler = new ThriftServerHandler(IP,port,balance);
             final NodeService.Processor processor = new NodeService.Processor(handler);
 
             Runnable simple = new Runnable() {
@@ -53,7 +61,7 @@ public class ThriftServer {
     private static void simple(NodeService.Processor processor, int port) {
         try {
             TServerTransport serverTransport = new TServerSocket(port);
-            TServer server = new TSimpleServer(new TServer.Args(serverTransport).processor(processor));
+            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(serverTransport).processor(processor));
 
             log.info("Starting the simple server " + port);
             server.serve();

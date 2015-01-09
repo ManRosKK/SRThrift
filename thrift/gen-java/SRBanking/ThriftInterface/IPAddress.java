@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._Fields>, java.io.Serializable, Cloneable, Comparable<IPAddress> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("IPAddress");
 
-  private static final org.apache.thrift.protocol.TField IP_FIELD_DESC = new org.apache.thrift.protocol.TField("IP", org.apache.thrift.protocol.TType.LIST, (short)1);
+  private static final org.apache.thrift.protocol.TField IP_FIELD_DESC = new org.apache.thrift.protocol.TField("IP", org.apache.thrift.protocol.TType.STRING, (short)1);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -43,7 +43,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
     schemes.put(TupleScheme.class, new IPAddressTupleSchemeFactory());
   }
 
-  public List<Byte> IP; // required
+  public String IP; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -108,8 +108,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.IP, new org.apache.thrift.meta_data.FieldMetaData("IP", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BYTE))));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(IPAddress.class, metaDataMap);
   }
@@ -118,7 +117,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
   }
 
   public IPAddress(
-    List<Byte> IP)
+    String IP)
   {
     this();
     this.IP = IP;
@@ -129,8 +128,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
    */
   public IPAddress(IPAddress other) {
     if (other.isSetIP()) {
-      List<Byte> __this__IP = new ArrayList<Byte>(other.IP);
-      this.IP = __this__IP;
+      this.IP = other.IP;
     }
   }
 
@@ -143,26 +141,11 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
     this.IP = null;
   }
 
-  public int getIPSize() {
-    return (this.IP == null) ? 0 : this.IP.size();
-  }
-
-  public java.util.Iterator<Byte> getIPIterator() {
-    return (this.IP == null) ? null : this.IP.iterator();
-  }
-
-  public void addToIP(byte elem) {
-    if (this.IP == null) {
-      this.IP = new ArrayList<Byte>();
-    }
-    this.IP.add(elem);
-  }
-
-  public List<Byte> getIP() {
+  public String getIP() {
     return this.IP;
   }
 
-  public IPAddress setIP(List<Byte> IP) {
+  public IPAddress setIP(String IP) {
     this.IP = IP;
     return this;
   }
@@ -188,7 +171,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
       if (value == null) {
         unsetIP();
       } else {
-        setIP((List<Byte>)value);
+        setIP((String)value);
       }
       break;
 
@@ -336,18 +319,8 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
         }
         switch (schemeField.id) {
           case 1: // IP
-            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
-              {
-                org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
-                struct.IP = new ArrayList<Byte>(_list0.size);
-                for (int _i1 = 0; _i1 < _list0.size; ++_i1)
-                {
-                  byte _elem2;
-                  _elem2 = iprot.readByte();
-                  struct.IP.add(_elem2);
-                }
-                iprot.readListEnd();
-              }
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.IP = iprot.readString();
               struct.setIPIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -370,14 +343,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
       oprot.writeStructBegin(STRUCT_DESC);
       if (struct.IP != null) {
         oprot.writeFieldBegin(IP_FIELD_DESC);
-        {
-          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, struct.IP.size()));
-          for (byte _iter3 : struct.IP)
-          {
-            oprot.writeByte(_iter3);
-          }
-          oprot.writeListEnd();
-        }
+        oprot.writeString(struct.IP);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -403,13 +369,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
       }
       oprot.writeBitSet(optionals, 1);
       if (struct.isSetIP()) {
-        {
-          oprot.writeI32(struct.IP.size());
-          for (byte _iter4 : struct.IP)
-          {
-            oprot.writeByte(_iter4);
-          }
-        }
+        oprot.writeString(struct.IP);
       }
     }
 
@@ -418,16 +378,7 @@ public class IPAddress implements org.apache.thrift.TBase<IPAddress, IPAddress._
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
-        {
-          org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, iprot.readI32());
-          struct.IP = new ArrayList<Byte>(_list5.size);
-          for (int _i6 = 0; _i6 < _list5.size; ++_i6)
-          {
-            byte _elem7;
-            _elem7 = iprot.readByte();
-            struct.IP.add(_elem7);
-          }
-        }
+        struct.IP = iprot.readString();
         struct.setIPIsSet(true);
       }
     }

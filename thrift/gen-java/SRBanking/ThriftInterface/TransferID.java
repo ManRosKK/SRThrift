@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 public class TransferID implements org.apache.thrift.TBase<TransferID, TransferID._Fields>, java.io.Serializable, Cloneable, Comparable<TransferID> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TransferID");
 
-  private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("Sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-  private static final org.apache.thrift.protocol.TField RECEIVER_FIELD_DESC = new org.apache.thrift.protocol.TField("Receiver", org.apache.thrift.protocol.TType.STRUCT, (short)2);
-  private static final org.apache.thrift.protocol.TField LP_FIELD_DESC = new org.apache.thrift.protocol.TField("LP", org.apache.thrift.protocol.TType.I64, (short)3);
+  private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+  private static final org.apache.thrift.protocol.TField RECEIVER_FIELD_DESC = new org.apache.thrift.protocol.TField("receiver", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+  private static final org.apache.thrift.protocol.TField COUNTER_FIELD_DESC = new org.apache.thrift.protocol.TField("counter", org.apache.thrift.protocol.TType.I64, (short)3);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -45,15 +45,15 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
     schemes.put(TupleScheme.class, new TransferIDTupleSchemeFactory());
   }
 
-  public NodeID Sender; // required
-  public NodeID Receiver; // required
-  public long LP; // required
+  public NodeID sender; // required
+  public NodeID receiver; // required
+  public long counter; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    SENDER((short)1, "Sender"),
-    RECEIVER((short)2, "Receiver"),
-    LP((short)3, "LP");
+    SENDER((short)1, "sender"),
+    RECEIVER((short)2, "receiver"),
+    COUNTER((short)3, "counter");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -72,8 +72,8 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
           return SENDER;
         case 2: // RECEIVER
           return RECEIVER;
-        case 3: // LP
-          return LP;
+        case 3: // COUNTER
+          return COUNTER;
         default:
           return null;
       }
@@ -114,16 +114,16 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
   }
 
   // isset id assignments
-  private static final int __LP_ISSET_ID = 0;
+  private static final int __COUNTER_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("Sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
-    tmpMap.put(_Fields.RECEIVER, new org.apache.thrift.meta_data.FieldMetaData("Receiver", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.RECEIVER, new org.apache.thrift.meta_data.FieldMetaData("receiver", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
-    tmpMap.put(_Fields.LP, new org.apache.thrift.meta_data.FieldMetaData("LP", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.COUNTER, new org.apache.thrift.meta_data.FieldMetaData("counter", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TransferID.class, metaDataMap);
@@ -133,15 +133,15 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
   }
 
   public TransferID(
-    NodeID Sender,
-    NodeID Receiver,
-    long LP)
+    NodeID sender,
+    NodeID receiver,
+    long counter)
   {
     this();
-    this.Sender = Sender;
-    this.Receiver = Receiver;
-    this.LP = LP;
-    setLPIsSet(true);
+    this.sender = sender;
+    this.receiver = receiver;
+    this.counter = counter;
+    setCounterIsSet(true);
   }
 
   /**
@@ -150,12 +150,12 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
   public TransferID(TransferID other) {
     __isset_bitfield = other.__isset_bitfield;
     if (other.isSetSender()) {
-      this.Sender = new NodeID(other.Sender);
+      this.sender = new NodeID(other.sender);
     }
     if (other.isSetReceiver()) {
-      this.Receiver = new NodeID(other.Receiver);
+      this.receiver = new NodeID(other.receiver);
     }
-    this.LP = other.LP;
+    this.counter = other.counter;
   }
 
   public TransferID deepCopy() {
@@ -164,81 +164,81 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
 
   @Override
   public void clear() {
-    this.Sender = null;
-    this.Receiver = null;
-    setLPIsSet(false);
-    this.LP = 0;
+    this.sender = null;
+    this.receiver = null;
+    setCounterIsSet(false);
+    this.counter = 0;
   }
 
   public NodeID getSender() {
-    return this.Sender;
+    return this.sender;
   }
 
-  public TransferID setSender(NodeID Sender) {
-    this.Sender = Sender;
+  public TransferID setSender(NodeID sender) {
+    this.sender = sender;
     return this;
   }
 
   public void unsetSender() {
-    this.Sender = null;
+    this.sender = null;
   }
 
-  /** Returns true if field Sender is set (has been assigned a value) and false otherwise */
+  /** Returns true if field sender is set (has been assigned a value) and false otherwise */
   public boolean isSetSender() {
-    return this.Sender != null;
+    return this.sender != null;
   }
 
   public void setSenderIsSet(boolean value) {
     if (!value) {
-      this.Sender = null;
+      this.sender = null;
     }
   }
 
   public NodeID getReceiver() {
-    return this.Receiver;
+    return this.receiver;
   }
 
-  public TransferID setReceiver(NodeID Receiver) {
-    this.Receiver = Receiver;
+  public TransferID setReceiver(NodeID receiver) {
+    this.receiver = receiver;
     return this;
   }
 
   public void unsetReceiver() {
-    this.Receiver = null;
+    this.receiver = null;
   }
 
-  /** Returns true if field Receiver is set (has been assigned a value) and false otherwise */
+  /** Returns true if field receiver is set (has been assigned a value) and false otherwise */
   public boolean isSetReceiver() {
-    return this.Receiver != null;
+    return this.receiver != null;
   }
 
   public void setReceiverIsSet(boolean value) {
     if (!value) {
-      this.Receiver = null;
+      this.receiver = null;
     }
   }
 
-  public long getLP() {
-    return this.LP;
+  public long getCounter() {
+    return this.counter;
   }
 
-  public TransferID setLP(long LP) {
-    this.LP = LP;
-    setLPIsSet(true);
+  public TransferID setCounter(long counter) {
+    this.counter = counter;
+    setCounterIsSet(true);
     return this;
   }
 
-  public void unsetLP() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __LP_ISSET_ID);
+  public void unsetCounter() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __COUNTER_ISSET_ID);
   }
 
-  /** Returns true if field LP is set (has been assigned a value) and false otherwise */
-  public boolean isSetLP() {
-    return EncodingUtils.testBit(__isset_bitfield, __LP_ISSET_ID);
+  /** Returns true if field counter is set (has been assigned a value) and false otherwise */
+  public boolean isSetCounter() {
+    return EncodingUtils.testBit(__isset_bitfield, __COUNTER_ISSET_ID);
   }
 
-  public void setLPIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __LP_ISSET_ID, value);
+  public void setCounterIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __COUNTER_ISSET_ID, value);
   }
 
   public void setFieldValue(_Fields field, Object value) {
@@ -259,11 +259,11 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
       }
       break;
 
-    case LP:
+    case COUNTER:
       if (value == null) {
-        unsetLP();
+        unsetCounter();
       } else {
-        setLP((Long)value);
+        setCounter((Long)value);
       }
       break;
 
@@ -278,8 +278,8 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
     case RECEIVER:
       return getReceiver();
 
-    case LP:
-      return Long.valueOf(getLP());
+    case COUNTER:
+      return Long.valueOf(getCounter());
 
     }
     throw new IllegalStateException();
@@ -296,8 +296,8 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
       return isSetSender();
     case RECEIVER:
       return isSetReceiver();
-    case LP:
-      return isSetLP();
+    case COUNTER:
+      return isSetCounter();
     }
     throw new IllegalStateException();
   }
@@ -315,30 +315,30 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
     if (that == null)
       return false;
 
-    boolean this_present_Sender = true && this.isSetSender();
-    boolean that_present_Sender = true && that.isSetSender();
-    if (this_present_Sender || that_present_Sender) {
-      if (!(this_present_Sender && that_present_Sender))
+    boolean this_present_sender = true && this.isSetSender();
+    boolean that_present_sender = true && that.isSetSender();
+    if (this_present_sender || that_present_sender) {
+      if (!(this_present_sender && that_present_sender))
         return false;
-      if (!this.Sender.equals(that.Sender))
-        return false;
-    }
-
-    boolean this_present_Receiver = true && this.isSetReceiver();
-    boolean that_present_Receiver = true && that.isSetReceiver();
-    if (this_present_Receiver || that_present_Receiver) {
-      if (!(this_present_Receiver && that_present_Receiver))
-        return false;
-      if (!this.Receiver.equals(that.Receiver))
+      if (!this.sender.equals(that.sender))
         return false;
     }
 
-    boolean this_present_LP = true;
-    boolean that_present_LP = true;
-    if (this_present_LP || that_present_LP) {
-      if (!(this_present_LP && that_present_LP))
+    boolean this_present_receiver = true && this.isSetReceiver();
+    boolean that_present_receiver = true && that.isSetReceiver();
+    if (this_present_receiver || that_present_receiver) {
+      if (!(this_present_receiver && that_present_receiver))
         return false;
-      if (this.LP != that.LP)
+      if (!this.receiver.equals(that.receiver))
+        return false;
+    }
+
+    boolean this_present_counter = true;
+    boolean that_present_counter = true;
+    if (this_present_counter || that_present_counter) {
+      if (!(this_present_counter && that_present_counter))
+        return false;
+      if (this.counter != that.counter)
         return false;
     }
 
@@ -363,7 +363,7 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
       return lastComparison;
     }
     if (isSetSender()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Sender, other.Sender);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -373,17 +373,17 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
       return lastComparison;
     }
     if (isSetReceiver()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Receiver, other.Receiver);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.receiver, other.receiver);
       if (lastComparison != 0) {
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetLP()).compareTo(other.isSetLP());
+    lastComparison = Boolean.valueOf(isSetCounter()).compareTo(other.isSetCounter());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetLP()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.LP, other.LP);
+    if (isSetCounter()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.counter, other.counter);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -408,24 +408,24 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
     StringBuilder sb = new StringBuilder("TransferID(");
     boolean first = true;
 
-    sb.append("Sender:");
-    if (this.Sender == null) {
+    sb.append("sender:");
+    if (this.sender == null) {
       sb.append("null");
     } else {
-      sb.append(this.Sender);
+      sb.append(this.sender);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("Receiver:");
-    if (this.Receiver == null) {
+    sb.append("receiver:");
+    if (this.receiver == null) {
       sb.append("null");
     } else {
-      sb.append(this.Receiver);
+      sb.append(this.receiver);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("LP:");
-    sb.append(this.LP);
+    sb.append("counter:");
+    sb.append(this.counter);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -434,11 +434,11 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (Sender != null) {
-      Sender.validate();
+    if (sender != null) {
+      sender.validate();
     }
-    if (Receiver != null) {
-      Receiver.validate();
+    if (receiver != null) {
+      receiver.validate();
     }
   }
 
@@ -480,8 +480,8 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
         switch (schemeField.id) {
           case 1: // SENDER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.Sender = new NodeID();
-              struct.Sender.read(iprot);
+              struct.sender = new NodeID();
+              struct.sender.read(iprot);
               struct.setSenderIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -489,17 +489,17 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
             break;
           case 2: // RECEIVER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.Receiver = new NodeID();
-              struct.Receiver.read(iprot);
+              struct.receiver = new NodeID();
+              struct.receiver.read(iprot);
               struct.setReceiverIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // LP
+          case 3: // COUNTER
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
-              struct.LP = iprot.readI64();
-              struct.setLPIsSet(true);
+              struct.counter = iprot.readI64();
+              struct.setCounterIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -519,18 +519,18 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.Sender != null) {
+      if (struct.sender != null) {
         oprot.writeFieldBegin(SENDER_FIELD_DESC);
-        struct.Sender.write(oprot);
+        struct.sender.write(oprot);
         oprot.writeFieldEnd();
       }
-      if (struct.Receiver != null) {
+      if (struct.receiver != null) {
         oprot.writeFieldBegin(RECEIVER_FIELD_DESC);
-        struct.Receiver.write(oprot);
+        struct.receiver.write(oprot);
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(LP_FIELD_DESC);
-      oprot.writeI64(struct.LP);
+      oprot.writeFieldBegin(COUNTER_FIELD_DESC);
+      oprot.writeI64(struct.counter);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -556,18 +556,18 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
       if (struct.isSetReceiver()) {
         optionals.set(1);
       }
-      if (struct.isSetLP()) {
+      if (struct.isSetCounter()) {
         optionals.set(2);
       }
       oprot.writeBitSet(optionals, 3);
       if (struct.isSetSender()) {
-        struct.Sender.write(oprot);
+        struct.sender.write(oprot);
       }
       if (struct.isSetReceiver()) {
-        struct.Receiver.write(oprot);
+        struct.receiver.write(oprot);
       }
-      if (struct.isSetLP()) {
-        oprot.writeI64(struct.LP);
+      if (struct.isSetCounter()) {
+        oprot.writeI64(struct.counter);
       }
     }
 
@@ -576,18 +576,18 @@ public class TransferID implements org.apache.thrift.TBase<TransferID, TransferI
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(3);
       if (incoming.get(0)) {
-        struct.Sender = new NodeID();
-        struct.Sender.read(iprot);
+        struct.sender = new NodeID();
+        struct.sender.read(iprot);
         struct.setSenderIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.Receiver = new NodeID();
-        struct.Receiver.read(iprot);
+        struct.receiver = new NodeID();
+        struct.receiver.read(iprot);
         struct.setReceiverIsSet(true);
       }
       if (incoming.get(2)) {
-        struct.LP = iprot.readI64();
-        struct.setLPIsSet(true);
+        struct.counter = iprot.readI64();
+        struct.setCounterIsSet(true);
       }
     }
   }
