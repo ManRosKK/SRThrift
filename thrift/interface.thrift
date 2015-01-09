@@ -78,13 +78,13 @@ service NodeService
   /**
   *
   */ 
-  void MakeTransfer(1: TransferData transfer)
+  void MakeTransfer(1: TransferData transfer),
 
-}
-service DebugService
-{
-   list<Swarm> GetSwarmList(),
-   void startSwarmElection(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
-   list<TransferData>  GetTransfers(),
-   void stop()
+  list<Swarm> GetSwarmList(),
+  
+  void startSwarmElection(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
+  
+  list<TransferData>  GetTransfers(),
+  
+  void stop()
 }

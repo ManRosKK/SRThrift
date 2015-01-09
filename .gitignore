@@ -1,0 +1,5 @@
+java-client/target/
+java-client/logs/
+java-server/target/
+java-server/logs/
+
