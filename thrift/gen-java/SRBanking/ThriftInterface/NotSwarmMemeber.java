@@ -35,8 +35,8 @@ import org.slf4j.LoggerFactory;
 public class NotSwarmMemeber extends TException implements org.apache.thrift.TBase<NotSwarmMemeber, NotSwarmMemeber._Fields>, java.io.Serializable, Cloneable, Comparable<NotSwarmMemeber> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("NotSwarmMemeber");
 
-  private static final org.apache.thrift.protocol.TField RECEIVER_NODE_FIELD_DESC = new org.apache.thrift.protocol.TField("ReceiverNode", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-  private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("Transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+  private static final org.apache.thrift.protocol.TField RECEIVER_NODE_FIELD_DESC = new org.apache.thrift.protocol.TField("receiverNode", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+  private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -44,13 +44,13 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
     schemes.put(TupleScheme.class, new NotSwarmMemeberTupleSchemeFactory());
   }
 
-  public NodeID ReceiverNode; // required
-  public TransferID Transfer; // required
+  public NodeID receiverNode; // required
+  public TransferID transfer; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    RECEIVER_NODE((short)1, "ReceiverNode"),
-    TRANSFER((short)2, "Transfer");
+    RECEIVER_NODE((short)1, "receiverNode"),
+    TRANSFER((short)2, "transfer");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -112,9 +112,9 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.RECEIVER_NODE, new org.apache.thrift.meta_data.FieldMetaData("ReceiverNode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.RECEIVER_NODE, new org.apache.thrift.meta_data.FieldMetaData("receiverNode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
-    tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("Transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(NotSwarmMemeber.class, metaDataMap);
@@ -124,12 +124,12 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
   }
 
   public NotSwarmMemeber(
-    NodeID ReceiverNode,
-    TransferID Transfer)
+    NodeID receiverNode,
+    TransferID transfer)
   {
     this();
-    this.ReceiverNode = ReceiverNode;
-    this.Transfer = Transfer;
+    this.receiverNode = receiverNode;
+    this.transfer = transfer;
   }
 
   /**
@@ -137,10 +137,10 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
    */
   public NotSwarmMemeber(NotSwarmMemeber other) {
     if (other.isSetReceiverNode()) {
-      this.ReceiverNode = new NodeID(other.ReceiverNode);
+      this.receiverNode = new NodeID(other.receiverNode);
     }
     if (other.isSetTransfer()) {
-      this.Transfer = new TransferID(other.Transfer);
+      this.transfer = new TransferID(other.transfer);
     }
   }
 
@@ -150,55 +150,55 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
 
   @Override
   public void clear() {
-    this.ReceiverNode = null;
-    this.Transfer = null;
+    this.receiverNode = null;
+    this.transfer = null;
   }
 
   public NodeID getReceiverNode() {
-    return this.ReceiverNode;
+    return this.receiverNode;
   }
 
-  public NotSwarmMemeber setReceiverNode(NodeID ReceiverNode) {
-    this.ReceiverNode = ReceiverNode;
+  public NotSwarmMemeber setReceiverNode(NodeID receiverNode) {
+    this.receiverNode = receiverNode;
     return this;
   }
 
   public void unsetReceiverNode() {
-    this.ReceiverNode = null;
+    this.receiverNode = null;
   }
 
-  /** Returns true if field ReceiverNode is set (has been assigned a value) and false otherwise */
+  /** Returns true if field receiverNode is set (has been assigned a value) and false otherwise */
   public boolean isSetReceiverNode() {
-    return this.ReceiverNode != null;
+    return this.receiverNode != null;
   }
 
   public void setReceiverNodeIsSet(boolean value) {
     if (!value) {
-      this.ReceiverNode = null;
+      this.receiverNode = null;
     }
   }
 
   public TransferID getTransfer() {
-    return this.Transfer;
+    return this.transfer;
   }
 
-  public NotSwarmMemeber setTransfer(TransferID Transfer) {
-    this.Transfer = Transfer;
+  public NotSwarmMemeber setTransfer(TransferID transfer) {
+    this.transfer = transfer;
     return this;
   }
 
   public void unsetTransfer() {
-    this.Transfer = null;
+    this.transfer = null;
   }
 
-  /** Returns true if field Transfer is set (has been assigned a value) and false otherwise */
+  /** Returns true if field transfer is set (has been assigned a value) and false otherwise */
   public boolean isSetTransfer() {
-    return this.Transfer != null;
+    return this.transfer != null;
   }
 
   public void setTransferIsSet(boolean value) {
     if (!value) {
-      this.Transfer = null;
+      this.transfer = null;
     }
   }
 
@@ -263,21 +263,21 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
     if (that == null)
       return false;
 
-    boolean this_present_ReceiverNode = true && this.isSetReceiverNode();
-    boolean that_present_ReceiverNode = true && that.isSetReceiverNode();
-    if (this_present_ReceiverNode || that_present_ReceiverNode) {
-      if (!(this_present_ReceiverNode && that_present_ReceiverNode))
+    boolean this_present_receiverNode = true && this.isSetReceiverNode();
+    boolean that_present_receiverNode = true && that.isSetReceiverNode();
+    if (this_present_receiverNode || that_present_receiverNode) {
+      if (!(this_present_receiverNode && that_present_receiverNode))
         return false;
-      if (!this.ReceiverNode.equals(that.ReceiverNode))
+      if (!this.receiverNode.equals(that.receiverNode))
         return false;
     }
 
-    boolean this_present_Transfer = true && this.isSetTransfer();
-    boolean that_present_Transfer = true && that.isSetTransfer();
-    if (this_present_Transfer || that_present_Transfer) {
-      if (!(this_present_Transfer && that_present_Transfer))
+    boolean this_present_transfer = true && this.isSetTransfer();
+    boolean that_present_transfer = true && that.isSetTransfer();
+    if (this_present_transfer || that_present_transfer) {
+      if (!(this_present_transfer && that_present_transfer))
         return false;
-      if (!this.Transfer.equals(that.Transfer))
+      if (!this.transfer.equals(that.transfer))
         return false;
     }
 
@@ -302,7 +302,7 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
       return lastComparison;
     }
     if (isSetReceiverNode()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.ReceiverNode, other.ReceiverNode);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.receiverNode, other.receiverNode);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -312,7 +312,7 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
       return lastComparison;
     }
     if (isSetTransfer()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Transfer, other.Transfer);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transfer, other.transfer);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -337,19 +337,19 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
     StringBuilder sb = new StringBuilder("NotSwarmMemeber(");
     boolean first = true;
 
-    sb.append("ReceiverNode:");
-    if (this.ReceiverNode == null) {
+    sb.append("receiverNode:");
+    if (this.receiverNode == null) {
       sb.append("null");
     } else {
-      sb.append(this.ReceiverNode);
+      sb.append(this.receiverNode);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("Transfer:");
-    if (this.Transfer == null) {
+    sb.append("transfer:");
+    if (this.transfer == null) {
       sb.append("null");
     } else {
-      sb.append(this.Transfer);
+      sb.append(this.transfer);
     }
     first = false;
     sb.append(")");
@@ -359,11 +359,11 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (ReceiverNode != null) {
-      ReceiverNode.validate();
+    if (receiverNode != null) {
+      receiverNode.validate();
     }
-    if (Transfer != null) {
-      Transfer.validate();
+    if (transfer != null) {
+      transfer.validate();
     }
   }
 
@@ -403,8 +403,8 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
         switch (schemeField.id) {
           case 1: // RECEIVER_NODE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.ReceiverNode = new NodeID();
-              struct.ReceiverNode.read(iprot);
+              struct.receiverNode = new NodeID();
+              struct.receiverNode.read(iprot);
               struct.setReceiverNodeIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -412,8 +412,8 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
             break;
           case 2: // TRANSFER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.Transfer = new TransferID();
-              struct.Transfer.read(iprot);
+              struct.transfer = new TransferID();
+              struct.transfer.read(iprot);
               struct.setTransferIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -434,14 +434,14 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.ReceiverNode != null) {
+      if (struct.receiverNode != null) {
         oprot.writeFieldBegin(RECEIVER_NODE_FIELD_DESC);
-        struct.ReceiverNode.write(oprot);
+        struct.receiverNode.write(oprot);
         oprot.writeFieldEnd();
       }
-      if (struct.Transfer != null) {
+      if (struct.transfer != null) {
         oprot.writeFieldBegin(TRANSFER_FIELD_DESC);
-        struct.Transfer.write(oprot);
+        struct.transfer.write(oprot);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -470,10 +470,10 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
       }
       oprot.writeBitSet(optionals, 2);
       if (struct.isSetReceiverNode()) {
-        struct.ReceiverNode.write(oprot);
+        struct.receiverNode.write(oprot);
       }
       if (struct.isSetTransfer()) {
-        struct.Transfer.write(oprot);
+        struct.transfer.write(oprot);
       }
     }
 
@@ -482,13 +482,13 @@ public class NotSwarmMemeber extends TException implements org.apache.thrift.TBa
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
-        struct.ReceiverNode = new NodeID();
-        struct.ReceiverNode.read(iprot);
+        struct.receiverNode = new NodeID();
+        struct.receiverNode.read(iprot);
         struct.setReceiverNodeIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.Transfer = new TransferID();
-        struct.Transfer.read(iprot);
+        struct.transfer = new TransferID();
+        struct.transfer.read(iprot);
         struct.setTransferIsSet(true);
       }
     }

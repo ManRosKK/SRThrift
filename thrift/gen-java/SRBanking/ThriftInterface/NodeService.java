@@ -42,17 +42,17 @@ public class NodeService {
      * @param receiver
      * @param value
      */
-    public void MakeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException;
+    public void makeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException;
 
     /**
      * 
      */
-    public long GetAccountBalance() throws org.apache.thrift.TException;
+    public long getAccountBalance() throws org.apache.thrift.TException;
 
     /**
      * pings node
      */
-    public void Ping() throws org.apache.thrift.TException;
+    public void ping() throws org.apache.thrift.TException;
 
     /**
      * pings Swarm and checks if leader is a leader
@@ -60,35 +60,35 @@ public class NodeService {
      * @param leader
      * @param transfer
      */
-    public void PingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public void pingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
      * 
      * 
      * @param swarm
      */
-    public void UpdateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
+    public void updateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
 
     /**
      * 
      * 
      * @param swarm
      */
-    public void AddToSwarm(Swarm swarm) throws AlreadySwarmMemeber, org.apache.thrift.TException;
+    public void addToSwarm(Swarm swarm) throws AlreadySwarmMemeber, org.apache.thrift.TException;
 
     /**
      * 
      * 
      * @param swarm
      */
-    public void DelSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
+    public void delSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
 
     /**
      * 
      * 
      * @param transfer
      */
-    public Swarm GetSwarm(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public Swarm getSwarm(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
      * returns true if candidateNodeID> current
@@ -96,27 +96,27 @@ public class NodeService {
      * @param cadidate
      * @param Transfer
      */
-    public boolean ElectSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public boolean electSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
      * new leader broadcast that he is a leader
      * 
      * @param swarm
      */
-    public void ElectionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public void electionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
      * 
      * 
      * @param transfer
      */
-    public void DeliverTransfer(TransferData transfer) throws org.apache.thrift.TException;
+    public void deliverTransfer(TransferData transfer) throws org.apache.thrift.TException;
 
-    public List<Swarm> GetSwarmList() throws org.apache.thrift.TException;
+    public List<Swarm> getSwarmList() throws org.apache.thrift.TException;
 
     public void startSwarmElection(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
-    public List<TransferData> GetTransfers() throws org.apache.thrift.TException;
+    public List<TransferData> getTransfers() throws org.apache.thrift.TException;
 
     public void stop() throws org.apache.thrift.TException;
 
@@ -124,33 +124,33 @@ public class NodeService {
 
   public interface AsyncIface {
 
-    public void MakeTransfer(NodeID receiver, long value, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void makeTransfer(NodeID receiver, long value, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void GetAccountBalance(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getAccountBalance(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void Ping(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void ping(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void PingSwarm(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void pingSwarm(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void UpdateSwarmMembers(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void updateSwarmMembers(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void AddToSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void addToSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void DelSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void delSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void GetSwarm(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getSwarm(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void ElectSwarmLeader(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void electSwarmLeader(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void ElectionEndedSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void electionEndedSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void DeliverTransfer(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void deliverTransfer(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void GetSwarmList(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getSwarmList(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void startSwarmElection(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void GetTransfers(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getTransfers(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void stop(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -176,109 +176,109 @@ public class NodeService {
       super(iprot, oprot);
     }
 
-    public void MakeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException
+    public void makeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException
     {
-      send_MakeTransfer(receiver, value);
-      recv_MakeTransfer();
+      send_makeTransfer(receiver, value);
+      recv_makeTransfer();
     }
 
-    public void send_MakeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException
+    public void send_makeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException
     {
-      MakeTransfer_args args = new MakeTransfer_args();
+      makeTransfer_args args = new makeTransfer_args();
       args.setReceiver(receiver);
       args.setValue(value);
-      sendBase("MakeTransfer", args);
+      sendBase("makeTransfer", args);
     }
 
-    public void recv_MakeTransfer() throws org.apache.thrift.TException
+    public void recv_makeTransfer() throws org.apache.thrift.TException
     {
-      MakeTransfer_result result = new MakeTransfer_result();
-      receiveBase(result, "MakeTransfer");
+      makeTransfer_result result = new makeTransfer_result();
+      receiveBase(result, "makeTransfer");
       return;
     }
 
-    public long GetAccountBalance() throws org.apache.thrift.TException
+    public long getAccountBalance() throws org.apache.thrift.TException
     {
-      send_GetAccountBalance();
-      return recv_GetAccountBalance();
+      send_getAccountBalance();
+      return recv_getAccountBalance();
     }
 
-    public void send_GetAccountBalance() throws org.apache.thrift.TException
+    public void send_getAccountBalance() throws org.apache.thrift.TException
     {
-      GetAccountBalance_args args = new GetAccountBalance_args();
-      sendBase("GetAccountBalance", args);
+      getAccountBalance_args args = new getAccountBalance_args();
+      sendBase("getAccountBalance", args);
     }
 
-    public long recv_GetAccountBalance() throws org.apache.thrift.TException
+    public long recv_getAccountBalance() throws org.apache.thrift.TException
     {
-      GetAccountBalance_result result = new GetAccountBalance_result();
-      receiveBase(result, "GetAccountBalance");
+      getAccountBalance_result result = new getAccountBalance_result();
+      receiveBase(result, "getAccountBalance");
       if (result.isSetSuccess()) {
         return result.success;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetAccountBalance failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getAccountBalance failed: unknown result");
     }
 
-    public void Ping() throws org.apache.thrift.TException
+    public void ping() throws org.apache.thrift.TException
     {
-      send_Ping();
-      recv_Ping();
+      send_ping();
+      recv_ping();
     }
 
-    public void send_Ping() throws org.apache.thrift.TException
+    public void send_ping() throws org.apache.thrift.TException
     {
-      Ping_args args = new Ping_args();
-      sendBase("Ping", args);
+      ping_args args = new ping_args();
+      sendBase("ping", args);
     }
 
-    public void recv_Ping() throws org.apache.thrift.TException
+    public void recv_ping() throws org.apache.thrift.TException
     {
-      Ping_result result = new Ping_result();
-      receiveBase(result, "Ping");
+      ping_result result = new ping_result();
+      receiveBase(result, "ping");
       return;
     }
 
-    public void PingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
+    public void pingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_PingSwarm(leader, transfer);
-      recv_PingSwarm();
+      send_pingSwarm(leader, transfer);
+      recv_pingSwarm();
     }
 
-    public void send_PingSwarm(NodeID leader, TransferID transfer) throws org.apache.thrift.TException
+    public void send_pingSwarm(NodeID leader, TransferID transfer) throws org.apache.thrift.TException
     {
-      PingSwarm_args args = new PingSwarm_args();
+      pingSwarm_args args = new pingSwarm_args();
       args.setLeader(leader);
       args.setTransfer(transfer);
-      sendBase("PingSwarm", args);
+      sendBase("pingSwarm", args);
     }
 
-    public void recv_PingSwarm() throws NotSwarmMemeber, org.apache.thrift.TException
+    public void recv_pingSwarm() throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      PingSwarm_result result = new PingSwarm_result();
-      receiveBase(result, "PingSwarm");
+      pingSwarm_result result = new pingSwarm_result();
+      receiveBase(result, "pingSwarm");
       if (result.exc != null) {
         throw result.exc;
       }
       return;
     }
 
-    public void UpdateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
+    public void updateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
     {
-      send_UpdateSwarmMembers(swarm);
-      recv_UpdateSwarmMembers();
+      send_updateSwarmMembers(swarm);
+      recv_updateSwarmMembers();
     }
 
-    public void send_UpdateSwarmMembers(Swarm swarm) throws org.apache.thrift.TException
+    public void send_updateSwarmMembers(Swarm swarm) throws org.apache.thrift.TException
     {
-      UpdateSwarmMembers_args args = new UpdateSwarmMembers_args();
+      updateSwarmMembers_args args = new updateSwarmMembers_args();
       args.setSwarm(swarm);
-      sendBase("UpdateSwarmMembers", args);
+      sendBase("updateSwarmMembers", args);
     }
 
-    public void recv_UpdateSwarmMembers() throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
+    public void recv_updateSwarmMembers() throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
     {
-      UpdateSwarmMembers_result result = new UpdateSwarmMembers_result();
-      receiveBase(result, "UpdateSwarmMembers");
+      updateSwarmMembers_result result = new updateSwarmMembers_result();
+      receiveBase(result, "updateSwarmMembers");
       if (result.exc != null) {
         throw result.exc;
       }
@@ -288,46 +288,46 @@ public class NodeService {
       return;
     }
 
-    public void AddToSwarm(Swarm swarm) throws AlreadySwarmMemeber, org.apache.thrift.TException
+    public void addToSwarm(Swarm swarm) throws AlreadySwarmMemeber, org.apache.thrift.TException
     {
-      send_AddToSwarm(swarm);
-      recv_AddToSwarm();
+      send_addToSwarm(swarm);
+      recv_addToSwarm();
     }
 
-    public void send_AddToSwarm(Swarm swarm) throws org.apache.thrift.TException
+    public void send_addToSwarm(Swarm swarm) throws org.apache.thrift.TException
     {
-      AddToSwarm_args args = new AddToSwarm_args();
+      addToSwarm_args args = new addToSwarm_args();
       args.setSwarm(swarm);
-      sendBase("AddToSwarm", args);
+      sendBase("addToSwarm", args);
     }
 
-    public void recv_AddToSwarm() throws AlreadySwarmMemeber, org.apache.thrift.TException
+    public void recv_addToSwarm() throws AlreadySwarmMemeber, org.apache.thrift.TException
     {
-      AddToSwarm_result result = new AddToSwarm_result();
-      receiveBase(result, "AddToSwarm");
+      addToSwarm_result result = new addToSwarm_result();
+      receiveBase(result, "addToSwarm");
       if (result.exc != null) {
         throw result.exc;
       }
       return;
     }
 
-    public void DelSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
+    public void delSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
     {
-      send_DelSwarm(swarm);
-      recv_DelSwarm();
+      send_delSwarm(swarm);
+      recv_delSwarm();
     }
 
-    public void send_DelSwarm(Swarm swarm) throws org.apache.thrift.TException
+    public void send_delSwarm(Swarm swarm) throws org.apache.thrift.TException
     {
-      DelSwarm_args args = new DelSwarm_args();
+      delSwarm_args args = new delSwarm_args();
       args.setSwarm(swarm);
-      sendBase("DelSwarm", args);
+      sendBase("delSwarm", args);
     }
 
-    public void recv_DelSwarm() throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
+    public void recv_delSwarm() throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
     {
-      DelSwarm_result result = new DelSwarm_result();
-      receiveBase(result, "DelSwarm");
+      delSwarm_result result = new delSwarm_result();
+      receiveBase(result, "delSwarm");
       if (result.exc != null) {
         throw result.exc;
       }
@@ -337,122 +337,122 @@ public class NodeService {
       return;
     }
 
-    public Swarm GetSwarm(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
+    public Swarm getSwarm(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_GetSwarm(transfer);
-      return recv_GetSwarm();
+      send_getSwarm(transfer);
+      return recv_getSwarm();
     }
 
-    public void send_GetSwarm(TransferID transfer) throws org.apache.thrift.TException
+    public void send_getSwarm(TransferID transfer) throws org.apache.thrift.TException
     {
-      GetSwarm_args args = new GetSwarm_args();
+      getSwarm_args args = new getSwarm_args();
       args.setTransfer(transfer);
-      sendBase("GetSwarm", args);
+      sendBase("getSwarm", args);
     }
 
-    public Swarm recv_GetSwarm() throws NotSwarmMemeber, org.apache.thrift.TException
+    public Swarm recv_getSwarm() throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      GetSwarm_result result = new GetSwarm_result();
-      receiveBase(result, "GetSwarm");
+      getSwarm_result result = new getSwarm_result();
+      receiveBase(result, "getSwarm");
       if (result.isSetSuccess()) {
         return result.success;
       }
       if (result.exc != null) {
         throw result.exc;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetSwarm failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getSwarm failed: unknown result");
     }
 
-    public boolean ElectSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException
+    public boolean electSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_ElectSwarmLeader(cadidate, Transfer);
-      return recv_ElectSwarmLeader();
+      send_electSwarmLeader(cadidate, Transfer);
+      return recv_electSwarmLeader();
     }
 
-    public void send_ElectSwarmLeader(NodeID cadidate, TransferID Transfer) throws org.apache.thrift.TException
+    public void send_electSwarmLeader(NodeID cadidate, TransferID Transfer) throws org.apache.thrift.TException
     {
-      ElectSwarmLeader_args args = new ElectSwarmLeader_args();
+      electSwarmLeader_args args = new electSwarmLeader_args();
       args.setCadidate(cadidate);
       args.setTransfer(Transfer);
-      sendBase("ElectSwarmLeader", args);
+      sendBase("electSwarmLeader", args);
     }
 
-    public boolean recv_ElectSwarmLeader() throws NotSwarmMemeber, org.apache.thrift.TException
+    public boolean recv_electSwarmLeader() throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      ElectSwarmLeader_result result = new ElectSwarmLeader_result();
-      receiveBase(result, "ElectSwarmLeader");
+      electSwarmLeader_result result = new electSwarmLeader_result();
+      receiveBase(result, "electSwarmLeader");
       if (result.isSetSuccess()) {
         return result.success;
       }
       if (result.exc != null) {
         throw result.exc;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "ElectSwarmLeader failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "electSwarmLeader failed: unknown result");
     }
 
-    public void ElectionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException
+    public void electionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_ElectionEndedSwarm(swarm);
-      recv_ElectionEndedSwarm();
+      send_electionEndedSwarm(swarm);
+      recv_electionEndedSwarm();
     }
 
-    public void send_ElectionEndedSwarm(Swarm swarm) throws org.apache.thrift.TException
+    public void send_electionEndedSwarm(Swarm swarm) throws org.apache.thrift.TException
     {
-      ElectionEndedSwarm_args args = new ElectionEndedSwarm_args();
+      electionEndedSwarm_args args = new electionEndedSwarm_args();
       args.setSwarm(swarm);
-      sendBase("ElectionEndedSwarm", args);
+      sendBase("electionEndedSwarm", args);
     }
 
-    public void recv_ElectionEndedSwarm() throws NotSwarmMemeber, org.apache.thrift.TException
+    public void recv_electionEndedSwarm() throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      ElectionEndedSwarm_result result = new ElectionEndedSwarm_result();
-      receiveBase(result, "ElectionEndedSwarm");
+      electionEndedSwarm_result result = new electionEndedSwarm_result();
+      receiveBase(result, "electionEndedSwarm");
       if (result.exc != null) {
         throw result.exc;
       }
       return;
     }
 
-    public void DeliverTransfer(TransferData transfer) throws org.apache.thrift.TException
+    public void deliverTransfer(TransferData transfer) throws org.apache.thrift.TException
     {
-      send_DeliverTransfer(transfer);
-      recv_DeliverTransfer();
+      send_deliverTransfer(transfer);
+      recv_deliverTransfer();
     }
 
-    public void send_DeliverTransfer(TransferData transfer) throws org.apache.thrift.TException
+    public void send_deliverTransfer(TransferData transfer) throws org.apache.thrift.TException
     {
-      DeliverTransfer_args args = new DeliverTransfer_args();
+      deliverTransfer_args args = new deliverTransfer_args();
       args.setTransfer(transfer);
-      sendBase("DeliverTransfer", args);
+      sendBase("deliverTransfer", args);
     }
 
-    public void recv_DeliverTransfer() throws org.apache.thrift.TException
+    public void recv_deliverTransfer() throws org.apache.thrift.TException
     {
-      DeliverTransfer_result result = new DeliverTransfer_result();
-      receiveBase(result, "DeliverTransfer");
+      deliverTransfer_result result = new deliverTransfer_result();
+      receiveBase(result, "deliverTransfer");
       return;
     }
 
-    public List<Swarm> GetSwarmList() throws org.apache.thrift.TException
+    public List<Swarm> getSwarmList() throws org.apache.thrift.TException
     {
-      send_GetSwarmList();
-      return recv_GetSwarmList();
+      send_getSwarmList();
+      return recv_getSwarmList();
     }
 
-    public void send_GetSwarmList() throws org.apache.thrift.TException
+    public void send_getSwarmList() throws org.apache.thrift.TException
     {
-      GetSwarmList_args args = new GetSwarmList_args();
-      sendBase("GetSwarmList", args);
+      getSwarmList_args args = new getSwarmList_args();
+      sendBase("getSwarmList", args);
     }
 
-    public List<Swarm> recv_GetSwarmList() throws org.apache.thrift.TException
+    public List<Swarm> recv_getSwarmList() throws org.apache.thrift.TException
     {
-      GetSwarmList_result result = new GetSwarmList_result();
-      receiveBase(result, "GetSwarmList");
+      getSwarmList_result result = new getSwarmList_result();
+      receiveBase(result, "getSwarmList");
       if (result.isSetSuccess()) {
         return result.success;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetSwarmList failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getSwarmList failed: unknown result");
     }
 
     public void startSwarmElection(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
@@ -478,26 +478,26 @@ public class NodeService {
       return;
     }
 
-    public List<TransferData> GetTransfers() throws org.apache.thrift.TException
+    public List<TransferData> getTransfers() throws org.apache.thrift.TException
     {
-      send_GetTransfers();
-      return recv_GetTransfers();
+      send_getTransfers();
+      return recv_getTransfers();
     }
 
-    public void send_GetTransfers() throws org.apache.thrift.TException
+    public void send_getTransfers() throws org.apache.thrift.TException
     {
-      GetTransfers_args args = new GetTransfers_args();
-      sendBase("GetTransfers", args);
+      getTransfers_args args = new getTransfers_args();
+      sendBase("getTransfers", args);
     }
 
-    public List<TransferData> recv_GetTransfers() throws org.apache.thrift.TException
+    public List<TransferData> recv_getTransfers() throws org.apache.thrift.TException
     {
-      GetTransfers_result result = new GetTransfers_result();
-      receiveBase(result, "GetTransfers");
+      getTransfers_result result = new getTransfers_result();
+      receiveBase(result, "getTransfers");
       if (result.isSetSuccess()) {
         return result.success;
       }
-      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetTransfers failed: unknown result");
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getTransfers failed: unknown result");
     }
 
     public void stop() throws org.apache.thrift.TException
@@ -537,25 +537,25 @@ public class NodeService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void MakeTransfer(NodeID receiver, long value, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void makeTransfer(NodeID receiver, long value, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      MakeTransfer_call method_call = new MakeTransfer_call(receiver, value, resultHandler, this, ___protocolFactory, ___transport);
+      makeTransfer_call method_call = new makeTransfer_call(receiver, value, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class MakeTransfer_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class makeTransfer_call extends org.apache.thrift.async.TAsyncMethodCall {
       private NodeID receiver;
       private long value;
-      public MakeTransfer_call(NodeID receiver, long value, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public makeTransfer_call(NodeID receiver, long value, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.receiver = receiver;
         this.value = value;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("MakeTransfer", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        MakeTransfer_args args = new MakeTransfer_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("makeTransfer", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        makeTransfer_args args = new makeTransfer_args();
         args.setReceiver(receiver);
         args.setValue(value);
         args.write(prot);
@@ -568,25 +568,25 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_MakeTransfer();
+        (new Client(prot)).recv_makeTransfer();
       }
     }
 
-    public void GetAccountBalance(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getAccountBalance(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      GetAccountBalance_call method_call = new GetAccountBalance_call(resultHandler, this, ___protocolFactory, ___transport);
+      getAccountBalance_call method_call = new getAccountBalance_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class GetAccountBalance_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public GetAccountBalance_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class getAccountBalance_call extends org.apache.thrift.async.TAsyncMethodCall {
+      public getAccountBalance_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetAccountBalance", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        GetAccountBalance_args args = new GetAccountBalance_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getAccountBalance", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getAccountBalance_args args = new getAccountBalance_args();
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -597,25 +597,25 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_GetAccountBalance();
+        return (new Client(prot)).recv_getAccountBalance();
       }
     }
 
-    public void Ping(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void ping(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      Ping_call method_call = new Ping_call(resultHandler, this, ___protocolFactory, ___transport);
+      ping_call method_call = new ping_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class Ping_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public Ping_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class ping_call extends org.apache.thrift.async.TAsyncMethodCall {
+      public ping_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("Ping", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        Ping_args args = new Ping_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("ping", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        ping_args args = new ping_args();
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -626,29 +626,29 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_Ping();
+        (new Client(prot)).recv_ping();
       }
     }
 
-    public void PingSwarm(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void pingSwarm(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      PingSwarm_call method_call = new PingSwarm_call(leader, transfer, resultHandler, this, ___protocolFactory, ___transport);
+      pingSwarm_call method_call = new pingSwarm_call(leader, transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class PingSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class pingSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
       private NodeID leader;
       private TransferID transfer;
-      public PingSwarm_call(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public pingSwarm_call(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.leader = leader;
         this.transfer = transfer;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("PingSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        PingSwarm_args args = new PingSwarm_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("pingSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        pingSwarm_args args = new pingSwarm_args();
         args.setLeader(leader);
         args.setTransfer(transfer);
         args.write(prot);
@@ -661,27 +661,27 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_PingSwarm();
+        (new Client(prot)).recv_pingSwarm();
       }
     }
 
-    public void UpdateSwarmMembers(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void updateSwarmMembers(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      UpdateSwarmMembers_call method_call = new UpdateSwarmMembers_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      updateSwarmMembers_call method_call = new updateSwarmMembers_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class UpdateSwarmMembers_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class updateSwarmMembers_call extends org.apache.thrift.async.TAsyncMethodCall {
       private Swarm swarm;
-      public UpdateSwarmMembers_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public updateSwarmMembers_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.swarm = swarm;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("UpdateSwarmMembers", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        UpdateSwarmMembers_args args = new UpdateSwarmMembers_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("updateSwarmMembers", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        updateSwarmMembers_args args = new updateSwarmMembers_args();
         args.setSwarm(swarm);
         args.write(prot);
         prot.writeMessageEnd();
@@ -693,27 +693,27 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_UpdateSwarmMembers();
+        (new Client(prot)).recv_updateSwarmMembers();
       }
     }
 
-    public void AddToSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void addToSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      AddToSwarm_call method_call = new AddToSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      addToSwarm_call method_call = new addToSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class AddToSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class addToSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
       private Swarm swarm;
-      public AddToSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public addToSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.swarm = swarm;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("AddToSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        AddToSwarm_args args = new AddToSwarm_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("addToSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        addToSwarm_args args = new addToSwarm_args();
         args.setSwarm(swarm);
         args.write(prot);
         prot.writeMessageEnd();
@@ -725,27 +725,27 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_AddToSwarm();
+        (new Client(prot)).recv_addToSwarm();
       }
     }
 
-    public void DelSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void delSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      DelSwarm_call method_call = new DelSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      delSwarm_call method_call = new delSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class DelSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class delSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
       private Swarm swarm;
-      public DelSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public delSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.swarm = swarm;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("DelSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        DelSwarm_args args = new DelSwarm_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("delSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        delSwarm_args args = new delSwarm_args();
         args.setSwarm(swarm);
         args.write(prot);
         prot.writeMessageEnd();
@@ -757,27 +757,27 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_DelSwarm();
+        (new Client(prot)).recv_delSwarm();
       }
     }
 
-    public void GetSwarm(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getSwarm(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      GetSwarm_call method_call = new GetSwarm_call(transfer, resultHandler, this, ___protocolFactory, ___transport);
+      getSwarm_call method_call = new getSwarm_call(transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class GetSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class getSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
       private TransferID transfer;
-      public GetSwarm_call(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public getSwarm_call(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.transfer = transfer;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        GetSwarm_args args = new GetSwarm_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getSwarm_args args = new getSwarm_args();
         args.setTransfer(transfer);
         args.write(prot);
         prot.writeMessageEnd();
@@ -789,29 +789,29 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_GetSwarm();
+        return (new Client(prot)).recv_getSwarm();
       }
     }
 
-    public void ElectSwarmLeader(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void electSwarmLeader(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      ElectSwarmLeader_call method_call = new ElectSwarmLeader_call(cadidate, Transfer, resultHandler, this, ___protocolFactory, ___transport);
+      electSwarmLeader_call method_call = new electSwarmLeader_call(cadidate, Transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class ElectSwarmLeader_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class electSwarmLeader_call extends org.apache.thrift.async.TAsyncMethodCall {
       private NodeID cadidate;
       private TransferID Transfer;
-      public ElectSwarmLeader_call(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public electSwarmLeader_call(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.cadidate = cadidate;
         this.Transfer = Transfer;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("ElectSwarmLeader", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        ElectSwarmLeader_args args = new ElectSwarmLeader_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("electSwarmLeader", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        electSwarmLeader_args args = new electSwarmLeader_args();
         args.setCadidate(cadidate);
         args.setTransfer(Transfer);
         args.write(prot);
@@ -824,27 +824,27 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_ElectSwarmLeader();
+        return (new Client(prot)).recv_electSwarmLeader();
       }
     }
 
-    public void ElectionEndedSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void electionEndedSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      ElectionEndedSwarm_call method_call = new ElectionEndedSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      electionEndedSwarm_call method_call = new electionEndedSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class ElectionEndedSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class electionEndedSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
       private Swarm swarm;
-      public ElectionEndedSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public electionEndedSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.swarm = swarm;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("ElectionEndedSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        ElectionEndedSwarm_args args = new ElectionEndedSwarm_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("electionEndedSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        electionEndedSwarm_args args = new electionEndedSwarm_args();
         args.setSwarm(swarm);
         args.write(prot);
         prot.writeMessageEnd();
@@ -856,27 +856,27 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_ElectionEndedSwarm();
+        (new Client(prot)).recv_electionEndedSwarm();
       }
     }
 
-    public void DeliverTransfer(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void deliverTransfer(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      DeliverTransfer_call method_call = new DeliverTransfer_call(transfer, resultHandler, this, ___protocolFactory, ___transport);
+      deliverTransfer_call method_call = new deliverTransfer_call(transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class DeliverTransfer_call extends org.apache.thrift.async.TAsyncMethodCall {
+    public static class deliverTransfer_call extends org.apache.thrift.async.TAsyncMethodCall {
       private TransferData transfer;
-      public DeliverTransfer_call(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public deliverTransfer_call(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.transfer = transfer;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("DeliverTransfer", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        DeliverTransfer_args args = new DeliverTransfer_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("deliverTransfer", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        deliverTransfer_args args = new deliverTransfer_args();
         args.setTransfer(transfer);
         args.write(prot);
         prot.writeMessageEnd();
@@ -888,25 +888,25 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_DeliverTransfer();
+        (new Client(prot)).recv_deliverTransfer();
       }
     }
 
-    public void GetSwarmList(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getSwarmList(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      GetSwarmList_call method_call = new GetSwarmList_call(resultHandler, this, ___protocolFactory, ___transport);
+      getSwarmList_call method_call = new getSwarmList_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class GetSwarmList_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public GetSwarmList_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class getSwarmList_call extends org.apache.thrift.async.TAsyncMethodCall {
+      public getSwarmList_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetSwarmList", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        GetSwarmList_args args = new GetSwarmList_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getSwarmList", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getSwarmList_args args = new getSwarmList_args();
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -917,7 +917,7 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_GetSwarmList();
+        return (new Client(prot)).recv_getSwarmList();
       }
     }
 
@@ -953,21 +953,21 @@ public class NodeService {
       }
     }
 
-    public void GetTransfers(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getTransfers(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      GetTransfers_call method_call = new GetTransfers_call(resultHandler, this, ___protocolFactory, ___transport);
+      getTransfers_call method_call = new getTransfers_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class GetTransfers_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public GetTransfers_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class getTransfers_call extends org.apache.thrift.async.TAsyncMethodCall {
+      public getTransfers_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetTransfers", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        GetTransfers_args args = new GetTransfers_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getTransfers", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        getTransfers_args args = new getTransfers_args();
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -978,7 +978,7 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return (new Client(prot)).recv_GetTransfers();
+        return (new Client(prot)).recv_getTransfers();
       }
     }
 
@@ -1024,102 +1024,102 @@ public class NodeService {
     }
 
     private static <I extends Iface> Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> getProcessMap(Map<String,  org.apache.thrift.ProcessFunction<I, ? extends  org.apache.thrift.TBase>> processMap) {
-      processMap.put("MakeTransfer", new MakeTransfer());
-      processMap.put("GetAccountBalance", new GetAccountBalance());
-      processMap.put("Ping", new Ping());
-      processMap.put("PingSwarm", new PingSwarm());
-      processMap.put("UpdateSwarmMembers", new UpdateSwarmMembers());
-      processMap.put("AddToSwarm", new AddToSwarm());
-      processMap.put("DelSwarm", new DelSwarm());
-      processMap.put("GetSwarm", new GetSwarm());
-      processMap.put("ElectSwarmLeader", new ElectSwarmLeader());
-      processMap.put("ElectionEndedSwarm", new ElectionEndedSwarm());
-      processMap.put("DeliverTransfer", new DeliverTransfer());
-      processMap.put("GetSwarmList", new GetSwarmList());
+      processMap.put("makeTransfer", new makeTransfer());
+      processMap.put("getAccountBalance", new getAccountBalance());
+      processMap.put("ping", new ping());
+      processMap.put("pingSwarm", new pingSwarm());
+      processMap.put("updateSwarmMembers", new updateSwarmMembers());
+      processMap.put("addToSwarm", new addToSwarm());
+      processMap.put("delSwarm", new delSwarm());
+      processMap.put("getSwarm", new getSwarm());
+      processMap.put("electSwarmLeader", new electSwarmLeader());
+      processMap.put("electionEndedSwarm", new electionEndedSwarm());
+      processMap.put("deliverTransfer", new deliverTransfer());
+      processMap.put("getSwarmList", new getSwarmList());
       processMap.put("startSwarmElection", new startSwarmElection());
-      processMap.put("GetTransfers", new GetTransfers());
+      processMap.put("getTransfers", new getTransfers());
       processMap.put("stop", new stop());
       return processMap;
     }
 
-    public static class MakeTransfer<I extends Iface> extends org.apache.thrift.ProcessFunction<I, MakeTransfer_args> {
-      public MakeTransfer() {
-        super("MakeTransfer");
+    public static class makeTransfer<I extends Iface> extends org.apache.thrift.ProcessFunction<I, makeTransfer_args> {
+      public makeTransfer() {
+        super("makeTransfer");
       }
 
-      public MakeTransfer_args getEmptyArgsInstance() {
-        return new MakeTransfer_args();
+      public makeTransfer_args getEmptyArgsInstance() {
+        return new makeTransfer_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public MakeTransfer_result getResult(I iface, MakeTransfer_args args) throws org.apache.thrift.TException {
-        MakeTransfer_result result = new MakeTransfer_result();
-        iface.MakeTransfer(args.receiver, args.value);
+      public makeTransfer_result getResult(I iface, makeTransfer_args args) throws org.apache.thrift.TException {
+        makeTransfer_result result = new makeTransfer_result();
+        iface.makeTransfer(args.receiver, args.value);
         return result;
       }
     }
 
-    public static class GetAccountBalance<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetAccountBalance_args> {
-      public GetAccountBalance() {
-        super("GetAccountBalance");
+    public static class getAccountBalance<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getAccountBalance_args> {
+      public getAccountBalance() {
+        super("getAccountBalance");
       }
 
-      public GetAccountBalance_args getEmptyArgsInstance() {
-        return new GetAccountBalance_args();
+      public getAccountBalance_args getEmptyArgsInstance() {
+        return new getAccountBalance_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public GetAccountBalance_result getResult(I iface, GetAccountBalance_args args) throws org.apache.thrift.TException {
-        GetAccountBalance_result result = new GetAccountBalance_result();
-        result.success = iface.GetAccountBalance();
+      public getAccountBalance_result getResult(I iface, getAccountBalance_args args) throws org.apache.thrift.TException {
+        getAccountBalance_result result = new getAccountBalance_result();
+        result.success = iface.getAccountBalance();
         result.setSuccessIsSet(true);
         return result;
       }
     }
 
-    public static class Ping<I extends Iface> extends org.apache.thrift.ProcessFunction<I, Ping_args> {
-      public Ping() {
-        super("Ping");
+    public static class ping<I extends Iface> extends org.apache.thrift.ProcessFunction<I, ping_args> {
+      public ping() {
+        super("ping");
       }
 
-      public Ping_args getEmptyArgsInstance() {
-        return new Ping_args();
+      public ping_args getEmptyArgsInstance() {
+        return new ping_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public Ping_result getResult(I iface, Ping_args args) throws org.apache.thrift.TException {
-        Ping_result result = new Ping_result();
-        iface.Ping();
+      public ping_result getResult(I iface, ping_args args) throws org.apache.thrift.TException {
+        ping_result result = new ping_result();
+        iface.ping();
         return result;
       }
     }
 
-    public static class PingSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, PingSwarm_args> {
-      public PingSwarm() {
-        super("PingSwarm");
+    public static class pingSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, pingSwarm_args> {
+      public pingSwarm() {
+        super("pingSwarm");
       }
 
-      public PingSwarm_args getEmptyArgsInstance() {
-        return new PingSwarm_args();
+      public pingSwarm_args getEmptyArgsInstance() {
+        return new pingSwarm_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public PingSwarm_result getResult(I iface, PingSwarm_args args) throws org.apache.thrift.TException {
-        PingSwarm_result result = new PingSwarm_result();
+      public pingSwarm_result getResult(I iface, pingSwarm_args args) throws org.apache.thrift.TException {
+        pingSwarm_result result = new pingSwarm_result();
         try {
-          iface.PingSwarm(args.leader, args.transfer);
+          iface.pingSwarm(args.leader, args.transfer);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1127,23 +1127,23 @@ public class NodeService {
       }
     }
 
-    public static class UpdateSwarmMembers<I extends Iface> extends org.apache.thrift.ProcessFunction<I, UpdateSwarmMembers_args> {
-      public UpdateSwarmMembers() {
-        super("UpdateSwarmMembers");
+    public static class updateSwarmMembers<I extends Iface> extends org.apache.thrift.ProcessFunction<I, updateSwarmMembers_args> {
+      public updateSwarmMembers() {
+        super("updateSwarmMembers");
       }
 
-      public UpdateSwarmMembers_args getEmptyArgsInstance() {
-        return new UpdateSwarmMembers_args();
+      public updateSwarmMembers_args getEmptyArgsInstance() {
+        return new updateSwarmMembers_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public UpdateSwarmMembers_result getResult(I iface, UpdateSwarmMembers_args args) throws org.apache.thrift.TException {
-        UpdateSwarmMembers_result result = new UpdateSwarmMembers_result();
+      public updateSwarmMembers_result getResult(I iface, updateSwarmMembers_args args) throws org.apache.thrift.TException {
+        updateSwarmMembers_result result = new updateSwarmMembers_result();
         try {
-          iface.UpdateSwarmMembers(args.swarm);
+          iface.updateSwarmMembers(args.swarm);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         } catch (WrongSwarmLeader exc2) {
@@ -1153,23 +1153,23 @@ public class NodeService {
       }
     }
 
-    public static class AddToSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, AddToSwarm_args> {
-      public AddToSwarm() {
-        super("AddToSwarm");
+    public static class addToSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, addToSwarm_args> {
+      public addToSwarm() {
+        super("addToSwarm");
       }
 
-      public AddToSwarm_args getEmptyArgsInstance() {
-        return new AddToSwarm_args();
+      public addToSwarm_args getEmptyArgsInstance() {
+        return new addToSwarm_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public AddToSwarm_result getResult(I iface, AddToSwarm_args args) throws org.apache.thrift.TException {
-        AddToSwarm_result result = new AddToSwarm_result();
+      public addToSwarm_result getResult(I iface, addToSwarm_args args) throws org.apache.thrift.TException {
+        addToSwarm_result result = new addToSwarm_result();
         try {
-          iface.AddToSwarm(args.swarm);
+          iface.addToSwarm(args.swarm);
         } catch (AlreadySwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1177,23 +1177,23 @@ public class NodeService {
       }
     }
 
-    public static class DelSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, DelSwarm_args> {
-      public DelSwarm() {
-        super("DelSwarm");
+    public static class delSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, delSwarm_args> {
+      public delSwarm() {
+        super("delSwarm");
       }
 
-      public DelSwarm_args getEmptyArgsInstance() {
-        return new DelSwarm_args();
+      public delSwarm_args getEmptyArgsInstance() {
+        return new delSwarm_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public DelSwarm_result getResult(I iface, DelSwarm_args args) throws org.apache.thrift.TException {
-        DelSwarm_result result = new DelSwarm_result();
+      public delSwarm_result getResult(I iface, delSwarm_args args) throws org.apache.thrift.TException {
+        delSwarm_result result = new delSwarm_result();
         try {
-          iface.DelSwarm(args.swarm);
+          iface.delSwarm(args.swarm);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         } catch (WrongSwarmLeader exc2) {
@@ -1203,23 +1203,23 @@ public class NodeService {
       }
     }
 
-    public static class GetSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetSwarm_args> {
-      public GetSwarm() {
-        super("GetSwarm");
+    public static class getSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getSwarm_args> {
+      public getSwarm() {
+        super("getSwarm");
       }
 
-      public GetSwarm_args getEmptyArgsInstance() {
-        return new GetSwarm_args();
+      public getSwarm_args getEmptyArgsInstance() {
+        return new getSwarm_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public GetSwarm_result getResult(I iface, GetSwarm_args args) throws org.apache.thrift.TException {
-        GetSwarm_result result = new GetSwarm_result();
+      public getSwarm_result getResult(I iface, getSwarm_args args) throws org.apache.thrift.TException {
+        getSwarm_result result = new getSwarm_result();
         try {
-          result.success = iface.GetSwarm(args.transfer);
+          result.success = iface.getSwarm(args.transfer);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1227,23 +1227,23 @@ public class NodeService {
       }
     }
 
-    public static class ElectSwarmLeader<I extends Iface> extends org.apache.thrift.ProcessFunction<I, ElectSwarmLeader_args> {
-      public ElectSwarmLeader() {
-        super("ElectSwarmLeader");
+    public static class electSwarmLeader<I extends Iface> extends org.apache.thrift.ProcessFunction<I, electSwarmLeader_args> {
+      public electSwarmLeader() {
+        super("electSwarmLeader");
       }
 
-      public ElectSwarmLeader_args getEmptyArgsInstance() {
-        return new ElectSwarmLeader_args();
+      public electSwarmLeader_args getEmptyArgsInstance() {
+        return new electSwarmLeader_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public ElectSwarmLeader_result getResult(I iface, ElectSwarmLeader_args args) throws org.apache.thrift.TException {
-        ElectSwarmLeader_result result = new ElectSwarmLeader_result();
+      public electSwarmLeader_result getResult(I iface, electSwarmLeader_args args) throws org.apache.thrift.TException {
+        electSwarmLeader_result result = new electSwarmLeader_result();
         try {
-          result.success = iface.ElectSwarmLeader(args.cadidate, args.Transfer);
+          result.success = iface.electSwarmLeader(args.cadidate, args.Transfer);
           result.setSuccessIsSet(true);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
@@ -1252,23 +1252,23 @@ public class NodeService {
       }
     }
 
-    public static class ElectionEndedSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, ElectionEndedSwarm_args> {
-      public ElectionEndedSwarm() {
-        super("ElectionEndedSwarm");
+    public static class electionEndedSwarm<I extends Iface> extends org.apache.thrift.ProcessFunction<I, electionEndedSwarm_args> {
+      public electionEndedSwarm() {
+        super("electionEndedSwarm");
       }
 
-      public ElectionEndedSwarm_args getEmptyArgsInstance() {
-        return new ElectionEndedSwarm_args();
+      public electionEndedSwarm_args getEmptyArgsInstance() {
+        return new electionEndedSwarm_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public ElectionEndedSwarm_result getResult(I iface, ElectionEndedSwarm_args args) throws org.apache.thrift.TException {
-        ElectionEndedSwarm_result result = new ElectionEndedSwarm_result();
+      public electionEndedSwarm_result getResult(I iface, electionEndedSwarm_args args) throws org.apache.thrift.TException {
+        electionEndedSwarm_result result = new electionEndedSwarm_result();
         try {
-          iface.ElectionEndedSwarm(args.swarm);
+          iface.electionEndedSwarm(args.swarm);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1276,42 +1276,42 @@ public class NodeService {
       }
     }
 
-    public static class DeliverTransfer<I extends Iface> extends org.apache.thrift.ProcessFunction<I, DeliverTransfer_args> {
-      public DeliverTransfer() {
-        super("DeliverTransfer");
+    public static class deliverTransfer<I extends Iface> extends org.apache.thrift.ProcessFunction<I, deliverTransfer_args> {
+      public deliverTransfer() {
+        super("deliverTransfer");
       }
 
-      public DeliverTransfer_args getEmptyArgsInstance() {
-        return new DeliverTransfer_args();
+      public deliverTransfer_args getEmptyArgsInstance() {
+        return new deliverTransfer_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public DeliverTransfer_result getResult(I iface, DeliverTransfer_args args) throws org.apache.thrift.TException {
-        DeliverTransfer_result result = new DeliverTransfer_result();
-        iface.DeliverTransfer(args.transfer);
+      public deliverTransfer_result getResult(I iface, deliverTransfer_args args) throws org.apache.thrift.TException {
+        deliverTransfer_result result = new deliverTransfer_result();
+        iface.deliverTransfer(args.transfer);
         return result;
       }
     }
 
-    public static class GetSwarmList<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetSwarmList_args> {
-      public GetSwarmList() {
-        super("GetSwarmList");
+    public static class getSwarmList<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getSwarmList_args> {
+      public getSwarmList() {
+        super("getSwarmList");
       }
 
-      public GetSwarmList_args getEmptyArgsInstance() {
-        return new GetSwarmList_args();
+      public getSwarmList_args getEmptyArgsInstance() {
+        return new getSwarmList_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public GetSwarmList_result getResult(I iface, GetSwarmList_args args) throws org.apache.thrift.TException {
-        GetSwarmList_result result = new GetSwarmList_result();
-        result.success = iface.GetSwarmList();
+      public getSwarmList_result getResult(I iface, getSwarmList_args args) throws org.apache.thrift.TException {
+        getSwarmList_result result = new getSwarmList_result();
+        result.success = iface.getSwarmList();
         return result;
       }
     }
@@ -1340,22 +1340,22 @@ public class NodeService {
       }
     }
 
-    public static class GetTransfers<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetTransfers_args> {
-      public GetTransfers() {
-        super("GetTransfers");
+    public static class getTransfers<I extends Iface> extends org.apache.thrift.ProcessFunction<I, getTransfers_args> {
+      public getTransfers() {
+        super("getTransfers");
       }
 
-      public GetTransfers_args getEmptyArgsInstance() {
-        return new GetTransfers_args();
+      public getTransfers_args getEmptyArgsInstance() {
+        return new getTransfers_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public GetTransfers_result getResult(I iface, GetTransfers_args args) throws org.apache.thrift.TException {
-        GetTransfers_result result = new GetTransfers_result();
-        result.success = iface.GetTransfers();
+      public getTransfers_result getResult(I iface, getTransfers_args args) throws org.apache.thrift.TException {
+        getTransfers_result result = new getTransfers_result();
+        result.success = iface.getTransfers();
         return result;
       }
     }
@@ -1393,38 +1393,38 @@ public class NodeService {
     }
 
     private static <I extends AsyncIface> Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase,?>> getProcessMap(Map<String,  org.apache.thrift.AsyncProcessFunction<I, ? extends  org.apache.thrift.TBase, ?>> processMap) {
-      processMap.put("MakeTransfer", new MakeTransfer());
-      processMap.put("GetAccountBalance", new GetAccountBalance());
-      processMap.put("Ping", new Ping());
-      processMap.put("PingSwarm", new PingSwarm());
-      processMap.put("UpdateSwarmMembers", new UpdateSwarmMembers());
-      processMap.put("AddToSwarm", new AddToSwarm());
-      processMap.put("DelSwarm", new DelSwarm());
-      processMap.put("GetSwarm", new GetSwarm());
-      processMap.put("ElectSwarmLeader", new ElectSwarmLeader());
-      processMap.put("ElectionEndedSwarm", new ElectionEndedSwarm());
-      processMap.put("DeliverTransfer", new DeliverTransfer());
-      processMap.put("GetSwarmList", new GetSwarmList());
+      processMap.put("makeTransfer", new makeTransfer());
+      processMap.put("getAccountBalance", new getAccountBalance());
+      processMap.put("ping", new ping());
+      processMap.put("pingSwarm", new pingSwarm());
+      processMap.put("updateSwarmMembers", new updateSwarmMembers());
+      processMap.put("addToSwarm", new addToSwarm());
+      processMap.put("delSwarm", new delSwarm());
+      processMap.put("getSwarm", new getSwarm());
+      processMap.put("electSwarmLeader", new electSwarmLeader());
+      processMap.put("electionEndedSwarm", new electionEndedSwarm());
+      processMap.put("deliverTransfer", new deliverTransfer());
+      processMap.put("getSwarmList", new getSwarmList());
       processMap.put("startSwarmElection", new startSwarmElection());
-      processMap.put("GetTransfers", new GetTransfers());
+      processMap.put("getTransfers", new getTransfers());
       processMap.put("stop", new stop());
       return processMap;
     }
 
-    public static class MakeTransfer<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, MakeTransfer_args, Void> {
-      public MakeTransfer() {
-        super("MakeTransfer");
+    public static class makeTransfer<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, makeTransfer_args, Void> {
+      public makeTransfer() {
+        super("makeTransfer");
       }
 
-      public MakeTransfer_args getEmptyArgsInstance() {
-        return new MakeTransfer_args();
+      public makeTransfer_args getEmptyArgsInstance() {
+        return new makeTransfer_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            MakeTransfer_result result = new MakeTransfer_result();
+            makeTransfer_result result = new makeTransfer_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1436,7 +1436,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            MakeTransfer_result result = new MakeTransfer_result();
+            makeTransfer_result result = new makeTransfer_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -1456,25 +1456,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, MakeTransfer_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.MakeTransfer(args.receiver, args.value,resultHandler);
+      public void start(I iface, makeTransfer_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.makeTransfer(args.receiver, args.value,resultHandler);
       }
     }
 
-    public static class GetAccountBalance<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetAccountBalance_args, Long> {
-      public GetAccountBalance() {
-        super("GetAccountBalance");
+    public static class getAccountBalance<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getAccountBalance_args, Long> {
+      public getAccountBalance() {
+        super("getAccountBalance");
       }
 
-      public GetAccountBalance_args getEmptyArgsInstance() {
-        return new GetAccountBalance_args();
+      public getAccountBalance_args getEmptyArgsInstance() {
+        return new getAccountBalance_args();
       }
 
       public AsyncMethodCallback<Long> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Long>() { 
           public void onComplete(Long o) {
-            GetAccountBalance_result result = new GetAccountBalance_result();
+            getAccountBalance_result result = new getAccountBalance_result();
             result.success = o;
             result.setSuccessIsSet(true);
             try {
@@ -1488,7 +1488,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            GetAccountBalance_result result = new GetAccountBalance_result();
+            getAccountBalance_result result = new getAccountBalance_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -1508,25 +1508,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, GetAccountBalance_args args, org.apache.thrift.async.AsyncMethodCallback<Long> resultHandler) throws TException {
-        iface.GetAccountBalance(resultHandler);
+      public void start(I iface, getAccountBalance_args args, org.apache.thrift.async.AsyncMethodCallback<Long> resultHandler) throws TException {
+        iface.getAccountBalance(resultHandler);
       }
     }
 
-    public static class Ping<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, Ping_args, Void> {
-      public Ping() {
-        super("Ping");
+    public static class ping<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, ping_args, Void> {
+      public ping() {
+        super("ping");
       }
 
-      public Ping_args getEmptyArgsInstance() {
-        return new Ping_args();
+      public ping_args getEmptyArgsInstance() {
+        return new ping_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            Ping_result result = new Ping_result();
+            ping_result result = new ping_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1538,7 +1538,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            Ping_result result = new Ping_result();
+            ping_result result = new ping_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -1558,25 +1558,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, Ping_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.Ping(resultHandler);
+      public void start(I iface, ping_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.ping(resultHandler);
       }
     }
 
-    public static class PingSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, PingSwarm_args, Void> {
-      public PingSwarm() {
-        super("PingSwarm");
+    public static class pingSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, pingSwarm_args, Void> {
+      public pingSwarm() {
+        super("pingSwarm");
       }
 
-      public PingSwarm_args getEmptyArgsInstance() {
-        return new PingSwarm_args();
+      public pingSwarm_args getEmptyArgsInstance() {
+        return new pingSwarm_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            PingSwarm_result result = new PingSwarm_result();
+            pingSwarm_result result = new pingSwarm_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1588,7 +1588,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            PingSwarm_result result = new PingSwarm_result();
+            pingSwarm_result result = new pingSwarm_result();
             if (e instanceof NotSwarmMemeber) {
                         result.exc = (NotSwarmMemeber) e;
                         result.setExcIsSet(true);
@@ -1614,25 +1614,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, PingSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.PingSwarm(args.leader, args.transfer,resultHandler);
+      public void start(I iface, pingSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.pingSwarm(args.leader, args.transfer,resultHandler);
       }
     }
 
-    public static class UpdateSwarmMembers<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, UpdateSwarmMembers_args, Void> {
-      public UpdateSwarmMembers() {
-        super("UpdateSwarmMembers");
+    public static class updateSwarmMembers<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, updateSwarmMembers_args, Void> {
+      public updateSwarmMembers() {
+        super("updateSwarmMembers");
       }
 
-      public UpdateSwarmMembers_args getEmptyArgsInstance() {
-        return new UpdateSwarmMembers_args();
+      public updateSwarmMembers_args getEmptyArgsInstance() {
+        return new updateSwarmMembers_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            UpdateSwarmMembers_result result = new UpdateSwarmMembers_result();
+            updateSwarmMembers_result result = new updateSwarmMembers_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1644,7 +1644,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            UpdateSwarmMembers_result result = new UpdateSwarmMembers_result();
+            updateSwarmMembers_result result = new updateSwarmMembers_result();
             if (e instanceof NotSwarmMemeber) {
                         result.exc = (NotSwarmMemeber) e;
                         result.setExcIsSet(true);
@@ -1675,25 +1675,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, UpdateSwarmMembers_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.UpdateSwarmMembers(args.swarm,resultHandler);
+      public void start(I iface, updateSwarmMembers_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.updateSwarmMembers(args.swarm,resultHandler);
       }
     }
 
-    public static class AddToSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, AddToSwarm_args, Void> {
-      public AddToSwarm() {
-        super("AddToSwarm");
+    public static class addToSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, addToSwarm_args, Void> {
+      public addToSwarm() {
+        super("addToSwarm");
       }
 
-      public AddToSwarm_args getEmptyArgsInstance() {
-        return new AddToSwarm_args();
+      public addToSwarm_args getEmptyArgsInstance() {
+        return new addToSwarm_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            AddToSwarm_result result = new AddToSwarm_result();
+            addToSwarm_result result = new addToSwarm_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1705,7 +1705,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            AddToSwarm_result result = new AddToSwarm_result();
+            addToSwarm_result result = new addToSwarm_result();
             if (e instanceof AlreadySwarmMemeber) {
                         result.exc = (AlreadySwarmMemeber) e;
                         result.setExcIsSet(true);
@@ -1731,25 +1731,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, AddToSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.AddToSwarm(args.swarm,resultHandler);
+      public void start(I iface, addToSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.addToSwarm(args.swarm,resultHandler);
       }
     }
 
-    public static class DelSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, DelSwarm_args, Void> {
-      public DelSwarm() {
-        super("DelSwarm");
+    public static class delSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, delSwarm_args, Void> {
+      public delSwarm() {
+        super("delSwarm");
       }
 
-      public DelSwarm_args getEmptyArgsInstance() {
-        return new DelSwarm_args();
+      public delSwarm_args getEmptyArgsInstance() {
+        return new delSwarm_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            DelSwarm_result result = new DelSwarm_result();
+            delSwarm_result result = new delSwarm_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1761,7 +1761,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            DelSwarm_result result = new DelSwarm_result();
+            delSwarm_result result = new delSwarm_result();
             if (e instanceof NotSwarmMemeber) {
                         result.exc = (NotSwarmMemeber) e;
                         result.setExcIsSet(true);
@@ -1792,25 +1792,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, DelSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.DelSwarm(args.swarm,resultHandler);
+      public void start(I iface, delSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.delSwarm(args.swarm,resultHandler);
       }
     }
 
-    public static class GetSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetSwarm_args, Swarm> {
-      public GetSwarm() {
-        super("GetSwarm");
+    public static class getSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getSwarm_args, Swarm> {
+      public getSwarm() {
+        super("getSwarm");
       }
 
-      public GetSwarm_args getEmptyArgsInstance() {
-        return new GetSwarm_args();
+      public getSwarm_args getEmptyArgsInstance() {
+        return new getSwarm_args();
       }
 
       public AsyncMethodCallback<Swarm> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Swarm>() { 
           public void onComplete(Swarm o) {
-            GetSwarm_result result = new GetSwarm_result();
+            getSwarm_result result = new getSwarm_result();
             result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
@@ -1823,7 +1823,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            GetSwarm_result result = new GetSwarm_result();
+            getSwarm_result result = new getSwarm_result();
             if (e instanceof NotSwarmMemeber) {
                         result.exc = (NotSwarmMemeber) e;
                         result.setExcIsSet(true);
@@ -1849,25 +1849,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, GetSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Swarm> resultHandler) throws TException {
-        iface.GetSwarm(args.transfer,resultHandler);
+      public void start(I iface, getSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Swarm> resultHandler) throws TException {
+        iface.getSwarm(args.transfer,resultHandler);
       }
     }
 
-    public static class ElectSwarmLeader<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, ElectSwarmLeader_args, Boolean> {
-      public ElectSwarmLeader() {
-        super("ElectSwarmLeader");
+    public static class electSwarmLeader<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, electSwarmLeader_args, Boolean> {
+      public electSwarmLeader() {
+        super("electSwarmLeader");
       }
 
-      public ElectSwarmLeader_args getEmptyArgsInstance() {
-        return new ElectSwarmLeader_args();
+      public electSwarmLeader_args getEmptyArgsInstance() {
+        return new electSwarmLeader_args();
       }
 
       public AsyncMethodCallback<Boolean> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Boolean>() { 
           public void onComplete(Boolean o) {
-            ElectSwarmLeader_result result = new ElectSwarmLeader_result();
+            electSwarmLeader_result result = new electSwarmLeader_result();
             result.success = o;
             result.setSuccessIsSet(true);
             try {
@@ -1881,7 +1881,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            ElectSwarmLeader_result result = new ElectSwarmLeader_result();
+            electSwarmLeader_result result = new electSwarmLeader_result();
             if (e instanceof NotSwarmMemeber) {
                         result.exc = (NotSwarmMemeber) e;
                         result.setExcIsSet(true);
@@ -1907,25 +1907,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, ElectSwarmLeader_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
-        iface.ElectSwarmLeader(args.cadidate, args.Transfer,resultHandler);
+      public void start(I iface, electSwarmLeader_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.electSwarmLeader(args.cadidate, args.Transfer,resultHandler);
       }
     }
 
-    public static class ElectionEndedSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, ElectionEndedSwarm_args, Void> {
-      public ElectionEndedSwarm() {
-        super("ElectionEndedSwarm");
+    public static class electionEndedSwarm<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, electionEndedSwarm_args, Void> {
+      public electionEndedSwarm() {
+        super("electionEndedSwarm");
       }
 
-      public ElectionEndedSwarm_args getEmptyArgsInstance() {
-        return new ElectionEndedSwarm_args();
+      public electionEndedSwarm_args getEmptyArgsInstance() {
+        return new electionEndedSwarm_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            ElectionEndedSwarm_result result = new ElectionEndedSwarm_result();
+            electionEndedSwarm_result result = new electionEndedSwarm_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1937,7 +1937,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            ElectionEndedSwarm_result result = new ElectionEndedSwarm_result();
+            electionEndedSwarm_result result = new electionEndedSwarm_result();
             if (e instanceof NotSwarmMemeber) {
                         result.exc = (NotSwarmMemeber) e;
                         result.setExcIsSet(true);
@@ -1963,25 +1963,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, ElectionEndedSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.ElectionEndedSwarm(args.swarm,resultHandler);
+      public void start(I iface, electionEndedSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.electionEndedSwarm(args.swarm,resultHandler);
       }
     }
 
-    public static class DeliverTransfer<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, DeliverTransfer_args, Void> {
-      public DeliverTransfer() {
-        super("DeliverTransfer");
+    public static class deliverTransfer<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, deliverTransfer_args, Void> {
+      public deliverTransfer() {
+        super("deliverTransfer");
       }
 
-      public DeliverTransfer_args getEmptyArgsInstance() {
-        return new DeliverTransfer_args();
+      public deliverTransfer_args getEmptyArgsInstance() {
+        return new deliverTransfer_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            DeliverTransfer_result result = new DeliverTransfer_result();
+            deliverTransfer_result result = new deliverTransfer_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -1993,7 +1993,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            DeliverTransfer_result result = new DeliverTransfer_result();
+            deliverTransfer_result result = new deliverTransfer_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -2013,25 +2013,25 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, DeliverTransfer_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.DeliverTransfer(args.transfer,resultHandler);
+      public void start(I iface, deliverTransfer_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.deliverTransfer(args.transfer,resultHandler);
       }
     }
 
-    public static class GetSwarmList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetSwarmList_args, List<Swarm>> {
-      public GetSwarmList() {
-        super("GetSwarmList");
+    public static class getSwarmList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getSwarmList_args, List<Swarm>> {
+      public getSwarmList() {
+        super("getSwarmList");
       }
 
-      public GetSwarmList_args getEmptyArgsInstance() {
-        return new GetSwarmList_args();
+      public getSwarmList_args getEmptyArgsInstance() {
+        return new getSwarmList_args();
       }
 
       public AsyncMethodCallback<List<Swarm>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<List<Swarm>>() { 
           public void onComplete(List<Swarm> o) {
-            GetSwarmList_result result = new GetSwarmList_result();
+            getSwarmList_result result = new getSwarmList_result();
             result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
@@ -2044,7 +2044,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            GetSwarmList_result result = new GetSwarmList_result();
+            getSwarmList_result result = new getSwarmList_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -2064,8 +2064,8 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, GetSwarmList_args args, org.apache.thrift.async.AsyncMethodCallback<List<Swarm>> resultHandler) throws TException {
-        iface.GetSwarmList(resultHandler);
+      public void start(I iface, getSwarmList_args args, org.apache.thrift.async.AsyncMethodCallback<List<Swarm>> resultHandler) throws TException {
+        iface.getSwarmList(resultHandler);
       }
     }
 
@@ -2125,20 +2125,20 @@ public class NodeService {
       }
     }
 
-    public static class GetTransfers<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetTransfers_args, List<TransferData>> {
-      public GetTransfers() {
-        super("GetTransfers");
+    public static class getTransfers<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, getTransfers_args, List<TransferData>> {
+      public getTransfers() {
+        super("getTransfers");
       }
 
-      public GetTransfers_args getEmptyArgsInstance() {
-        return new GetTransfers_args();
+      public getTransfers_args getEmptyArgsInstance() {
+        return new getTransfers_args();
       }
 
       public AsyncMethodCallback<List<TransferData>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<List<TransferData>>() { 
           public void onComplete(List<TransferData> o) {
-            GetTransfers_result result = new GetTransfers_result();
+            getTransfers_result result = new getTransfers_result();
             result.success = o;
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
@@ -2151,7 +2151,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            GetTransfers_result result = new GetTransfers_result();
+            getTransfers_result result = new getTransfers_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -2171,8 +2171,8 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, GetTransfers_args args, org.apache.thrift.async.AsyncMethodCallback<List<TransferData>> resultHandler) throws TException {
-        iface.GetTransfers(resultHandler);
+      public void start(I iface, getTransfers_args args, org.apache.thrift.async.AsyncMethodCallback<List<TransferData>> resultHandler) throws TException {
+        iface.getTransfers(resultHandler);
       }
     }
 
@@ -2228,16 +2228,16 @@ public class NodeService {
 
   }
 
-  public static class MakeTransfer_args implements org.apache.thrift.TBase<MakeTransfer_args, MakeTransfer_args._Fields>, java.io.Serializable, Cloneable, Comparable<MakeTransfer_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("MakeTransfer_args");
+  public static class makeTransfer_args implements org.apache.thrift.TBase<makeTransfer_args, makeTransfer_args._Fields>, java.io.Serializable, Cloneable, Comparable<makeTransfer_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("makeTransfer_args");
 
     private static final org.apache.thrift.protocol.TField RECEIVER_FIELD_DESC = new org.apache.thrift.protocol.TField("receiver", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("value", org.apache.thrift.protocol.TType.I64, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new MakeTransfer_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new MakeTransfer_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new makeTransfer_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new makeTransfer_argsTupleSchemeFactory());
     }
 
     public NodeID receiver; // required
@@ -2315,13 +2315,13 @@ public class NodeService {
       tmpMap.put(_Fields.VALUE, new org.apache.thrift.meta_data.FieldMetaData("value", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64          , "AccountBalanceType")));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(MakeTransfer_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(makeTransfer_args.class, metaDataMap);
     }
 
-    public MakeTransfer_args() {
+    public makeTransfer_args() {
     }
 
-    public MakeTransfer_args(
+    public makeTransfer_args(
       NodeID receiver,
       long value)
     {
@@ -2334,7 +2334,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public MakeTransfer_args(MakeTransfer_args other) {
+    public makeTransfer_args(makeTransfer_args other) {
       __isset_bitfield = other.__isset_bitfield;
       if (other.isSetReceiver()) {
         this.receiver = new NodeID(other.receiver);
@@ -2342,8 +2342,8 @@ public class NodeService {
       this.value = other.value;
     }
 
-    public MakeTransfer_args deepCopy() {
-      return new MakeTransfer_args(this);
+    public makeTransfer_args deepCopy() {
+      return new makeTransfer_args(this);
     }
 
     @Override
@@ -2357,7 +2357,7 @@ public class NodeService {
       return this.receiver;
     }
 
-    public MakeTransfer_args setReceiver(NodeID receiver) {
+    public makeTransfer_args setReceiver(NodeID receiver) {
       this.receiver = receiver;
       return this;
     }
@@ -2381,7 +2381,7 @@ public class NodeService {
       return this.value;
     }
 
-    public MakeTransfer_args setValue(long value) {
+    public makeTransfer_args setValue(long value) {
       this.value = value;
       setValueIsSet(true);
       return this;
@@ -2452,12 +2452,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof MakeTransfer_args)
-        return this.equals((MakeTransfer_args)that);
+      if (that instanceof makeTransfer_args)
+        return this.equals((makeTransfer_args)that);
       return false;
     }
 
-    public boolean equals(MakeTransfer_args that) {
+    public boolean equals(makeTransfer_args that) {
       if (that == null)
         return false;
 
@@ -2488,7 +2488,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(MakeTransfer_args other) {
+    public int compareTo(makeTransfer_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -2532,7 +2532,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("MakeTransfer_args(");
+      StringBuilder sb = new StringBuilder("makeTransfer_args(");
       boolean first = true;
 
       sb.append("receiver:");
@@ -2576,15 +2576,15 @@ public class NodeService {
       }
     }
 
-    private static class MakeTransfer_argsStandardSchemeFactory implements SchemeFactory {
-      public MakeTransfer_argsStandardScheme getScheme() {
-        return new MakeTransfer_argsStandardScheme();
+    private static class makeTransfer_argsStandardSchemeFactory implements SchemeFactory {
+      public makeTransfer_argsStandardScheme getScheme() {
+        return new makeTransfer_argsStandardScheme();
       }
     }
 
-    private static class MakeTransfer_argsStandardScheme extends StandardScheme<MakeTransfer_args> {
+    private static class makeTransfer_argsStandardScheme extends StandardScheme<makeTransfer_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, MakeTransfer_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, makeTransfer_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2622,7 +2622,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, MakeTransfer_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, makeTransfer_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2640,16 +2640,16 @@ public class NodeService {
 
     }
 
-    private static class MakeTransfer_argsTupleSchemeFactory implements SchemeFactory {
-      public MakeTransfer_argsTupleScheme getScheme() {
-        return new MakeTransfer_argsTupleScheme();
+    private static class makeTransfer_argsTupleSchemeFactory implements SchemeFactory {
+      public makeTransfer_argsTupleScheme getScheme() {
+        return new makeTransfer_argsTupleScheme();
       }
     }
 
-    private static class MakeTransfer_argsTupleScheme extends TupleScheme<MakeTransfer_args> {
+    private static class makeTransfer_argsTupleScheme extends TupleScheme<makeTransfer_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, MakeTransfer_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, makeTransfer_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetReceiver()) {
@@ -2668,7 +2668,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, MakeTransfer_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, makeTransfer_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -2685,14 +2685,14 @@ public class NodeService {
 
   }
 
-  public static class MakeTransfer_result implements org.apache.thrift.TBase<MakeTransfer_result, MakeTransfer_result._Fields>, java.io.Serializable, Cloneable, Comparable<MakeTransfer_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("MakeTransfer_result");
+  public static class makeTransfer_result implements org.apache.thrift.TBase<makeTransfer_result, makeTransfer_result._Fields>, java.io.Serializable, Cloneable, Comparable<makeTransfer_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("makeTransfer_result");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new MakeTransfer_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new MakeTransfer_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new makeTransfer_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new makeTransfer_resultTupleSchemeFactory());
     }
 
 
@@ -2755,20 +2755,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(MakeTransfer_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(makeTransfer_result.class, metaDataMap);
     }
 
-    public MakeTransfer_result() {
+    public makeTransfer_result() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public MakeTransfer_result(MakeTransfer_result other) {
+    public makeTransfer_result(makeTransfer_result other) {
     }
 
-    public MakeTransfer_result deepCopy() {
-      return new MakeTransfer_result(this);
+    public makeTransfer_result deepCopy() {
+      return new makeTransfer_result(this);
     }
 
     @Override
@@ -2801,12 +2801,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof MakeTransfer_result)
-        return this.equals((MakeTransfer_result)that);
+      if (that instanceof makeTransfer_result)
+        return this.equals((makeTransfer_result)that);
       return false;
     }
 
-    public boolean equals(MakeTransfer_result that) {
+    public boolean equals(makeTransfer_result that) {
       if (that == null)
         return false;
 
@@ -2819,7 +2819,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(MakeTransfer_result other) {
+    public int compareTo(makeTransfer_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -2843,7 +2843,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("MakeTransfer_result(");
+      StringBuilder sb = new StringBuilder("makeTransfer_result(");
       boolean first = true;
 
       sb.append(")");
@@ -2871,15 +2871,15 @@ public class NodeService {
       }
     }
 
-    private static class MakeTransfer_resultStandardSchemeFactory implements SchemeFactory {
-      public MakeTransfer_resultStandardScheme getScheme() {
-        return new MakeTransfer_resultStandardScheme();
+    private static class makeTransfer_resultStandardSchemeFactory implements SchemeFactory {
+      public makeTransfer_resultStandardScheme getScheme() {
+        return new makeTransfer_resultStandardScheme();
       }
     }
 
-    private static class MakeTransfer_resultStandardScheme extends StandardScheme<MakeTransfer_result> {
+    private static class makeTransfer_resultStandardScheme extends StandardScheme<makeTransfer_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, MakeTransfer_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, makeTransfer_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2900,7 +2900,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, MakeTransfer_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, makeTransfer_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2910,35 +2910,35 @@ public class NodeService {
 
     }
 
-    private static class MakeTransfer_resultTupleSchemeFactory implements SchemeFactory {
-      public MakeTransfer_resultTupleScheme getScheme() {
-        return new MakeTransfer_resultTupleScheme();
+    private static class makeTransfer_resultTupleSchemeFactory implements SchemeFactory {
+      public makeTransfer_resultTupleScheme getScheme() {
+        return new makeTransfer_resultTupleScheme();
       }
     }
 
-    private static class MakeTransfer_resultTupleScheme extends TupleScheme<MakeTransfer_result> {
+    private static class makeTransfer_resultTupleScheme extends TupleScheme<makeTransfer_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, MakeTransfer_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, makeTransfer_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, MakeTransfer_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, makeTransfer_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class GetAccountBalance_args implements org.apache.thrift.TBase<GetAccountBalance_args, GetAccountBalance_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetAccountBalance_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetAccountBalance_args");
+  public static class getAccountBalance_args implements org.apache.thrift.TBase<getAccountBalance_args, getAccountBalance_args._Fields>, java.io.Serializable, Cloneable, Comparable<getAccountBalance_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAccountBalance_args");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetAccountBalance_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetAccountBalance_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getAccountBalance_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getAccountBalance_argsTupleSchemeFactory());
     }
 
 
@@ -3001,20 +3001,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetAccountBalance_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAccountBalance_args.class, metaDataMap);
     }
 
-    public GetAccountBalance_args() {
+    public getAccountBalance_args() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetAccountBalance_args(GetAccountBalance_args other) {
+    public getAccountBalance_args(getAccountBalance_args other) {
     }
 
-    public GetAccountBalance_args deepCopy() {
-      return new GetAccountBalance_args(this);
+    public getAccountBalance_args deepCopy() {
+      return new getAccountBalance_args(this);
     }
 
     @Override
@@ -3047,12 +3047,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetAccountBalance_args)
-        return this.equals((GetAccountBalance_args)that);
+      if (that instanceof getAccountBalance_args)
+        return this.equals((getAccountBalance_args)that);
       return false;
     }
 
-    public boolean equals(GetAccountBalance_args that) {
+    public boolean equals(getAccountBalance_args that) {
       if (that == null)
         return false;
 
@@ -3065,7 +3065,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetAccountBalance_args other) {
+    public int compareTo(getAccountBalance_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -3089,7 +3089,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetAccountBalance_args(");
+      StringBuilder sb = new StringBuilder("getAccountBalance_args(");
       boolean first = true;
 
       sb.append(")");
@@ -3117,15 +3117,15 @@ public class NodeService {
       }
     }
 
-    private static class GetAccountBalance_argsStandardSchemeFactory implements SchemeFactory {
-      public GetAccountBalance_argsStandardScheme getScheme() {
-        return new GetAccountBalance_argsStandardScheme();
+    private static class getAccountBalance_argsStandardSchemeFactory implements SchemeFactory {
+      public getAccountBalance_argsStandardScheme getScheme() {
+        return new getAccountBalance_argsStandardScheme();
       }
     }
 
-    private static class GetAccountBalance_argsStandardScheme extends StandardScheme<GetAccountBalance_args> {
+    private static class getAccountBalance_argsStandardScheme extends StandardScheme<getAccountBalance_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountBalance_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAccountBalance_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3146,7 +3146,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountBalance_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAccountBalance_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3156,36 +3156,36 @@ public class NodeService {
 
     }
 
-    private static class GetAccountBalance_argsTupleSchemeFactory implements SchemeFactory {
-      public GetAccountBalance_argsTupleScheme getScheme() {
-        return new GetAccountBalance_argsTupleScheme();
+    private static class getAccountBalance_argsTupleSchemeFactory implements SchemeFactory {
+      public getAccountBalance_argsTupleScheme getScheme() {
+        return new getAccountBalance_argsTupleScheme();
       }
     }
 
-    private static class GetAccountBalance_argsTupleScheme extends TupleScheme<GetAccountBalance_args> {
+    private static class getAccountBalance_argsTupleScheme extends TupleScheme<getAccountBalance_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountBalance_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAccountBalance_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountBalance_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAccountBalance_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class GetAccountBalance_result implements org.apache.thrift.TBase<GetAccountBalance_result, GetAccountBalance_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetAccountBalance_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetAccountBalance_result");
+  public static class getAccountBalance_result implements org.apache.thrift.TBase<getAccountBalance_result, getAccountBalance_result._Fields>, java.io.Serializable, Cloneable, Comparable<getAccountBalance_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAccountBalance_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.I64, (short)0);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetAccountBalance_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetAccountBalance_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getAccountBalance_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getAccountBalance_resultTupleSchemeFactory());
     }
 
     public long success; // required
@@ -3257,13 +3257,13 @@ public class NodeService {
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64          , "AccountBalanceType")));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetAccountBalance_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAccountBalance_result.class, metaDataMap);
     }
 
-    public GetAccountBalance_result() {
+    public getAccountBalance_result() {
     }
 
-    public GetAccountBalance_result(
+    public getAccountBalance_result(
       long success)
     {
       this();
@@ -3274,13 +3274,13 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetAccountBalance_result(GetAccountBalance_result other) {
+    public getAccountBalance_result(getAccountBalance_result other) {
       __isset_bitfield = other.__isset_bitfield;
       this.success = other.success;
     }
 
-    public GetAccountBalance_result deepCopy() {
-      return new GetAccountBalance_result(this);
+    public getAccountBalance_result deepCopy() {
+      return new getAccountBalance_result(this);
     }
 
     @Override
@@ -3293,7 +3293,7 @@ public class NodeService {
       return this.success;
     }
 
-    public GetAccountBalance_result setSuccess(long success) {
+    public getAccountBalance_result setSuccess(long success) {
       this.success = success;
       setSuccessIsSet(true);
       return this;
@@ -3351,12 +3351,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetAccountBalance_result)
-        return this.equals((GetAccountBalance_result)that);
+      if (that instanceof getAccountBalance_result)
+        return this.equals((getAccountBalance_result)that);
       return false;
     }
 
-    public boolean equals(GetAccountBalance_result that) {
+    public boolean equals(getAccountBalance_result that) {
       if (that == null)
         return false;
 
@@ -3378,7 +3378,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetAccountBalance_result other) {
+    public int compareTo(getAccountBalance_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -3412,7 +3412,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetAccountBalance_result(");
+      StringBuilder sb = new StringBuilder("getAccountBalance_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -3445,15 +3445,15 @@ public class NodeService {
       }
     }
 
-    private static class GetAccountBalance_resultStandardSchemeFactory implements SchemeFactory {
-      public GetAccountBalance_resultStandardScheme getScheme() {
-        return new GetAccountBalance_resultStandardScheme();
+    private static class getAccountBalance_resultStandardSchemeFactory implements SchemeFactory {
+      public getAccountBalance_resultStandardScheme getScheme() {
+        return new getAccountBalance_resultStandardScheme();
       }
     }
 
-    private static class GetAccountBalance_resultStandardScheme extends StandardScheme<GetAccountBalance_result> {
+    private static class getAccountBalance_resultStandardScheme extends StandardScheme<getAccountBalance_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountBalance_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAccountBalance_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3482,7 +3482,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountBalance_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAccountBalance_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3497,16 +3497,16 @@ public class NodeService {
 
     }
 
-    private static class GetAccountBalance_resultTupleSchemeFactory implements SchemeFactory {
-      public GetAccountBalance_resultTupleScheme getScheme() {
-        return new GetAccountBalance_resultTupleScheme();
+    private static class getAccountBalance_resultTupleSchemeFactory implements SchemeFactory {
+      public getAccountBalance_resultTupleScheme getScheme() {
+        return new getAccountBalance_resultTupleScheme();
       }
     }
 
-    private static class GetAccountBalance_resultTupleScheme extends TupleScheme<GetAccountBalance_result> {
+    private static class getAccountBalance_resultTupleScheme extends TupleScheme<getAccountBalance_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountBalance_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAccountBalance_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -3519,7 +3519,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountBalance_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAccountBalance_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3531,14 +3531,14 @@ public class NodeService {
 
   }
 
-  public static class Ping_args implements org.apache.thrift.TBase<Ping_args, Ping_args._Fields>, java.io.Serializable, Cloneable, Comparable<Ping_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Ping_args");
+  public static class ping_args implements org.apache.thrift.TBase<ping_args, ping_args._Fields>, java.io.Serializable, Cloneable, Comparable<ping_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ping_args");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new Ping_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new Ping_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new ping_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new ping_argsTupleSchemeFactory());
     }
 
 
@@ -3601,20 +3601,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Ping_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ping_args.class, metaDataMap);
     }
 
-    public Ping_args() {
+    public ping_args() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public Ping_args(Ping_args other) {
+    public ping_args(ping_args other) {
     }
 
-    public Ping_args deepCopy() {
-      return new Ping_args(this);
+    public ping_args deepCopy() {
+      return new ping_args(this);
     }
 
     @Override
@@ -3647,12 +3647,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof Ping_args)
-        return this.equals((Ping_args)that);
+      if (that instanceof ping_args)
+        return this.equals((ping_args)that);
       return false;
     }
 
-    public boolean equals(Ping_args that) {
+    public boolean equals(ping_args that) {
       if (that == null)
         return false;
 
@@ -3665,7 +3665,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(Ping_args other) {
+    public int compareTo(ping_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -3689,7 +3689,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("Ping_args(");
+      StringBuilder sb = new StringBuilder("ping_args(");
       boolean first = true;
 
       sb.append(")");
@@ -3717,15 +3717,15 @@ public class NodeService {
       }
     }
 
-    private static class Ping_argsStandardSchemeFactory implements SchemeFactory {
-      public Ping_argsStandardScheme getScheme() {
-        return new Ping_argsStandardScheme();
+    private static class ping_argsStandardSchemeFactory implements SchemeFactory {
+      public ping_argsStandardScheme getScheme() {
+        return new ping_argsStandardScheme();
       }
     }
 
-    private static class Ping_argsStandardScheme extends StandardScheme<Ping_args> {
+    private static class ping_argsStandardScheme extends StandardScheme<ping_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, Ping_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, ping_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3746,7 +3746,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, Ping_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, ping_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3756,35 +3756,35 @@ public class NodeService {
 
     }
 
-    private static class Ping_argsTupleSchemeFactory implements SchemeFactory {
-      public Ping_argsTupleScheme getScheme() {
-        return new Ping_argsTupleScheme();
+    private static class ping_argsTupleSchemeFactory implements SchemeFactory {
+      public ping_argsTupleScheme getScheme() {
+        return new ping_argsTupleScheme();
       }
     }
 
-    private static class Ping_argsTupleScheme extends TupleScheme<Ping_args> {
+    private static class ping_argsTupleScheme extends TupleScheme<ping_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, Ping_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, ping_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, Ping_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, ping_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class Ping_result implements org.apache.thrift.TBase<Ping_result, Ping_result._Fields>, java.io.Serializable, Cloneable, Comparable<Ping_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Ping_result");
+  public static class ping_result implements org.apache.thrift.TBase<ping_result, ping_result._Fields>, java.io.Serializable, Cloneable, Comparable<ping_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ping_result");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new Ping_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new Ping_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new ping_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new ping_resultTupleSchemeFactory());
     }
 
 
@@ -3847,20 +3847,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Ping_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ping_result.class, metaDataMap);
     }
 
-    public Ping_result() {
+    public ping_result() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public Ping_result(Ping_result other) {
+    public ping_result(ping_result other) {
     }
 
-    public Ping_result deepCopy() {
-      return new Ping_result(this);
+    public ping_result deepCopy() {
+      return new ping_result(this);
     }
 
     @Override
@@ -3893,12 +3893,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof Ping_result)
-        return this.equals((Ping_result)that);
+      if (that instanceof ping_result)
+        return this.equals((ping_result)that);
       return false;
     }
 
-    public boolean equals(Ping_result that) {
+    public boolean equals(ping_result that) {
       if (that == null)
         return false;
 
@@ -3911,7 +3911,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(Ping_result other) {
+    public int compareTo(ping_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -3935,7 +3935,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("Ping_result(");
+      StringBuilder sb = new StringBuilder("ping_result(");
       boolean first = true;
 
       sb.append(")");
@@ -3963,15 +3963,15 @@ public class NodeService {
       }
     }
 
-    private static class Ping_resultStandardSchemeFactory implements SchemeFactory {
-      public Ping_resultStandardScheme getScheme() {
-        return new Ping_resultStandardScheme();
+    private static class ping_resultStandardSchemeFactory implements SchemeFactory {
+      public ping_resultStandardScheme getScheme() {
+        return new ping_resultStandardScheme();
       }
     }
 
-    private static class Ping_resultStandardScheme extends StandardScheme<Ping_result> {
+    private static class ping_resultStandardScheme extends StandardScheme<ping_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, Ping_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, ping_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3992,7 +3992,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, Ping_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, ping_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4002,37 +4002,37 @@ public class NodeService {
 
     }
 
-    private static class Ping_resultTupleSchemeFactory implements SchemeFactory {
-      public Ping_resultTupleScheme getScheme() {
-        return new Ping_resultTupleScheme();
+    private static class ping_resultTupleSchemeFactory implements SchemeFactory {
+      public ping_resultTupleScheme getScheme() {
+        return new ping_resultTupleScheme();
       }
     }
 
-    private static class Ping_resultTupleScheme extends TupleScheme<Ping_result> {
+    private static class ping_resultTupleScheme extends TupleScheme<ping_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, Ping_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, ping_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, Ping_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, ping_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class PingSwarm_args implements org.apache.thrift.TBase<PingSwarm_args, PingSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<PingSwarm_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("PingSwarm_args");
+  public static class pingSwarm_args implements org.apache.thrift.TBase<pingSwarm_args, pingSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<pingSwarm_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("pingSwarm_args");
 
     private static final org.apache.thrift.protocol.TField LEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("leader", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new PingSwarm_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new PingSwarm_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new pingSwarm_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new pingSwarm_argsTupleSchemeFactory());
     }
 
     public NodeID leader; // required
@@ -4108,13 +4108,13 @@ public class NodeService {
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(PingSwarm_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(pingSwarm_args.class, metaDataMap);
     }
 
-    public PingSwarm_args() {
+    public pingSwarm_args() {
     }
 
-    public PingSwarm_args(
+    public pingSwarm_args(
       NodeID leader,
       TransferID transfer)
     {
@@ -4126,7 +4126,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public PingSwarm_args(PingSwarm_args other) {
+    public pingSwarm_args(pingSwarm_args other) {
       if (other.isSetLeader()) {
         this.leader = new NodeID(other.leader);
       }
@@ -4135,8 +4135,8 @@ public class NodeService {
       }
     }
 
-    public PingSwarm_args deepCopy() {
-      return new PingSwarm_args(this);
+    public pingSwarm_args deepCopy() {
+      return new pingSwarm_args(this);
     }
 
     @Override
@@ -4149,7 +4149,7 @@ public class NodeService {
       return this.leader;
     }
 
-    public PingSwarm_args setLeader(NodeID leader) {
+    public pingSwarm_args setLeader(NodeID leader) {
       this.leader = leader;
       return this;
     }
@@ -4173,7 +4173,7 @@ public class NodeService {
       return this.transfer;
     }
 
-    public PingSwarm_args setTransfer(TransferID transfer) {
+    public pingSwarm_args setTransfer(TransferID transfer) {
       this.transfer = transfer;
       return this;
     }
@@ -4245,12 +4245,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof PingSwarm_args)
-        return this.equals((PingSwarm_args)that);
+      if (that instanceof pingSwarm_args)
+        return this.equals((pingSwarm_args)that);
       return false;
     }
 
-    public boolean equals(PingSwarm_args that) {
+    public boolean equals(pingSwarm_args that) {
       if (that == null)
         return false;
 
@@ -4281,7 +4281,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(PingSwarm_args other) {
+    public int compareTo(pingSwarm_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -4325,7 +4325,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("PingSwarm_args(");
+      StringBuilder sb = new StringBuilder("pingSwarm_args(");
       boolean first = true;
 
       sb.append("leader:");
@@ -4374,15 +4374,15 @@ public class NodeService {
       }
     }
 
-    private static class PingSwarm_argsStandardSchemeFactory implements SchemeFactory {
-      public PingSwarm_argsStandardScheme getScheme() {
-        return new PingSwarm_argsStandardScheme();
+    private static class pingSwarm_argsStandardSchemeFactory implements SchemeFactory {
+      public pingSwarm_argsStandardScheme getScheme() {
+        return new pingSwarm_argsStandardScheme();
       }
     }
 
-    private static class PingSwarm_argsStandardScheme extends StandardScheme<PingSwarm_args> {
+    private static class pingSwarm_argsStandardScheme extends StandardScheme<pingSwarm_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, PingSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, pingSwarm_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4421,7 +4421,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, PingSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, pingSwarm_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4441,16 +4441,16 @@ public class NodeService {
 
     }
 
-    private static class PingSwarm_argsTupleSchemeFactory implements SchemeFactory {
-      public PingSwarm_argsTupleScheme getScheme() {
-        return new PingSwarm_argsTupleScheme();
+    private static class pingSwarm_argsTupleSchemeFactory implements SchemeFactory {
+      public pingSwarm_argsTupleScheme getScheme() {
+        return new pingSwarm_argsTupleScheme();
       }
     }
 
-    private static class PingSwarm_argsTupleScheme extends TupleScheme<PingSwarm_args> {
+    private static class pingSwarm_argsTupleScheme extends TupleScheme<pingSwarm_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, PingSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, pingSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetLeader()) {
@@ -4469,7 +4469,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, PingSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, pingSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -4487,15 +4487,15 @@ public class NodeService {
 
   }
 
-  public static class PingSwarm_result implements org.apache.thrift.TBase<PingSwarm_result, PingSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<PingSwarm_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("PingSwarm_result");
+  public static class pingSwarm_result implements org.apache.thrift.TBase<pingSwarm_result, pingSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<pingSwarm_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("pingSwarm_result");
 
     private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new PingSwarm_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new PingSwarm_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new pingSwarm_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new pingSwarm_resultTupleSchemeFactory());
     }
 
     public NotSwarmMemeber exc; // required
@@ -4565,13 +4565,13 @@ public class NodeService {
       tmpMap.put(_Fields.EXC, new org.apache.thrift.meta_data.FieldMetaData("exc", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(PingSwarm_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(pingSwarm_result.class, metaDataMap);
     }
 
-    public PingSwarm_result() {
+    public pingSwarm_result() {
     }
 
-    public PingSwarm_result(
+    public pingSwarm_result(
       NotSwarmMemeber exc)
     {
       this();
@@ -4581,14 +4581,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public PingSwarm_result(PingSwarm_result other) {
+    public pingSwarm_result(pingSwarm_result other) {
       if (other.isSetExc()) {
         this.exc = new NotSwarmMemeber(other.exc);
       }
     }
 
-    public PingSwarm_result deepCopy() {
-      return new PingSwarm_result(this);
+    public pingSwarm_result deepCopy() {
+      return new pingSwarm_result(this);
     }
 
     @Override
@@ -4600,7 +4600,7 @@ public class NodeService {
       return this.exc;
     }
 
-    public PingSwarm_result setExc(NotSwarmMemeber exc) {
+    public pingSwarm_result setExc(NotSwarmMemeber exc) {
       this.exc = exc;
       return this;
     }
@@ -4659,12 +4659,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof PingSwarm_result)
-        return this.equals((PingSwarm_result)that);
+      if (that instanceof pingSwarm_result)
+        return this.equals((pingSwarm_result)that);
       return false;
     }
 
-    public boolean equals(PingSwarm_result that) {
+    public boolean equals(pingSwarm_result that) {
       if (that == null)
         return false;
 
@@ -4686,7 +4686,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(PingSwarm_result other) {
+    public int compareTo(pingSwarm_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -4720,7 +4720,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("PingSwarm_result(");
+      StringBuilder sb = new StringBuilder("pingSwarm_result(");
       boolean first = true;
 
       sb.append("exc:");
@@ -4755,15 +4755,15 @@ public class NodeService {
       }
     }
 
-    private static class PingSwarm_resultStandardSchemeFactory implements SchemeFactory {
-      public PingSwarm_resultStandardScheme getScheme() {
-        return new PingSwarm_resultStandardScheme();
+    private static class pingSwarm_resultStandardSchemeFactory implements SchemeFactory {
+      public pingSwarm_resultStandardScheme getScheme() {
+        return new pingSwarm_resultStandardScheme();
       }
     }
 
-    private static class PingSwarm_resultStandardScheme extends StandardScheme<PingSwarm_result> {
+    private static class pingSwarm_resultStandardScheme extends StandardScheme<pingSwarm_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, PingSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, pingSwarm_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4793,7 +4793,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, PingSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, pingSwarm_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4808,16 +4808,16 @@ public class NodeService {
 
     }
 
-    private static class PingSwarm_resultTupleSchemeFactory implements SchemeFactory {
-      public PingSwarm_resultTupleScheme getScheme() {
-        return new PingSwarm_resultTupleScheme();
+    private static class pingSwarm_resultTupleSchemeFactory implements SchemeFactory {
+      public pingSwarm_resultTupleScheme getScheme() {
+        return new pingSwarm_resultTupleScheme();
       }
     }
 
-    private static class PingSwarm_resultTupleScheme extends TupleScheme<PingSwarm_result> {
+    private static class pingSwarm_resultTupleScheme extends TupleScheme<pingSwarm_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, PingSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, pingSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetExc()) {
@@ -4830,7 +4830,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, PingSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, pingSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -4843,15 +4843,15 @@ public class NodeService {
 
   }
 
-  public static class UpdateSwarmMembers_args implements org.apache.thrift.TBase<UpdateSwarmMembers_args, UpdateSwarmMembers_args._Fields>, java.io.Serializable, Cloneable, Comparable<UpdateSwarmMembers_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("UpdateSwarmMembers_args");
+  public static class updateSwarmMembers_args implements org.apache.thrift.TBase<updateSwarmMembers_args, updateSwarmMembers_args._Fields>, java.io.Serializable, Cloneable, Comparable<updateSwarmMembers_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("updateSwarmMembers_args");
 
     private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new UpdateSwarmMembers_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new UpdateSwarmMembers_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new updateSwarmMembers_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new updateSwarmMembers_argsTupleSchemeFactory());
     }
 
     public Swarm swarm; // required
@@ -4921,13 +4921,13 @@ public class NodeService {
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(UpdateSwarmMembers_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(updateSwarmMembers_args.class, metaDataMap);
     }
 
-    public UpdateSwarmMembers_args() {
+    public updateSwarmMembers_args() {
     }
 
-    public UpdateSwarmMembers_args(
+    public updateSwarmMembers_args(
       Swarm swarm)
     {
       this();
@@ -4937,14 +4937,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public UpdateSwarmMembers_args(UpdateSwarmMembers_args other) {
+    public updateSwarmMembers_args(updateSwarmMembers_args other) {
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
       }
     }
 
-    public UpdateSwarmMembers_args deepCopy() {
-      return new UpdateSwarmMembers_args(this);
+    public updateSwarmMembers_args deepCopy() {
+      return new updateSwarmMembers_args(this);
     }
 
     @Override
@@ -4956,7 +4956,7 @@ public class NodeService {
       return this.swarm;
     }
 
-    public UpdateSwarmMembers_args setSwarm(Swarm swarm) {
+    public updateSwarmMembers_args setSwarm(Swarm swarm) {
       this.swarm = swarm;
       return this;
     }
@@ -5015,12 +5015,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof UpdateSwarmMembers_args)
-        return this.equals((UpdateSwarmMembers_args)that);
+      if (that instanceof updateSwarmMembers_args)
+        return this.equals((updateSwarmMembers_args)that);
       return false;
     }
 
-    public boolean equals(UpdateSwarmMembers_args that) {
+    public boolean equals(updateSwarmMembers_args that) {
       if (that == null)
         return false;
 
@@ -5042,7 +5042,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(UpdateSwarmMembers_args other) {
+    public int compareTo(updateSwarmMembers_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -5076,7 +5076,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("UpdateSwarmMembers_args(");
+      StringBuilder sb = new StringBuilder("updateSwarmMembers_args(");
       boolean first = true;
 
       sb.append("swarm:");
@@ -5114,15 +5114,15 @@ public class NodeService {
       }
     }
 
-    private static class UpdateSwarmMembers_argsStandardSchemeFactory implements SchemeFactory {
-      public UpdateSwarmMembers_argsStandardScheme getScheme() {
-        return new UpdateSwarmMembers_argsStandardScheme();
+    private static class updateSwarmMembers_argsStandardSchemeFactory implements SchemeFactory {
+      public updateSwarmMembers_argsStandardScheme getScheme() {
+        return new updateSwarmMembers_argsStandardScheme();
       }
     }
 
-    private static class UpdateSwarmMembers_argsStandardScheme extends StandardScheme<UpdateSwarmMembers_args> {
+    private static class updateSwarmMembers_argsStandardScheme extends StandardScheme<updateSwarmMembers_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, UpdateSwarmMembers_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, updateSwarmMembers_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5152,7 +5152,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, UpdateSwarmMembers_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, updateSwarmMembers_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -5167,16 +5167,16 @@ public class NodeService {
 
     }
 
-    private static class UpdateSwarmMembers_argsTupleSchemeFactory implements SchemeFactory {
-      public UpdateSwarmMembers_argsTupleScheme getScheme() {
-        return new UpdateSwarmMembers_argsTupleScheme();
+    private static class updateSwarmMembers_argsTupleSchemeFactory implements SchemeFactory {
+      public updateSwarmMembers_argsTupleScheme getScheme() {
+        return new updateSwarmMembers_argsTupleScheme();
       }
     }
 
-    private static class UpdateSwarmMembers_argsTupleScheme extends TupleScheme<UpdateSwarmMembers_args> {
+    private static class updateSwarmMembers_argsTupleScheme extends TupleScheme<updateSwarmMembers_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, UpdateSwarmMembers_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, updateSwarmMembers_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSwarm()) {
@@ -5189,7 +5189,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, UpdateSwarmMembers_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, updateSwarmMembers_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -5202,16 +5202,16 @@ public class NodeService {
 
   }
 
-  public static class UpdateSwarmMembers_result implements org.apache.thrift.TBase<UpdateSwarmMembers_result, UpdateSwarmMembers_result._Fields>, java.io.Serializable, Cloneable, Comparable<UpdateSwarmMembers_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("UpdateSwarmMembers_result");
+  public static class updateSwarmMembers_result implements org.apache.thrift.TBase<updateSwarmMembers_result, updateSwarmMembers_result._Fields>, java.io.Serializable, Cloneable, Comparable<updateSwarmMembers_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("updateSwarmMembers_result");
 
     private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField EXC2_FIELD_DESC = new org.apache.thrift.protocol.TField("exc2", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new UpdateSwarmMembers_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new UpdateSwarmMembers_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new updateSwarmMembers_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new updateSwarmMembers_resultTupleSchemeFactory());
     }
 
     public NotSwarmMemeber exc; // required
@@ -5287,13 +5287,13 @@ public class NodeService {
       tmpMap.put(_Fields.EXC2, new org.apache.thrift.meta_data.FieldMetaData("exc2", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(UpdateSwarmMembers_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(updateSwarmMembers_result.class, metaDataMap);
     }
 
-    public UpdateSwarmMembers_result() {
+    public updateSwarmMembers_result() {
     }
 
-    public UpdateSwarmMembers_result(
+    public updateSwarmMembers_result(
       NotSwarmMemeber exc,
       WrongSwarmLeader exc2)
     {
@@ -5305,7 +5305,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public UpdateSwarmMembers_result(UpdateSwarmMembers_result other) {
+    public updateSwarmMembers_result(updateSwarmMembers_result other) {
       if (other.isSetExc()) {
         this.exc = new NotSwarmMemeber(other.exc);
       }
@@ -5314,8 +5314,8 @@ public class NodeService {
       }
     }
 
-    public UpdateSwarmMembers_result deepCopy() {
-      return new UpdateSwarmMembers_result(this);
+    public updateSwarmMembers_result deepCopy() {
+      return new updateSwarmMembers_result(this);
     }
 
     @Override
@@ -5328,7 +5328,7 @@ public class NodeService {
       return this.exc;
     }
 
-    public UpdateSwarmMembers_result setExc(NotSwarmMemeber exc) {
+    public updateSwarmMembers_result setExc(NotSwarmMemeber exc) {
       this.exc = exc;
       return this;
     }
@@ -5352,7 +5352,7 @@ public class NodeService {
       return this.exc2;
     }
 
-    public UpdateSwarmMembers_result setExc2(WrongSwarmLeader exc2) {
+    public updateSwarmMembers_result setExc2(WrongSwarmLeader exc2) {
       this.exc2 = exc2;
       return this;
     }
@@ -5424,12 +5424,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof UpdateSwarmMembers_result)
-        return this.equals((UpdateSwarmMembers_result)that);
+      if (that instanceof updateSwarmMembers_result)
+        return this.equals((updateSwarmMembers_result)that);
       return false;
     }
 
-    public boolean equals(UpdateSwarmMembers_result that) {
+    public boolean equals(updateSwarmMembers_result that) {
       if (that == null)
         return false;
 
@@ -5460,7 +5460,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(UpdateSwarmMembers_result other) {
+    public int compareTo(updateSwarmMembers_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -5504,7 +5504,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("UpdateSwarmMembers_result(");
+      StringBuilder sb = new StringBuilder("updateSwarmMembers_result(");
       boolean first = true;
 
       sb.append("exc:");
@@ -5547,15 +5547,15 @@ public class NodeService {
       }
     }
 
-    private static class UpdateSwarmMembers_resultStandardSchemeFactory implements SchemeFactory {
-      public UpdateSwarmMembers_resultStandardScheme getScheme() {
-        return new UpdateSwarmMembers_resultStandardScheme();
+    private static class updateSwarmMembers_resultStandardSchemeFactory implements SchemeFactory {
+      public updateSwarmMembers_resultStandardScheme getScheme() {
+        return new updateSwarmMembers_resultStandardScheme();
       }
     }
 
-    private static class UpdateSwarmMembers_resultStandardScheme extends StandardScheme<UpdateSwarmMembers_result> {
+    private static class updateSwarmMembers_resultStandardScheme extends StandardScheme<updateSwarmMembers_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, UpdateSwarmMembers_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, updateSwarmMembers_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5594,7 +5594,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, UpdateSwarmMembers_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, updateSwarmMembers_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -5614,16 +5614,16 @@ public class NodeService {
 
     }
 
-    private static class UpdateSwarmMembers_resultTupleSchemeFactory implements SchemeFactory {
-      public UpdateSwarmMembers_resultTupleScheme getScheme() {
-        return new UpdateSwarmMembers_resultTupleScheme();
+    private static class updateSwarmMembers_resultTupleSchemeFactory implements SchemeFactory {
+      public updateSwarmMembers_resultTupleScheme getScheme() {
+        return new updateSwarmMembers_resultTupleScheme();
       }
     }
 
-    private static class UpdateSwarmMembers_resultTupleScheme extends TupleScheme<UpdateSwarmMembers_result> {
+    private static class updateSwarmMembers_resultTupleScheme extends TupleScheme<updateSwarmMembers_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, UpdateSwarmMembers_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, updateSwarmMembers_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetExc()) {
@@ -5642,7 +5642,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, UpdateSwarmMembers_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, updateSwarmMembers_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -5660,15 +5660,15 @@ public class NodeService {
 
   }
 
-  public static class AddToSwarm_args implements org.apache.thrift.TBase<AddToSwarm_args, AddToSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<AddToSwarm_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("AddToSwarm_args");
+  public static class addToSwarm_args implements org.apache.thrift.TBase<addToSwarm_args, addToSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<addToSwarm_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addToSwarm_args");
 
     private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new AddToSwarm_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new AddToSwarm_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new addToSwarm_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new addToSwarm_argsTupleSchemeFactory());
     }
 
     public Swarm swarm; // required
@@ -5738,13 +5738,13 @@ public class NodeService {
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(AddToSwarm_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addToSwarm_args.class, metaDataMap);
     }
 
-    public AddToSwarm_args() {
+    public addToSwarm_args() {
     }
 
-    public AddToSwarm_args(
+    public addToSwarm_args(
       Swarm swarm)
     {
       this();
@@ -5754,14 +5754,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public AddToSwarm_args(AddToSwarm_args other) {
+    public addToSwarm_args(addToSwarm_args other) {
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
       }
     }
 
-    public AddToSwarm_args deepCopy() {
-      return new AddToSwarm_args(this);
+    public addToSwarm_args deepCopy() {
+      return new addToSwarm_args(this);
     }
 
     @Override
@@ -5773,7 +5773,7 @@ public class NodeService {
       return this.swarm;
     }
 
-    public AddToSwarm_args setSwarm(Swarm swarm) {
+    public addToSwarm_args setSwarm(Swarm swarm) {
       this.swarm = swarm;
       return this;
     }
@@ -5832,12 +5832,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof AddToSwarm_args)
-        return this.equals((AddToSwarm_args)that);
+      if (that instanceof addToSwarm_args)
+        return this.equals((addToSwarm_args)that);
       return false;
     }
 
-    public boolean equals(AddToSwarm_args that) {
+    public boolean equals(addToSwarm_args that) {
       if (that == null)
         return false;
 
@@ -5859,7 +5859,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(AddToSwarm_args other) {
+    public int compareTo(addToSwarm_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -5893,7 +5893,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("AddToSwarm_args(");
+      StringBuilder sb = new StringBuilder("addToSwarm_args(");
       boolean first = true;
 
       sb.append("swarm:");
@@ -5931,15 +5931,15 @@ public class NodeService {
       }
     }
 
-    private static class AddToSwarm_argsStandardSchemeFactory implements SchemeFactory {
-      public AddToSwarm_argsStandardScheme getScheme() {
-        return new AddToSwarm_argsStandardScheme();
+    private static class addToSwarm_argsStandardSchemeFactory implements SchemeFactory {
+      public addToSwarm_argsStandardScheme getScheme() {
+        return new addToSwarm_argsStandardScheme();
       }
     }
 
-    private static class AddToSwarm_argsStandardScheme extends StandardScheme<AddToSwarm_args> {
+    private static class addToSwarm_argsStandardScheme extends StandardScheme<addToSwarm_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, AddToSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, addToSwarm_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5969,7 +5969,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, AddToSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, addToSwarm_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -5984,16 +5984,16 @@ public class NodeService {
 
     }
 
-    private static class AddToSwarm_argsTupleSchemeFactory implements SchemeFactory {
-      public AddToSwarm_argsTupleScheme getScheme() {
-        return new AddToSwarm_argsTupleScheme();
+    private static class addToSwarm_argsTupleSchemeFactory implements SchemeFactory {
+      public addToSwarm_argsTupleScheme getScheme() {
+        return new addToSwarm_argsTupleScheme();
       }
     }
 
-    private static class AddToSwarm_argsTupleScheme extends TupleScheme<AddToSwarm_args> {
+    private static class addToSwarm_argsTupleScheme extends TupleScheme<addToSwarm_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, AddToSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, addToSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSwarm()) {
@@ -6006,7 +6006,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, AddToSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, addToSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -6019,15 +6019,15 @@ public class NodeService {
 
   }
 
-  public static class AddToSwarm_result implements org.apache.thrift.TBase<AddToSwarm_result, AddToSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<AddToSwarm_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("AddToSwarm_result");
+  public static class addToSwarm_result implements org.apache.thrift.TBase<addToSwarm_result, addToSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<addToSwarm_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addToSwarm_result");
 
     private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new AddToSwarm_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new AddToSwarm_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new addToSwarm_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new addToSwarm_resultTupleSchemeFactory());
     }
 
     public AlreadySwarmMemeber exc; // required
@@ -6097,13 +6097,13 @@ public class NodeService {
       tmpMap.put(_Fields.EXC, new org.apache.thrift.meta_data.FieldMetaData("exc", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(AddToSwarm_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addToSwarm_result.class, metaDataMap);
     }
 
-    public AddToSwarm_result() {
+    public addToSwarm_result() {
     }
 
-    public AddToSwarm_result(
+    public addToSwarm_result(
       AlreadySwarmMemeber exc)
     {
       this();
@@ -6113,14 +6113,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public AddToSwarm_result(AddToSwarm_result other) {
+    public addToSwarm_result(addToSwarm_result other) {
       if (other.isSetExc()) {
         this.exc = new AlreadySwarmMemeber(other.exc);
       }
     }
 
-    public AddToSwarm_result deepCopy() {
-      return new AddToSwarm_result(this);
+    public addToSwarm_result deepCopy() {
+      return new addToSwarm_result(this);
     }
 
     @Override
@@ -6132,7 +6132,7 @@ public class NodeService {
       return this.exc;
     }
 
-    public AddToSwarm_result setExc(AlreadySwarmMemeber exc) {
+    public addToSwarm_result setExc(AlreadySwarmMemeber exc) {
       this.exc = exc;
       return this;
     }
@@ -6191,12 +6191,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof AddToSwarm_result)
-        return this.equals((AddToSwarm_result)that);
+      if (that instanceof addToSwarm_result)
+        return this.equals((addToSwarm_result)that);
       return false;
     }
 
-    public boolean equals(AddToSwarm_result that) {
+    public boolean equals(addToSwarm_result that) {
       if (that == null)
         return false;
 
@@ -6218,7 +6218,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(AddToSwarm_result other) {
+    public int compareTo(addToSwarm_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -6252,7 +6252,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("AddToSwarm_result(");
+      StringBuilder sb = new StringBuilder("addToSwarm_result(");
       boolean first = true;
 
       sb.append("exc:");
@@ -6287,15 +6287,15 @@ public class NodeService {
       }
     }
 
-    private static class AddToSwarm_resultStandardSchemeFactory implements SchemeFactory {
-      public AddToSwarm_resultStandardScheme getScheme() {
-        return new AddToSwarm_resultStandardScheme();
+    private static class addToSwarm_resultStandardSchemeFactory implements SchemeFactory {
+      public addToSwarm_resultStandardScheme getScheme() {
+        return new addToSwarm_resultStandardScheme();
       }
     }
 
-    private static class AddToSwarm_resultStandardScheme extends StandardScheme<AddToSwarm_result> {
+    private static class addToSwarm_resultStandardScheme extends StandardScheme<addToSwarm_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, AddToSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, addToSwarm_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -6325,7 +6325,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, AddToSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, addToSwarm_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -6340,16 +6340,16 @@ public class NodeService {
 
     }
 
-    private static class AddToSwarm_resultTupleSchemeFactory implements SchemeFactory {
-      public AddToSwarm_resultTupleScheme getScheme() {
-        return new AddToSwarm_resultTupleScheme();
+    private static class addToSwarm_resultTupleSchemeFactory implements SchemeFactory {
+      public addToSwarm_resultTupleScheme getScheme() {
+        return new addToSwarm_resultTupleScheme();
       }
     }
 
-    private static class AddToSwarm_resultTupleScheme extends TupleScheme<AddToSwarm_result> {
+    private static class addToSwarm_resultTupleScheme extends TupleScheme<addToSwarm_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, AddToSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, addToSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetExc()) {
@@ -6362,7 +6362,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, AddToSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, addToSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -6375,15 +6375,15 @@ public class NodeService {
 
   }
 
-  public static class DelSwarm_args implements org.apache.thrift.TBase<DelSwarm_args, DelSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<DelSwarm_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("DelSwarm_args");
+  public static class delSwarm_args implements org.apache.thrift.TBase<delSwarm_args, delSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<delSwarm_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("delSwarm_args");
 
     private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new DelSwarm_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new DelSwarm_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new delSwarm_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new delSwarm_argsTupleSchemeFactory());
     }
 
     public Swarm swarm; // required
@@ -6453,13 +6453,13 @@ public class NodeService {
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DelSwarm_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(delSwarm_args.class, metaDataMap);
     }
 
-    public DelSwarm_args() {
+    public delSwarm_args() {
     }
 
-    public DelSwarm_args(
+    public delSwarm_args(
       Swarm swarm)
     {
       this();
@@ -6469,14 +6469,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public DelSwarm_args(DelSwarm_args other) {
+    public delSwarm_args(delSwarm_args other) {
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
       }
     }
 
-    public DelSwarm_args deepCopy() {
-      return new DelSwarm_args(this);
+    public delSwarm_args deepCopy() {
+      return new delSwarm_args(this);
     }
 
     @Override
@@ -6488,7 +6488,7 @@ public class NodeService {
       return this.swarm;
     }
 
-    public DelSwarm_args setSwarm(Swarm swarm) {
+    public delSwarm_args setSwarm(Swarm swarm) {
       this.swarm = swarm;
       return this;
     }
@@ -6547,12 +6547,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof DelSwarm_args)
-        return this.equals((DelSwarm_args)that);
+      if (that instanceof delSwarm_args)
+        return this.equals((delSwarm_args)that);
       return false;
     }
 
-    public boolean equals(DelSwarm_args that) {
+    public boolean equals(delSwarm_args that) {
       if (that == null)
         return false;
 
@@ -6574,7 +6574,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(DelSwarm_args other) {
+    public int compareTo(delSwarm_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -6608,7 +6608,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("DelSwarm_args(");
+      StringBuilder sb = new StringBuilder("delSwarm_args(");
       boolean first = true;
 
       sb.append("swarm:");
@@ -6646,15 +6646,15 @@ public class NodeService {
       }
     }
 
-    private static class DelSwarm_argsStandardSchemeFactory implements SchemeFactory {
-      public DelSwarm_argsStandardScheme getScheme() {
-        return new DelSwarm_argsStandardScheme();
+    private static class delSwarm_argsStandardSchemeFactory implements SchemeFactory {
+      public delSwarm_argsStandardScheme getScheme() {
+        return new delSwarm_argsStandardScheme();
       }
     }
 
-    private static class DelSwarm_argsStandardScheme extends StandardScheme<DelSwarm_args> {
+    private static class delSwarm_argsStandardScheme extends StandardScheme<delSwarm_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, DelSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, delSwarm_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -6684,7 +6684,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, DelSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, delSwarm_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -6699,16 +6699,16 @@ public class NodeService {
 
     }
 
-    private static class DelSwarm_argsTupleSchemeFactory implements SchemeFactory {
-      public DelSwarm_argsTupleScheme getScheme() {
-        return new DelSwarm_argsTupleScheme();
+    private static class delSwarm_argsTupleSchemeFactory implements SchemeFactory {
+      public delSwarm_argsTupleScheme getScheme() {
+        return new delSwarm_argsTupleScheme();
       }
     }
 
-    private static class DelSwarm_argsTupleScheme extends TupleScheme<DelSwarm_args> {
+    private static class delSwarm_argsTupleScheme extends TupleScheme<delSwarm_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, DelSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, delSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSwarm()) {
@@ -6721,7 +6721,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, DelSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, delSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -6734,16 +6734,16 @@ public class NodeService {
 
   }
 
-  public static class DelSwarm_result implements org.apache.thrift.TBase<DelSwarm_result, DelSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<DelSwarm_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("DelSwarm_result");
+  public static class delSwarm_result implements org.apache.thrift.TBase<delSwarm_result, delSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<delSwarm_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("delSwarm_result");
 
     private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField EXC2_FIELD_DESC = new org.apache.thrift.protocol.TField("exc2", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new DelSwarm_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new DelSwarm_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new delSwarm_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new delSwarm_resultTupleSchemeFactory());
     }
 
     public NotSwarmMemeber exc; // required
@@ -6819,13 +6819,13 @@ public class NodeService {
       tmpMap.put(_Fields.EXC2, new org.apache.thrift.meta_data.FieldMetaData("exc2", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DelSwarm_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(delSwarm_result.class, metaDataMap);
     }
 
-    public DelSwarm_result() {
+    public delSwarm_result() {
     }
 
-    public DelSwarm_result(
+    public delSwarm_result(
       NotSwarmMemeber exc,
       WrongSwarmLeader exc2)
     {
@@ -6837,7 +6837,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public DelSwarm_result(DelSwarm_result other) {
+    public delSwarm_result(delSwarm_result other) {
       if (other.isSetExc()) {
         this.exc = new NotSwarmMemeber(other.exc);
       }
@@ -6846,8 +6846,8 @@ public class NodeService {
       }
     }
 
-    public DelSwarm_result deepCopy() {
-      return new DelSwarm_result(this);
+    public delSwarm_result deepCopy() {
+      return new delSwarm_result(this);
     }
 
     @Override
@@ -6860,7 +6860,7 @@ public class NodeService {
       return this.exc;
     }
 
-    public DelSwarm_result setExc(NotSwarmMemeber exc) {
+    public delSwarm_result setExc(NotSwarmMemeber exc) {
       this.exc = exc;
       return this;
     }
@@ -6884,7 +6884,7 @@ public class NodeService {
       return this.exc2;
     }
 
-    public DelSwarm_result setExc2(WrongSwarmLeader exc2) {
+    public delSwarm_result setExc2(WrongSwarmLeader exc2) {
       this.exc2 = exc2;
       return this;
     }
@@ -6956,12 +6956,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof DelSwarm_result)
-        return this.equals((DelSwarm_result)that);
+      if (that instanceof delSwarm_result)
+        return this.equals((delSwarm_result)that);
       return false;
     }
 
-    public boolean equals(DelSwarm_result that) {
+    public boolean equals(delSwarm_result that) {
       if (that == null)
         return false;
 
@@ -6992,7 +6992,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(DelSwarm_result other) {
+    public int compareTo(delSwarm_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -7036,7 +7036,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("DelSwarm_result(");
+      StringBuilder sb = new StringBuilder("delSwarm_result(");
       boolean first = true;
 
       sb.append("exc:");
@@ -7079,15 +7079,15 @@ public class NodeService {
       }
     }
 
-    private static class DelSwarm_resultStandardSchemeFactory implements SchemeFactory {
-      public DelSwarm_resultStandardScheme getScheme() {
-        return new DelSwarm_resultStandardScheme();
+    private static class delSwarm_resultStandardSchemeFactory implements SchemeFactory {
+      public delSwarm_resultStandardScheme getScheme() {
+        return new delSwarm_resultStandardScheme();
       }
     }
 
-    private static class DelSwarm_resultStandardScheme extends StandardScheme<DelSwarm_result> {
+    private static class delSwarm_resultStandardScheme extends StandardScheme<delSwarm_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, DelSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, delSwarm_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7126,7 +7126,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, DelSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, delSwarm_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7146,16 +7146,16 @@ public class NodeService {
 
     }
 
-    private static class DelSwarm_resultTupleSchemeFactory implements SchemeFactory {
-      public DelSwarm_resultTupleScheme getScheme() {
-        return new DelSwarm_resultTupleScheme();
+    private static class delSwarm_resultTupleSchemeFactory implements SchemeFactory {
+      public delSwarm_resultTupleScheme getScheme() {
+        return new delSwarm_resultTupleScheme();
       }
     }
 
-    private static class DelSwarm_resultTupleScheme extends TupleScheme<DelSwarm_result> {
+    private static class delSwarm_resultTupleScheme extends TupleScheme<delSwarm_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, DelSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, delSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetExc()) {
@@ -7174,7 +7174,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, DelSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, delSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -7192,15 +7192,15 @@ public class NodeService {
 
   }
 
-  public static class GetSwarm_args implements org.apache.thrift.TBase<GetSwarm_args, GetSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetSwarm_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetSwarm_args");
+  public static class getSwarm_args implements org.apache.thrift.TBase<getSwarm_args, getSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<getSwarm_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getSwarm_args");
 
     private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetSwarm_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetSwarm_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getSwarm_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getSwarm_argsTupleSchemeFactory());
     }
 
     public TransferID transfer; // required
@@ -7270,13 +7270,13 @@ public class NodeService {
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetSwarm_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getSwarm_args.class, metaDataMap);
     }
 
-    public GetSwarm_args() {
+    public getSwarm_args() {
     }
 
-    public GetSwarm_args(
+    public getSwarm_args(
       TransferID transfer)
     {
       this();
@@ -7286,14 +7286,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetSwarm_args(GetSwarm_args other) {
+    public getSwarm_args(getSwarm_args other) {
       if (other.isSetTransfer()) {
         this.transfer = new TransferID(other.transfer);
       }
     }
 
-    public GetSwarm_args deepCopy() {
-      return new GetSwarm_args(this);
+    public getSwarm_args deepCopy() {
+      return new getSwarm_args(this);
     }
 
     @Override
@@ -7305,7 +7305,7 @@ public class NodeService {
       return this.transfer;
     }
 
-    public GetSwarm_args setTransfer(TransferID transfer) {
+    public getSwarm_args setTransfer(TransferID transfer) {
       this.transfer = transfer;
       return this;
     }
@@ -7364,12 +7364,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetSwarm_args)
-        return this.equals((GetSwarm_args)that);
+      if (that instanceof getSwarm_args)
+        return this.equals((getSwarm_args)that);
       return false;
     }
 
-    public boolean equals(GetSwarm_args that) {
+    public boolean equals(getSwarm_args that) {
       if (that == null)
         return false;
 
@@ -7391,7 +7391,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetSwarm_args other) {
+    public int compareTo(getSwarm_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -7425,7 +7425,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetSwarm_args(");
+      StringBuilder sb = new StringBuilder("getSwarm_args(");
       boolean first = true;
 
       sb.append("transfer:");
@@ -7463,15 +7463,15 @@ public class NodeService {
       }
     }
 
-    private static class GetSwarm_argsStandardSchemeFactory implements SchemeFactory {
-      public GetSwarm_argsStandardScheme getScheme() {
-        return new GetSwarm_argsStandardScheme();
+    private static class getSwarm_argsStandardSchemeFactory implements SchemeFactory {
+      public getSwarm_argsStandardScheme getScheme() {
+        return new getSwarm_argsStandardScheme();
       }
     }
 
-    private static class GetSwarm_argsStandardScheme extends StandardScheme<GetSwarm_args> {
+    private static class getSwarm_argsStandardScheme extends StandardScheme<getSwarm_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getSwarm_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7501,7 +7501,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getSwarm_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7516,16 +7516,16 @@ public class NodeService {
 
     }
 
-    private static class GetSwarm_argsTupleSchemeFactory implements SchemeFactory {
-      public GetSwarm_argsTupleScheme getScheme() {
-        return new GetSwarm_argsTupleScheme();
+    private static class getSwarm_argsTupleSchemeFactory implements SchemeFactory {
+      public getSwarm_argsTupleScheme getScheme() {
+        return new getSwarm_argsTupleScheme();
       }
     }
 
-    private static class GetSwarm_argsTupleScheme extends TupleScheme<GetSwarm_args> {
+    private static class getSwarm_argsTupleScheme extends TupleScheme<getSwarm_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetTransfer()) {
@@ -7538,7 +7538,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -7551,16 +7551,16 @@ public class NodeService {
 
   }
 
-  public static class GetSwarm_result implements org.apache.thrift.TBase<GetSwarm_result, GetSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetSwarm_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetSwarm_result");
+  public static class getSwarm_result implements org.apache.thrift.TBase<getSwarm_result, getSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<getSwarm_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getSwarm_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetSwarm_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetSwarm_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getSwarm_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getSwarm_resultTupleSchemeFactory());
     }
 
     public Swarm success; // required
@@ -7636,13 +7636,13 @@ public class NodeService {
       tmpMap.put(_Fields.EXC, new org.apache.thrift.meta_data.FieldMetaData("exc", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetSwarm_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getSwarm_result.class, metaDataMap);
     }
 
-    public GetSwarm_result() {
+    public getSwarm_result() {
     }
 
-    public GetSwarm_result(
+    public getSwarm_result(
       Swarm success,
       NotSwarmMemeber exc)
     {
@@ -7654,7 +7654,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetSwarm_result(GetSwarm_result other) {
+    public getSwarm_result(getSwarm_result other) {
       if (other.isSetSuccess()) {
         this.success = new Swarm(other.success);
       }
@@ -7663,8 +7663,8 @@ public class NodeService {
       }
     }
 
-    public GetSwarm_result deepCopy() {
-      return new GetSwarm_result(this);
+    public getSwarm_result deepCopy() {
+      return new getSwarm_result(this);
     }
 
     @Override
@@ -7677,7 +7677,7 @@ public class NodeService {
       return this.success;
     }
 
-    public GetSwarm_result setSuccess(Swarm success) {
+    public getSwarm_result setSuccess(Swarm success) {
       this.success = success;
       return this;
     }
@@ -7701,7 +7701,7 @@ public class NodeService {
       return this.exc;
     }
 
-    public GetSwarm_result setExc(NotSwarmMemeber exc) {
+    public getSwarm_result setExc(NotSwarmMemeber exc) {
       this.exc = exc;
       return this;
     }
@@ -7773,12 +7773,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetSwarm_result)
-        return this.equals((GetSwarm_result)that);
+      if (that instanceof getSwarm_result)
+        return this.equals((getSwarm_result)that);
       return false;
     }
 
-    public boolean equals(GetSwarm_result that) {
+    public boolean equals(getSwarm_result that) {
       if (that == null)
         return false;
 
@@ -7809,7 +7809,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetSwarm_result other) {
+    public int compareTo(getSwarm_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -7853,7 +7853,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetSwarm_result(");
+      StringBuilder sb = new StringBuilder("getSwarm_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -7899,15 +7899,15 @@ public class NodeService {
       }
     }
 
-    private static class GetSwarm_resultStandardSchemeFactory implements SchemeFactory {
-      public GetSwarm_resultStandardScheme getScheme() {
-        return new GetSwarm_resultStandardScheme();
+    private static class getSwarm_resultStandardSchemeFactory implements SchemeFactory {
+      public getSwarm_resultStandardScheme getScheme() {
+        return new getSwarm_resultStandardScheme();
       }
     }
 
-    private static class GetSwarm_resultStandardScheme extends StandardScheme<GetSwarm_result> {
+    private static class getSwarm_resultStandardScheme extends StandardScheme<getSwarm_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getSwarm_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7946,7 +7946,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getSwarm_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7966,16 +7966,16 @@ public class NodeService {
 
     }
 
-    private static class GetSwarm_resultTupleSchemeFactory implements SchemeFactory {
-      public GetSwarm_resultTupleScheme getScheme() {
-        return new GetSwarm_resultTupleScheme();
+    private static class getSwarm_resultTupleSchemeFactory implements SchemeFactory {
+      public getSwarm_resultTupleScheme getScheme() {
+        return new getSwarm_resultTupleScheme();
       }
     }
 
-    private static class GetSwarm_resultTupleScheme extends TupleScheme<GetSwarm_result> {
+    private static class getSwarm_resultTupleScheme extends TupleScheme<getSwarm_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -7994,7 +7994,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -8012,16 +8012,16 @@ public class NodeService {
 
   }
 
-  public static class ElectSwarmLeader_args implements org.apache.thrift.TBase<ElectSwarmLeader_args, ElectSwarmLeader_args._Fields>, java.io.Serializable, Cloneable, Comparable<ElectSwarmLeader_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ElectSwarmLeader_args");
+  public static class electSwarmLeader_args implements org.apache.thrift.TBase<electSwarmLeader_args, electSwarmLeader_args._Fields>, java.io.Serializable, Cloneable, Comparable<electSwarmLeader_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("electSwarmLeader_args");
 
     private static final org.apache.thrift.protocol.TField CADIDATE_FIELD_DESC = new org.apache.thrift.protocol.TField("cadidate", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("Transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new ElectSwarmLeader_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new ElectSwarmLeader_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new electSwarmLeader_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new electSwarmLeader_argsTupleSchemeFactory());
     }
 
     public NodeID cadidate; // required
@@ -8097,13 +8097,13 @@ public class NodeService {
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("Transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ElectSwarmLeader_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(electSwarmLeader_args.class, metaDataMap);
     }
 
-    public ElectSwarmLeader_args() {
+    public electSwarmLeader_args() {
     }
 
-    public ElectSwarmLeader_args(
+    public electSwarmLeader_args(
       NodeID cadidate,
       TransferID Transfer)
     {
@@ -8115,7 +8115,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public ElectSwarmLeader_args(ElectSwarmLeader_args other) {
+    public electSwarmLeader_args(electSwarmLeader_args other) {
       if (other.isSetCadidate()) {
         this.cadidate = new NodeID(other.cadidate);
       }
@@ -8124,8 +8124,8 @@ public class NodeService {
       }
     }
 
-    public ElectSwarmLeader_args deepCopy() {
-      return new ElectSwarmLeader_args(this);
+    public electSwarmLeader_args deepCopy() {
+      return new electSwarmLeader_args(this);
     }
 
     @Override
@@ -8138,7 +8138,7 @@ public class NodeService {
       return this.cadidate;
     }
 
-    public ElectSwarmLeader_args setCadidate(NodeID cadidate) {
+    public electSwarmLeader_args setCadidate(NodeID cadidate) {
       this.cadidate = cadidate;
       return this;
     }
@@ -8162,7 +8162,7 @@ public class NodeService {
       return this.Transfer;
     }
 
-    public ElectSwarmLeader_args setTransfer(TransferID Transfer) {
+    public electSwarmLeader_args setTransfer(TransferID Transfer) {
       this.Transfer = Transfer;
       return this;
     }
@@ -8234,12 +8234,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof ElectSwarmLeader_args)
-        return this.equals((ElectSwarmLeader_args)that);
+      if (that instanceof electSwarmLeader_args)
+        return this.equals((electSwarmLeader_args)that);
       return false;
     }
 
-    public boolean equals(ElectSwarmLeader_args that) {
+    public boolean equals(electSwarmLeader_args that) {
       if (that == null)
         return false;
 
@@ -8270,7 +8270,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(ElectSwarmLeader_args other) {
+    public int compareTo(electSwarmLeader_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -8314,7 +8314,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("ElectSwarmLeader_args(");
+      StringBuilder sb = new StringBuilder("electSwarmLeader_args(");
       boolean first = true;
 
       sb.append("cadidate:");
@@ -8363,15 +8363,15 @@ public class NodeService {
       }
     }
 
-    private static class ElectSwarmLeader_argsStandardSchemeFactory implements SchemeFactory {
-      public ElectSwarmLeader_argsStandardScheme getScheme() {
-        return new ElectSwarmLeader_argsStandardScheme();
+    private static class electSwarmLeader_argsStandardSchemeFactory implements SchemeFactory {
+      public electSwarmLeader_argsStandardScheme getScheme() {
+        return new electSwarmLeader_argsStandardScheme();
       }
     }
 
-    private static class ElectSwarmLeader_argsStandardScheme extends StandardScheme<ElectSwarmLeader_args> {
+    private static class electSwarmLeader_argsStandardScheme extends StandardScheme<electSwarmLeader_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, ElectSwarmLeader_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, electSwarmLeader_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -8410,7 +8410,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, ElectSwarmLeader_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, electSwarmLeader_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -8430,16 +8430,16 @@ public class NodeService {
 
     }
 
-    private static class ElectSwarmLeader_argsTupleSchemeFactory implements SchemeFactory {
-      public ElectSwarmLeader_argsTupleScheme getScheme() {
-        return new ElectSwarmLeader_argsTupleScheme();
+    private static class electSwarmLeader_argsTupleSchemeFactory implements SchemeFactory {
+      public electSwarmLeader_argsTupleScheme getScheme() {
+        return new electSwarmLeader_argsTupleScheme();
       }
     }
 
-    private static class ElectSwarmLeader_argsTupleScheme extends TupleScheme<ElectSwarmLeader_args> {
+    private static class electSwarmLeader_argsTupleScheme extends TupleScheme<electSwarmLeader_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, ElectSwarmLeader_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, electSwarmLeader_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetCadidate()) {
@@ -8458,7 +8458,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, ElectSwarmLeader_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, electSwarmLeader_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -8476,16 +8476,16 @@ public class NodeService {
 
   }
 
-  public static class ElectSwarmLeader_result implements org.apache.thrift.TBase<ElectSwarmLeader_result, ElectSwarmLeader_result._Fields>, java.io.Serializable, Cloneable, Comparable<ElectSwarmLeader_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ElectSwarmLeader_result");
+  public static class electSwarmLeader_result implements org.apache.thrift.TBase<electSwarmLeader_result, electSwarmLeader_result._Fields>, java.io.Serializable, Cloneable, Comparable<electSwarmLeader_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("electSwarmLeader_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
     private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new ElectSwarmLeader_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new ElectSwarmLeader_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new electSwarmLeader_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new electSwarmLeader_resultTupleSchemeFactory());
     }
 
     public boolean success; // required
@@ -8563,13 +8563,13 @@ public class NodeService {
       tmpMap.put(_Fields.EXC, new org.apache.thrift.meta_data.FieldMetaData("exc", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ElectSwarmLeader_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(electSwarmLeader_result.class, metaDataMap);
     }
 
-    public ElectSwarmLeader_result() {
+    public electSwarmLeader_result() {
     }
 
-    public ElectSwarmLeader_result(
+    public electSwarmLeader_result(
       boolean success,
       NotSwarmMemeber exc)
     {
@@ -8582,7 +8582,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public ElectSwarmLeader_result(ElectSwarmLeader_result other) {
+    public electSwarmLeader_result(electSwarmLeader_result other) {
       __isset_bitfield = other.__isset_bitfield;
       this.success = other.success;
       if (other.isSetExc()) {
@@ -8590,8 +8590,8 @@ public class NodeService {
       }
     }
 
-    public ElectSwarmLeader_result deepCopy() {
-      return new ElectSwarmLeader_result(this);
+    public electSwarmLeader_result deepCopy() {
+      return new electSwarmLeader_result(this);
     }
 
     @Override
@@ -8605,7 +8605,7 @@ public class NodeService {
       return this.success;
     }
 
-    public ElectSwarmLeader_result setSuccess(boolean success) {
+    public electSwarmLeader_result setSuccess(boolean success) {
       this.success = success;
       setSuccessIsSet(true);
       return this;
@@ -8628,7 +8628,7 @@ public class NodeService {
       return this.exc;
     }
 
-    public ElectSwarmLeader_result setExc(NotSwarmMemeber exc) {
+    public electSwarmLeader_result setExc(NotSwarmMemeber exc) {
       this.exc = exc;
       return this;
     }
@@ -8700,12 +8700,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof ElectSwarmLeader_result)
-        return this.equals((ElectSwarmLeader_result)that);
+      if (that instanceof electSwarmLeader_result)
+        return this.equals((electSwarmLeader_result)that);
       return false;
     }
 
-    public boolean equals(ElectSwarmLeader_result that) {
+    public boolean equals(electSwarmLeader_result that) {
       if (that == null)
         return false;
 
@@ -8736,7 +8736,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(ElectSwarmLeader_result other) {
+    public int compareTo(electSwarmLeader_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -8780,7 +8780,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("ElectSwarmLeader_result(");
+      StringBuilder sb = new StringBuilder("electSwarmLeader_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -8821,15 +8821,15 @@ public class NodeService {
       }
     }
 
-    private static class ElectSwarmLeader_resultStandardSchemeFactory implements SchemeFactory {
-      public ElectSwarmLeader_resultStandardScheme getScheme() {
-        return new ElectSwarmLeader_resultStandardScheme();
+    private static class electSwarmLeader_resultStandardSchemeFactory implements SchemeFactory {
+      public electSwarmLeader_resultStandardScheme getScheme() {
+        return new electSwarmLeader_resultStandardScheme();
       }
     }
 
-    private static class ElectSwarmLeader_resultStandardScheme extends StandardScheme<ElectSwarmLeader_result> {
+    private static class electSwarmLeader_resultStandardScheme extends StandardScheme<electSwarmLeader_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, ElectSwarmLeader_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, electSwarmLeader_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -8867,7 +8867,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, ElectSwarmLeader_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, electSwarmLeader_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -8887,16 +8887,16 @@ public class NodeService {
 
     }
 
-    private static class ElectSwarmLeader_resultTupleSchemeFactory implements SchemeFactory {
-      public ElectSwarmLeader_resultTupleScheme getScheme() {
-        return new ElectSwarmLeader_resultTupleScheme();
+    private static class electSwarmLeader_resultTupleSchemeFactory implements SchemeFactory {
+      public electSwarmLeader_resultTupleScheme getScheme() {
+        return new electSwarmLeader_resultTupleScheme();
       }
     }
 
-    private static class ElectSwarmLeader_resultTupleScheme extends TupleScheme<ElectSwarmLeader_result> {
+    private static class electSwarmLeader_resultTupleScheme extends TupleScheme<electSwarmLeader_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, ElectSwarmLeader_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, electSwarmLeader_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -8915,7 +8915,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, ElectSwarmLeader_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, electSwarmLeader_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -8932,15 +8932,15 @@ public class NodeService {
 
   }
 
-  public static class ElectionEndedSwarm_args implements org.apache.thrift.TBase<ElectionEndedSwarm_args, ElectionEndedSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<ElectionEndedSwarm_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ElectionEndedSwarm_args");
+  public static class electionEndedSwarm_args implements org.apache.thrift.TBase<electionEndedSwarm_args, electionEndedSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<electionEndedSwarm_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("electionEndedSwarm_args");
 
     private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new ElectionEndedSwarm_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new ElectionEndedSwarm_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new electionEndedSwarm_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new electionEndedSwarm_argsTupleSchemeFactory());
     }
 
     public Swarm swarm; // required
@@ -9010,13 +9010,13 @@ public class NodeService {
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ElectionEndedSwarm_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(electionEndedSwarm_args.class, metaDataMap);
     }
 
-    public ElectionEndedSwarm_args() {
+    public electionEndedSwarm_args() {
     }
 
-    public ElectionEndedSwarm_args(
+    public electionEndedSwarm_args(
       Swarm swarm)
     {
       this();
@@ -9026,14 +9026,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public ElectionEndedSwarm_args(ElectionEndedSwarm_args other) {
+    public electionEndedSwarm_args(electionEndedSwarm_args other) {
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
       }
     }
 
-    public ElectionEndedSwarm_args deepCopy() {
-      return new ElectionEndedSwarm_args(this);
+    public electionEndedSwarm_args deepCopy() {
+      return new electionEndedSwarm_args(this);
     }
 
     @Override
@@ -9045,7 +9045,7 @@ public class NodeService {
       return this.swarm;
     }
 
-    public ElectionEndedSwarm_args setSwarm(Swarm swarm) {
+    public electionEndedSwarm_args setSwarm(Swarm swarm) {
       this.swarm = swarm;
       return this;
     }
@@ -9104,12 +9104,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof ElectionEndedSwarm_args)
-        return this.equals((ElectionEndedSwarm_args)that);
+      if (that instanceof electionEndedSwarm_args)
+        return this.equals((electionEndedSwarm_args)that);
       return false;
     }
 
-    public boolean equals(ElectionEndedSwarm_args that) {
+    public boolean equals(electionEndedSwarm_args that) {
       if (that == null)
         return false;
 
@@ -9131,7 +9131,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(ElectionEndedSwarm_args other) {
+    public int compareTo(electionEndedSwarm_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -9165,7 +9165,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("ElectionEndedSwarm_args(");
+      StringBuilder sb = new StringBuilder("electionEndedSwarm_args(");
       boolean first = true;
 
       sb.append("swarm:");
@@ -9203,15 +9203,15 @@ public class NodeService {
       }
     }
 
-    private static class ElectionEndedSwarm_argsStandardSchemeFactory implements SchemeFactory {
-      public ElectionEndedSwarm_argsStandardScheme getScheme() {
-        return new ElectionEndedSwarm_argsStandardScheme();
+    private static class electionEndedSwarm_argsStandardSchemeFactory implements SchemeFactory {
+      public electionEndedSwarm_argsStandardScheme getScheme() {
+        return new electionEndedSwarm_argsStandardScheme();
       }
     }
 
-    private static class ElectionEndedSwarm_argsStandardScheme extends StandardScheme<ElectionEndedSwarm_args> {
+    private static class electionEndedSwarm_argsStandardScheme extends StandardScheme<electionEndedSwarm_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, ElectionEndedSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, electionEndedSwarm_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -9241,7 +9241,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, ElectionEndedSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, electionEndedSwarm_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -9256,16 +9256,16 @@ public class NodeService {
 
     }
 
-    private static class ElectionEndedSwarm_argsTupleSchemeFactory implements SchemeFactory {
-      public ElectionEndedSwarm_argsTupleScheme getScheme() {
-        return new ElectionEndedSwarm_argsTupleScheme();
+    private static class electionEndedSwarm_argsTupleSchemeFactory implements SchemeFactory {
+      public electionEndedSwarm_argsTupleScheme getScheme() {
+        return new electionEndedSwarm_argsTupleScheme();
       }
     }
 
-    private static class ElectionEndedSwarm_argsTupleScheme extends TupleScheme<ElectionEndedSwarm_args> {
+    private static class electionEndedSwarm_argsTupleScheme extends TupleScheme<electionEndedSwarm_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, ElectionEndedSwarm_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, electionEndedSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSwarm()) {
@@ -9278,7 +9278,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, ElectionEndedSwarm_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, electionEndedSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -9291,15 +9291,15 @@ public class NodeService {
 
   }
 
-  public static class ElectionEndedSwarm_result implements org.apache.thrift.TBase<ElectionEndedSwarm_result, ElectionEndedSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<ElectionEndedSwarm_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ElectionEndedSwarm_result");
+  public static class electionEndedSwarm_result implements org.apache.thrift.TBase<electionEndedSwarm_result, electionEndedSwarm_result._Fields>, java.io.Serializable, Cloneable, Comparable<electionEndedSwarm_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("electionEndedSwarm_result");
 
     private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new ElectionEndedSwarm_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new ElectionEndedSwarm_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new electionEndedSwarm_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new electionEndedSwarm_resultTupleSchemeFactory());
     }
 
     public NotSwarmMemeber exc; // required
@@ -9369,13 +9369,13 @@ public class NodeService {
       tmpMap.put(_Fields.EXC, new org.apache.thrift.meta_data.FieldMetaData("exc", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ElectionEndedSwarm_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(electionEndedSwarm_result.class, metaDataMap);
     }
 
-    public ElectionEndedSwarm_result() {
+    public electionEndedSwarm_result() {
     }
 
-    public ElectionEndedSwarm_result(
+    public electionEndedSwarm_result(
       NotSwarmMemeber exc)
     {
       this();
@@ -9385,14 +9385,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public ElectionEndedSwarm_result(ElectionEndedSwarm_result other) {
+    public electionEndedSwarm_result(electionEndedSwarm_result other) {
       if (other.isSetExc()) {
         this.exc = new NotSwarmMemeber(other.exc);
       }
     }
 
-    public ElectionEndedSwarm_result deepCopy() {
-      return new ElectionEndedSwarm_result(this);
+    public electionEndedSwarm_result deepCopy() {
+      return new electionEndedSwarm_result(this);
     }
 
     @Override
@@ -9404,7 +9404,7 @@ public class NodeService {
       return this.exc;
     }
 
-    public ElectionEndedSwarm_result setExc(NotSwarmMemeber exc) {
+    public electionEndedSwarm_result setExc(NotSwarmMemeber exc) {
       this.exc = exc;
       return this;
     }
@@ -9463,12 +9463,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof ElectionEndedSwarm_result)
-        return this.equals((ElectionEndedSwarm_result)that);
+      if (that instanceof electionEndedSwarm_result)
+        return this.equals((electionEndedSwarm_result)that);
       return false;
     }
 
-    public boolean equals(ElectionEndedSwarm_result that) {
+    public boolean equals(electionEndedSwarm_result that) {
       if (that == null)
         return false;
 
@@ -9490,7 +9490,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(ElectionEndedSwarm_result other) {
+    public int compareTo(electionEndedSwarm_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -9524,7 +9524,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("ElectionEndedSwarm_result(");
+      StringBuilder sb = new StringBuilder("electionEndedSwarm_result(");
       boolean first = true;
 
       sb.append("exc:");
@@ -9559,15 +9559,15 @@ public class NodeService {
       }
     }
 
-    private static class ElectionEndedSwarm_resultStandardSchemeFactory implements SchemeFactory {
-      public ElectionEndedSwarm_resultStandardScheme getScheme() {
-        return new ElectionEndedSwarm_resultStandardScheme();
+    private static class electionEndedSwarm_resultStandardSchemeFactory implements SchemeFactory {
+      public electionEndedSwarm_resultStandardScheme getScheme() {
+        return new electionEndedSwarm_resultStandardScheme();
       }
     }
 
-    private static class ElectionEndedSwarm_resultStandardScheme extends StandardScheme<ElectionEndedSwarm_result> {
+    private static class electionEndedSwarm_resultStandardScheme extends StandardScheme<electionEndedSwarm_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, ElectionEndedSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, electionEndedSwarm_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -9597,7 +9597,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, ElectionEndedSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, electionEndedSwarm_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -9612,16 +9612,16 @@ public class NodeService {
 
     }
 
-    private static class ElectionEndedSwarm_resultTupleSchemeFactory implements SchemeFactory {
-      public ElectionEndedSwarm_resultTupleScheme getScheme() {
-        return new ElectionEndedSwarm_resultTupleScheme();
+    private static class electionEndedSwarm_resultTupleSchemeFactory implements SchemeFactory {
+      public electionEndedSwarm_resultTupleScheme getScheme() {
+        return new electionEndedSwarm_resultTupleScheme();
       }
     }
 
-    private static class ElectionEndedSwarm_resultTupleScheme extends TupleScheme<ElectionEndedSwarm_result> {
+    private static class electionEndedSwarm_resultTupleScheme extends TupleScheme<electionEndedSwarm_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, ElectionEndedSwarm_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, electionEndedSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetExc()) {
@@ -9634,7 +9634,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, ElectionEndedSwarm_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, electionEndedSwarm_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -9647,15 +9647,15 @@ public class NodeService {
 
   }
 
-  public static class DeliverTransfer_args implements org.apache.thrift.TBase<DeliverTransfer_args, DeliverTransfer_args._Fields>, java.io.Serializable, Cloneable, Comparable<DeliverTransfer_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("DeliverTransfer_args");
+  public static class deliverTransfer_args implements org.apache.thrift.TBase<deliverTransfer_args, deliverTransfer_args._Fields>, java.io.Serializable, Cloneable, Comparable<deliverTransfer_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("deliverTransfer_args");
 
     private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new DeliverTransfer_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new DeliverTransfer_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new deliverTransfer_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new deliverTransfer_argsTupleSchemeFactory());
     }
 
     public TransferData transfer; // required
@@ -9725,13 +9725,13 @@ public class NodeService {
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferData.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DeliverTransfer_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(deliverTransfer_args.class, metaDataMap);
     }
 
-    public DeliverTransfer_args() {
+    public deliverTransfer_args() {
     }
 
-    public DeliverTransfer_args(
+    public deliverTransfer_args(
       TransferData transfer)
     {
       this();
@@ -9741,14 +9741,14 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public DeliverTransfer_args(DeliverTransfer_args other) {
+    public deliverTransfer_args(deliverTransfer_args other) {
       if (other.isSetTransfer()) {
         this.transfer = new TransferData(other.transfer);
       }
     }
 
-    public DeliverTransfer_args deepCopy() {
-      return new DeliverTransfer_args(this);
+    public deliverTransfer_args deepCopy() {
+      return new deliverTransfer_args(this);
     }
 
     @Override
@@ -9760,7 +9760,7 @@ public class NodeService {
       return this.transfer;
     }
 
-    public DeliverTransfer_args setTransfer(TransferData transfer) {
+    public deliverTransfer_args setTransfer(TransferData transfer) {
       this.transfer = transfer;
       return this;
     }
@@ -9819,12 +9819,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof DeliverTransfer_args)
-        return this.equals((DeliverTransfer_args)that);
+      if (that instanceof deliverTransfer_args)
+        return this.equals((deliverTransfer_args)that);
       return false;
     }
 
-    public boolean equals(DeliverTransfer_args that) {
+    public boolean equals(deliverTransfer_args that) {
       if (that == null)
         return false;
 
@@ -9846,7 +9846,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(DeliverTransfer_args other) {
+    public int compareTo(deliverTransfer_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -9880,7 +9880,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("DeliverTransfer_args(");
+      StringBuilder sb = new StringBuilder("deliverTransfer_args(");
       boolean first = true;
 
       sb.append("transfer:");
@@ -9918,15 +9918,15 @@ public class NodeService {
       }
     }
 
-    private static class DeliverTransfer_argsStandardSchemeFactory implements SchemeFactory {
-      public DeliverTransfer_argsStandardScheme getScheme() {
-        return new DeliverTransfer_argsStandardScheme();
+    private static class deliverTransfer_argsStandardSchemeFactory implements SchemeFactory {
+      public deliverTransfer_argsStandardScheme getScheme() {
+        return new deliverTransfer_argsStandardScheme();
       }
     }
 
-    private static class DeliverTransfer_argsStandardScheme extends StandardScheme<DeliverTransfer_args> {
+    private static class deliverTransfer_argsStandardScheme extends StandardScheme<deliverTransfer_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, DeliverTransfer_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, deliverTransfer_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -9956,7 +9956,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, DeliverTransfer_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, deliverTransfer_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -9971,16 +9971,16 @@ public class NodeService {
 
     }
 
-    private static class DeliverTransfer_argsTupleSchemeFactory implements SchemeFactory {
-      public DeliverTransfer_argsTupleScheme getScheme() {
-        return new DeliverTransfer_argsTupleScheme();
+    private static class deliverTransfer_argsTupleSchemeFactory implements SchemeFactory {
+      public deliverTransfer_argsTupleScheme getScheme() {
+        return new deliverTransfer_argsTupleScheme();
       }
     }
 
-    private static class DeliverTransfer_argsTupleScheme extends TupleScheme<DeliverTransfer_args> {
+    private static class deliverTransfer_argsTupleScheme extends TupleScheme<deliverTransfer_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, DeliverTransfer_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, deliverTransfer_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetTransfer()) {
@@ -9993,7 +9993,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, DeliverTransfer_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, deliverTransfer_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -10006,14 +10006,14 @@ public class NodeService {
 
   }
 
-  public static class DeliverTransfer_result implements org.apache.thrift.TBase<DeliverTransfer_result, DeliverTransfer_result._Fields>, java.io.Serializable, Cloneable, Comparable<DeliverTransfer_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("DeliverTransfer_result");
+  public static class deliverTransfer_result implements org.apache.thrift.TBase<deliverTransfer_result, deliverTransfer_result._Fields>, java.io.Serializable, Cloneable, Comparable<deliverTransfer_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("deliverTransfer_result");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new DeliverTransfer_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new DeliverTransfer_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new deliverTransfer_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new deliverTransfer_resultTupleSchemeFactory());
     }
 
 
@@ -10076,20 +10076,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(DeliverTransfer_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(deliverTransfer_result.class, metaDataMap);
     }
 
-    public DeliverTransfer_result() {
+    public deliverTransfer_result() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public DeliverTransfer_result(DeliverTransfer_result other) {
+    public deliverTransfer_result(deliverTransfer_result other) {
     }
 
-    public DeliverTransfer_result deepCopy() {
-      return new DeliverTransfer_result(this);
+    public deliverTransfer_result deepCopy() {
+      return new deliverTransfer_result(this);
     }
 
     @Override
@@ -10122,12 +10122,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof DeliverTransfer_result)
-        return this.equals((DeliverTransfer_result)that);
+      if (that instanceof deliverTransfer_result)
+        return this.equals((deliverTransfer_result)that);
       return false;
     }
 
-    public boolean equals(DeliverTransfer_result that) {
+    public boolean equals(deliverTransfer_result that) {
       if (that == null)
         return false;
 
@@ -10140,7 +10140,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(DeliverTransfer_result other) {
+    public int compareTo(deliverTransfer_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -10164,7 +10164,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("DeliverTransfer_result(");
+      StringBuilder sb = new StringBuilder("deliverTransfer_result(");
       boolean first = true;
 
       sb.append(")");
@@ -10192,15 +10192,15 @@ public class NodeService {
       }
     }
 
-    private static class DeliverTransfer_resultStandardSchemeFactory implements SchemeFactory {
-      public DeliverTransfer_resultStandardScheme getScheme() {
-        return new DeliverTransfer_resultStandardScheme();
+    private static class deliverTransfer_resultStandardSchemeFactory implements SchemeFactory {
+      public deliverTransfer_resultStandardScheme getScheme() {
+        return new deliverTransfer_resultStandardScheme();
       }
     }
 
-    private static class DeliverTransfer_resultStandardScheme extends StandardScheme<DeliverTransfer_result> {
+    private static class deliverTransfer_resultStandardScheme extends StandardScheme<deliverTransfer_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, DeliverTransfer_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, deliverTransfer_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -10221,7 +10221,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, DeliverTransfer_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, deliverTransfer_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -10231,35 +10231,35 @@ public class NodeService {
 
     }
 
-    private static class DeliverTransfer_resultTupleSchemeFactory implements SchemeFactory {
-      public DeliverTransfer_resultTupleScheme getScheme() {
-        return new DeliverTransfer_resultTupleScheme();
+    private static class deliverTransfer_resultTupleSchemeFactory implements SchemeFactory {
+      public deliverTransfer_resultTupleScheme getScheme() {
+        return new deliverTransfer_resultTupleScheme();
       }
     }
 
-    private static class DeliverTransfer_resultTupleScheme extends TupleScheme<DeliverTransfer_result> {
+    private static class deliverTransfer_resultTupleScheme extends TupleScheme<deliverTransfer_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, DeliverTransfer_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, deliverTransfer_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, DeliverTransfer_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, deliverTransfer_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class GetSwarmList_args implements org.apache.thrift.TBase<GetSwarmList_args, GetSwarmList_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetSwarmList_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetSwarmList_args");
+  public static class getSwarmList_args implements org.apache.thrift.TBase<getSwarmList_args, getSwarmList_args._Fields>, java.io.Serializable, Cloneable, Comparable<getSwarmList_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getSwarmList_args");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetSwarmList_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetSwarmList_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getSwarmList_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getSwarmList_argsTupleSchemeFactory());
     }
 
 
@@ -10322,20 +10322,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetSwarmList_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getSwarmList_args.class, metaDataMap);
     }
 
-    public GetSwarmList_args() {
+    public getSwarmList_args() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetSwarmList_args(GetSwarmList_args other) {
+    public getSwarmList_args(getSwarmList_args other) {
     }
 
-    public GetSwarmList_args deepCopy() {
-      return new GetSwarmList_args(this);
+    public getSwarmList_args deepCopy() {
+      return new getSwarmList_args(this);
     }
 
     @Override
@@ -10368,12 +10368,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetSwarmList_args)
-        return this.equals((GetSwarmList_args)that);
+      if (that instanceof getSwarmList_args)
+        return this.equals((getSwarmList_args)that);
       return false;
     }
 
-    public boolean equals(GetSwarmList_args that) {
+    public boolean equals(getSwarmList_args that) {
       if (that == null)
         return false;
 
@@ -10386,7 +10386,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetSwarmList_args other) {
+    public int compareTo(getSwarmList_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -10410,7 +10410,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetSwarmList_args(");
+      StringBuilder sb = new StringBuilder("getSwarmList_args(");
       boolean first = true;
 
       sb.append(")");
@@ -10438,15 +10438,15 @@ public class NodeService {
       }
     }
 
-    private static class GetSwarmList_argsStandardSchemeFactory implements SchemeFactory {
-      public GetSwarmList_argsStandardScheme getScheme() {
-        return new GetSwarmList_argsStandardScheme();
+    private static class getSwarmList_argsStandardSchemeFactory implements SchemeFactory {
+      public getSwarmList_argsStandardScheme getScheme() {
+        return new getSwarmList_argsStandardScheme();
       }
     }
 
-    private static class GetSwarmList_argsStandardScheme extends StandardScheme<GetSwarmList_args> {
+    private static class getSwarmList_argsStandardScheme extends StandardScheme<getSwarmList_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetSwarmList_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getSwarmList_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -10467,7 +10467,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetSwarmList_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getSwarmList_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -10477,36 +10477,36 @@ public class NodeService {
 
     }
 
-    private static class GetSwarmList_argsTupleSchemeFactory implements SchemeFactory {
-      public GetSwarmList_argsTupleScheme getScheme() {
-        return new GetSwarmList_argsTupleScheme();
+    private static class getSwarmList_argsTupleSchemeFactory implements SchemeFactory {
+      public getSwarmList_argsTupleScheme getScheme() {
+        return new getSwarmList_argsTupleScheme();
       }
     }
 
-    private static class GetSwarmList_argsTupleScheme extends TupleScheme<GetSwarmList_args> {
+    private static class getSwarmList_argsTupleScheme extends TupleScheme<getSwarmList_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetSwarmList_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getSwarmList_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetSwarmList_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getSwarmList_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class GetSwarmList_result implements org.apache.thrift.TBase<GetSwarmList_result, GetSwarmList_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetSwarmList_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetSwarmList_result");
+  public static class getSwarmList_result implements org.apache.thrift.TBase<getSwarmList_result, getSwarmList_result._Fields>, java.io.Serializable, Cloneable, Comparable<getSwarmList_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getSwarmList_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.LIST, (short)0);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetSwarmList_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetSwarmList_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getSwarmList_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getSwarmList_resultTupleSchemeFactory());
     }
 
     public List<Swarm> success; // required
@@ -10577,13 +10577,13 @@ public class NodeService {
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
               new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetSwarmList_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getSwarmList_result.class, metaDataMap);
     }
 
-    public GetSwarmList_result() {
+    public getSwarmList_result() {
     }
 
-    public GetSwarmList_result(
+    public getSwarmList_result(
       List<Swarm> success)
     {
       this();
@@ -10593,7 +10593,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetSwarmList_result(GetSwarmList_result other) {
+    public getSwarmList_result(getSwarmList_result other) {
       if (other.isSetSuccess()) {
         List<Swarm> __this__success = new ArrayList<Swarm>(other.success.size());
         for (Swarm other_element : other.success) {
@@ -10603,8 +10603,8 @@ public class NodeService {
       }
     }
 
-    public GetSwarmList_result deepCopy() {
-      return new GetSwarmList_result(this);
+    public getSwarmList_result deepCopy() {
+      return new getSwarmList_result(this);
     }
 
     @Override
@@ -10631,7 +10631,7 @@ public class NodeService {
       return this.success;
     }
 
-    public GetSwarmList_result setSuccess(List<Swarm> success) {
+    public getSwarmList_result setSuccess(List<Swarm> success) {
       this.success = success;
       return this;
     }
@@ -10690,12 +10690,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetSwarmList_result)
-        return this.equals((GetSwarmList_result)that);
+      if (that instanceof getSwarmList_result)
+        return this.equals((getSwarmList_result)that);
       return false;
     }
 
-    public boolean equals(GetSwarmList_result that) {
+    public boolean equals(getSwarmList_result that) {
       if (that == null)
         return false;
 
@@ -10717,7 +10717,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetSwarmList_result other) {
+    public int compareTo(getSwarmList_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -10751,7 +10751,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetSwarmList_result(");
+      StringBuilder sb = new StringBuilder("getSwarmList_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -10786,15 +10786,15 @@ public class NodeService {
       }
     }
 
-    private static class GetSwarmList_resultStandardSchemeFactory implements SchemeFactory {
-      public GetSwarmList_resultStandardScheme getScheme() {
-        return new GetSwarmList_resultStandardScheme();
+    private static class getSwarmList_resultStandardSchemeFactory implements SchemeFactory {
+      public getSwarmList_resultStandardScheme getScheme() {
+        return new getSwarmList_resultStandardScheme();
       }
     }
 
-    private static class GetSwarmList_resultStandardScheme extends StandardScheme<GetSwarmList_result> {
+    private static class getSwarmList_resultStandardScheme extends StandardScheme<getSwarmList_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetSwarmList_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getSwarmList_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -10834,7 +10834,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetSwarmList_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getSwarmList_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -10856,16 +10856,16 @@ public class NodeService {
 
     }
 
-    private static class GetSwarmList_resultTupleSchemeFactory implements SchemeFactory {
-      public GetSwarmList_resultTupleScheme getScheme() {
-        return new GetSwarmList_resultTupleScheme();
+    private static class getSwarmList_resultTupleSchemeFactory implements SchemeFactory {
+      public getSwarmList_resultTupleScheme getScheme() {
+        return new getSwarmList_resultTupleScheme();
       }
     }
 
-    private static class GetSwarmList_resultTupleScheme extends TupleScheme<GetSwarmList_result> {
+    private static class getSwarmList_resultTupleScheme extends TupleScheme<getSwarmList_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetSwarmList_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getSwarmList_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -10884,7 +10884,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetSwarmList_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getSwarmList_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -11621,14 +11621,14 @@ public class NodeService {
 
   }
 
-  public static class GetTransfers_args implements org.apache.thrift.TBase<GetTransfers_args, GetTransfers_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetTransfers_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetTransfers_args");
+  public static class getTransfers_args implements org.apache.thrift.TBase<getTransfers_args, getTransfers_args._Fields>, java.io.Serializable, Cloneable, Comparable<getTransfers_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getTransfers_args");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetTransfers_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetTransfers_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getTransfers_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getTransfers_argsTupleSchemeFactory());
     }
 
 
@@ -11691,20 +11691,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetTransfers_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getTransfers_args.class, metaDataMap);
     }
 
-    public GetTransfers_args() {
+    public getTransfers_args() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetTransfers_args(GetTransfers_args other) {
+    public getTransfers_args(getTransfers_args other) {
     }
 
-    public GetTransfers_args deepCopy() {
-      return new GetTransfers_args(this);
+    public getTransfers_args deepCopy() {
+      return new getTransfers_args(this);
     }
 
     @Override
@@ -11737,12 +11737,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetTransfers_args)
-        return this.equals((GetTransfers_args)that);
+      if (that instanceof getTransfers_args)
+        return this.equals((getTransfers_args)that);
       return false;
     }
 
-    public boolean equals(GetTransfers_args that) {
+    public boolean equals(getTransfers_args that) {
       if (that == null)
         return false;
 
@@ -11755,7 +11755,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetTransfers_args other) {
+    public int compareTo(getTransfers_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -11779,7 +11779,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetTransfers_args(");
+      StringBuilder sb = new StringBuilder("getTransfers_args(");
       boolean first = true;
 
       sb.append(")");
@@ -11807,15 +11807,15 @@ public class NodeService {
       }
     }
 
-    private static class GetTransfers_argsStandardSchemeFactory implements SchemeFactory {
-      public GetTransfers_argsStandardScheme getScheme() {
-        return new GetTransfers_argsStandardScheme();
+    private static class getTransfers_argsStandardSchemeFactory implements SchemeFactory {
+      public getTransfers_argsStandardScheme getScheme() {
+        return new getTransfers_argsStandardScheme();
       }
     }
 
-    private static class GetTransfers_argsStandardScheme extends StandardScheme<GetTransfers_args> {
+    private static class getTransfers_argsStandardScheme extends StandardScheme<getTransfers_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetTransfers_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getTransfers_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -11836,7 +11836,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetTransfers_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getTransfers_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -11846,36 +11846,36 @@ public class NodeService {
 
     }
 
-    private static class GetTransfers_argsTupleSchemeFactory implements SchemeFactory {
-      public GetTransfers_argsTupleScheme getScheme() {
-        return new GetTransfers_argsTupleScheme();
+    private static class getTransfers_argsTupleSchemeFactory implements SchemeFactory {
+      public getTransfers_argsTupleScheme getScheme() {
+        return new getTransfers_argsTupleScheme();
       }
     }
 
-    private static class GetTransfers_argsTupleScheme extends TupleScheme<GetTransfers_args> {
+    private static class getTransfers_argsTupleScheme extends TupleScheme<getTransfers_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetTransfers_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getTransfers_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetTransfers_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getTransfers_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
   }
 
-  public static class GetTransfers_result implements org.apache.thrift.TBase<GetTransfers_result, GetTransfers_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetTransfers_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetTransfers_result");
+  public static class getTransfers_result implements org.apache.thrift.TBase<getTransfers_result, getTransfers_result._Fields>, java.io.Serializable, Cloneable, Comparable<getTransfers_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getTransfers_result");
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.LIST, (short)0);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new GetTransfers_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new GetTransfers_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new getTransfers_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new getTransfers_resultTupleSchemeFactory());
     }
 
     public List<TransferData> success; // required
@@ -11946,13 +11946,13 @@ public class NodeService {
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
               new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferData.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetTransfers_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getTransfers_result.class, metaDataMap);
     }
 
-    public GetTransfers_result() {
+    public getTransfers_result() {
     }
 
-    public GetTransfers_result(
+    public getTransfers_result(
       List<TransferData> success)
     {
       this();
@@ -11962,7 +11962,7 @@ public class NodeService {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public GetTransfers_result(GetTransfers_result other) {
+    public getTransfers_result(getTransfers_result other) {
       if (other.isSetSuccess()) {
         List<TransferData> __this__success = new ArrayList<TransferData>(other.success.size());
         for (TransferData other_element : other.success) {
@@ -11972,8 +11972,8 @@ public class NodeService {
       }
     }
 
-    public GetTransfers_result deepCopy() {
-      return new GetTransfers_result(this);
+    public getTransfers_result deepCopy() {
+      return new getTransfers_result(this);
     }
 
     @Override
@@ -12000,7 +12000,7 @@ public class NodeService {
       return this.success;
     }
 
-    public GetTransfers_result setSuccess(List<TransferData> success) {
+    public getTransfers_result setSuccess(List<TransferData> success) {
       this.success = success;
       return this;
     }
@@ -12059,12 +12059,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof GetTransfers_result)
-        return this.equals((GetTransfers_result)that);
+      if (that instanceof getTransfers_result)
+        return this.equals((getTransfers_result)that);
       return false;
     }
 
-    public boolean equals(GetTransfers_result that) {
+    public boolean equals(getTransfers_result that) {
       if (that == null)
         return false;
 
@@ -12086,7 +12086,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(GetTransfers_result other) {
+    public int compareTo(getTransfers_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -12120,7 +12120,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("GetTransfers_result(");
+      StringBuilder sb = new StringBuilder("getTransfers_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -12155,15 +12155,15 @@ public class NodeService {
       }
     }
 
-    private static class GetTransfers_resultStandardSchemeFactory implements SchemeFactory {
-      public GetTransfers_resultStandardScheme getScheme() {
-        return new GetTransfers_resultStandardScheme();
+    private static class getTransfers_resultStandardSchemeFactory implements SchemeFactory {
+      public getTransfers_resultStandardScheme getScheme() {
+        return new getTransfers_resultStandardScheme();
       }
     }
 
-    private static class GetTransfers_resultStandardScheme extends StandardScheme<GetTransfers_result> {
+    private static class getTransfers_resultStandardScheme extends StandardScheme<getTransfers_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetTransfers_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getTransfers_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -12203,7 +12203,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetTransfers_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getTransfers_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -12225,16 +12225,16 @@ public class NodeService {
 
     }
 
-    private static class GetTransfers_resultTupleSchemeFactory implements SchemeFactory {
-      public GetTransfers_resultTupleScheme getScheme() {
-        return new GetTransfers_resultTupleScheme();
+    private static class getTransfers_resultTupleSchemeFactory implements SchemeFactory {
+      public getTransfers_resultTupleScheme getScheme() {
+        return new getTransfers_resultTupleScheme();
       }
     }
 
-    private static class GetTransfers_resultTupleScheme extends TupleScheme<GetTransfers_result> {
+    private static class getTransfers_resultTupleScheme extends TupleScheme<getTransfers_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetTransfers_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getTransfers_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -12253,7 +12253,7 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetTransfers_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getTransfers_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

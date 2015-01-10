@@ -16,10 +16,6 @@ import static org.testng.Assert.fail;
  */
 public class ServerPingAndKillTest {
 
-
-
-
-
     @Test
     public void test10Servers() throws Exception
     {

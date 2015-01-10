@@ -27,22 +27,22 @@ struct Swarm
 struct TransferData
 {
     1: TransferID transferID,
-    2: AccountBalanceType Value 
+    2: AccountBalanceType value 
 }
 
 exception  NotSwarmMemeber{
-    1: NodeID ReceiverNode,
-    2: TransferID Transfer
+    1: NodeID receiverNode,
+    2: TransferID transfer
 }
 exception  WrongSwarmLeader{
-    1: NodeID ReceiverNode,
-    2: NodeID Leader,
-    3: TransferID Transfer
+    1: NodeID receiverNode,
+    2: NodeID leader,
+    3: TransferID transfer
 }
 exception  AlreadySwarmMemeber{
-    1: NodeID ReceiverNode,
-    2: NodeID Leader,
-    3: TransferID Transfer
+    1: NodeID receiverNode,
+    2: NodeID leader,
+    3: TransferID transfer
 }
 service NodeService
 {
@@ -53,55 +53,55 @@ service NodeService
   /**
   *
   */ 
-  void MakeTransfer(1: NodeID receiver,2: AccountBalanceType value),
+  void makeTransfer(1: NodeID receiver,2: AccountBalanceType value),
 
   /**
   *
   */ 
-  AccountBalanceType GetAccountBalance(),
+  AccountBalanceType getAccountBalance(),
   
   /**
   * pings node
   */
-  void Ping(),
+  void ping(),
   /**
   * pings Swarm and checks if leader is a leader
   */
-  void PingSwarm(1: NodeID leader,2: TransferID transfer ) throws (1: NotSwarmMemeber exc),
+  void pingSwarm(1: NodeID leader,2: TransferID transfer ) throws (1: NotSwarmMemeber exc),
   /**
   *
   */
-  void UpdateSwarmMembers(1:Swarm swarm) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
+  void updateSwarmMembers(1:Swarm swarm) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
   /**
   *
   */
-  void AddToSwarm(1:Swarm swarm) throws (1: AlreadySwarmMemeber exc),
+  void addToSwarm(1:Swarm swarm) throws (1: AlreadySwarmMemeber exc),
   /**
   *
   */
-  void DelSwarm(1:Swarm swarm) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
+  void delSwarm(1:Swarm swarm) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
   /**
   *
   */
-  Swarm GetSwarm(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
+  Swarm getSwarm(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
   /**
   * returns true if candidateNodeID> current
   */
-  bool ElectSwarmLeader(1:NodeID cadidate,2:TransferID Transfer) throws (1: NotSwarmMemeber exc ),
+  bool electSwarmLeader(1:NodeID cadidate,2:TransferID Transfer) throws (1: NotSwarmMemeber exc ),
   /**
   * new leader broadcast that he is a leader
   */
-  void ElectionEndedSwarm(1:Swarm swarm) throws (1: NotSwarmMemeber exc ),
+  void electionEndedSwarm(1:Swarm swarm) throws (1: NotSwarmMemeber exc ),
   /**
   *
   */ 
-  void DeliverTransfer(1: TransferData transfer),
+  void deliverTransfer(1: TransferData transfer),
 
-  list<Swarm> GetSwarmList(),
+  list<Swarm> getSwarmList(),
   
   void startSwarmElection(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
   
-  list<TransferData>  GetTransfers(),
+  list<TransferData> getTransfers(),
   
   void stop()
 }

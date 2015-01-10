@@ -38,54 +38,54 @@ public class ThriftServerHandler implements NodeService.Iface{
     }
 
     @Override
-    public void Ping() throws TException {
+    public void ping() throws TException {
         //implementation intentionally empty
     }
 
     @Override
-    public void PingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, TException {
+    public void pingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, TException {
 
     }
 
     @Override
-    public void UpdateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, TException {
+    public void updateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, TException {
 
     }
 
     @Override
-    public void AddToSwarm(Swarm swarm) throws AlreadySwarmMemeber, TException {
+    public void addToSwarm(Swarm swarm) throws AlreadySwarmMemeber, TException {
 
     }
 
     @Override
-    public void DelSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, TException {
+    public void delSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, TException {
 
     }
 
     @Override
-    public Swarm GetSwarm(TransferID transfer) throws NotSwarmMemeber, TException {
+    public Swarm getSwarm(TransferID transfer) throws NotSwarmMemeber, TException {
         return null;
     }
 
     @Override
-    public boolean ElectSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, TException {
+    public boolean electSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, TException {
         return false;
     }
 
     @Override
-    public void ElectionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, TException {
+    public void electionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, TException {
 
     }
 
     @Override
-    public void DeliverTransfer(TransferData transfer) throws TException {
+    public void deliverTransfer(TransferData transfer) throws TException {
         accountBalance += transfer.getValue();
         //TODO: Delete Swarm here.
     }
 
 
     @Override
-    public void MakeTransfer(NodeID receiver, long value) throws TException {
+    public void makeTransfer(NodeID receiver, long value) throws TException {
         //get params for connection
         String address = receiver.getAddress().getIP();
         int port = receiver.getPort();
@@ -114,7 +114,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
 
         try {
-            client.DeliverTransfer(transferData);
+            client.deliverTransfer(transferData);
             log.info("Transfer delivered!");
         } catch (TTransportException e) {
             pendingTransfers.add(transferData);
@@ -127,13 +127,13 @@ public class ThriftServerHandler implements NodeService.Iface{
     }
 
     @Override
-    public long GetAccountBalance() throws TException {
+    public long getAccountBalance() throws TException {
 
         return accountBalance;
     }
 
     @Override
-    public List<Swarm> GetSwarmList() throws TException {
+    public List<Swarm> getSwarmList() throws TException {
         return null;
     }
 
@@ -143,7 +143,7 @@ public class ThriftServerHandler implements NodeService.Iface{
     }
 
     @Override
-    public List<TransferData> GetTransfers() throws TException {
+    public List<TransferData> getTransfers() throws TException {
         return null;
     }
 

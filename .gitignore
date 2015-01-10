@@ -2,5 +2,5 @@ java-client/target/
 java-client/logs/
 java-server/target/
 java-server/logs/
-java-client/.idea/workspace.xml
-java-server/.idea/workspace.xml
+**/.idea/workspace.xml
+**/.idea/tasks.xml

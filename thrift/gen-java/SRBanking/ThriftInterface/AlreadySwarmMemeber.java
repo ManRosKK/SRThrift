@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 public class AlreadySwarmMemeber extends TException implements org.apache.thrift.TBase<AlreadySwarmMemeber, AlreadySwarmMemeber._Fields>, java.io.Serializable, Cloneable, Comparable<AlreadySwarmMemeber> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("AlreadySwarmMemeber");
 
-  private static final org.apache.thrift.protocol.TField RECEIVER_NODE_FIELD_DESC = new org.apache.thrift.protocol.TField("ReceiverNode", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-  private static final org.apache.thrift.protocol.TField LEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("Leader", org.apache.thrift.protocol.TType.STRUCT, (short)2);
-  private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("Transfer", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+  private static final org.apache.thrift.protocol.TField RECEIVER_NODE_FIELD_DESC = new org.apache.thrift.protocol.TField("receiverNode", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+  private static final org.apache.thrift.protocol.TField LEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("leader", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+  private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)3);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -45,15 +45,15 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
     schemes.put(TupleScheme.class, new AlreadySwarmMemeberTupleSchemeFactory());
   }
 
-  public NodeID ReceiverNode; // required
-  public NodeID Leader; // required
-  public TransferID Transfer; // required
+  public NodeID receiverNode; // required
+  public NodeID leader; // required
+  public TransferID transfer; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    RECEIVER_NODE((short)1, "ReceiverNode"),
-    LEADER((short)2, "Leader"),
-    TRANSFER((short)3, "Transfer");
+    RECEIVER_NODE((short)1, "receiverNode"),
+    LEADER((short)2, "leader"),
+    TRANSFER((short)3, "transfer");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -117,11 +117,11 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.RECEIVER_NODE, new org.apache.thrift.meta_data.FieldMetaData("ReceiverNode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.RECEIVER_NODE, new org.apache.thrift.meta_data.FieldMetaData("receiverNode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
-    tmpMap.put(_Fields.LEADER, new org.apache.thrift.meta_data.FieldMetaData("Leader", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.LEADER, new org.apache.thrift.meta_data.FieldMetaData("leader", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
-    tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("Transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(AlreadySwarmMemeber.class, metaDataMap);
@@ -131,14 +131,14 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
   }
 
   public AlreadySwarmMemeber(
-    NodeID ReceiverNode,
-    NodeID Leader,
-    TransferID Transfer)
+    NodeID receiverNode,
+    NodeID leader,
+    TransferID transfer)
   {
     this();
-    this.ReceiverNode = ReceiverNode;
-    this.Leader = Leader;
-    this.Transfer = Transfer;
+    this.receiverNode = receiverNode;
+    this.leader = leader;
+    this.transfer = transfer;
   }
 
   /**
@@ -146,13 +146,13 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
    */
   public AlreadySwarmMemeber(AlreadySwarmMemeber other) {
     if (other.isSetReceiverNode()) {
-      this.ReceiverNode = new NodeID(other.ReceiverNode);
+      this.receiverNode = new NodeID(other.receiverNode);
     }
     if (other.isSetLeader()) {
-      this.Leader = new NodeID(other.Leader);
+      this.leader = new NodeID(other.leader);
     }
     if (other.isSetTransfer()) {
-      this.Transfer = new TransferID(other.Transfer);
+      this.transfer = new TransferID(other.transfer);
     }
   }
 
@@ -162,80 +162,80 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
 
   @Override
   public void clear() {
-    this.ReceiverNode = null;
-    this.Leader = null;
-    this.Transfer = null;
+    this.receiverNode = null;
+    this.leader = null;
+    this.transfer = null;
   }
 
   public NodeID getReceiverNode() {
-    return this.ReceiverNode;
+    return this.receiverNode;
   }
 
-  public AlreadySwarmMemeber setReceiverNode(NodeID ReceiverNode) {
-    this.ReceiverNode = ReceiverNode;
+  public AlreadySwarmMemeber setReceiverNode(NodeID receiverNode) {
+    this.receiverNode = receiverNode;
     return this;
   }
 
   public void unsetReceiverNode() {
-    this.ReceiverNode = null;
+    this.receiverNode = null;
   }
 
-  /** Returns true if field ReceiverNode is set (has been assigned a value) and false otherwise */
+  /** Returns true if field receiverNode is set (has been assigned a value) and false otherwise */
   public boolean isSetReceiverNode() {
-    return this.ReceiverNode != null;
+    return this.receiverNode != null;
   }
 
   public void setReceiverNodeIsSet(boolean value) {
     if (!value) {
-      this.ReceiverNode = null;
+      this.receiverNode = null;
     }
   }
 
   public NodeID getLeader() {
-    return this.Leader;
+    return this.leader;
   }
 
-  public AlreadySwarmMemeber setLeader(NodeID Leader) {
-    this.Leader = Leader;
+  public AlreadySwarmMemeber setLeader(NodeID leader) {
+    this.leader = leader;
     return this;
   }
 
   public void unsetLeader() {
-    this.Leader = null;
+    this.leader = null;
   }
 
-  /** Returns true if field Leader is set (has been assigned a value) and false otherwise */
+  /** Returns true if field leader is set (has been assigned a value) and false otherwise */
   public boolean isSetLeader() {
-    return this.Leader != null;
+    return this.leader != null;
   }
 
   public void setLeaderIsSet(boolean value) {
     if (!value) {
-      this.Leader = null;
+      this.leader = null;
     }
   }
 
   public TransferID getTransfer() {
-    return this.Transfer;
+    return this.transfer;
   }
 
-  public AlreadySwarmMemeber setTransfer(TransferID Transfer) {
-    this.Transfer = Transfer;
+  public AlreadySwarmMemeber setTransfer(TransferID transfer) {
+    this.transfer = transfer;
     return this;
   }
 
   public void unsetTransfer() {
-    this.Transfer = null;
+    this.transfer = null;
   }
 
-  /** Returns true if field Transfer is set (has been assigned a value) and false otherwise */
+  /** Returns true if field transfer is set (has been assigned a value) and false otherwise */
   public boolean isSetTransfer() {
-    return this.Transfer != null;
+    return this.transfer != null;
   }
 
   public void setTransferIsSet(boolean value) {
     if (!value) {
-      this.Transfer = null;
+      this.transfer = null;
     }
   }
 
@@ -313,30 +313,30 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
     if (that == null)
       return false;
 
-    boolean this_present_ReceiverNode = true && this.isSetReceiverNode();
-    boolean that_present_ReceiverNode = true && that.isSetReceiverNode();
-    if (this_present_ReceiverNode || that_present_ReceiverNode) {
-      if (!(this_present_ReceiverNode && that_present_ReceiverNode))
+    boolean this_present_receiverNode = true && this.isSetReceiverNode();
+    boolean that_present_receiverNode = true && that.isSetReceiverNode();
+    if (this_present_receiverNode || that_present_receiverNode) {
+      if (!(this_present_receiverNode && that_present_receiverNode))
         return false;
-      if (!this.ReceiverNode.equals(that.ReceiverNode))
-        return false;
-    }
-
-    boolean this_present_Leader = true && this.isSetLeader();
-    boolean that_present_Leader = true && that.isSetLeader();
-    if (this_present_Leader || that_present_Leader) {
-      if (!(this_present_Leader && that_present_Leader))
-        return false;
-      if (!this.Leader.equals(that.Leader))
+      if (!this.receiverNode.equals(that.receiverNode))
         return false;
     }
 
-    boolean this_present_Transfer = true && this.isSetTransfer();
-    boolean that_present_Transfer = true && that.isSetTransfer();
-    if (this_present_Transfer || that_present_Transfer) {
-      if (!(this_present_Transfer && that_present_Transfer))
+    boolean this_present_leader = true && this.isSetLeader();
+    boolean that_present_leader = true && that.isSetLeader();
+    if (this_present_leader || that_present_leader) {
+      if (!(this_present_leader && that_present_leader))
         return false;
-      if (!this.Transfer.equals(that.Transfer))
+      if (!this.leader.equals(that.leader))
+        return false;
+    }
+
+    boolean this_present_transfer = true && this.isSetTransfer();
+    boolean that_present_transfer = true && that.isSetTransfer();
+    if (this_present_transfer || that_present_transfer) {
+      if (!(this_present_transfer && that_present_transfer))
+        return false;
+      if (!this.transfer.equals(that.transfer))
         return false;
     }
 
@@ -361,7 +361,7 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
       return lastComparison;
     }
     if (isSetReceiverNode()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.ReceiverNode, other.ReceiverNode);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.receiverNode, other.receiverNode);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -371,7 +371,7 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
       return lastComparison;
     }
     if (isSetLeader()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Leader, other.Leader);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.leader, other.leader);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -381,7 +381,7 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
       return lastComparison;
     }
     if (isSetTransfer()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.Transfer, other.Transfer);
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transfer, other.transfer);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -406,27 +406,27 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
     StringBuilder sb = new StringBuilder("AlreadySwarmMemeber(");
     boolean first = true;
 
-    sb.append("ReceiverNode:");
-    if (this.ReceiverNode == null) {
+    sb.append("receiverNode:");
+    if (this.receiverNode == null) {
       sb.append("null");
     } else {
-      sb.append(this.ReceiverNode);
+      sb.append(this.receiverNode);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("Leader:");
-    if (this.Leader == null) {
+    sb.append("leader:");
+    if (this.leader == null) {
       sb.append("null");
     } else {
-      sb.append(this.Leader);
+      sb.append(this.leader);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("Transfer:");
-    if (this.Transfer == null) {
+    sb.append("transfer:");
+    if (this.transfer == null) {
       sb.append("null");
     } else {
-      sb.append(this.Transfer);
+      sb.append(this.transfer);
     }
     first = false;
     sb.append(")");
@@ -436,14 +436,14 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (ReceiverNode != null) {
-      ReceiverNode.validate();
+    if (receiverNode != null) {
+      receiverNode.validate();
     }
-    if (Leader != null) {
-      Leader.validate();
+    if (leader != null) {
+      leader.validate();
     }
-    if (Transfer != null) {
-      Transfer.validate();
+    if (transfer != null) {
+      transfer.validate();
     }
   }
 
@@ -483,8 +483,8 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
         switch (schemeField.id) {
           case 1: // RECEIVER_NODE
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.ReceiverNode = new NodeID();
-              struct.ReceiverNode.read(iprot);
+              struct.receiverNode = new NodeID();
+              struct.receiverNode.read(iprot);
               struct.setReceiverNodeIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -492,8 +492,8 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
             break;
           case 2: // LEADER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.Leader = new NodeID();
-              struct.Leader.read(iprot);
+              struct.leader = new NodeID();
+              struct.leader.read(iprot);
               struct.setLeaderIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -501,8 +501,8 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
             break;
           case 3: // TRANSFER
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.Transfer = new TransferID();
-              struct.Transfer.read(iprot);
+              struct.transfer = new TransferID();
+              struct.transfer.read(iprot);
               struct.setTransferIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -523,19 +523,19 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.ReceiverNode != null) {
+      if (struct.receiverNode != null) {
         oprot.writeFieldBegin(RECEIVER_NODE_FIELD_DESC);
-        struct.ReceiverNode.write(oprot);
+        struct.receiverNode.write(oprot);
         oprot.writeFieldEnd();
       }
-      if (struct.Leader != null) {
+      if (struct.leader != null) {
         oprot.writeFieldBegin(LEADER_FIELD_DESC);
-        struct.Leader.write(oprot);
+        struct.leader.write(oprot);
         oprot.writeFieldEnd();
       }
-      if (struct.Transfer != null) {
+      if (struct.transfer != null) {
         oprot.writeFieldBegin(TRANSFER_FIELD_DESC);
-        struct.Transfer.write(oprot);
+        struct.transfer.write(oprot);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -567,13 +567,13 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
       }
       oprot.writeBitSet(optionals, 3);
       if (struct.isSetReceiverNode()) {
-        struct.ReceiverNode.write(oprot);
+        struct.receiverNode.write(oprot);
       }
       if (struct.isSetLeader()) {
-        struct.Leader.write(oprot);
+        struct.leader.write(oprot);
       }
       if (struct.isSetTransfer()) {
-        struct.Transfer.write(oprot);
+        struct.transfer.write(oprot);
       }
     }
 
@@ -582,18 +582,18 @@ public class AlreadySwarmMemeber extends TException implements org.apache.thrift
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(3);
       if (incoming.get(0)) {
-        struct.ReceiverNode = new NodeID();
-        struct.ReceiverNode.read(iprot);
+        struct.receiverNode = new NodeID();
+        struct.receiverNode.read(iprot);
         struct.setReceiverNodeIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.Leader = new NodeID();
-        struct.Leader.read(iprot);
+        struct.leader = new NodeID();
+        struct.leader.read(iprot);
         struct.setLeaderIsSet(true);
       }
       if (incoming.get(2)) {
-        struct.Transfer = new TransferID();
-        struct.Transfer.read(iprot);
+        struct.transfer = new TransferID();
+        struct.transfer.read(iprot);
         struct.setTransferIsSet(true);
       }
     }

@@ -24,9 +24,7 @@ public class Util {
     }
 
     public static void runserver(int port) throws IOException {
-        Process proc = Runtime.getRuntime().exec("java -jar " +
-                "C:\\currentProjects\\SR\\SRThrift\\java-server\\target\\server-1.0-SNAPSHOT-jar-with-dependencies.jar " +
-                "127.0.0.1 " + port + " " + defaultBalance);
+        runserver("127.0.0.1",port,defaultBalance);
     }
 
     public static void runNServers(int portlow, int count) throws IOException {
