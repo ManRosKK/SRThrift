@@ -59,21 +59,22 @@ class Iface(object):
     """
     pass
 
-  def addToSwarm(self, swarm):
+  def addToSwarm(self, swarm, transferData):
     """
 
 
     Parameters:
      - swarm
+     - transferData
     """
     pass
 
-  def delSwarm(self, swarm):
+  def delSwarm(self, swarmID):
     """
 
 
     Parameters:
-     - swarm
+     - swarmID
     """
     pass
 
@@ -292,20 +293,22 @@ class Client(Iface):
       raise result.exc2
     return
 
-  def addToSwarm(self, swarm):
+  def addToSwarm(self, swarm, transferData):
     """
 
 
     Parameters:
      - swarm
+     - transferData
     """
-    self.send_addToSwarm(swarm)
+    self.send_addToSwarm(swarm, transferData)
     self.recv_addToSwarm()
 
-  def send_addToSwarm(self, swarm):
+  def send_addToSwarm(self, swarm, transferData):
     self._oprot.writeMessageBegin('addToSwarm', TMessageType.CALL, self._seqid)
     args = addToSwarm_args()
     args.swarm = swarm
+    args.transferData = transferData
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -324,20 +327,20 @@ class Client(Iface):
       raise result.exc
     return
 
-  def delSwarm(self, swarm):
+  def delSwarm(self, swarmID):
     """
 
 
     Parameters:
-     - swarm
+     - swarmID
     """
-    self.send_delSwarm(swarm)
+    self.send_delSwarm(swarmID)
     self.recv_delSwarm()
 
-  def send_delSwarm(self, swarm):
+  def send_delSwarm(self, swarmID):
     self._oprot.writeMessageBegin('delSwarm', TMessageType.CALL, self._seqid)
     args = delSwarm_args()
-    args.swarm = swarm
+    args.swarmID = swarmID
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -698,7 +701,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = addToSwarm_result()
     try:
-      self._handler.addToSwarm(args.swarm)
+      self._handler.addToSwarm(args.swarm, args.transferData)
     except AlreadySwarmMemeber, exc:
       result.exc = exc
     oprot.writeMessageBegin("addToSwarm", TMessageType.REPLY, seqid)
@@ -712,7 +715,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = delSwarm_result()
     try:
-      self._handler.delSwarm(args.swarm)
+      self._handler.delSwarm(args.swarmID)
     except NotSwarmMemeber, exc:
       result.exc = exc
     except WrongSwarmLeader, exc2:
@@ -1399,15 +1402,18 @@ class addToSwarm_args(object):
   """
   Attributes:
    - swarm
+   - transferData
   """
 
   thrift_spec = (
     None, # 0
     (1, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'transferData', (TransferData, TransferData.thrift_spec), None, ), # 2
   )
 
-  def __init__(self, swarm=None,):
+  def __init__(self, swarm=None, transferData=None,):
     self.swarm = swarm
+    self.transferData = transferData
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -1424,6 +1430,12 @@ class addToSwarm_args(object):
           self.swarm.read(iprot)
         else:
           iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.STRUCT:
+          self.transferData = TransferData()
+          self.transferData.read(iprot)
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -1437,6 +1449,10 @@ class addToSwarm_args(object):
     if self.swarm is not None:
       oprot.writeFieldBegin('swarm', TType.STRUCT, 1)
       self.swarm.write(oprot)
+      oprot.writeFieldEnd()
+    if self.transferData is not None:
+      oprot.writeFieldBegin('transferData', TType.STRUCT, 2)
+      self.transferData.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -1520,16 +1536,16 @@ class addToSwarm_result(object):
 class delSwarm_args(object):
   """
   Attributes:
-   - swarm
+   - swarmID
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'swarmID', (TransferID, TransferID.thrift_spec), None, ), # 1
   )
 
-  def __init__(self, swarm=None,):
-    self.swarm = swarm
+  def __init__(self, swarmID=None,):
+    self.swarmID = swarmID
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -1542,8 +1558,8 @@ class delSwarm_args(object):
         break
       if fid == 1:
         if ftype == TType.STRUCT:
-          self.swarm = Swarm()
-          self.swarm.read(iprot)
+          self.swarmID = TransferID()
+          self.swarmID.read(iprot)
         else:
           iprot.skip(ftype)
       else:
@@ -1556,9 +1572,9 @@ class delSwarm_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('delSwarm_args')
-    if self.swarm is not None:
-      oprot.writeFieldBegin('swarm', TType.STRUCT, 1)
-      self.swarm.write(oprot)
+    if self.swarmID is not None:
+      oprot.writeFieldBegin('swarmID', TType.STRUCT, 1)
+      self.swarmID.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()

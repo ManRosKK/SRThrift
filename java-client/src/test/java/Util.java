@@ -19,6 +19,7 @@ public class Util {
     public static int defaultBalance = 500;
 
     public static String filename = "localSystem.ini";
+    public static String defaultConfigFile = "config//default.ini";
     public static Map<String,String> shellStrings = new HashMap<String,String>();
     public static String defaultLanguage;
     public static Map<Integer,Process> processMap = new HashMap<Integer,Process>();
@@ -40,6 +41,7 @@ public class Util {
             System.err.println("shellStrings not complete, check " + filename);
             System.exit(1);
         }
+        System.out.println(new File(defaultConfigFile).getAbsolutePath());
     }
 
     static String convertStreamToString(java.io.InputStream is) {
@@ -47,63 +49,69 @@ public class Util {
         return s.hasNext() ? s.next() : "";
     }
 
-    public static void runServer(String IP, int port, long balance, String language) throws IOException {
 
-        String execString = shellStrings.get(language) + " " + IP + " " + port + " " + balance;
+    public static void runServer(String IP, int port, long balance, String configFile, String language) throws IOException {
+        String execString = shellStrings.get(language) + " " + IP + " " + port + " " +
+                balance + " " + (new File(configFile).getAbsolutePath());
         Process proc = Runtime.getRuntime().exec(execString);
         System.out.println(execString);
-        processMap.put(port,proc);
+    }
+
+    public static void runServer(String IP, int port, long balance, String configFile) throws IOException {
+        runServer(IP,port,balance,configFile,defaultLanguage);
     }
 
     public static void runServer(String IP, int port, long balance) throws IOException {
-        runServer(IP,port,balance,defaultLanguage);
+        runServer(IP,port,balance,defaultConfigFile);
     }
 
-    public static void runServer(int port) throws IOException {
-        runServer("localhost", port, defaultBalance);
+    public static void runServer(String IP, int port) throws IOException {
+        runServer(IP,port,defaultBalance);
     }
 
-    public static void runNServers(int portlow, int count) throws IOException {
+    public static void runNServers(String IP, int portlow, int count) throws IOException {
         for (int i=0;i<count;++i)
         {
-            runServer(portlow + i);
+            runServer(IP,portlow + i);
         }
     }
 
-    public static void pingNServers(int portlow, int count) throws TException {
+    public static void pingNServers(String IP,int portlow, int count) throws TException {
         for (int i=0;i<count;++i)
         {
-            ThriftTestClient.pingserver(portlow+i);
+            EasyClient.pingserver(IP,portlow + i);
         }
     }
 
-    public static void pingNServersExpectFail(int portlow, int count) throws TException {
+    public static void pingNServersExpectFail(String IP,int portlow, int count) throws TException {
+        int countFail = 0;
         for (int i=0;i<count;++i)
         {
             try{
                 //ping again - ping should throw an exception
-                ThriftTestClient.pingserver(portlow+i);
-                assertEquals("Port should be down",false);
+                EasyClient.pingserver(IP, portlow + i);
             }
             catch (TTransportException e)
             {
-                return;
+                countFail++;
             }
         }
-    }
-
-    public static void killNServers(int portlow, int count) throws TException {
-        for (int i=0;i<count;++i)
+        if (countFail!=count)
         {
-            killServerNoException(portlow+i);
+            throw new TException("Some ports are not shut down! " + (count-countFail) + "/" + count);
         }
     }
 
-    public static void killServerNoException(int port)  {
+    public static void killNServers(String IP, int portlow, int count) throws TException {
+        for (int i=0;i<count;++i)
+        {
+            killServerNoException(IP,portlow + i);
+        }
+    }
+
+    public static void killServerNoException(String IP, int port)  {
             try{
-                ThriftTestClient.killserver(port);
-                System.out.println(convertStreamToString( processMap.get(port).getErrorStream()));
-                System.out.println(convertStreamToString( processMap.get(port).getInputStream()));
+                EasyClient.killserver(IP,port);
             }
             catch (TTransportException e){
 
@@ -117,7 +125,7 @@ public class Util {
     public static void main(String [] args) {
         //kill
         try {
-            Util.killNServers(9080,11);
+            Util.killNServers("localhost",9080,11);
         } catch (TException e) {
             e.printStackTrace();
         }

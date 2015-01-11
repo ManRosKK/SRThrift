@@ -72,11 +72,11 @@ service NodeService
     /**
     *
     */
-    void addToSwarm(1:Swarm swarm) throws (1: AlreadySwarmMemeber exc),
+    void addToSwarm(1:Swarm swarm,2: TransferData transferData) throws (1: AlreadySwarmMemeber exc),
     /**
     *
     */
-    void delSwarm(1:Swarm swarm) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
+    void delSwarm(1:TransferID swarmID) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
     /**
     *
     */

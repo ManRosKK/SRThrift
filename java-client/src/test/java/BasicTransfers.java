@@ -20,20 +20,20 @@ public class BasicTransfers {
     @BeforeMethod
     public void setUp() throws Exception {
         //arrange
-        Util.runServer("localhost", port, balance);
-        Util.runServer("localhost", port2, balance2);
+        Util.runServer(IP, port, balance);
+        Util.runServer(IP2, port2, balance2);
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
-        Util.killServerNoException(port);
-        Util.killServerNoException(port2);
+        Util.killServerNoException(IP,port);
+        Util.killServerNoException(IP2,port2);
     }
 
     @Test
     public void BasicAccountBalance() throws Exception {
-        long balanceRead = ThriftTestClient.getBalance(port);
-        long balance2Read = ThriftTestClient.getBalance(port2);
+        long balanceRead = EasyClient.getBalance(IP,port);
+        long balance2Read = EasyClient.getBalance(IP2,port2);
         //assert
         assertEquals(balanceRead, balance);
         assertEquals(balance2Read, balance2);
@@ -42,10 +42,10 @@ public class BasicTransfers {
     @Test
     public void BasicTransfer() throws Exception {
         long value = 30;
-        ThriftTestClient.makeTransfer(IP,port,IP2,port2,value);
+        EasyClient.makeTransfer(IP, port, IP2, port2, value);
 
-        long balanceRead = ThriftTestClient.getBalance(port);
-        long balance2Read = ThriftTestClient.getBalance(port2);
+        long balanceRead = EasyClient.getBalance(IP,port);
+        long balance2Read = EasyClient.getBalance(IP2,port2);
         //assert
         assertEquals(balanceRead, balance-value);
         assertEquals(balance2Read, balance2+value);
@@ -54,11 +54,11 @@ public class BasicTransfers {
     @Test
     public void BasicTransferAndReverseTransfer() throws Exception {
         long value = 35;
-        ThriftTestClient.makeTransfer(IP,port,IP2,port2,value);
-        ThriftTestClient.makeTransfer(IP2,port2,IP,port,value);
+        EasyClient.makeTransfer(IP, port, IP2, port2, value);
+        EasyClient.makeTransfer(IP2, port2, IP, port, value);
 
-        long balanceRead = ThriftTestClient.getBalance(port);
-        long balance2Read = ThriftTestClient.getBalance(port2);
+        long balanceRead = EasyClient.getBalance(IP,port);
+        long balance2Read = EasyClient.getBalance(IP2,port2);
         //assert
         assertEquals(balanceRead, balance);
         assertEquals(balance2Read, balance2);
@@ -67,9 +67,9 @@ public class BasicTransfers {
     @Test
     public void BasicSelfTransfer() throws Exception {
         long value = 35;
-        ThriftTestClient.makeTransfer(IP,port,IP,port,value);
+        EasyClient.makeTransfer(IP, port, IP, port, value);
 
-        long balanceRead = ThriftTestClient.getBalance(port);
+        long balanceRead = EasyClient.getBalance(IP,port);
         //assert
         assertEquals(balanceRead, balance);
     }

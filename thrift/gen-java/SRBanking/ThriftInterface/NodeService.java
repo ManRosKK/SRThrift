@@ -79,9 +79,9 @@ public class NodeService {
     /**
      * 
      * 
-     * @param swarm
+     * @param swarmID
      */
-    public void delSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
+    public void delSwarm(TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
 
     /**
      * 
@@ -136,7 +136,7 @@ public class NodeService {
 
     public void addToSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void delSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void delSwarm(TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void getSwarm(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -311,16 +311,16 @@ public class NodeService {
       return;
     }
 
-    public void delSwarm(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
+    public void delSwarm(TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
     {
-      send_delSwarm(swarm);
+      send_delSwarm(swarmID);
       recv_delSwarm();
     }
 
-    public void send_delSwarm(Swarm swarm) throws org.apache.thrift.TException
+    public void send_delSwarm(TransferID swarmID) throws org.apache.thrift.TException
     {
       delSwarm_args args = new delSwarm_args();
-      args.setSwarm(swarm);
+      args.setSwarmID(swarmID);
       sendBase("delSwarm", args);
     }
 
@@ -729,24 +729,24 @@ public class NodeService {
       }
     }
 
-    public void delSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void delSwarm(TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      delSwarm_call method_call = new delSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      delSwarm_call method_call = new delSwarm_call(swarmID, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class delSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private Swarm swarm;
-      public delSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private TransferID swarmID;
+      public delSwarm_call(TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.swarm = swarm;
+        this.swarmID = swarmID;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("delSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
         delSwarm_args args = new delSwarm_args();
-        args.setSwarm(swarm);
+        args.setSwarmID(swarmID);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -1193,7 +1193,7 @@ public class NodeService {
       public delSwarm_result getResult(I iface, delSwarm_args args) throws org.apache.thrift.TException {
         delSwarm_result result = new delSwarm_result();
         try {
-          iface.delSwarm(args.swarm);
+          iface.delSwarm(args.swarmID);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         } catch (WrongSwarmLeader exc2) {
@@ -1793,7 +1793,7 @@ public class NodeService {
       }
 
       public void start(I iface, delSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.delSwarm(args.swarm,resultHandler);
+        iface.delSwarm(args.swarmID,resultHandler);
       }
     }
 
@@ -6378,7 +6378,7 @@ public class NodeService {
   public static class delSwarm_args implements org.apache.thrift.TBase<delSwarm_args, delSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<delSwarm_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("delSwarm_args");
 
-    private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SWARM_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("swarmID", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -6386,11 +6386,11 @@ public class NodeService {
       schemes.put(TupleScheme.class, new delSwarm_argsTupleSchemeFactory());
     }
 
-    public Swarm swarm; // required
+    public TransferID swarmID; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SWARM((short)1, "swarm");
+      SWARM_ID((short)1, "swarmID");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -6405,8 +6405,8 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // SWARM
-            return SWARM;
+          case 1: // SWARM_ID
+            return SWARM_ID;
           default:
             return null;
         }
@@ -6450,8 +6450,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
+      tmpMap.put(_Fields.SWARM_ID, new org.apache.thrift.meta_data.FieldMetaData("swarmID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(delSwarm_args.class, metaDataMap);
     }
@@ -6460,18 +6460,18 @@ public class NodeService {
     }
 
     public delSwarm_args(
-      Swarm swarm)
+      TransferID swarmID)
     {
       this();
-      this.swarm = swarm;
+      this.swarmID = swarmID;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public delSwarm_args(delSwarm_args other) {
-      if (other.isSetSwarm()) {
-        this.swarm = new Swarm(other.swarm);
+      if (other.isSetSwarmID()) {
+        this.swarmID = new TransferID(other.swarmID);
       }
     }
 
@@ -6481,40 +6481,40 @@ public class NodeService {
 
     @Override
     public void clear() {
-      this.swarm = null;
+      this.swarmID = null;
     }
 
-    public Swarm getSwarm() {
-      return this.swarm;
+    public TransferID getSwarmID() {
+      return this.swarmID;
     }
 
-    public delSwarm_args setSwarm(Swarm swarm) {
-      this.swarm = swarm;
+    public delSwarm_args setSwarmID(TransferID swarmID) {
+      this.swarmID = swarmID;
       return this;
     }
 
-    public void unsetSwarm() {
-      this.swarm = null;
+    public void unsetSwarmID() {
+      this.swarmID = null;
     }
 
-    /** Returns true if field swarm is set (has been assigned a value) and false otherwise */
-    public boolean isSetSwarm() {
-      return this.swarm != null;
+    /** Returns true if field swarmID is set (has been assigned a value) and false otherwise */
+    public boolean isSetSwarmID() {
+      return this.swarmID != null;
     }
 
-    public void setSwarmIsSet(boolean value) {
+    public void setSwarmIDIsSet(boolean value) {
       if (!value) {
-        this.swarm = null;
+        this.swarmID = null;
       }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case SWARM:
+      case SWARM_ID:
         if (value == null) {
-          unsetSwarm();
+          unsetSwarmID();
         } else {
-          setSwarm((Swarm)value);
+          setSwarmID((TransferID)value);
         }
         break;
 
@@ -6523,8 +6523,8 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case SWARM:
-        return getSwarm();
+      case SWARM_ID:
+        return getSwarmID();
 
       }
       throw new IllegalStateException();
@@ -6537,8 +6537,8 @@ public class NodeService {
       }
 
       switch (field) {
-      case SWARM:
-        return isSetSwarm();
+      case SWARM_ID:
+        return isSetSwarmID();
       }
       throw new IllegalStateException();
     }
@@ -6556,12 +6556,12 @@ public class NodeService {
       if (that == null)
         return false;
 
-      boolean this_present_swarm = true && this.isSetSwarm();
-      boolean that_present_swarm = true && that.isSetSwarm();
-      if (this_present_swarm || that_present_swarm) {
-        if (!(this_present_swarm && that_present_swarm))
+      boolean this_present_swarmID = true && this.isSetSwarmID();
+      boolean that_present_swarmID = true && that.isSetSwarmID();
+      if (this_present_swarmID || that_present_swarmID) {
+        if (!(this_present_swarmID && that_present_swarmID))
           return false;
-        if (!this.swarm.equals(that.swarm))
+        if (!this.swarmID.equals(that.swarmID))
           return false;
       }
 
@@ -6581,12 +6581,12 @@ public class NodeService {
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetSwarm()).compareTo(other.isSetSwarm());
+      lastComparison = Boolean.valueOf(isSetSwarmID()).compareTo(other.isSetSwarmID());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetSwarm()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.swarm, other.swarm);
+      if (isSetSwarmID()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.swarmID, other.swarmID);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -6611,11 +6611,11 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("delSwarm_args(");
       boolean first = true;
 
-      sb.append("swarm:");
-      if (this.swarm == null) {
+      sb.append("swarmID:");
+      if (this.swarmID == null) {
         sb.append("null");
       } else {
-        sb.append(this.swarm);
+        sb.append(this.swarmID);
       }
       first = false;
       sb.append(")");
@@ -6625,8 +6625,8 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (swarm != null) {
-        swarm.validate();
+      if (swarmID != null) {
+        swarmID.validate();
       }
     }
 
@@ -6664,11 +6664,11 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // SWARM
+            case 1: // SWARM_ID
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.swarm = new Swarm();
-                struct.swarm.read(iprot);
-                struct.setSwarmIsSet(true);
+                struct.swarmID = new TransferID();
+                struct.swarmID.read(iprot);
+                struct.setSwarmIDIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -6688,9 +6688,9 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.swarm != null) {
-          oprot.writeFieldBegin(SWARM_FIELD_DESC);
-          struct.swarm.write(oprot);
+        if (struct.swarmID != null) {
+          oprot.writeFieldBegin(SWARM_ID_FIELD_DESC);
+          struct.swarmID.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -6711,12 +6711,12 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, delSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSwarm()) {
+        if (struct.isSetSwarmID()) {
           optionals.set(0);
         }
         oprot.writeBitSet(optionals, 1);
-        if (struct.isSetSwarm()) {
-          struct.swarm.write(oprot);
+        if (struct.isSetSwarmID()) {
+          struct.swarmID.write(oprot);
         }
       }
 
@@ -6725,9 +6725,9 @@ public class NodeService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.swarm = new Swarm();
-          struct.swarm.read(iprot);
-          struct.setSwarmIsSet(true);
+          struct.swarmID = new TransferID();
+          struct.swarmID.read(iprot);
+          struct.setSwarmIDIsSet(true);
         }
       }
     }

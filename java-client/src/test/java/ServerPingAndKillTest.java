@@ -14,11 +14,12 @@ public class ServerPingAndKillTest {
     {
         int lowserver = 9080;
         int count = 10;
+        String IP = "localhost";
 
-        Util.runNServers(lowserver, count);
-        Util.pingNServers(lowserver, count);
-        Util.killNServers(lowserver, count);
-        Util.pingNServersExpectFail(lowserver, count);
+        Util.runNServers(IP,lowserver, count);
+        Util.pingNServers(IP,lowserver, count);
+        Util.killNServers(IP,lowserver, count);
+        Util.pingNServersExpectFail(IP,lowserver, count);
     }
 
     @Test
@@ -26,20 +27,21 @@ public class ServerPingAndKillTest {
         //run server
         int port1 = 9080;
         int port2 = 9090;
-        Util.runServer(port1);
-        Util.runServer(port2);
+        String IP = "localhost";
+        Util.runServer(IP,port1);
+        Util.runServer(IP,port2);
 
         //ping server
-        ThriftTestClient.pingserver(port1);
-        ThriftTestClient.pingserver(port2);
+        EasyClient.pingserver(IP,port1);
+        EasyClient.pingserver(IP,port2);
 
-        Util.killServerNoException(port1);
-        Util.killServerNoException(port2);
+        Util.killServerNoException(IP,port1);
+        Util.killServerNoException(IP,port2);
 
 
         try{
             //ping again - ping should throw an exception
-            ThriftTestClient.pingserver(port1);
+            EasyClient.pingserver(IP,port1);
             fail();
         }
         catch (TTransportException e)
@@ -49,7 +51,7 @@ public class ServerPingAndKillTest {
 
         try{
             //ping again - ping should throw an exception
-            ThriftTestClient.pingserver(port2);
+            EasyClient.pingserver(IP,port2);
             fail();
         }
         catch (TTransportException e)
@@ -63,17 +65,18 @@ public class ServerPingAndKillTest {
     public void testPingAndKill9080() throws Exception {
         //run server
         int port = 9080;
-        Util.runServer(port);
+        String IP = "localhost";
+        Util.runServer(IP,port);
 
         //ping server
-        ThriftTestClient.pingserver(port);
+        EasyClient.pingserver(IP,port);
 
         //kill server - should fail with transport
-        Util.killServerNoException(port);
+        Util.killServerNoException(IP,port);
 
         try{
             //ping again - ping should throw an exception
-            ThriftTestClient.pingserver(port);
+            EasyClient.pingserver(IP,port);
             assertEquals("Port should be down", false);
         }
         catch (TTransportException e)
@@ -86,17 +89,18 @@ public class ServerPingAndKillTest {
     public void testPingAndKill9090() throws Exception {
         //run server
         int port = 9090;
-        Util.runServer(port);
+        String IP = "localhost";
+        Util.runServer(IP,port);
 
         //ping server
-        ThriftTestClient.pingserver(port);
+        EasyClient.pingserver(IP,port);
 
         //kill server - should fail with transport
-        Util.killServerNoException(port);
+        Util.killServerNoException(IP,port);
 
         try{
             //ping again - should fail
-            ThriftTestClient.pingserver(port);
+            EasyClient.pingserver(IP,port);
             assertEquals("Port should be down", false);
         }
         catch (TTransportException e)

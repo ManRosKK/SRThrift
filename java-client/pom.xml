@@ -47,7 +47,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>ThriftTestClient</mainClass>
+                            <mainClass>EasyClient</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
