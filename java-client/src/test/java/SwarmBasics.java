@@ -53,6 +53,31 @@ public class SwarmBasics {
         assert((port2 == swarmList.get(0).getMembers().get(0).getPort())
                 || port2 == swarmList.get(0).getMembers().get(1).getPort());
     }
+    @Test
+    public void CreateTwoSwarmsDifferentSenders() throws Exception {
+        Util.runServer(IP, port, balance, configFile);
+        Util.runServer(IP2, port2, balance2, configFile);
+
+        int value = 5;
+        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+        EasyClient.makeTransfer(IP2, port2, IPReceiver, portReceiver, value);
+        List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
+        assertEquals(swarmList.size(),2);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+    }
+
+    @Test
+    public void CreateTwoSwarmsSameSender() throws Exception {
+        Util.runServer(IP, port, balance, configFile);
+        Util.runServer(IP2, port2, balance2, configFile);
+
+        int value = 5;
+        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+        List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
+        assertEquals(swarmList.size(),2);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+    }
 
     @Test(expectedExceptions = NotEnoughMembersToMakeTransfer.class)
     public void CreateTooBigSwarm() throws Exception {

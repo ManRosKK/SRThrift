@@ -115,11 +115,22 @@ public class Util {
     public static void killServerNoException(String IP, int port)  {
             try{
                 EasyClient.killserver(IP,port);
-                System.out.println("Error" + port + ":");
-                System.out.println(convertStreamToString(processMap.get(port).getErrorStream()));
-                System.out.println("StdOut" + port + ": ");
-                System.out.println(convertStreamToString(processMap.get(port).getInputStream()));
-                System.out.flush();
+                Process process = processMap.get(port);
+                if(process != null)
+                {
+                    System.out.println("Error" + port + ":");
+                    System.out.println(convertStreamToString(process.getErrorStream()));
+                    System.out.println("StdOut" + port + ": ");
+                    System.out.println(convertStreamToString(process.getInputStream()));
+                    System.out.flush();
+                    processMap.remove(port);
+                }
+                else
+                {
+                    System.out.println("Proces not available " + port);
+                    System.out.flush();
+                }
+
             }
             catch (TTransportException e){
 
