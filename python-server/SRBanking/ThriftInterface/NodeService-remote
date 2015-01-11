@@ -4,7 +4,7 @@
 #
 # DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 #
-#  options string: py
+#  options string: py:utf8string,new_style
 #
 
 import sys
@@ -23,20 +23,20 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print 'Usage: ' + sys.argv[0] + ' [-h host[:port]] [-u url] [-f[ramed]] function [arg1 [arg2...]]'
   print ''
   print 'Functions:'
-  print '  void MakeTransfer(NodeID receiver, AccountBalanceType value)'
-  print '  AccountBalanceType GetAccountBalance()'
-  print '  void Ping()'
-  print '  void PingSwarm(NodeID leader, TransferID transfer)'
-  print '  void UpdateSwarmMembers(Swarm swarm)'
-  print '  void AddToSwarm(Swarm swarm)'
-  print '  void DelSwarm(Swarm swarm)'
-  print '  Swarm GetSwarm(TransferID transfer)'
-  print '  bool ElectSwarmLeader(NodeID cadidate, TransferID Transfer)'
-  print '  void ElectionEndedSwarm(Swarm swarm)'
-  print '  void DeliverTransfer(TransferData transfer)'
-  print '   GetSwarmList()'
+  print '  void makeTransfer(NodeID receiver, AccountBalanceType value)'
+  print '  AccountBalanceType getAccountBalance()'
+  print '  void ping()'
+  print '  void pingSwarm(NodeID leader, TransferID transfer)'
+  print '  void updateSwarmMembers(Swarm swarm)'
+  print '  void addToSwarm(Swarm swarm)'
+  print '  void delSwarm(Swarm swarm)'
+  print '  Swarm getSwarm(TransferID transfer)'
+  print '  bool electSwarmLeader(NodeID cadidate, TransferID Transfer)'
+  print '  void electionEndedSwarm(Swarm swarm)'
+  print '  void deliverTransfer(TransferData transfer)'
+  print '   getSwarmList()'
   print '  void startSwarmElection(TransferID transfer)'
-  print '   GetTransfers()'
+  print '   getTransfers()'
   print '  void stop()'
   print ''
   sys.exit(0)
@@ -89,77 +89,77 @@ protocol = TBinaryProtocol.TBinaryProtocol(transport)
 client = NodeService.Client(protocol)
 transport.open()
 
-if cmd == 'MakeTransfer':
+if cmd == 'makeTransfer':
   if len(args) != 2:
-    print 'MakeTransfer requires 2 args'
+    print 'makeTransfer requires 2 args'
     sys.exit(1)
-  pp.pprint(client.MakeTransfer(eval(args[0]),eval(args[1]),))
+  pp.pprint(client.makeTransfer(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'GetAccountBalance':
+elif cmd == 'getAccountBalance':
   if len(args) != 0:
-    print 'GetAccountBalance requires 0 args'
+    print 'getAccountBalance requires 0 args'
     sys.exit(1)
-  pp.pprint(client.GetAccountBalance())
+  pp.pprint(client.getAccountBalance())
 
-elif cmd == 'Ping':
+elif cmd == 'ping':
   if len(args) != 0:
-    print 'Ping requires 0 args'
+    print 'ping requires 0 args'
     sys.exit(1)
-  pp.pprint(client.Ping())
+  pp.pprint(client.ping())
 
-elif cmd == 'PingSwarm':
+elif cmd == 'pingSwarm':
   if len(args) != 2:
-    print 'PingSwarm requires 2 args'
+    print 'pingSwarm requires 2 args'
     sys.exit(1)
-  pp.pprint(client.PingSwarm(eval(args[0]),eval(args[1]),))
+  pp.pprint(client.pingSwarm(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'UpdateSwarmMembers':
+elif cmd == 'updateSwarmMembers':
   if len(args) != 1:
-    print 'UpdateSwarmMembers requires 1 args'
+    print 'updateSwarmMembers requires 1 args'
     sys.exit(1)
-  pp.pprint(client.UpdateSwarmMembers(eval(args[0]),))
+  pp.pprint(client.updateSwarmMembers(eval(args[0]),))
 
-elif cmd == 'AddToSwarm':
+elif cmd == 'addToSwarm':
   if len(args) != 1:
-    print 'AddToSwarm requires 1 args'
+    print 'addToSwarm requires 1 args'
     sys.exit(1)
-  pp.pprint(client.AddToSwarm(eval(args[0]),))
+  pp.pprint(client.addToSwarm(eval(args[0]),))
 
-elif cmd == 'DelSwarm':
+elif cmd == 'delSwarm':
   if len(args) != 1:
-    print 'DelSwarm requires 1 args'
+    print 'delSwarm requires 1 args'
     sys.exit(1)
-  pp.pprint(client.DelSwarm(eval(args[0]),))
+  pp.pprint(client.delSwarm(eval(args[0]),))
 
-elif cmd == 'GetSwarm':
+elif cmd == 'getSwarm':
   if len(args) != 1:
-    print 'GetSwarm requires 1 args'
+    print 'getSwarm requires 1 args'
     sys.exit(1)
-  pp.pprint(client.GetSwarm(eval(args[0]),))
+  pp.pprint(client.getSwarm(eval(args[0]),))
 
-elif cmd == 'ElectSwarmLeader':
+elif cmd == 'electSwarmLeader':
   if len(args) != 2:
-    print 'ElectSwarmLeader requires 2 args'
+    print 'electSwarmLeader requires 2 args'
     sys.exit(1)
-  pp.pprint(client.ElectSwarmLeader(eval(args[0]),eval(args[1]),))
+  pp.pprint(client.electSwarmLeader(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'ElectionEndedSwarm':
+elif cmd == 'electionEndedSwarm':
   if len(args) != 1:
-    print 'ElectionEndedSwarm requires 1 args'
+    print 'electionEndedSwarm requires 1 args'
     sys.exit(1)
-  pp.pprint(client.ElectionEndedSwarm(eval(args[0]),))
+  pp.pprint(client.electionEndedSwarm(eval(args[0]),))
 
-elif cmd == 'DeliverTransfer':
+elif cmd == 'deliverTransfer':
   if len(args) != 1:
-    print 'DeliverTransfer requires 1 args'
+    print 'deliverTransfer requires 1 args'
     sys.exit(1)
-  pp.pprint(client.DeliverTransfer(eval(args[0]),))
+  pp.pprint(client.deliverTransfer(eval(args[0]),))
 
-elif cmd == 'GetSwarmList':
+elif cmd == 'getSwarmList':
   if len(args) != 0:
-    print 'GetSwarmList requires 0 args'
+    print 'getSwarmList requires 0 args'
     sys.exit(1)
-  pp.pprint(client.GetSwarmList())
+  pp.pprint(client.getSwarmList())
 
 elif cmd == 'startSwarmElection':
   if len(args) != 1:
@@ -167,11 +167,11 @@ elif cmd == 'startSwarmElection':
     sys.exit(1)
   pp.pprint(client.startSwarmElection(eval(args[0]),))
 
-elif cmd == 'GetTransfers':
+elif cmd == 'getTransfers':
   if len(args) != 0:
-    print 'GetTransfers requires 0 args'
+    print 'getTransfers requires 0 args'
     sys.exit(1)
-  pp.pprint(client.GetTransfers())
+  pp.pprint(client.getTransfers())
 
 elif cmd == 'stop':
   if len(args) != 0:

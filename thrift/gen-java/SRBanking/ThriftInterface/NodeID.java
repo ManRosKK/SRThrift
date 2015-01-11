@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, java.io.Serializable, Cloneable, Comparable<NodeID> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("NodeID");
 
-  private static final org.apache.thrift.protocol.TField ADDRESS_FIELD_DESC = new org.apache.thrift.protocol.TField("address", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+  private static final org.apache.thrift.protocol.TField IP_FIELD_DESC = new org.apache.thrift.protocol.TField("IP", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField PORT_FIELD_DESC = new org.apache.thrift.protocol.TField("port", org.apache.thrift.protocol.TType.I32, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -44,12 +44,12 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
     schemes.put(TupleScheme.class, new NodeIDTupleSchemeFactory());
   }
 
-  public IPAddress address; // required
+  public String IP; // required
   public int port; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    ADDRESS((short)1, "address"),
+    IP((short)1, "IP"),
     PORT((short)2, "port");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -65,8 +65,8 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // ADDRESS
-          return ADDRESS;
+        case 1: // IP
+          return IP;
         case 2: // PORT
           return PORT;
         default:
@@ -114,8 +114,8 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.ADDRESS, new org.apache.thrift.meta_data.FieldMetaData("address", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, IPAddress.class)));
+    tmpMap.put(_Fields.IP, new org.apache.thrift.meta_data.FieldMetaData("IP", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , "IPType")));
     tmpMap.put(_Fields.PORT, new org.apache.thrift.meta_data.FieldMetaData("port", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -126,11 +126,11 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
   }
 
   public NodeID(
-    IPAddress address,
+    String IP,
     int port)
   {
     this();
-    this.address = address;
+    this.IP = IP;
     this.port = port;
     setPortIsSet(true);
   }
@@ -140,8 +140,8 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
    */
   public NodeID(NodeID other) {
     __isset_bitfield = other.__isset_bitfield;
-    if (other.isSetAddress()) {
-      this.address = new IPAddress(other.address);
+    if (other.isSetIP()) {
+      this.IP = other.IP;
     }
     this.port = other.port;
   }
@@ -152,32 +152,32 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
 
   @Override
   public void clear() {
-    this.address = null;
+    this.IP = null;
     setPortIsSet(false);
     this.port = 0;
   }
 
-  public IPAddress getAddress() {
-    return this.address;
+  public String getIP() {
+    return this.IP;
   }
 
-  public NodeID setAddress(IPAddress address) {
-    this.address = address;
+  public NodeID setIP(String IP) {
+    this.IP = IP;
     return this;
   }
 
-  public void unsetAddress() {
-    this.address = null;
+  public void unsetIP() {
+    this.IP = null;
   }
 
-  /** Returns true if field address is set (has been assigned a value) and false otherwise */
-  public boolean isSetAddress() {
-    return this.address != null;
+  /** Returns true if field IP is set (has been assigned a value) and false otherwise */
+  public boolean isSetIP() {
+    return this.IP != null;
   }
 
-  public void setAddressIsSet(boolean value) {
+  public void setIPIsSet(boolean value) {
     if (!value) {
-      this.address = null;
+      this.IP = null;
     }
   }
 
@@ -206,11 +206,11 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
-    case ADDRESS:
+    case IP:
       if (value == null) {
-        unsetAddress();
+        unsetIP();
       } else {
-        setAddress((IPAddress)value);
+        setIP((String)value);
       }
       break;
 
@@ -227,8 +227,8 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
-    case ADDRESS:
-      return getAddress();
+    case IP:
+      return getIP();
 
     case PORT:
       return Integer.valueOf(getPort());
@@ -244,8 +244,8 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
     }
 
     switch (field) {
-    case ADDRESS:
-      return isSetAddress();
+    case IP:
+      return isSetIP();
     case PORT:
       return isSetPort();
     }
@@ -265,12 +265,12 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
     if (that == null)
       return false;
 
-    boolean this_present_address = true && this.isSetAddress();
-    boolean that_present_address = true && that.isSetAddress();
-    if (this_present_address || that_present_address) {
-      if (!(this_present_address && that_present_address))
+    boolean this_present_IP = true && this.isSetIP();
+    boolean that_present_IP = true && that.isSetIP();
+    if (this_present_IP || that_present_IP) {
+      if (!(this_present_IP && that_present_IP))
         return false;
-      if (!this.address.equals(that.address))
+      if (!this.IP.equals(that.IP))
         return false;
     }
 
@@ -299,12 +299,12 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
 
     int lastComparison = 0;
 
-    lastComparison = Boolean.valueOf(isSetAddress()).compareTo(other.isSetAddress());
+    lastComparison = Boolean.valueOf(isSetIP()).compareTo(other.isSetIP());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetAddress()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.address, other.address);
+    if (isSetIP()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.IP, other.IP);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -339,11 +339,11 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
     StringBuilder sb = new StringBuilder("NodeID(");
     boolean first = true;
 
-    sb.append("address:");
-    if (this.address == null) {
+    sb.append("IP:");
+    if (this.IP == null) {
       sb.append("null");
     } else {
-      sb.append(this.address);
+      sb.append(this.IP);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -357,9 +357,6 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (address != null) {
-      address.validate();
-    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -398,11 +395,10 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
           break;
         }
         switch (schemeField.id) {
-          case 1: // ADDRESS
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.address = new IPAddress();
-              struct.address.read(iprot);
-              struct.setAddressIsSet(true);
+          case 1: // IP
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.IP = iprot.readString();
+              struct.setIPIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -430,9 +426,9 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.address != null) {
-        oprot.writeFieldBegin(ADDRESS_FIELD_DESC);
-        struct.address.write(oprot);
+      if (struct.IP != null) {
+        oprot.writeFieldBegin(IP_FIELD_DESC);
+        oprot.writeString(struct.IP);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldBegin(PORT_FIELD_DESC);
@@ -456,15 +452,15 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
     public void write(org.apache.thrift.protocol.TProtocol prot, NodeID struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetAddress()) {
+      if (struct.isSetIP()) {
         optionals.set(0);
       }
       if (struct.isSetPort()) {
         optionals.set(1);
       }
       oprot.writeBitSet(optionals, 2);
-      if (struct.isSetAddress()) {
-        struct.address.write(oprot);
+      if (struct.isSetIP()) {
+        oprot.writeString(struct.IP);
       }
       if (struct.isSetPort()) {
         oprot.writeI32(struct.port);
@@ -476,9 +472,8 @@ public class NodeID implements org.apache.thrift.TBase<NodeID, NodeID._Fields>, 
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
-        struct.address = new IPAddress();
-        struct.address.read(iprot);
-        struct.setAddressIsSet(true);
+        struct.IP = iprot.readString();
+        struct.setIPIsSet(true);
       }
       if (incoming.get(1)) {
         struct.port = iprot.readI32();

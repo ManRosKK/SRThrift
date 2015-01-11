@@ -1,2 +1,2 @@
-thrift-0.9.1.exe -gen py -o ..\ ..\interface.thrift
-python3 c:\Python33\Tools\Scripts\2to3.py ..\gen-py\ 
+rd /q /s ..\gen-py
+thrift-0.9.1.exe -gen py:utf8string,new_style -o ..\ ..\interface.thrift

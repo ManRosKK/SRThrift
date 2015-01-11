@@ -1,11 +1,6 @@
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -25,8 +20,8 @@ public class BasicTransfers {
     @BeforeMethod
     public void setUp() throws Exception {
         //arrange
-        Util.runserver("localhost",port,balance);
-        Util.runserver("localhost",port2,balance2);
+        Util.runServer("localhost", port, balance);
+        Util.runServer("localhost", port2, balance2);
     }
 
     @AfterMethod

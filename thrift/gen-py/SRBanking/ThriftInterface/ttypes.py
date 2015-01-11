@@ -3,7 +3,7 @@
 #
 # DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 #
-#  options string: py
+#  options string: py:utf8string,new_style
 #
 
 from thrift.Thrift import TType, TMessageType, TException, TApplicationException
@@ -17,19 +17,22 @@ except:
 
 
 
-class IPAddress:
+class NodeID(object):
   """
   Attributes:
    - IP
+   - port
   """
 
   thrift_spec = (
     None, # 0
     (1, TType.STRING, 'IP', None, None, ), # 1
+    (2, TType.I32, 'port', None, None, ), # 2
   )
 
-  def __init__(self, IP=None,):
+  def __init__(self, IP=None, port=None,):
     self.IP = IP
+    self.port = port
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -43,70 +46,6 @@ class IPAddress:
       if fid == 1:
         if ftype == TType.STRING:
           self.IP = iprot.readString();
-        else:
-          iprot.skip(ftype)
-      else:
-        iprot.skip(ftype)
-      iprot.readFieldEnd()
-    iprot.readStructEnd()
-
-  def write(self, oprot):
-    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
-      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
-      return
-    oprot.writeStructBegin('IPAddress')
-    if self.IP is not None:
-      oprot.writeFieldBegin('IP', TType.STRING, 1)
-      oprot.writeString(self.IP)
-      oprot.writeFieldEnd()
-    oprot.writeFieldStop()
-    oprot.writeStructEnd()
-
-  def validate(self):
-    return
-
-
-  def __repr__(self):
-    L = ['%s=%r' % (key, value)
-      for key, value in self.__dict__.iteritems()]
-    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
-
-  def __eq__(self, other):
-    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-
-  def __ne__(self, other):
-    return not (self == other)
-
-class NodeID:
-  """
-  Attributes:
-   - address
-   - port
-  """
-
-  thrift_spec = (
-    None, # 0
-    (1, TType.STRUCT, 'address', (IPAddress, IPAddress.thrift_spec), None, ), # 1
-    (2, TType.I32, 'port', None, None, ), # 2
-  )
-
-  def __init__(self, address=None, port=None,):
-    self.address = address
-    self.port = port
-
-  def read(self, iprot):
-    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
-      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
-      return
-    iprot.readStructBegin()
-    while True:
-      (fname, ftype, fid) = iprot.readFieldBegin()
-      if ftype == TType.STOP:
-        break
-      if fid == 1:
-        if ftype == TType.STRUCT:
-          self.address = IPAddress()
-          self.address.read(iprot)
         else:
           iprot.skip(ftype)
       elif fid == 2:
@@ -124,9 +63,9 @@ class NodeID:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('NodeID')
-    if self.address is not None:
-      oprot.writeFieldBegin('address', TType.STRUCT, 1)
-      self.address.write(oprot)
+    if self.IP is not None:
+      oprot.writeFieldBegin('IP', TType.STRING, 1)
+      oprot.writeString(self.IP)
       oprot.writeFieldEnd()
     if self.port is not None:
       oprot.writeFieldBegin('port', TType.I32, 2)
@@ -150,24 +89,21 @@ class NodeID:
   def __ne__(self, other):
     return not (self == other)
 
-class TransferID:
+class TransferID(object):
   """
   Attributes:
    - sender
-   - receiver
    - counter
   """
 
   thrift_spec = (
     None, # 0
     (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
-    (2, TType.STRUCT, 'receiver', (NodeID, NodeID.thrift_spec), None, ), # 2
-    (3, TType.I64, 'counter', None, None, ), # 3
+    (2, TType.I64, 'counter', None, None, ), # 2
   )
 
-  def __init__(self, sender=None, receiver=None, counter=None,):
+  def __init__(self, sender=None, counter=None,):
     self.sender = sender
-    self.receiver = receiver
     self.counter = counter
 
   def read(self, iprot):
@@ -186,12 +122,6 @@ class TransferID:
         else:
           iprot.skip(ftype)
       elif fid == 2:
-        if ftype == TType.STRUCT:
-          self.receiver = NodeID()
-          self.receiver.read(iprot)
-        else:
-          iprot.skip(ftype)
-      elif fid == 3:
         if ftype == TType.I64:
           self.counter = iprot.readI64();
         else:
@@ -210,12 +140,8 @@ class TransferID:
       oprot.writeFieldBegin('sender', TType.STRUCT, 1)
       self.sender.write(oprot)
       oprot.writeFieldEnd()
-    if self.receiver is not None:
-      oprot.writeFieldBegin('receiver', TType.STRUCT, 2)
-      self.receiver.write(oprot)
-      oprot.writeFieldEnd()
     if self.counter is not None:
-      oprot.writeFieldBegin('counter', TType.I64, 3)
+      oprot.writeFieldBegin('counter', TType.I64, 2)
       oprot.writeI64(self.counter)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -236,7 +162,7 @@ class TransferID:
   def __ne__(self, other):
     return not (self == other)
 
-class Swarm:
+class Swarm(object):
   """
   Attributes:
    - transfer
@@ -331,21 +257,24 @@ class Swarm:
   def __ne__(self, other):
     return not (self == other)
 
-class TransferData:
+class TransferData(object):
   """
   Attributes:
    - transferID
+   - receiver
    - value
   """
 
   thrift_spec = (
     None, # 0
     (1, TType.STRUCT, 'transferID', (TransferID, TransferID.thrift_spec), None, ), # 1
-    (2, TType.I64, 'value', None, None, ), # 2
+    (2, TType.STRUCT, 'receiver', (NodeID, NodeID.thrift_spec), None, ), # 2
+    (3, TType.I64, 'value', None, None, ), # 3
   )
 
-  def __init__(self, transferID=None, value=None,):
+  def __init__(self, transferID=None, receiver=None, value=None,):
     self.transferID = transferID
+    self.receiver = receiver
     self.value = value
 
   def read(self, iprot):
@@ -364,6 +293,12 @@ class TransferData:
         else:
           iprot.skip(ftype)
       elif fid == 2:
+        if ftype == TType.STRUCT:
+          self.receiver = NodeID()
+          self.receiver.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 3:
         if ftype == TType.I64:
           self.value = iprot.readI64();
         else:
@@ -382,8 +317,12 @@ class TransferData:
       oprot.writeFieldBegin('transferID', TType.STRUCT, 1)
       self.transferID.write(oprot)
       oprot.writeFieldEnd()
+    if self.receiver is not None:
+      oprot.writeFieldBegin('receiver', TType.STRUCT, 2)
+      self.receiver.write(oprot)
+      oprot.writeFieldEnd()
     if self.value is not None:
-      oprot.writeFieldBegin('value', TType.I64, 2)
+      oprot.writeFieldBegin('value', TType.I64, 3)
       oprot.writeI64(self.value)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()

@@ -1,12 +1,5 @@
-import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -33,22 +26,16 @@ public class ServerPingAndKillTest {
         //run server
         int port1 = 9080;
         int port2 = 9090;
-        Util.runserver(port1);
-        Util.runserver(port2);
+        Util.runServer(port1);
+        Util.runServer(port2);
 
         //ping server
         ThriftTestClient.pingserver(port1);
         ThriftTestClient.pingserver(port2);
 
-        //kill server - should fail with transport
-        try{
-            ThriftTestClient.killserver(port1);
-        }
-        catch (TTransportException e){};
-        try{
-            ThriftTestClient.killserver(port2);
-        }
-        catch (TTransportException e){};
+        Util.killServerNoException(port1);
+        Util.killServerNoException(port2);
+
 
         try{
             //ping again - ping should throw an exception
@@ -76,16 +63,13 @@ public class ServerPingAndKillTest {
     public void testPingAndKill9080() throws Exception {
         //run server
         int port = 9080;
-        Util.runserver(port);
+        Util.runServer(port);
 
         //ping server
         ThriftTestClient.pingserver(port);
 
         //kill server - should fail with transport
-        try{
-            ThriftTestClient.killserver(port);
-        }
-        catch (TTransportException e){};
+        Util.killServerNoException(port);
 
         try{
             //ping again - ping should throw an exception
@@ -102,19 +86,13 @@ public class ServerPingAndKillTest {
     public void testPingAndKill9090() throws Exception {
         //run server
         int port = 9090;
-        Util.runserver(port);
+        Util.runServer(port);
 
         //ping server
         ThriftTestClient.pingserver(port);
 
         //kill server - should fail with transport
-        try{
-            ThriftTestClient.killserver(port);
-        }
-        catch (TTransportException e)
-        {
-
-        }
+        Util.killServerNoException(port);
 
         try{
             //ping again - should fail

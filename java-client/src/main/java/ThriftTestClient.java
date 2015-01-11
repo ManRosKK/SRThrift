@@ -5,8 +5,14 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.ini4j.Ini;
+import org.ini4j.IniPreferences;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.prefs.Preferences;
 
 /**
  * Created by sven on 2015-01-09.
@@ -14,7 +20,29 @@ import org.slf4j.LoggerFactory;
 public class ThriftTestClient {
 
     private static Logger log = LoggerFactory.getLogger(ThriftTestClient.class);
+    public static Preferences prefs;
+    static {
+        //String filename = "C:\\currentProjects\\SR\\SRThrift\\java-client\\src\\main\\resources\\localSystem.ini";
+        String filename = "localSystem.ini";
+        try {
+            prefs = new IniPreferences(new Ini(new File(filename)));
+        } catch (IOException e) {
+            System.out.println("Preferences load failure");
+            System.exit(1);
+        }
+    }
 
+    public static void main(String[] args)
+    {
+        try {
+            pingserver(9090);
+            System.out.println(getBalance(9090));
+            makeTransfer("127.0.0.1",9090,"127.0.0.1",9090,20);
+            killserver(9090);
+        } catch (TException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void pingserver(int port) throws TException {
         TTransport transport;
@@ -28,7 +56,7 @@ public class ThriftTestClient {
         log.info("About to ping server");
 
         try {
-            client.Ping();
+            client.ping();
         } catch (TException e) {
             e.printStackTrace();
             log.error("Connected but unable to ping??");
@@ -67,7 +95,7 @@ public class ThriftTestClient {
         TProtocol protocol = new TBinaryProtocol(transport);
         NodeService.Client client = new NodeService.Client(protocol);
 
-        long balance = client.GetAccountBalance();
+        long balance = client.getAccountBalance();
 
         transport.close();
 
@@ -85,11 +113,9 @@ public class ThriftTestClient {
 
         NodeID receiver = new NodeID();
         receiver.setPort(portR);
-        IPAddress ipAddressR = new IPAddress();
-        ipAddressR.setIP(IPR);
-        receiver.setAddress(ipAddressR);
+        receiver.setIP(IPR);
 
-        client.MakeTransfer(receiver,value);
+        client.makeTransfer(receiver,value);
 
         transport.close();
     }

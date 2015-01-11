@@ -3,7 +3,7 @@
 #
 # DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 #
-#  options string: py
+#  options string: py:utf8string,new_style
 #
 
 from thrift.Thrift import TType, TMessageType, TException, TApplicationException
@@ -17,7 +17,7 @@ except:
   fastbinary = None
 
 
-class Iface:
+class Iface(object):
   def makeTransfer(self, receiver, value):
     """
 
@@ -28,7 +28,7 @@ class Iface:
     """
     pass
 
-  def GetAccountBalance(self):
+  def getAccountBalance(self):
     """
 
     """
@@ -170,33 +170,33 @@ class Client(Iface):
     self._iprot.readMessageEnd()
     return
 
-  def GetAccountBalance(self):
+  def getAccountBalance(self):
     """
 
     """
-    self.send_GetAccountBalance()
-    return self.recv_GetAccountBalance()
+    self.send_getAccountBalance()
+    return self.recv_getAccountBalance()
 
-  def send_GetAccountBalance(self):
-    self._oprot.writeMessageBegin('GetAccountBalance', TMessageType.CALL, self._seqid)
-    args = GetAccountBalance_args()
+  def send_getAccountBalance(self):
+    self._oprot.writeMessageBegin('getAccountBalance', TMessageType.CALL, self._seqid)
+    args = getAccountBalance_args()
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_GetAccountBalance(self):
+  def recv_getAccountBalance(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = GetAccountBalance_result()
+    result = getAccountBalance_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetAccountBalance failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "getAccountBalance failed: unknown result");
 
   def ping(self):
     """
@@ -599,7 +599,7 @@ class Processor(Iface, TProcessor):
     self._handler = handler
     self._processMap = {}
     self._processMap["makeTransfer"] = Processor.process_makeTransfer
-    self._processMap["GetAccountBalance"] = Processor.process_GetAccountBalance
+    self._processMap["getAccountBalance"] = Processor.process_getAccountBalance
     self._processMap["ping"] = Processor.process_ping
     self._processMap["pingSwarm"] = Processor.process_pingSwarm
     self._processMap["updateSwarmMembers"] = Processor.process_updateSwarmMembers
@@ -640,13 +640,13 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_GetAccountBalance(self, seqid, iprot, oprot):
-    args = GetAccountBalance_args()
+  def process_getAccountBalance(self, seqid, iprot, oprot):
+    args = getAccountBalance_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = GetAccountBalance_result()
-    result.success = self._handler.GetAccountBalance()
-    oprot.writeMessageBegin("GetAccountBalance", TMessageType.REPLY, seqid)
+    result = getAccountBalance_result()
+    result.success = self._handler.getAccountBalance()
+    oprot.writeMessageBegin("getAccountBalance", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -825,7 +825,7 @@ class Processor(Iface, TProcessor):
 
 # HELPER FUNCTIONS AND STRUCTURES
 
-class makeTransfer_args:
+class makeTransfer_args(object):
   """
   Attributes:
    - receiver
@@ -898,7 +898,7 @@ class makeTransfer_args:
   def __ne__(self, other):
     return not (self == other)
 
-class makeTransfer_result:
+class makeTransfer_result(object):
 
   thrift_spec = (
   )
@@ -940,7 +940,7 @@ class makeTransfer_result:
   def __ne__(self, other):
     return not (self == other)
 
-class GetAccountBalance_args:
+class getAccountBalance_args(object):
 
   thrift_spec = (
   )
@@ -963,7 +963,7 @@ class GetAccountBalance_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetAccountBalance_args')
+    oprot.writeStructBegin('getAccountBalance_args')
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 
@@ -982,7 +982,7 @@ class GetAccountBalance_args:
   def __ne__(self, other):
     return not (self == other)
 
-class GetAccountBalance_result:
+class getAccountBalance_result(object):
   """
   Attributes:
    - success
@@ -1018,7 +1018,7 @@ class GetAccountBalance_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetAccountBalance_result')
+    oprot.writeStructBegin('getAccountBalance_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.I64, 0)
       oprot.writeI64(self.success)
@@ -1041,7 +1041,7 @@ class GetAccountBalance_result:
   def __ne__(self, other):
     return not (self == other)
 
-class ping_args:
+class ping_args(object):
 
   thrift_spec = (
   )
@@ -1083,7 +1083,7 @@ class ping_args:
   def __ne__(self, other):
     return not (self == other)
 
-class ping_result:
+class ping_result(object):
 
   thrift_spec = (
   )
@@ -1125,7 +1125,7 @@ class ping_result:
   def __ne__(self, other):
     return not (self == other)
 
-class pingSwarm_args:
+class pingSwarm_args(object):
   """
   Attributes:
    - leader
@@ -1199,7 +1199,7 @@ class pingSwarm_args:
   def __ne__(self, other):
     return not (self == other)
 
-class pingSwarm_result:
+class pingSwarm_result(object):
   """
   Attributes:
    - exc
@@ -1260,7 +1260,7 @@ class pingSwarm_result:
   def __ne__(self, other):
     return not (self == other)
 
-class updateSwarmMembers_args:
+class updateSwarmMembers_args(object):
   """
   Attributes:
    - swarm
@@ -1321,7 +1321,7 @@ class updateSwarmMembers_args:
   def __ne__(self, other):
     return not (self == other)
 
-class updateSwarmMembers_result:
+class updateSwarmMembers_result(object):
   """
   Attributes:
    - exc
@@ -1395,7 +1395,7 @@ class updateSwarmMembers_result:
   def __ne__(self, other):
     return not (self == other)
 
-class addToSwarm_args:
+class addToSwarm_args(object):
   """
   Attributes:
    - swarm
@@ -1456,7 +1456,7 @@ class addToSwarm_args:
   def __ne__(self, other):
     return not (self == other)
 
-class addToSwarm_result:
+class addToSwarm_result(object):
   """
   Attributes:
    - exc
@@ -1517,7 +1517,7 @@ class addToSwarm_result:
   def __ne__(self, other):
     return not (self == other)
 
-class delSwarm_args:
+class delSwarm_args(object):
   """
   Attributes:
    - swarm
@@ -1578,7 +1578,7 @@ class delSwarm_args:
   def __ne__(self, other):
     return not (self == other)
 
-class delSwarm_result:
+class delSwarm_result(object):
   """
   Attributes:
    - exc
@@ -1652,7 +1652,7 @@ class delSwarm_result:
   def __ne__(self, other):
     return not (self == other)
 
-class getSwarm_args:
+class getSwarm_args(object):
   """
   Attributes:
    - transfer
@@ -1713,7 +1713,7 @@ class getSwarm_args:
   def __ne__(self, other):
     return not (self == other)
 
-class getSwarm_result:
+class getSwarm_result(object):
   """
   Attributes:
    - success
@@ -1786,7 +1786,7 @@ class getSwarm_result:
   def __ne__(self, other):
     return not (self == other)
 
-class electSwarmLeader_args:
+class electSwarmLeader_args(object):
   """
   Attributes:
    - cadidate
@@ -1860,7 +1860,7 @@ class electSwarmLeader_args:
   def __ne__(self, other):
     return not (self == other)
 
-class electSwarmLeader_result:
+class electSwarmLeader_result(object):
   """
   Attributes:
    - success
@@ -1932,7 +1932,7 @@ class electSwarmLeader_result:
   def __ne__(self, other):
     return not (self == other)
 
-class electionEndedSwarm_args:
+class electionEndedSwarm_args(object):
   """
   Attributes:
    - swarm
@@ -1993,7 +1993,7 @@ class electionEndedSwarm_args:
   def __ne__(self, other):
     return not (self == other)
 
-class electionEndedSwarm_result:
+class electionEndedSwarm_result(object):
   """
   Attributes:
    - exc
@@ -2054,7 +2054,7 @@ class electionEndedSwarm_result:
   def __ne__(self, other):
     return not (self == other)
 
-class deliverTransfer_args:
+class deliverTransfer_args(object):
   """
   Attributes:
    - transfer
@@ -2115,7 +2115,7 @@ class deliverTransfer_args:
   def __ne__(self, other):
     return not (self == other)
 
-class deliverTransfer_result:
+class deliverTransfer_result(object):
 
   thrift_spec = (
   )
@@ -2157,7 +2157,7 @@ class deliverTransfer_result:
   def __ne__(self, other):
     return not (self == other)
 
-class getSwarmList_args:
+class getSwarmList_args(object):
 
   thrift_spec = (
   )
@@ -2199,7 +2199,7 @@ class getSwarmList_args:
   def __ne__(self, other):
     return not (self == other)
 
-class getSwarmList_result:
+class getSwarmList_result(object):
   """
   Attributes:
    - success
@@ -2267,7 +2267,7 @@ class getSwarmList_result:
   def __ne__(self, other):
     return not (self == other)
 
-class startSwarmElection_args:
+class startSwarmElection_args(object):
   """
   Attributes:
    - transfer
@@ -2328,7 +2328,7 @@ class startSwarmElection_args:
   def __ne__(self, other):
     return not (self == other)
 
-class startSwarmElection_result:
+class startSwarmElection_result(object):
   """
   Attributes:
    - exc
@@ -2389,7 +2389,7 @@ class startSwarmElection_result:
   def __ne__(self, other):
     return not (self == other)
 
-class getTransfers_args:
+class getTransfers_args(object):
 
   thrift_spec = (
   )
@@ -2431,7 +2431,7 @@ class getTransfers_args:
   def __ne__(self, other):
     return not (self == other)
 
-class getTransfers_result:
+class getTransfers_result(object):
   """
   Attributes:
    - success
@@ -2499,7 +2499,7 @@ class getTransfers_result:
   def __ne__(self, other):
     return not (self == other)
 
-class stop_args:
+class stop_args(object):
 
   thrift_spec = (
   )
@@ -2541,7 +2541,7 @@ class stop_args:
   def __ne__(self, other):
     return not (self == other)
 
-class stop_result:
+class stop_result(object):
 
   thrift_spec = (
   )
