@@ -9,7 +9,7 @@ import static org.testng.Assert.fail;
  */
 public class ServerPingAndKillTest {
 
-    @Test
+   @Test
     public void test10Servers() throws Exception
     {
         int lowserver = 9080;

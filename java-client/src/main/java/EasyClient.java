@@ -57,10 +57,10 @@ public class EasyClient {
         long balance2 = 502;
         String IPReceiver = "localhost";
         int portReceiver = 13467;
-        String configFile = "config\\default.ini";
+        String configFile = "config\\testSwarmBasics.ini";
         try {
             int value = 5;
-            EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+            EasyClient.makeTransfer(IP, port, IP2, portReceiver, value);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {

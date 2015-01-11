@@ -8,6 +8,7 @@ from SRBanking.ThriftInterface.ttypes import TransferData, NodeID, TransferID,\
     Swarm
 from SRBanking.ThriftInterface import NodeService
 from ConfigParser import ConfigParser
+import time
 logging.basicConfig()
 sys.path.append('../thrift/gen-py/')
 
@@ -22,17 +23,19 @@ class AutoClient:
     def __init__(self, address,port):
         self.address = address
         self.port = port
+        #print("init ",self.address," ",port)
 
     def __enter__(self):
+        #print("entering ",self.address,self.port)
         transport = TSocket.TSocket(self.address, self.port)
         self.transport = TTransport.TBufferedTransport(transport)
+        transport.open()
         protocol = TBinaryProtocol.TBinaryProtocol(transport)
         self.client = NodeService.Client(protocol)
-
-    def getClient(self):
-        return self.client;
+        return self.client
 
     def __exit__(self, type, value, tb):
+        #print("exit ",self.address,self.port)
         if (self.transport != None):
             self.transport.close()
 
@@ -75,49 +78,48 @@ class ServerHandler:
         port = receiver.port
         self.accountBalance -= value
         try:
-            with AutoClient(address,port) as aclient:
-                client = aclient.getClient()
-                #make transfer
+            with AutoClient(address,port) as client:
                 client.deliverTransfer(transferData);
         except:
+            print(sys.exc_info()[0])
             #receiver offline
             self.makeSwarm(transferData)
-        print("transfer complete")
+        print("makeTransfer: return")
 
     def makeSwarm(self,transferData):
         print("making swarm")
         #scan for ppl
         neighbours = self.getNeighbours()
-        print(neighbours)
+        print("neighbours",neighbours)
 
         #choose first n-1 neighbours
         how_much = self.getSwarmSize() - 1
-        print(how_much)
         if(len(neighbours) >= how_much):
             print("enough to swarm")
-            swarm = Swarm(transfer=transferData.transferID, leader=self.nodeID, members=neighbours[0:how_much])
+            swarm = Swarm(transfer=transferData.transferID, leader=self.nodeID, members=neighbours[0:how_much]+[self.nodeID])
             self.mySwarms += [swarm]
             for i in xrange(how_much):
-                with AutoClient(neighbours[i].IP,neighbours[i].port) as aclient:
-                    client = aclient.getClient()
-                    client.addSwarm(swarm)
+                with AutoClient(neighbours[i].IP,neighbours[i].port) as client:
+                    client.addToSwarm(swarm,transferData)
+        else:
+            print("not enough to swarm")
+        print("makeSwarm exit: mySwarm is now: ",self.mySwarms)
 
     def getNeighbours(self):
         nlist = []
         for ip in self.getIPList():
             for port in self.getPortList():
                 try:
-                    with AutoClient(ip,port) as aclient:
-                        print("checking ",ip,port)
-                        client = aclient.getClient()
+                    if (ip==self.nodeID.IP and port==self.nodeID.port):
+                        continue
+                    with AutoClient(ip,port) as client:
                         client.ping()
-                        print("It's ok!",ip,port)
                         nlist += [NodeID(IP=ip, port=port)]
                 except:
                     pass
         return nlist
 
-    def addSwarm(self,swarm,transferData):
+    def addToSwarm(self,swarm,transferData):
         self.mySwarms += [swarm]
         self.pendingTransfers += [transferData]
 
@@ -129,7 +131,7 @@ class ServerHandler:
         return get.split(',')
     def getPortList(self):
         get = config.get("config", "port_list")
-        return get.split(',')
+        return [int(x) for x in get.split(',')]
     def getSwarmSize(self):
         return config.getint("config", "swarm_size")
 
@@ -156,6 +158,8 @@ if __name__ == "__main__":
     pfactory = TBinaryProtocol.TBinaryProtocolFactory()
     server = TServer.TThreadPoolServer(processor, transport, tfactory, pfactory)
     print('Starting the server...')
+    #sys.stdout.flush()
+    time.sleep(0.1);
     server.serve()
     print('done.')
 

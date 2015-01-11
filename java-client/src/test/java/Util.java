@@ -2,9 +2,9 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
+import org.testng.Reporter;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.Preferences;
@@ -50,11 +50,14 @@ public class Util {
     }
 
 
-    public static void runServer(String IP, int port, long balance, String configFile, String language) throws IOException {
+    public static void runServer(String IP, final int port, long balance, String configFile, String language) throws IOException {
         String execString = shellStrings.get(language) + " " + IP + " " + port + " " +
                 balance + " " + (new File(configFile).getAbsolutePath());
-        Process proc = Runtime.getRuntime().exec(execString);
         System.out.println(execString);
+        System.out.flush();
+        Process proc = Runtime.getRuntime ().exec(execString);
+
+        processMap.put(port,proc);
     }
 
     public static void runServer(String IP, int port, long balance, String configFile) throws IOException {
@@ -112,6 +115,11 @@ public class Util {
     public static void killServerNoException(String IP, int port)  {
             try{
                 EasyClient.killserver(IP,port);
+                System.out.println("Error" + port + ":");
+                System.out.println(convertStreamToString(processMap.get(port).getErrorStream()));
+                System.out.println("StdOut" + port + ": ");
+                System.out.println(convertStreamToString(processMap.get(port).getInputStream()));
+                System.out.flush();
             }
             catch (TTransportException e){
 

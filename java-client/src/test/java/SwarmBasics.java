@@ -1,4 +1,5 @@
 import SRBanking.ThriftInterface.Swarm;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,15 +13,15 @@ import static org.testng.Assert.assertEquals;
  */
 public class SwarmBasics {
 
-    String IP = "localhost";
+    String IP = "127.0.0.1";
     int port = 9080;
     long balance = 501;
-    String IP2 = "localhost";
+    String IP2 = "127.0.0.1";
     int port2 = 9081;
     long balance2 = 502;
-    String IPReceiver = "localhost";
+    String IPReceiver = "127.0.0.1";
     int portReceiver = 13467;
-    String configFile = "config\\default.ini";
+    String configFile = "config\\testSwarmBasics.ini";
 
 
     @BeforeMethod
@@ -34,6 +35,7 @@ public class SwarmBasics {
     public void tearDown() throws Exception {
         Util.killServerNoException(IP,port);
         Util.killServerNoException(IP2,port2);
+        Reporter.log("asdasdasdasdasd: ");
     }
 
     @Test
@@ -42,9 +44,9 @@ public class SwarmBasics {
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         Thread.sleep(500);
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
-        assertEquals(1,swarmList.size());
-        assertEquals(2,swarmList.get(0).getMembersSize());
-        assertEquals(port,swarmList.get(0).getLeader().getPort());
+        assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+        assertEquals(swarmList.get(0).getLeader().getPort(),port);
         assert((port == swarmList.get(0).getMembers().get(0).getPort())
                 || port == swarmList.get(0).getMembers().get(1).getPort());
         assert((port2 == swarmList.get(0).getMembers().get(0).getPort())
