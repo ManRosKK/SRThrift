@@ -1,6 +1,10 @@
+import SRBanking.ThriftInterface.NotEnoughMoney;
+import SRBanking.ThriftInterface.TransferData;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -51,6 +55,12 @@ public class BasicTransfers {
         assertEquals(balance2Read, balance2+value);
     }
 
+    @Test(expectedExceptions = NotEnoughMoney.class)
+    public void TransferWithoutMoney() throws Exception {
+        long value = 99999999;
+        EasyClient.makeTransfer(IP, port, IP2, port2, value);
+    }
+
     @Test
     public void BasicTransferAndReverseTransfer() throws Exception {
         long value = 35;
@@ -72,5 +82,23 @@ public class BasicTransfers {
         long balanceRead = EasyClient.getBalance(IP,port);
         //assert
         assertEquals(balanceRead, balance);
+    }
+
+    @Test
+    public void TransferHistory() throws Exception {
+        long value = 30;
+        EasyClient.makeTransfer(IP, port, IP2, port2, value);
+
+        List<TransferData> history = EasyClient.getHistory(IP, port);
+        List<TransferData> history2 = EasyClient.getHistory(IP2, port2);
+
+        //assert
+        assertEquals(history.size(), 0);
+        assertEquals(history2.size(), 1);
+        assertEquals(history2.get(0).getValue(), value);
+        assertEquals(history2.get(0).getTransferID().getSender().getPort(), port);
+        assertEquals(history2.get(0).getTransferID().getSender().getIP(), IP);
+        assertEquals(history2.get(0).getReceiver().getPort(), port2);
+        assertEquals(history2.get(0).getReceiver().getIP(), IP2);
     }
 }

@@ -169,6 +169,10 @@ class Client(Iface):
     result = makeTransfer_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
+    if result.exc is not None:
+      raise result.exc
+    if result.exc2 is not None:
+      raise result.exc2
     return
 
   def getAccountBalance(self):
@@ -637,7 +641,12 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = makeTransfer_result()
-    self._handler.makeTransfer(args.receiver, args.value)
+    try:
+      self._handler.makeTransfer(args.receiver, args.value)
+    except NotEnoughMembersToMakeTransfer, exc:
+      result.exc = exc
+    except NotEnoughMoney, exc2:
+      result.exc2 = exc2
     oprot.writeMessageBegin("makeTransfer", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -902,9 +911,21 @@ class makeTransfer_args(object):
     return not (self == other)
 
 class makeTransfer_result(object):
+  """
+  Attributes:
+   - exc
+   - exc2
+  """
 
   thrift_spec = (
+    None, # 0
+    (1, TType.STRUCT, 'exc', (NotEnoughMembersToMakeTransfer, NotEnoughMembersToMakeTransfer.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'exc2', (NotEnoughMoney, NotEnoughMoney.thrift_spec), None, ), # 2
   )
+
+  def __init__(self, exc=None, exc2=None,):
+    self.exc = exc
+    self.exc2 = exc2
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -915,6 +936,18 @@ class makeTransfer_result(object):
       (fname, ftype, fid) = iprot.readFieldBegin()
       if ftype == TType.STOP:
         break
+      if fid == 1:
+        if ftype == TType.STRUCT:
+          self.exc = NotEnoughMembersToMakeTransfer()
+          self.exc.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.STRUCT:
+          self.exc2 = NotEnoughMoney()
+          self.exc2.read(iprot)
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -925,6 +958,14 @@ class makeTransfer_result(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('makeTransfer_result')
+    if self.exc is not None:
+      oprot.writeFieldBegin('exc', TType.STRUCT, 1)
+      self.exc.write(oprot)
+      oprot.writeFieldEnd()
+    if self.exc2 is not None:
+      oprot.writeFieldBegin('exc2', TType.STRUCT, 2)
+      self.exc2.write(oprot)
+      oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 

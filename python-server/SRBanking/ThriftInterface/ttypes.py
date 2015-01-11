@@ -420,6 +420,156 @@ class NotSwarmMemeber(TException):
   def __ne__(self, other):
     return not (self == other)
 
+class NotEnoughMembersToMakeTransfer(TException):
+  """
+  Attributes:
+   - membersAvailable
+   - membersRequested
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I64, 'membersAvailable', None, None, ), # 1
+    (2, TType.I64, 'membersRequested', None, None, ), # 2
+  )
+
+  def __init__(self, membersAvailable=None, membersRequested=None,):
+    self.membersAvailable = membersAvailable
+    self.membersRequested = membersRequested
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I64:
+          self.membersAvailable = iprot.readI64();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.I64:
+          self.membersRequested = iprot.readI64();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('NotEnoughMembersToMakeTransfer')
+    if self.membersAvailable is not None:
+      oprot.writeFieldBegin('membersAvailable', TType.I64, 1)
+      oprot.writeI64(self.membersAvailable)
+      oprot.writeFieldEnd()
+    if self.membersRequested is not None:
+      oprot.writeFieldBegin('membersRequested', TType.I64, 2)
+      oprot.writeI64(self.membersRequested)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __str__(self):
+    return repr(self)
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class NotEnoughMoney(TException):
+  """
+  Attributes:
+   - moneyAvailable
+   - moneyRequested
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I64, 'moneyAvailable', None, None, ), # 1
+    (2, TType.I64, 'moneyRequested', None, None, ), # 2
+  )
+
+  def __init__(self, moneyAvailable=None, moneyRequested=None,):
+    self.moneyAvailable = moneyAvailable
+    self.moneyRequested = moneyRequested
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I64:
+          self.moneyAvailable = iprot.readI64();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.I64:
+          self.moneyRequested = iprot.readI64();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('NotEnoughMoney')
+    if self.moneyAvailable is not None:
+      oprot.writeFieldBegin('moneyAvailable', TType.I64, 1)
+      oprot.writeI64(self.moneyAvailable)
+      oprot.writeFieldEnd()
+    if self.moneyRequested is not None:
+      oprot.writeFieldBegin('moneyRequested', TType.I64, 2)
+      oprot.writeI64(self.moneyRequested)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __str__(self):
+    return repr(self)
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
 class WrongSwarmLeader(TException):
   """
   Attributes:

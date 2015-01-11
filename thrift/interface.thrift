@@ -31,6 +31,14 @@ exception  NotSwarmMemeber{
     1: NodeID receiverNode,
     2: TransferID transfer
 }
+exception NotEnoughMembersToMakeTransfer{
+    1: i64 membersAvailable,
+    2: i64 membersRequested
+}
+exception NotEnoughMoney{
+    1: AccountBalanceType moneyAvailable,
+    2: AccountBalanceType moneyRequested
+}
 exception  WrongSwarmLeader{
     1: NodeID receiverNode,
     2: NodeID leader,
@@ -50,7 +58,7 @@ service NodeService
     /**
     *
     */ 
-    void makeTransfer(1: NodeID receiver,2: AccountBalanceType value),
+    void makeTransfer(1: NodeID receiver,2: AccountBalanceType value) throws (1: NotEnoughMembersToMakeTransfer exc, 2: NotEnoughMoney exc2),
 
     /**
     *

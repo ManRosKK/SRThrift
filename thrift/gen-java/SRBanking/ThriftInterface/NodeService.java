@@ -42,7 +42,7 @@ public class NodeService {
      * @param receiver
      * @param value
      */
-    public void makeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException;
+    public void makeTransfer(NodeID receiver, long value) throws NotEnoughMembersToMakeTransfer, NotEnoughMoney, org.apache.thrift.TException;
 
     /**
      * 
@@ -73,8 +73,9 @@ public class NodeService {
      * 
      * 
      * @param swarm
+     * @param transferData
      */
-    public void addToSwarm(Swarm swarm) throws AlreadySwarmMemeber, org.apache.thrift.TException;
+    public void addToSwarm(Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, org.apache.thrift.TException;
 
     /**
      * 
@@ -134,7 +135,7 @@ public class NodeService {
 
     public void updateSwarmMembers(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void addToSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void addToSwarm(Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void delSwarm(TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -176,7 +177,7 @@ public class NodeService {
       super(iprot, oprot);
     }
 
-    public void makeTransfer(NodeID receiver, long value) throws org.apache.thrift.TException
+    public void makeTransfer(NodeID receiver, long value) throws NotEnoughMembersToMakeTransfer, NotEnoughMoney, org.apache.thrift.TException
     {
       send_makeTransfer(receiver, value);
       recv_makeTransfer();
@@ -190,10 +191,16 @@ public class NodeService {
       sendBase("makeTransfer", args);
     }
 
-    public void recv_makeTransfer() throws org.apache.thrift.TException
+    public void recv_makeTransfer() throws NotEnoughMembersToMakeTransfer, NotEnoughMoney, org.apache.thrift.TException
     {
       makeTransfer_result result = new makeTransfer_result();
       receiveBase(result, "makeTransfer");
+      if (result.exc != null) {
+        throw result.exc;
+      }
+      if (result.exc2 != null) {
+        throw result.exc2;
+      }
       return;
     }
 
@@ -288,16 +295,17 @@ public class NodeService {
       return;
     }
 
-    public void addToSwarm(Swarm swarm) throws AlreadySwarmMemeber, org.apache.thrift.TException
+    public void addToSwarm(Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, org.apache.thrift.TException
     {
-      send_addToSwarm(swarm);
+      send_addToSwarm(swarm, transferData);
       recv_addToSwarm();
     }
 
-    public void send_addToSwarm(Swarm swarm) throws org.apache.thrift.TException
+    public void send_addToSwarm(Swarm swarm, TransferData transferData) throws org.apache.thrift.TException
     {
       addToSwarm_args args = new addToSwarm_args();
       args.setSwarm(swarm);
+      args.setTransferData(transferData);
       sendBase("addToSwarm", args);
     }
 
@@ -562,7 +570,7 @@ public class NodeService {
         prot.writeMessageEnd();
       }
 
-      public void getResult() throws org.apache.thrift.TException {
+      public void getResult() throws NotEnoughMembersToMakeTransfer, NotEnoughMoney, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
@@ -697,24 +705,27 @@ public class NodeService {
       }
     }
 
-    public void addToSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void addToSwarm(Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      addToSwarm_call method_call = new addToSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      addToSwarm_call method_call = new addToSwarm_call(swarm, transferData, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class addToSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
       private Swarm swarm;
-      public addToSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private TransferData transferData;
+      public addToSwarm_call(Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.swarm = swarm;
+        this.transferData = transferData;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("addToSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
         addToSwarm_args args = new addToSwarm_args();
         args.setSwarm(swarm);
+        args.setTransferData(transferData);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -1057,7 +1068,13 @@ public class NodeService {
 
       public makeTransfer_result getResult(I iface, makeTransfer_args args) throws org.apache.thrift.TException {
         makeTransfer_result result = new makeTransfer_result();
-        iface.makeTransfer(args.receiver, args.value);
+        try {
+          iface.makeTransfer(args.receiver, args.value);
+        } catch (NotEnoughMembersToMakeTransfer exc) {
+          result.exc = exc;
+        } catch (NotEnoughMoney exc2) {
+          result.exc2 = exc2;
+        }
         return result;
       }
     }
@@ -1169,7 +1186,7 @@ public class NodeService {
       public addToSwarm_result getResult(I iface, addToSwarm_args args) throws org.apache.thrift.TException {
         addToSwarm_result result = new addToSwarm_result();
         try {
-          iface.addToSwarm(args.swarm);
+          iface.addToSwarm(args.swarm, args.transferData);
         } catch (AlreadySwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1437,6 +1454,17 @@ public class NodeService {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
             makeTransfer_result result = new makeTransfer_result();
+            if (e instanceof NotEnoughMembersToMakeTransfer) {
+                        result.exc = (NotEnoughMembersToMakeTransfer) e;
+                        result.setExcIsSet(true);
+                        msg = result;
+            }
+            else             if (e instanceof NotEnoughMoney) {
+                        result.exc2 = (NotEnoughMoney) e;
+                        result.setExc2IsSet(true);
+                        msg = result;
+            }
+             else 
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -1732,7 +1760,7 @@ public class NodeService {
       }
 
       public void start(I iface, addToSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.addToSwarm(args.swarm,resultHandler);
+        iface.addToSwarm(args.swarm, args.transferData,resultHandler);
       }
     }
 
@@ -2688,6 +2716,8 @@ public class NodeService {
   public static class makeTransfer_result implements org.apache.thrift.TBase<makeTransfer_result, makeTransfer_result._Fields>, java.io.Serializable, Cloneable, Comparable<makeTransfer_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("makeTransfer_result");
 
+    private static final org.apache.thrift.protocol.TField EXC_FIELD_DESC = new org.apache.thrift.protocol.TField("exc", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField EXC2_FIELD_DESC = new org.apache.thrift.protocol.TField("exc2", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -2695,10 +2725,13 @@ public class NodeService {
       schemes.put(TupleScheme.class, new makeTransfer_resultTupleSchemeFactory());
     }
 
+    public NotEnoughMembersToMakeTransfer exc; // required
+    public NotEnoughMoney exc2; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      EXC((short)1, "exc"),
+      EXC2((short)2, "exc2");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -2713,6 +2746,10 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // EXC
+            return EXC;
+          case 2: // EXC2
+            return EXC2;
           default:
             return null;
         }
@@ -2751,9 +2788,15 @@ public class NodeService {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.EXC, new org.apache.thrift.meta_data.FieldMetaData("exc", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
+      tmpMap.put(_Fields.EXC2, new org.apache.thrift.meta_data.FieldMetaData("exc2", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(makeTransfer_result.class, metaDataMap);
     }
@@ -2761,10 +2804,25 @@ public class NodeService {
     public makeTransfer_result() {
     }
 
+    public makeTransfer_result(
+      NotEnoughMembersToMakeTransfer exc,
+      NotEnoughMoney exc2)
+    {
+      this();
+      this.exc = exc;
+      this.exc2 = exc2;
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public makeTransfer_result(makeTransfer_result other) {
+      if (other.isSetExc()) {
+        this.exc = new NotEnoughMembersToMakeTransfer(other.exc);
+      }
+      if (other.isSetExc2()) {
+        this.exc2 = new NotEnoughMoney(other.exc2);
+      }
     }
 
     public makeTransfer_result deepCopy() {
@@ -2773,15 +2831,87 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.exc = null;
+      this.exc2 = null;
+    }
+
+    public NotEnoughMembersToMakeTransfer getExc() {
+      return this.exc;
+    }
+
+    public makeTransfer_result setExc(NotEnoughMembersToMakeTransfer exc) {
+      this.exc = exc;
+      return this;
+    }
+
+    public void unsetExc() {
+      this.exc = null;
+    }
+
+    /** Returns true if field exc is set (has been assigned a value) and false otherwise */
+    public boolean isSetExc() {
+      return this.exc != null;
+    }
+
+    public void setExcIsSet(boolean value) {
+      if (!value) {
+        this.exc = null;
+      }
+    }
+
+    public NotEnoughMoney getExc2() {
+      return this.exc2;
+    }
+
+    public makeTransfer_result setExc2(NotEnoughMoney exc2) {
+      this.exc2 = exc2;
+      return this;
+    }
+
+    public void unsetExc2() {
+      this.exc2 = null;
+    }
+
+    /** Returns true if field exc2 is set (has been assigned a value) and false otherwise */
+    public boolean isSetExc2() {
+      return this.exc2 != null;
+    }
+
+    public void setExc2IsSet(boolean value) {
+      if (!value) {
+        this.exc2 = null;
+      }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case EXC:
+        if (value == null) {
+          unsetExc();
+        } else {
+          setExc((NotEnoughMembersToMakeTransfer)value);
+        }
+        break;
+
+      case EXC2:
+        if (value == null) {
+          unsetExc2();
+        } else {
+          setExc2((NotEnoughMoney)value);
+        }
+        break;
+
       }
     }
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case EXC:
+        return getExc();
+
+      case EXC2:
+        return getExc2();
+
       }
       throw new IllegalStateException();
     }
@@ -2793,6 +2923,10 @@ public class NodeService {
       }
 
       switch (field) {
+      case EXC:
+        return isSetExc();
+      case EXC2:
+        return isSetExc2();
       }
       throw new IllegalStateException();
     }
@@ -2810,6 +2944,24 @@ public class NodeService {
       if (that == null)
         return false;
 
+      boolean this_present_exc = true && this.isSetExc();
+      boolean that_present_exc = true && that.isSetExc();
+      if (this_present_exc || that_present_exc) {
+        if (!(this_present_exc && that_present_exc))
+          return false;
+        if (!this.exc.equals(that.exc))
+          return false;
+      }
+
+      boolean this_present_exc2 = true && this.isSetExc2();
+      boolean that_present_exc2 = true && that.isSetExc2();
+      if (this_present_exc2 || that_present_exc2) {
+        if (!(this_present_exc2 && that_present_exc2))
+          return false;
+        if (!this.exc2.equals(that.exc2))
+          return false;
+      }
+
       return true;
     }
 
@@ -2826,6 +2978,26 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetExc()).compareTo(other.isSetExc());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetExc()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.exc, other.exc);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetExc2()).compareTo(other.isSetExc2());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetExc2()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.exc2, other.exc2);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -2846,6 +3018,21 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("makeTransfer_result(");
       boolean first = true;
 
+      sb.append("exc:");
+      if (this.exc == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.exc);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("exc2:");
+      if (this.exc2 == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.exc2);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -2889,6 +3076,24 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
+            case 1: // EXC
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.exc = new NotEnoughMembersToMakeTransfer();
+                struct.exc.read(iprot);
+                struct.setExcIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // EXC2
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.exc2 = new NotEnoughMoney();
+                struct.exc2.read(iprot);
+                struct.setExc2IsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -2904,6 +3109,16 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.exc != null) {
+          oprot.writeFieldBegin(EXC_FIELD_DESC);
+          struct.exc.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.exc2 != null) {
+          oprot.writeFieldBegin(EXC2_FIELD_DESC);
+          struct.exc2.write(oprot);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -2921,11 +3136,36 @@ public class NodeService {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, makeTransfer_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetExc()) {
+          optionals.set(0);
+        }
+        if (struct.isSetExc2()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetExc()) {
+          struct.exc.write(oprot);
+        }
+        if (struct.isSetExc2()) {
+          struct.exc2.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, makeTransfer_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.exc = new NotEnoughMembersToMakeTransfer();
+          struct.exc.read(iprot);
+          struct.setExcIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.exc2 = new NotEnoughMoney();
+          struct.exc2.read(iprot);
+          struct.setExc2IsSet(true);
+        }
       }
     }
 
@@ -5664,6 +5904,7 @@ public class NodeService {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addToSwarm_args");
 
     private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField TRANSFER_DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("transferData", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -5672,10 +5913,12 @@ public class NodeService {
     }
 
     public Swarm swarm; // required
+    public TransferData transferData; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SWARM((short)1, "swarm");
+      SWARM((short)1, "swarm"),
+      TRANSFER_DATA((short)2, "transferData");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -5692,6 +5935,8 @@ public class NodeService {
         switch(fieldId) {
           case 1: // SWARM
             return SWARM;
+          case 2: // TRANSFER_DATA
+            return TRANSFER_DATA;
           default:
             return null;
         }
@@ -5737,6 +5982,8 @@ public class NodeService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
+      tmpMap.put(_Fields.TRANSFER_DATA, new org.apache.thrift.meta_data.FieldMetaData("transferData", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferData.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addToSwarm_args.class, metaDataMap);
     }
@@ -5745,10 +5992,12 @@ public class NodeService {
     }
 
     public addToSwarm_args(
-      Swarm swarm)
+      Swarm swarm,
+      TransferData transferData)
     {
       this();
       this.swarm = swarm;
+      this.transferData = transferData;
     }
 
     /**
@@ -5757,6 +6006,9 @@ public class NodeService {
     public addToSwarm_args(addToSwarm_args other) {
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
+      }
+      if (other.isSetTransferData()) {
+        this.transferData = new TransferData(other.transferData);
       }
     }
 
@@ -5767,6 +6019,7 @@ public class NodeService {
     @Override
     public void clear() {
       this.swarm = null;
+      this.transferData = null;
     }
 
     public Swarm getSwarm() {
@@ -5793,6 +6046,30 @@ public class NodeService {
       }
     }
 
+    public TransferData getTransferData() {
+      return this.transferData;
+    }
+
+    public addToSwarm_args setTransferData(TransferData transferData) {
+      this.transferData = transferData;
+      return this;
+    }
+
+    public void unsetTransferData() {
+      this.transferData = null;
+    }
+
+    /** Returns true if field transferData is set (has been assigned a value) and false otherwise */
+    public boolean isSetTransferData() {
+      return this.transferData != null;
+    }
+
+    public void setTransferDataIsSet(boolean value) {
+      if (!value) {
+        this.transferData = null;
+      }
+    }
+
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case SWARM:
@@ -5803,6 +6080,14 @@ public class NodeService {
         }
         break;
 
+      case TRANSFER_DATA:
+        if (value == null) {
+          unsetTransferData();
+        } else {
+          setTransferData((TransferData)value);
+        }
+        break;
+
       }
     }
 
@@ -5810,6 +6095,9 @@ public class NodeService {
       switch (field) {
       case SWARM:
         return getSwarm();
+
+      case TRANSFER_DATA:
+        return getTransferData();
 
       }
       throw new IllegalStateException();
@@ -5824,6 +6112,8 @@ public class NodeService {
       switch (field) {
       case SWARM:
         return isSetSwarm();
+      case TRANSFER_DATA:
+        return isSetTransferData();
       }
       throw new IllegalStateException();
     }
@@ -5850,6 +6140,15 @@ public class NodeService {
           return false;
       }
 
+      boolean this_present_transferData = true && this.isSetTransferData();
+      boolean that_present_transferData = true && that.isSetTransferData();
+      if (this_present_transferData || that_present_transferData) {
+        if (!(this_present_transferData && that_present_transferData))
+          return false;
+        if (!this.transferData.equals(that.transferData))
+          return false;
+      }
+
       return true;
     }
 
@@ -5872,6 +6171,16 @@ public class NodeService {
       }
       if (isSetSwarm()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.swarm, other.swarm);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetTransferData()).compareTo(other.isSetTransferData());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTransferData()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transferData, other.transferData);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -5903,6 +6212,14 @@ public class NodeService {
         sb.append(this.swarm);
       }
       first = false;
+      if (!first) sb.append(", ");
+      sb.append("transferData:");
+      if (this.transferData == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.transferData);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -5912,6 +6229,9 @@ public class NodeService {
       // check for sub-struct validity
       if (swarm != null) {
         swarm.validate();
+      }
+      if (transferData != null) {
+        transferData.validate();
       }
     }
 
@@ -5958,6 +6278,15 @@ public class NodeService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 2: // TRANSFER_DATA
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.transferData = new TransferData();
+                struct.transferData.read(iprot);
+                struct.setTransferDataIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -5976,6 +6305,11 @@ public class NodeService {
         if (struct.swarm != null) {
           oprot.writeFieldBegin(SWARM_FIELD_DESC);
           struct.swarm.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.transferData != null) {
+          oprot.writeFieldBegin(TRANSFER_DATA_FIELD_DESC);
+          struct.transferData.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -5999,20 +6333,31 @@ public class NodeService {
         if (struct.isSetSwarm()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetTransferData()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
         if (struct.isSetSwarm()) {
           struct.swarm.write(oprot);
+        }
+        if (struct.isSetTransferData()) {
+          struct.transferData.write(oprot);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, addToSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           struct.swarm = new Swarm();
           struct.swarm.read(iprot);
           struct.setSwarmIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.transferData = new TransferData();
+          struct.transferData.read(iprot);
+          struct.setTransferDataIsSet(true);
         }
       }
     }

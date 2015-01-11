@@ -5,7 +5,7 @@ import threading
 from threading import Thread
 from SRBanking.ThriftInterface import NodeService
 from SRBanking.ThriftInterface.ttypes import TransferData, NodeID, TransferID,\
-    Swarm
+    Swarm, NotEnoughMembersToMakeTransfer, NotEnoughMoney
 from SRBanking.ThriftInterface import NodeService
 from ConfigParser import ConfigParser
 import time
@@ -48,6 +48,7 @@ class ServerHandler:
     - config
     - mySwarms
     - pendingTransfers
+    - transferHistory
     """
     def __init__(self, ip, port, accountBalance,config):
         self.nodeID = NodeID(IP=ip,port=port)
@@ -56,16 +57,19 @@ class ServerHandler:
         self.config = config
         self.mySwarms = []
         self.pendingTransfers = []
+        self.transferHistory = []
     def ping(self):
         pass
     def stop(self):
-        print("Stopping")
+        print("Stopping server with SIGINT")
         os.kill(os.getpid(),signal.SIGINT)
-        print("Stopped")
     def getAccountBalance(self):
         return self.accountBalance
+    def getTransfers(self):
+        return self.transferHistory
     def deliverTransfer(self,transfer_data):
         self.accountBalance += transfer_data.value
+        self.transferHistory += [transfer_data]
     def makeTransfer(self, receiver, value):
 
         #prepare transfer data
@@ -76,7 +80,10 @@ class ServerHandler:
         #open connection to server
         address = receiver.IP
         port = receiver.port
-        self.accountBalance -= value
+        if(self.accountBalance >= value):
+            self.accountBalance -= value
+        else:
+            raise NotEnoughMoney(moneyAvailable=self.accountBalance, moneyRequested=value)
         try:
             with AutoClient(address,port) as client:
                 client.deliverTransfer(transferData);
@@ -102,7 +109,7 @@ class ServerHandler:
                 with AutoClient(neighbours[i].IP,neighbours[i].port) as client:
                     client.addToSwarm(swarm,transferData)
         else:
-            print("not enough to swarm")
+            raise NotEnoughMembersToMakeTransfer(membersAvailable=len(neighbours),membersRequested=how_much)
         print("makeSwarm exit: mySwarm is now: ",self.mySwarms)
 
     def getNeighbours(self):

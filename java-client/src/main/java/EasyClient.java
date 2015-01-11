@@ -134,6 +134,14 @@ public class EasyClient {
         }
     }
 
+    public static List<TransferData> getHistory(String IP,int port) throws TException {
+        try(AutoClosingClient acclient = getClient(IP, port)) {
+            NodeService.Client client = acclient.getClient();
+            List<TransferData> swarmList = client.getTransfers();
+            return swarmList;
+        }
+    }
+
     public static void delSwarm(String IP,int port, TransferID swarmID ) throws TException {
         try(AutoClosingClient acclient = getClient(IP, port)) {
             NodeService.Client client = acclient.getClient();
