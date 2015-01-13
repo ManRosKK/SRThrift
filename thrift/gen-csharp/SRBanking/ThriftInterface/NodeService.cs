@@ -20,86 +20,125 @@ namespace SRBanking.ThriftInterface
   public partial class NodeService {
     public interface Iface {
       /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="receiver"></param>
+      /// <param name="value"></param>
+      void makeTransfer(NodeID receiver, long value);
+      #if SILVERLIGHT
+      IAsyncResult Begin_makeTransfer(AsyncCallback callback, object state, NodeID receiver, long value);
+      void End_makeTransfer(IAsyncResult asyncResult);
+      #endif
+      /// <summary>
+      /// 
+      /// </summary>
+      long getAccountBalance();
+      #if SILVERLIGHT
+      IAsyncResult Begin_getAccountBalance(AsyncCallback callback, object state);
+      long End_getAccountBalance(IAsyncResult asyncResult);
+      #endif
+      /// <summary>
       /// pings node
       /// </summary>
-      void Ping();
+      void ping();
       #if SILVERLIGHT
-      IAsyncResult Begin_Ping(AsyncCallback callback, object state);
-      void End_Ping(IAsyncResult asyncResult);
+      IAsyncResult Begin_ping(AsyncCallback callback, object state);
+      void End_ping(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// pings Swarm and checks if leader is a leader
       /// </summary>
       /// <param name="leader"></param>
       /// <param name="transfer"></param>
-      void PingSwarm(NodeID leader, TransferID transfer);
+      void pingSwarm(NodeID leader, TransferID transfer);
       #if SILVERLIGHT
-      IAsyncResult Begin_PingSwarm(AsyncCallback callback, object state, NodeID leader, TransferID transfer);
-      void End_PingSwarm(IAsyncResult asyncResult);
+      IAsyncResult Begin_pingSwarm(AsyncCallback callback, object state, NodeID leader, TransferID transfer);
+      void End_pingSwarm(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// 
       /// </summary>
       /// <param name="swarm"></param>
-      void UpdateSwarmMembers(Swarm swarm);
+      void updateSwarmMembers(Swarm swarm);
       #if SILVERLIGHT
-      IAsyncResult Begin_UpdateSwarmMembers(AsyncCallback callback, object state, Swarm swarm);
-      void End_UpdateSwarmMembers(IAsyncResult asyncResult);
+      IAsyncResult Begin_updateSwarmMembers(AsyncCallback callback, object state, Swarm swarm);
+      void End_updateSwarmMembers(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// 
       /// </summary>
       /// <param name="swarm"></param>
-      void AddToSwarm(Swarm swarm);
+      /// <param name="transferData"></param>
+      void addToSwarm(Swarm swarm, TransferData transferData);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddToSwarm(AsyncCallback callback, object state, Swarm swarm);
-      void End_AddToSwarm(IAsyncResult asyncResult);
+      IAsyncResult Begin_addToSwarm(AsyncCallback callback, object state, Swarm swarm, TransferData transferData);
+      void End_addToSwarm(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// 
       /// </summary>
-      /// <param name="swarm"></param>
-      void DelSwarm(Swarm swarm);
+      /// <param name="swarmID"></param>
+      void delSwarm(TransferID swarmID);
       #if SILVERLIGHT
-      IAsyncResult Begin_DelSwarm(AsyncCallback callback, object state, Swarm swarm);
-      void End_DelSwarm(IAsyncResult asyncResult);
+      IAsyncResult Begin_delSwarm(AsyncCallback callback, object state, TransferID swarmID);
+      void End_delSwarm(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// 
       /// </summary>
       /// <param name="transfer"></param>
-      Swarm GetSwarm(TransferID transfer);
+      Swarm getSwarm(TransferID transfer);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetSwarm(AsyncCallback callback, object state, TransferID transfer);
-      Swarm End_GetSwarm(IAsyncResult asyncResult);
+      IAsyncResult Begin_getSwarm(AsyncCallback callback, object state, TransferID transfer);
+      Swarm End_getSwarm(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// returns true if candidateNodeID> current
       /// </summary>
       /// <param name="cadidate"></param>
       /// <param name="Transfer"></param>
-      bool ElectSwarmLeader(NodeID cadidate, TransferID Transfer);
+      bool electSwarmLeader(NodeID cadidate, TransferID Transfer);
       #if SILVERLIGHT
-      IAsyncResult Begin_ElectSwarmLeader(AsyncCallback callback, object state, NodeID cadidate, TransferID Transfer);
-      bool End_ElectSwarmLeader(IAsyncResult asyncResult);
+      IAsyncResult Begin_electSwarmLeader(AsyncCallback callback, object state, NodeID cadidate, TransferID Transfer);
+      bool End_electSwarmLeader(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// new leader broadcast that he is a leader
       /// </summary>
       /// <param name="swarm"></param>
-      void ElectionEndedSwarm(Swarm swarm);
+      void electionEndedSwarm(Swarm swarm);
       #if SILVERLIGHT
-      IAsyncResult Begin_ElectionEndedSwarm(AsyncCallback callback, object state, Swarm swarm);
-      void End_ElectionEndedSwarm(IAsyncResult asyncResult);
+      IAsyncResult Begin_electionEndedSwarm(AsyncCallback callback, object state, Swarm swarm);
+      void End_electionEndedSwarm(IAsyncResult asyncResult);
       #endif
       /// <summary>
       /// 
       /// </summary>
       /// <param name="transfer"></param>
-      void MakeTransfer(TransferData transfer);
+      void deliverTransfer(TransferData transfer);
       #if SILVERLIGHT
-      IAsyncResult Begin_MakeTransfer(AsyncCallback callback, object state, TransferData transfer);
-      void End_MakeTransfer(IAsyncResult asyncResult);
+      IAsyncResult Begin_deliverTransfer(AsyncCallback callback, object state, TransferData transfer);
+      void End_deliverTransfer(IAsyncResult asyncResult);
+      #endif
+      List<Swarm> getSwarmList();
+      #if SILVERLIGHT
+      IAsyncResult Begin_getSwarmList(AsyncCallback callback, object state);
+      List<Swarm> End_getSwarmList(IAsyncResult asyncResult);
+      #endif
+      void startSwarmElection(TransferID transfer);
+      #if SILVERLIGHT
+      IAsyncResult Begin_startSwarmElection(AsyncCallback callback, object state, TransferID transfer);
+      void End_startSwarmElection(IAsyncResult asyncResult);
+      #endif
+      List<TransferData> getTransfers();
+      #if SILVERLIGHT
+      IAsyncResult Begin_getTransfers(AsyncCallback callback, object state);
+      List<TransferData> End_getTransfers(IAsyncResult asyncResult);
+      #endif
+      void stop();
+      #if SILVERLIGHT
+      IAsyncResult Begin_stop(AsyncCallback callback, object state);
+      void End_stop(IAsyncResult asyncResult);
       #endif
     }
 
@@ -161,42 +200,46 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_Ping(AsyncCallback callback, object state)
+      public IAsyncResult Begin_makeTransfer(AsyncCallback callback, object state, NodeID receiver, long value)
       {
-        return send_Ping(callback, state);
+        return send_makeTransfer(callback, state, receiver, value);
       }
 
-      public void End_Ping(IAsyncResult asyncResult)
+      public void End_makeTransfer(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_Ping();
+        recv_makeTransfer();
       }
 
       #endif
 
       /// <summary>
-      /// pings node
+      /// 
       /// </summary>
-      public void Ping()
+      /// <param name="receiver"></param>
+      /// <param name="value"></param>
+      public void makeTransfer(NodeID receiver, long value)
       {
         #if !SILVERLIGHT
-        send_Ping();
-        recv_Ping();
+        send_makeTransfer(receiver, value);
+        recv_makeTransfer();
 
         #else
-        var asyncResult = Begin_Ping(null, null);
-        End_Ping(asyncResult);
+        var asyncResult = Begin_makeTransfer(null, null, receiver, value);
+        End_makeTransfer(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_Ping(AsyncCallback callback, object state)
+      public IAsyncResult send_makeTransfer(AsyncCallback callback, object state, NodeID receiver, long value)
       #else
-      public void send_Ping()
+      public void send_makeTransfer(NodeID receiver, long value)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("Ping", TMessageType.Call, seqid_));
-        Ping_args args = new Ping_args();
+        oprot_.WriteMessageBegin(new TMessage("makeTransfer", TMessageType.Call, seqid_));
+        makeTransfer_args args = new makeTransfer_args();
+        args.Receiver = receiver;
+        args.Value = value;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         #if SILVERLIGHT
@@ -206,7 +249,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_Ping()
+      public void recv_makeTransfer()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -214,7 +257,138 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        Ping_result result = new Ping_result();
+        makeTransfer_result result = new makeTransfer_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.exc) {
+          throw result.Exc;
+        }
+        if (result.__isset.exc2) {
+          throw result.Exc2;
+        }
+        return;
+      }
+
+      
+      #if SILVERLIGHT
+      public IAsyncResult Begin_getAccountBalance(AsyncCallback callback, object state)
+      {
+        return send_getAccountBalance(callback, state);
+      }
+
+      public long End_getAccountBalance(IAsyncResult asyncResult)
+      {
+        oprot_.Transport.EndFlush(asyncResult);
+        return recv_getAccountBalance();
+      }
+
+      #endif
+
+      /// <summary>
+      /// 
+      /// </summary>
+      public long getAccountBalance()
+      {
+        #if !SILVERLIGHT
+        send_getAccountBalance();
+        return recv_getAccountBalance();
+
+        #else
+        var asyncResult = Begin_getAccountBalance(null, null);
+        return End_getAccountBalance(asyncResult);
+
+        #endif
+      }
+      #if SILVERLIGHT
+      public IAsyncResult send_getAccountBalance(AsyncCallback callback, object state)
+      #else
+      public void send_getAccountBalance()
+      #endif
+      {
+        oprot_.WriteMessageBegin(new TMessage("getAccountBalance", TMessageType.Call, seqid_));
+        getAccountBalance_args args = new getAccountBalance_args();
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        #if SILVERLIGHT
+        return oprot_.Transport.BeginFlush(callback, state);
+        #else
+        oprot_.Transport.Flush();
+        #endif
+      }
+
+      public long recv_getAccountBalance()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        getAccountBalance_result result = new getAccountBalance_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "getAccountBalance failed: unknown result");
+      }
+
+      
+      #if SILVERLIGHT
+      public IAsyncResult Begin_ping(AsyncCallback callback, object state)
+      {
+        return send_ping(callback, state);
+      }
+
+      public void End_ping(IAsyncResult asyncResult)
+      {
+        oprot_.Transport.EndFlush(asyncResult);
+        recv_ping();
+      }
+
+      #endif
+
+      /// <summary>
+      /// pings node
+      /// </summary>
+      public void ping()
+      {
+        #if !SILVERLIGHT
+        send_ping();
+        recv_ping();
+
+        #else
+        var asyncResult = Begin_ping(null, null);
+        End_ping(asyncResult);
+
+        #endif
+      }
+      #if SILVERLIGHT
+      public IAsyncResult send_ping(AsyncCallback callback, object state)
+      #else
+      public void send_ping()
+      #endif
+      {
+        oprot_.WriteMessageBegin(new TMessage("ping", TMessageType.Call, seqid_));
+        ping_args args = new ping_args();
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        #if SILVERLIGHT
+        return oprot_.Transport.BeginFlush(callback, state);
+        #else
+        oprot_.Transport.Flush();
+        #endif
+      }
+
+      public void recv_ping()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        ping_result result = new ping_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         return;
@@ -222,15 +396,15 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_PingSwarm(AsyncCallback callback, object state, NodeID leader, TransferID transfer)
+      public IAsyncResult Begin_pingSwarm(AsyncCallback callback, object state, NodeID leader, TransferID transfer)
       {
-        return send_PingSwarm(callback, state, leader, transfer);
+        return send_pingSwarm(callback, state, leader, transfer);
       }
 
-      public void End_PingSwarm(IAsyncResult asyncResult)
+      public void End_pingSwarm(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_PingSwarm();
+        recv_pingSwarm();
       }
 
       #endif
@@ -240,26 +414,26 @@ namespace SRBanking.ThriftInterface
       /// </summary>
       /// <param name="leader"></param>
       /// <param name="transfer"></param>
-      public void PingSwarm(NodeID leader, TransferID transfer)
+      public void pingSwarm(NodeID leader, TransferID transfer)
       {
         #if !SILVERLIGHT
-        send_PingSwarm(leader, transfer);
-        recv_PingSwarm();
+        send_pingSwarm(leader, transfer);
+        recv_pingSwarm();
 
         #else
-        var asyncResult = Begin_PingSwarm(null, null, leader, transfer);
-        End_PingSwarm(asyncResult);
+        var asyncResult = Begin_pingSwarm(null, null, leader, transfer);
+        End_pingSwarm(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_PingSwarm(AsyncCallback callback, object state, NodeID leader, TransferID transfer)
+      public IAsyncResult send_pingSwarm(AsyncCallback callback, object state, NodeID leader, TransferID transfer)
       #else
-      public void send_PingSwarm(NodeID leader, TransferID transfer)
+      public void send_pingSwarm(NodeID leader, TransferID transfer)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("PingSwarm", TMessageType.Call, seqid_));
-        PingSwarm_args args = new PingSwarm_args();
+        oprot_.WriteMessageBegin(new TMessage("pingSwarm", TMessageType.Call, seqid_));
+        pingSwarm_args args = new pingSwarm_args();
         args.Leader = leader;
         args.Transfer = transfer;
         args.Write(oprot_);
@@ -271,7 +445,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_PingSwarm()
+      public void recv_pingSwarm()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -279,7 +453,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        PingSwarm_result result = new PingSwarm_result();
+        pingSwarm_result result = new pingSwarm_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.exc) {
@@ -290,15 +464,15 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_UpdateSwarmMembers(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult Begin_updateSwarmMembers(AsyncCallback callback, object state, Swarm swarm)
       {
-        return send_UpdateSwarmMembers(callback, state, swarm);
+        return send_updateSwarmMembers(callback, state, swarm);
       }
 
-      public void End_UpdateSwarmMembers(IAsyncResult asyncResult)
+      public void End_updateSwarmMembers(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_UpdateSwarmMembers();
+        recv_updateSwarmMembers();
       }
 
       #endif
@@ -307,26 +481,26 @@ namespace SRBanking.ThriftInterface
       /// 
       /// </summary>
       /// <param name="swarm"></param>
-      public void UpdateSwarmMembers(Swarm swarm)
+      public void updateSwarmMembers(Swarm swarm)
       {
         #if !SILVERLIGHT
-        send_UpdateSwarmMembers(swarm);
-        recv_UpdateSwarmMembers();
+        send_updateSwarmMembers(swarm);
+        recv_updateSwarmMembers();
 
         #else
-        var asyncResult = Begin_UpdateSwarmMembers(null, null, swarm);
-        End_UpdateSwarmMembers(asyncResult);
+        var asyncResult = Begin_updateSwarmMembers(null, null, swarm);
+        End_updateSwarmMembers(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_UpdateSwarmMembers(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult send_updateSwarmMembers(AsyncCallback callback, object state, Swarm swarm)
       #else
-      public void send_UpdateSwarmMembers(Swarm swarm)
+      public void send_updateSwarmMembers(Swarm swarm)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("UpdateSwarmMembers", TMessageType.Call, seqid_));
-        UpdateSwarmMembers_args args = new UpdateSwarmMembers_args();
+        oprot_.WriteMessageBegin(new TMessage("updateSwarmMembers", TMessageType.Call, seqid_));
+        updateSwarmMembers_args args = new updateSwarmMembers_args();
         args.Swarm = swarm;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -337,7 +511,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_UpdateSwarmMembers()
+      public void recv_updateSwarmMembers()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -345,7 +519,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        UpdateSwarmMembers_result result = new UpdateSwarmMembers_result();
+        updateSwarmMembers_result result = new updateSwarmMembers_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.exc) {
@@ -359,15 +533,15 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddToSwarm(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult Begin_addToSwarm(AsyncCallback callback, object state, Swarm swarm, TransferData transferData)
       {
-        return send_AddToSwarm(callback, state, swarm);
+        return send_addToSwarm(callback, state, swarm, transferData);
       }
 
-      public void End_AddToSwarm(IAsyncResult asyncResult)
+      public void End_addToSwarm(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_AddToSwarm();
+        recv_addToSwarm();
       }
 
       #endif
@@ -376,27 +550,29 @@ namespace SRBanking.ThriftInterface
       /// 
       /// </summary>
       /// <param name="swarm"></param>
-      public void AddToSwarm(Swarm swarm)
+      /// <param name="transferData"></param>
+      public void addToSwarm(Swarm swarm, TransferData transferData)
       {
         #if !SILVERLIGHT
-        send_AddToSwarm(swarm);
-        recv_AddToSwarm();
+        send_addToSwarm(swarm, transferData);
+        recv_addToSwarm();
 
         #else
-        var asyncResult = Begin_AddToSwarm(null, null, swarm);
-        End_AddToSwarm(asyncResult);
+        var asyncResult = Begin_addToSwarm(null, null, swarm, transferData);
+        End_addToSwarm(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddToSwarm(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult send_addToSwarm(AsyncCallback callback, object state, Swarm swarm, TransferData transferData)
       #else
-      public void send_AddToSwarm(Swarm swarm)
+      public void send_addToSwarm(Swarm swarm, TransferData transferData)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("AddToSwarm", TMessageType.Call, seqid_));
-        AddToSwarm_args args = new AddToSwarm_args();
+        oprot_.WriteMessageBegin(new TMessage("addToSwarm", TMessageType.Call, seqid_));
+        addToSwarm_args args = new addToSwarm_args();
         args.Swarm = swarm;
+        args.TransferData = transferData;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         #if SILVERLIGHT
@@ -406,7 +582,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_AddToSwarm()
+      public void recv_addToSwarm()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -414,7 +590,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        AddToSwarm_result result = new AddToSwarm_result();
+        addToSwarm_result result = new addToSwarm_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.exc) {
@@ -425,15 +601,15 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_DelSwarm(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult Begin_delSwarm(AsyncCallback callback, object state, TransferID swarmID)
       {
-        return send_DelSwarm(callback, state, swarm);
+        return send_delSwarm(callback, state, swarmID);
       }
 
-      public void End_DelSwarm(IAsyncResult asyncResult)
+      public void End_delSwarm(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_DelSwarm();
+        recv_delSwarm();
       }
 
       #endif
@@ -441,28 +617,28 @@ namespace SRBanking.ThriftInterface
       /// <summary>
       /// 
       /// </summary>
-      /// <param name="swarm"></param>
-      public void DelSwarm(Swarm swarm)
+      /// <param name="swarmID"></param>
+      public void delSwarm(TransferID swarmID)
       {
         #if !SILVERLIGHT
-        send_DelSwarm(swarm);
-        recv_DelSwarm();
+        send_delSwarm(swarmID);
+        recv_delSwarm();
 
         #else
-        var asyncResult = Begin_DelSwarm(null, null, swarm);
-        End_DelSwarm(asyncResult);
+        var asyncResult = Begin_delSwarm(null, null, swarmID);
+        End_delSwarm(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_DelSwarm(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult send_delSwarm(AsyncCallback callback, object state, TransferID swarmID)
       #else
-      public void send_DelSwarm(Swarm swarm)
+      public void send_delSwarm(TransferID swarmID)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("DelSwarm", TMessageType.Call, seqid_));
-        DelSwarm_args args = new DelSwarm_args();
-        args.Swarm = swarm;
+        oprot_.WriteMessageBegin(new TMessage("delSwarm", TMessageType.Call, seqid_));
+        delSwarm_args args = new delSwarm_args();
+        args.SwarmID = swarmID;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         #if SILVERLIGHT
@@ -472,7 +648,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_DelSwarm()
+      public void recv_delSwarm()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -480,7 +656,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        DelSwarm_result result = new DelSwarm_result();
+        delSwarm_result result = new delSwarm_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.exc) {
@@ -494,15 +670,15 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetSwarm(AsyncCallback callback, object state, TransferID transfer)
+      public IAsyncResult Begin_getSwarm(AsyncCallback callback, object state, TransferID transfer)
       {
-        return send_GetSwarm(callback, state, transfer);
+        return send_getSwarm(callback, state, transfer);
       }
 
-      public Swarm End_GetSwarm(IAsyncResult asyncResult)
+      public Swarm End_getSwarm(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_GetSwarm();
+        return recv_getSwarm();
       }
 
       #endif
@@ -511,26 +687,26 @@ namespace SRBanking.ThriftInterface
       /// 
       /// </summary>
       /// <param name="transfer"></param>
-      public Swarm GetSwarm(TransferID transfer)
+      public Swarm getSwarm(TransferID transfer)
       {
         #if !SILVERLIGHT
-        send_GetSwarm(transfer);
-        return recv_GetSwarm();
+        send_getSwarm(transfer);
+        return recv_getSwarm();
 
         #else
-        var asyncResult = Begin_GetSwarm(null, null, transfer);
-        return End_GetSwarm(asyncResult);
+        var asyncResult = Begin_getSwarm(null, null, transfer);
+        return End_getSwarm(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetSwarm(AsyncCallback callback, object state, TransferID transfer)
+      public IAsyncResult send_getSwarm(AsyncCallback callback, object state, TransferID transfer)
       #else
-      public void send_GetSwarm(TransferID transfer)
+      public void send_getSwarm(TransferID transfer)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("GetSwarm", TMessageType.Call, seqid_));
-        GetSwarm_args args = new GetSwarm_args();
+        oprot_.WriteMessageBegin(new TMessage("getSwarm", TMessageType.Call, seqid_));
+        getSwarm_args args = new getSwarm_args();
         args.Transfer = transfer;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -541,7 +717,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public Swarm recv_GetSwarm()
+      public Swarm recv_getSwarm()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -549,7 +725,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        GetSwarm_result result = new GetSwarm_result();
+        getSwarm_result result = new getSwarm_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
@@ -558,20 +734,20 @@ namespace SRBanking.ThriftInterface
         if (result.__isset.exc) {
           throw result.Exc;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetSwarm failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "getSwarm failed: unknown result");
       }
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_ElectSwarmLeader(AsyncCallback callback, object state, NodeID cadidate, TransferID Transfer)
+      public IAsyncResult Begin_electSwarmLeader(AsyncCallback callback, object state, NodeID cadidate, TransferID Transfer)
       {
-        return send_ElectSwarmLeader(callback, state, cadidate, Transfer);
+        return send_electSwarmLeader(callback, state, cadidate, Transfer);
       }
 
-      public bool End_ElectSwarmLeader(IAsyncResult asyncResult)
+      public bool End_electSwarmLeader(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_ElectSwarmLeader();
+        return recv_electSwarmLeader();
       }
 
       #endif
@@ -581,26 +757,26 @@ namespace SRBanking.ThriftInterface
       /// </summary>
       /// <param name="cadidate"></param>
       /// <param name="Transfer"></param>
-      public bool ElectSwarmLeader(NodeID cadidate, TransferID Transfer)
+      public bool electSwarmLeader(NodeID cadidate, TransferID Transfer)
       {
         #if !SILVERLIGHT
-        send_ElectSwarmLeader(cadidate, Transfer);
-        return recv_ElectSwarmLeader();
+        send_electSwarmLeader(cadidate, Transfer);
+        return recv_electSwarmLeader();
 
         #else
-        var asyncResult = Begin_ElectSwarmLeader(null, null, cadidate, Transfer);
-        return End_ElectSwarmLeader(asyncResult);
+        var asyncResult = Begin_electSwarmLeader(null, null, cadidate, Transfer);
+        return End_electSwarmLeader(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_ElectSwarmLeader(AsyncCallback callback, object state, NodeID cadidate, TransferID Transfer)
+      public IAsyncResult send_electSwarmLeader(AsyncCallback callback, object state, NodeID cadidate, TransferID Transfer)
       #else
-      public void send_ElectSwarmLeader(NodeID cadidate, TransferID Transfer)
+      public void send_electSwarmLeader(NodeID cadidate, TransferID Transfer)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("ElectSwarmLeader", TMessageType.Call, seqid_));
-        ElectSwarmLeader_args args = new ElectSwarmLeader_args();
+        oprot_.WriteMessageBegin(new TMessage("electSwarmLeader", TMessageType.Call, seqid_));
+        electSwarmLeader_args args = new electSwarmLeader_args();
         args.Cadidate = cadidate;
         args.Transfer = Transfer;
         args.Write(oprot_);
@@ -612,7 +788,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public bool recv_ElectSwarmLeader()
+      public bool recv_electSwarmLeader()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -620,7 +796,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        ElectSwarmLeader_result result = new ElectSwarmLeader_result();
+        electSwarmLeader_result result = new electSwarmLeader_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
@@ -629,20 +805,20 @@ namespace SRBanking.ThriftInterface
         if (result.__isset.exc) {
           throw result.Exc;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "ElectSwarmLeader failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "electSwarmLeader failed: unknown result");
       }
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_ElectionEndedSwarm(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult Begin_electionEndedSwarm(AsyncCallback callback, object state, Swarm swarm)
       {
-        return send_ElectionEndedSwarm(callback, state, swarm);
+        return send_electionEndedSwarm(callback, state, swarm);
       }
 
-      public void End_ElectionEndedSwarm(IAsyncResult asyncResult)
+      public void End_electionEndedSwarm(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_ElectionEndedSwarm();
+        recv_electionEndedSwarm();
       }
 
       #endif
@@ -651,26 +827,26 @@ namespace SRBanking.ThriftInterface
       /// new leader broadcast that he is a leader
       /// </summary>
       /// <param name="swarm"></param>
-      public void ElectionEndedSwarm(Swarm swarm)
+      public void electionEndedSwarm(Swarm swarm)
       {
         #if !SILVERLIGHT
-        send_ElectionEndedSwarm(swarm);
-        recv_ElectionEndedSwarm();
+        send_electionEndedSwarm(swarm);
+        recv_electionEndedSwarm();
 
         #else
-        var asyncResult = Begin_ElectionEndedSwarm(null, null, swarm);
-        End_ElectionEndedSwarm(asyncResult);
+        var asyncResult = Begin_electionEndedSwarm(null, null, swarm);
+        End_electionEndedSwarm(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_ElectionEndedSwarm(AsyncCallback callback, object state, Swarm swarm)
+      public IAsyncResult send_electionEndedSwarm(AsyncCallback callback, object state, Swarm swarm)
       #else
-      public void send_ElectionEndedSwarm(Swarm swarm)
+      public void send_electionEndedSwarm(Swarm swarm)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("ElectionEndedSwarm", TMessageType.Call, seqid_));
-        ElectionEndedSwarm_args args = new ElectionEndedSwarm_args();
+        oprot_.WriteMessageBegin(new TMessage("electionEndedSwarm", TMessageType.Call, seqid_));
+        electionEndedSwarm_args args = new electionEndedSwarm_args();
         args.Swarm = swarm;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -681,7 +857,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_ElectionEndedSwarm()
+      public void recv_electionEndedSwarm()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -689,7 +865,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        ElectionEndedSwarm_result result = new ElectionEndedSwarm_result();
+        electionEndedSwarm_result result = new electionEndedSwarm_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.exc) {
@@ -700,15 +876,15 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_MakeTransfer(AsyncCallback callback, object state, TransferData transfer)
+      public IAsyncResult Begin_deliverTransfer(AsyncCallback callback, object state, TransferData transfer)
       {
-        return send_MakeTransfer(callback, state, transfer);
+        return send_deliverTransfer(callback, state, transfer);
       }
 
-      public void End_MakeTransfer(IAsyncResult asyncResult)
+      public void End_deliverTransfer(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_MakeTransfer();
+        recv_deliverTransfer();
       }
 
       #endif
@@ -717,26 +893,26 @@ namespace SRBanking.ThriftInterface
       /// 
       /// </summary>
       /// <param name="transfer"></param>
-      public void MakeTransfer(TransferData transfer)
+      public void deliverTransfer(TransferData transfer)
       {
         #if !SILVERLIGHT
-        send_MakeTransfer(transfer);
-        recv_MakeTransfer();
+        send_deliverTransfer(transfer);
+        recv_deliverTransfer();
 
         #else
-        var asyncResult = Begin_MakeTransfer(null, null, transfer);
-        End_MakeTransfer(asyncResult);
+        var asyncResult = Begin_deliverTransfer(null, null, transfer);
+        End_deliverTransfer(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_MakeTransfer(AsyncCallback callback, object state, TransferData transfer)
+      public IAsyncResult send_deliverTransfer(AsyncCallback callback, object state, TransferData transfer)
       #else
-      public void send_MakeTransfer(TransferData transfer)
+      public void send_deliverTransfer(TransferData transfer)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("MakeTransfer", TMessageType.Call, seqid_));
-        MakeTransfer_args args = new MakeTransfer_args();
+        oprot_.WriteMessageBegin(new TMessage("deliverTransfer", TMessageType.Call, seqid_));
+        deliverTransfer_args args = new deliverTransfer_args();
         args.Transfer = transfer;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -747,7 +923,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_MakeTransfer()
+      public void recv_deliverTransfer()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -755,7 +931,249 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        MakeTransfer_result result = new MakeTransfer_result();
+        deliverTransfer_result result = new deliverTransfer_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        return;
+      }
+
+      
+      #if SILVERLIGHT
+      public IAsyncResult Begin_getSwarmList(AsyncCallback callback, object state)
+      {
+        return send_getSwarmList(callback, state);
+      }
+
+      public List<Swarm> End_getSwarmList(IAsyncResult asyncResult)
+      {
+        oprot_.Transport.EndFlush(asyncResult);
+        return recv_getSwarmList();
+      }
+
+      #endif
+
+      public List<Swarm> getSwarmList()
+      {
+        #if !SILVERLIGHT
+        send_getSwarmList();
+        return recv_getSwarmList();
+
+        #else
+        var asyncResult = Begin_getSwarmList(null, null);
+        return End_getSwarmList(asyncResult);
+
+        #endif
+      }
+      #if SILVERLIGHT
+      public IAsyncResult send_getSwarmList(AsyncCallback callback, object state)
+      #else
+      public void send_getSwarmList()
+      #endif
+      {
+        oprot_.WriteMessageBegin(new TMessage("getSwarmList", TMessageType.Call, seqid_));
+        getSwarmList_args args = new getSwarmList_args();
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        #if SILVERLIGHT
+        return oprot_.Transport.BeginFlush(callback, state);
+        #else
+        oprot_.Transport.Flush();
+        #endif
+      }
+
+      public List<Swarm> recv_getSwarmList()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        getSwarmList_result result = new getSwarmList_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "getSwarmList failed: unknown result");
+      }
+
+      
+      #if SILVERLIGHT
+      public IAsyncResult Begin_startSwarmElection(AsyncCallback callback, object state, TransferID transfer)
+      {
+        return send_startSwarmElection(callback, state, transfer);
+      }
+
+      public void End_startSwarmElection(IAsyncResult asyncResult)
+      {
+        oprot_.Transport.EndFlush(asyncResult);
+        recv_startSwarmElection();
+      }
+
+      #endif
+
+      public void startSwarmElection(TransferID transfer)
+      {
+        #if !SILVERLIGHT
+        send_startSwarmElection(transfer);
+        recv_startSwarmElection();
+
+        #else
+        var asyncResult = Begin_startSwarmElection(null, null, transfer);
+        End_startSwarmElection(asyncResult);
+
+        #endif
+      }
+      #if SILVERLIGHT
+      public IAsyncResult send_startSwarmElection(AsyncCallback callback, object state, TransferID transfer)
+      #else
+      public void send_startSwarmElection(TransferID transfer)
+      #endif
+      {
+        oprot_.WriteMessageBegin(new TMessage("startSwarmElection", TMessageType.Call, seqid_));
+        startSwarmElection_args args = new startSwarmElection_args();
+        args.Transfer = transfer;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        #if SILVERLIGHT
+        return oprot_.Transport.BeginFlush(callback, state);
+        #else
+        oprot_.Transport.Flush();
+        #endif
+      }
+
+      public void recv_startSwarmElection()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        startSwarmElection_result result = new startSwarmElection_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.exc) {
+          throw result.Exc;
+        }
+        return;
+      }
+
+      
+      #if SILVERLIGHT
+      public IAsyncResult Begin_getTransfers(AsyncCallback callback, object state)
+      {
+        return send_getTransfers(callback, state);
+      }
+
+      public List<TransferData> End_getTransfers(IAsyncResult asyncResult)
+      {
+        oprot_.Transport.EndFlush(asyncResult);
+        return recv_getTransfers();
+      }
+
+      #endif
+
+      public List<TransferData> getTransfers()
+      {
+        #if !SILVERLIGHT
+        send_getTransfers();
+        return recv_getTransfers();
+
+        #else
+        var asyncResult = Begin_getTransfers(null, null);
+        return End_getTransfers(asyncResult);
+
+        #endif
+      }
+      #if SILVERLIGHT
+      public IAsyncResult send_getTransfers(AsyncCallback callback, object state)
+      #else
+      public void send_getTransfers()
+      #endif
+      {
+        oprot_.WriteMessageBegin(new TMessage("getTransfers", TMessageType.Call, seqid_));
+        getTransfers_args args = new getTransfers_args();
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        #if SILVERLIGHT
+        return oprot_.Transport.BeginFlush(callback, state);
+        #else
+        oprot_.Transport.Flush();
+        #endif
+      }
+
+      public List<TransferData> recv_getTransfers()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        getTransfers_result result = new getTransfers_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "getTransfers failed: unknown result");
+      }
+
+      
+      #if SILVERLIGHT
+      public IAsyncResult Begin_stop(AsyncCallback callback, object state)
+      {
+        return send_stop(callback, state);
+      }
+
+      public void End_stop(IAsyncResult asyncResult)
+      {
+        oprot_.Transport.EndFlush(asyncResult);
+        recv_stop();
+      }
+
+      #endif
+
+      public void stop()
+      {
+        #if !SILVERLIGHT
+        send_stop();
+        recv_stop();
+
+        #else
+        var asyncResult = Begin_stop(null, null);
+        End_stop(asyncResult);
+
+        #endif
+      }
+      #if SILVERLIGHT
+      public IAsyncResult send_stop(AsyncCallback callback, object state)
+      #else
+      public void send_stop()
+      #endif
+      {
+        oprot_.WriteMessageBegin(new TMessage("stop", TMessageType.Call, seqid_));
+        stop_args args = new stop_args();
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        #if SILVERLIGHT
+        return oprot_.Transport.BeginFlush(callback, state);
+        #else
+        oprot_.Transport.Flush();
+        #endif
+      }
+
+      public void recv_stop()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        stop_result result = new stop_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         return;
@@ -766,15 +1184,21 @@ namespace SRBanking.ThriftInterface
       public Processor(Iface iface)
       {
         iface_ = iface;
-        processMap_["Ping"] = Ping_Process;
-        processMap_["PingSwarm"] = PingSwarm_Process;
-        processMap_["UpdateSwarmMembers"] = UpdateSwarmMembers_Process;
-        processMap_["AddToSwarm"] = AddToSwarm_Process;
-        processMap_["DelSwarm"] = DelSwarm_Process;
-        processMap_["GetSwarm"] = GetSwarm_Process;
-        processMap_["ElectSwarmLeader"] = ElectSwarmLeader_Process;
-        processMap_["ElectionEndedSwarm"] = ElectionEndedSwarm_Process;
-        processMap_["MakeTransfer"] = MakeTransfer_Process;
+        processMap_["makeTransfer"] = makeTransfer_Process;
+        processMap_["getAccountBalance"] = getAccountBalance_Process;
+        processMap_["ping"] = ping_Process;
+        processMap_["pingSwarm"] = pingSwarm_Process;
+        processMap_["updateSwarmMembers"] = updateSwarmMembers_Process;
+        processMap_["addToSwarm"] = addToSwarm_Process;
+        processMap_["delSwarm"] = delSwarm_Process;
+        processMap_["getSwarm"] = getSwarm_Process;
+        processMap_["electSwarmLeader"] = electSwarmLeader_Process;
+        processMap_["electionEndedSwarm"] = electionEndedSwarm_Process;
+        processMap_["deliverTransfer"] = deliverTransfer_Process;
+        processMap_["getSwarmList"] = getSwarmList_Process;
+        processMap_["startSwarmElection"] = startSwarmElection_Process;
+        processMap_["getTransfers"] = getTransfers_Process;
+        processMap_["stop"] = stop_Process;
       }
 
       protected delegate void ProcessFunction(int seqid, TProtocol iprot, TProtocol oprot);
@@ -807,150 +1231,238 @@ namespace SRBanking.ThriftInterface
         return true;
       }
 
-      public void Ping_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void makeTransfer_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        Ping_args args = new Ping_args();
+        makeTransfer_args args = new makeTransfer_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        Ping_result result = new Ping_result();
-        iface_.Ping();
-        oprot.WriteMessageBegin(new TMessage("Ping", TMessageType.Reply, seqid)); 
+        makeTransfer_result result = new makeTransfer_result();
+        try {
+          iface_.makeTransfer(args.Receiver, args.Value);
+        } catch (NotEnoughMembersToMakeTransfer exc) {
+          result.Exc = exc;
+        } catch (NotEnoughMoney exc2) {
+          result.Exc2 = exc2;
+        }
+        oprot.WriteMessageBegin(new TMessage("makeTransfer", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void PingSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void getAccountBalance_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        PingSwarm_args args = new PingSwarm_args();
+        getAccountBalance_args args = new getAccountBalance_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        PingSwarm_result result = new PingSwarm_result();
+        getAccountBalance_result result = new getAccountBalance_result();
+        result.Success = iface_.getAccountBalance();
+        oprot.WriteMessageBegin(new TMessage("getAccountBalance", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void ping_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        ping_args args = new ping_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        ping_result result = new ping_result();
+        iface_.ping();
+        oprot.WriteMessageBegin(new TMessage("ping", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void pingSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        pingSwarm_args args = new pingSwarm_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        pingSwarm_result result = new pingSwarm_result();
         try {
-          iface_.PingSwarm(args.Leader, args.Transfer);
+          iface_.pingSwarm(args.Leader, args.Transfer);
         } catch (NotSwarmMemeber exc) {
           result.Exc = exc;
         }
-        oprot.WriteMessageBegin(new TMessage("PingSwarm", TMessageType.Reply, seqid)); 
+        oprot.WriteMessageBegin(new TMessage("pingSwarm", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void UpdateSwarmMembers_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void updateSwarmMembers_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        UpdateSwarmMembers_args args = new UpdateSwarmMembers_args();
+        updateSwarmMembers_args args = new updateSwarmMembers_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        UpdateSwarmMembers_result result = new UpdateSwarmMembers_result();
+        updateSwarmMembers_result result = new updateSwarmMembers_result();
         try {
-          iface_.UpdateSwarmMembers(args.Swarm);
+          iface_.updateSwarmMembers(args.Swarm);
         } catch (NotSwarmMemeber exc) {
           result.Exc = exc;
         } catch (WrongSwarmLeader exc2) {
           result.Exc2 = exc2;
         }
-        oprot.WriteMessageBegin(new TMessage("UpdateSwarmMembers", TMessageType.Reply, seqid)); 
+        oprot.WriteMessageBegin(new TMessage("updateSwarmMembers", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void AddToSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void addToSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        AddToSwarm_args args = new AddToSwarm_args();
+        addToSwarm_args args = new addToSwarm_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        AddToSwarm_result result = new AddToSwarm_result();
+        addToSwarm_result result = new addToSwarm_result();
         try {
-          iface_.AddToSwarm(args.Swarm);
+          iface_.addToSwarm(args.Swarm, args.TransferData);
         } catch (AlreadySwarmMemeber exc) {
           result.Exc = exc;
         }
-        oprot.WriteMessageBegin(new TMessage("AddToSwarm", TMessageType.Reply, seqid)); 
+        oprot.WriteMessageBegin(new TMessage("addToSwarm", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void DelSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void delSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        DelSwarm_args args = new DelSwarm_args();
+        delSwarm_args args = new delSwarm_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        DelSwarm_result result = new DelSwarm_result();
+        delSwarm_result result = new delSwarm_result();
         try {
-          iface_.DelSwarm(args.Swarm);
+          iface_.delSwarm(args.SwarmID);
         } catch (NotSwarmMemeber exc) {
           result.Exc = exc;
         } catch (WrongSwarmLeader exc2) {
           result.Exc2 = exc2;
         }
-        oprot.WriteMessageBegin(new TMessage("DelSwarm", TMessageType.Reply, seqid)); 
+        oprot.WriteMessageBegin(new TMessage("delSwarm", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void GetSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void getSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        GetSwarm_args args = new GetSwarm_args();
+        getSwarm_args args = new getSwarm_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        GetSwarm_result result = new GetSwarm_result();
+        getSwarm_result result = new getSwarm_result();
         try {
-          result.Success = iface_.GetSwarm(args.Transfer);
+          result.Success = iface_.getSwarm(args.Transfer);
         } catch (NotSwarmMemeber exc) {
           result.Exc = exc;
         }
-        oprot.WriteMessageBegin(new TMessage("GetSwarm", TMessageType.Reply, seqid)); 
+        oprot.WriteMessageBegin(new TMessage("getSwarm", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void ElectSwarmLeader_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void electSwarmLeader_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        ElectSwarmLeader_args args = new ElectSwarmLeader_args();
+        electSwarmLeader_args args = new electSwarmLeader_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        ElectSwarmLeader_result result = new ElectSwarmLeader_result();
+        electSwarmLeader_result result = new electSwarmLeader_result();
         try {
-          result.Success = iface_.ElectSwarmLeader(args.Cadidate, args.Transfer);
+          result.Success = iface_.electSwarmLeader(args.Cadidate, args.Transfer);
         } catch (NotSwarmMemeber exc) {
           result.Exc = exc;
         }
-        oprot.WriteMessageBegin(new TMessage("ElectSwarmLeader", TMessageType.Reply, seqid)); 
+        oprot.WriteMessageBegin(new TMessage("electSwarmLeader", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void ElectionEndedSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void electionEndedSwarm_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        ElectionEndedSwarm_args args = new ElectionEndedSwarm_args();
+        electionEndedSwarm_args args = new electionEndedSwarm_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        ElectionEndedSwarm_result result = new ElectionEndedSwarm_result();
+        electionEndedSwarm_result result = new electionEndedSwarm_result();
         try {
-          iface_.ElectionEndedSwarm(args.Swarm);
+          iface_.electionEndedSwarm(args.Swarm);
         } catch (NotSwarmMemeber exc) {
           result.Exc = exc;
         }
-        oprot.WriteMessageBegin(new TMessage("ElectionEndedSwarm", TMessageType.Reply, seqid)); 
+        oprot.WriteMessageBegin(new TMessage("electionEndedSwarm", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void MakeTransfer_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void deliverTransfer_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        MakeTransfer_args args = new MakeTransfer_args();
+        deliverTransfer_args args = new deliverTransfer_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        MakeTransfer_result result = new MakeTransfer_result();
-        iface_.MakeTransfer(args.Transfer);
-        oprot.WriteMessageBegin(new TMessage("MakeTransfer", TMessageType.Reply, seqid)); 
+        deliverTransfer_result result = new deliverTransfer_result();
+        iface_.deliverTransfer(args.Transfer);
+        oprot.WriteMessageBegin(new TMessage("deliverTransfer", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void getSwarmList_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        getSwarmList_args args = new getSwarmList_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        getSwarmList_result result = new getSwarmList_result();
+        result.Success = iface_.getSwarmList();
+        oprot.WriteMessageBegin(new TMessage("getSwarmList", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void startSwarmElection_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        startSwarmElection_args args = new startSwarmElection_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        startSwarmElection_result result = new startSwarmElection_result();
+        try {
+          iface_.startSwarmElection(args.Transfer);
+        } catch (NotSwarmMemeber exc) {
+          result.Exc = exc;
+        }
+        oprot.WriteMessageBegin(new TMessage("startSwarmElection", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void getTransfers_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        getTransfers_args args = new getTransfers_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        getTransfers_result result = new getTransfers_result();
+        result.Success = iface_.getTransfers();
+        oprot.WriteMessageBegin(new TMessage("getTransfers", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void stop_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        stop_args args = new stop_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        stop_result result = new stop_result();
+        iface_.stop();
+        oprot.WriteMessageBegin(new TMessage("stop", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -962,10 +1474,255 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class Ping_args : TBase
+    public partial class makeTransfer_args : TBase
+    {
+      private NodeID _receiver;
+      private long _value;
+
+      public NodeID Receiver
+      {
+        get
+        {
+          return _receiver;
+        }
+        set
+        {
+          __isset.receiver = true;
+          this._receiver = value;
+        }
+      }
+
+      public long Value
+      {
+        get
+        {
+          return _value;
+        }
+        set
+        {
+          __isset.value = true;
+          this._value = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool receiver;
+        public bool value;
+      }
+
+      public makeTransfer_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                Receiver = new NodeID();
+                Receiver.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.I64) {
+                Value = iprot.ReadI64();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("makeTransfer_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (Receiver != null && __isset.receiver) {
+          field.Name = "receiver";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          Receiver.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset.value) {
+          field.Name = "value";
+          field.Type = TType.I64;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI64(Value);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("makeTransfer_args(");
+        sb.Append("Receiver: ");
+        sb.Append(Receiver== null ? "<null>" : Receiver.ToString());
+        sb.Append(",Value: ");
+        sb.Append(Value);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class makeTransfer_result : TBase
+    {
+      private NotEnoughMembersToMakeTransfer _exc;
+      private NotEnoughMoney _exc2;
+
+      public NotEnoughMembersToMakeTransfer Exc
+      {
+        get
+        {
+          return _exc;
+        }
+        set
+        {
+          __isset.exc = true;
+          this._exc = value;
+        }
+      }
+
+      public NotEnoughMoney Exc2
+      {
+        get
+        {
+          return _exc2;
+        }
+        set
+        {
+          __isset.exc2 = true;
+          this._exc2 = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool exc;
+        public bool exc2;
+      }
+
+      public makeTransfer_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                Exc = new NotEnoughMembersToMakeTransfer();
+                Exc.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Struct) {
+                Exc2 = new NotEnoughMoney();
+                Exc2.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("makeTransfer_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.exc) {
+          if (Exc != null) {
+            field.Name = "Exc";
+            field.Type = TType.Struct;
+            field.ID = 1;
+            oprot.WriteFieldBegin(field);
+            Exc.Write(oprot);
+            oprot.WriteFieldEnd();
+          }
+        } else if (this.__isset.exc2) {
+          if (Exc2 != null) {
+            field.Name = "Exc2";
+            field.Type = TType.Struct;
+            field.ID = 2;
+            oprot.WriteFieldBegin(field);
+            Exc2.Write(oprot);
+            oprot.WriteFieldEnd();
+          }
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("makeTransfer_result(");
+        sb.Append("Exc: ");
+        sb.Append(Exc== null ? "<null>" : Exc.ToString());
+        sb.Append(",Exc2: ");
+        sb.Append(Exc2== null ? "<null>" : Exc2.ToString());
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class getAccountBalance_args : TBase
     {
 
-      public Ping_args() {
+      public getAccountBalance_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -990,14 +1747,14 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("Ping_args");
+        TStruct struc = new TStruct("getAccountBalance_args");
         oprot.WriteStructBegin(struc);
         oprot.WriteFieldStop();
         oprot.WriteStructEnd();
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("Ping_args(");
+        StringBuilder sb = new StringBuilder("getAccountBalance_args(");
         sb.Append(")");
         return sb.ToString();
       }
@@ -1008,10 +1765,98 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class Ping_result : TBase
+    public partial class getAccountBalance_result : TBase
+    {
+      private long _success;
+
+      public long Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool success;
+      }
+
+      public getAccountBalance_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.I64) {
+                Success = iprot.ReadI64();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("getAccountBalance_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.I64;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI64(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("getAccountBalance_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class ping_args : TBase
     {
 
-      public Ping_result() {
+      public ping_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -1036,15 +1881,14 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("Ping_result");
+        TStruct struc = new TStruct("ping_args");
         oprot.WriteStructBegin(struc);
-
         oprot.WriteFieldStop();
         oprot.WriteStructEnd();
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("Ping_result(");
+        StringBuilder sb = new StringBuilder("ping_args(");
         sb.Append(")");
         return sb.ToString();
       }
@@ -1055,7 +1899,54 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class PingSwarm_args : TBase
+    public partial class ping_result : TBase
+    {
+
+      public ping_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("ping_result");
+        oprot.WriteStructBegin(struc);
+
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("ping_result(");
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class pingSwarm_args : TBase
     {
       private NodeID _leader;
       private TransferID _transfer;
@@ -1096,7 +1987,7 @@ namespace SRBanking.ThriftInterface
         public bool transfer;
       }
 
-      public PingSwarm_args() {
+      public pingSwarm_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -1137,7 +2028,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("PingSwarm_args");
+        TStruct struc = new TStruct("pingSwarm_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (Leader != null && __isset.leader) {
@@ -1161,7 +2052,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("PingSwarm_args(");
+        StringBuilder sb = new StringBuilder("pingSwarm_args(");
         sb.Append("Leader: ");
         sb.Append(Leader== null ? "<null>" : Leader.ToString());
         sb.Append(",Transfer: ");
@@ -1176,7 +2067,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class PingSwarm_result : TBase
+    public partial class pingSwarm_result : TBase
     {
       private NotSwarmMemeber _exc;
 
@@ -1202,7 +2093,7 @@ namespace SRBanking.ThriftInterface
         public bool exc;
       }
 
-      public PingSwarm_result() {
+      public pingSwarm_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -1235,7 +2126,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("PingSwarm_result");
+        TStruct struc = new TStruct("pingSwarm_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -1254,7 +2145,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("PingSwarm_result(");
+        StringBuilder sb = new StringBuilder("pingSwarm_result(");
         sb.Append("Exc: ");
         sb.Append(Exc== null ? "<null>" : Exc.ToString());
         sb.Append(")");
@@ -1267,7 +2158,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class UpdateSwarmMembers_args : TBase
+    public partial class updateSwarmMembers_args : TBase
     {
       private Swarm _swarm;
 
@@ -1293,7 +2184,7 @@ namespace SRBanking.ThriftInterface
         public bool swarm;
       }
 
-      public UpdateSwarmMembers_args() {
+      public updateSwarmMembers_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -1326,7 +2217,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("UpdateSwarmMembers_args");
+        TStruct struc = new TStruct("updateSwarmMembers_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (Swarm != null && __isset.swarm) {
@@ -1342,7 +2233,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("UpdateSwarmMembers_args(");
+        StringBuilder sb = new StringBuilder("updateSwarmMembers_args(");
         sb.Append("Swarm: ");
         sb.Append(Swarm== null ? "<null>" : Swarm.ToString());
         sb.Append(")");
@@ -1355,7 +2246,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class UpdateSwarmMembers_result : TBase
+    public partial class updateSwarmMembers_result : TBase
     {
       private NotSwarmMemeber _exc;
       private WrongSwarmLeader _exc2;
@@ -1396,7 +2287,7 @@ namespace SRBanking.ThriftInterface
         public bool exc2;
       }
 
-      public UpdateSwarmMembers_result() {
+      public updateSwarmMembers_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -1437,7 +2328,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("UpdateSwarmMembers_result");
+        TStruct struc = new TStruct("updateSwarmMembers_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -1465,7 +2356,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("UpdateSwarmMembers_result(");
+        StringBuilder sb = new StringBuilder("updateSwarmMembers_result(");
         sb.Append("Exc: ");
         sb.Append(Exc== null ? "<null>" : Exc.ToString());
         sb.Append(",Exc2: ");
@@ -1480,9 +2371,10 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class AddToSwarm_args : TBase
+    public partial class addToSwarm_args : TBase
     {
       private Swarm _swarm;
+      private TransferData _transferData;
 
       public Swarm Swarm
       {
@@ -1497,6 +2389,19 @@ namespace SRBanking.ThriftInterface
         }
       }
 
+      public TransferData TransferData
+      {
+        get
+        {
+          return _transferData;
+        }
+        set
+        {
+          __isset.transferData = true;
+          this._transferData = value;
+        }
+      }
+
 
       public Isset __isset;
       #if !SILVERLIGHT
@@ -1504,9 +2409,10 @@ namespace SRBanking.ThriftInterface
       #endif
       public struct Isset {
         public bool swarm;
+        public bool transferData;
       }
 
-      public AddToSwarm_args() {
+      public addToSwarm_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -1529,6 +2435,14 @@ namespace SRBanking.ThriftInterface
                 TProtocolUtil.Skip(iprot, field.Type);
               }
               break;
+            case 2:
+              if (field.Type == TType.Struct) {
+                TransferData = new TransferData();
+                TransferData.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
             default: 
               TProtocolUtil.Skip(iprot, field.Type);
               break;
@@ -1539,7 +2453,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("AddToSwarm_args");
+        TStruct struc = new TStruct("addToSwarm_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (Swarm != null && __isset.swarm) {
@@ -1550,14 +2464,24 @@ namespace SRBanking.ThriftInterface
           Swarm.Write(oprot);
           oprot.WriteFieldEnd();
         }
+        if (TransferData != null && __isset.transferData) {
+          field.Name = "transferData";
+          field.Type = TType.Struct;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          TransferData.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
         oprot.WriteFieldStop();
         oprot.WriteStructEnd();
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("AddToSwarm_args(");
+        StringBuilder sb = new StringBuilder("addToSwarm_args(");
         sb.Append("Swarm: ");
         sb.Append(Swarm== null ? "<null>" : Swarm.ToString());
+        sb.Append(",TransferData: ");
+        sb.Append(TransferData== null ? "<null>" : TransferData.ToString());
         sb.Append(")");
         return sb.ToString();
       }
@@ -1568,7 +2492,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class AddToSwarm_result : TBase
+    public partial class addToSwarm_result : TBase
     {
       private AlreadySwarmMemeber _exc;
 
@@ -1594,7 +2518,7 @@ namespace SRBanking.ThriftInterface
         public bool exc;
       }
 
-      public AddToSwarm_result() {
+      public addToSwarm_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -1627,7 +2551,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("AddToSwarm_result");
+        TStruct struc = new TStruct("addToSwarm_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -1646,7 +2570,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("AddToSwarm_result(");
+        StringBuilder sb = new StringBuilder("addToSwarm_result(");
         sb.Append("Exc: ");
         sb.Append(Exc== null ? "<null>" : Exc.ToString());
         sb.Append(")");
@@ -1659,20 +2583,20 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class DelSwarm_args : TBase
+    public partial class delSwarm_args : TBase
     {
-      private Swarm _swarm;
+      private TransferID _swarmID;
 
-      public Swarm Swarm
+      public TransferID SwarmID
       {
         get
         {
-          return _swarm;
+          return _swarmID;
         }
         set
         {
-          __isset.swarm = true;
-          this._swarm = value;
+          __isset.swarmID = true;
+          this._swarmID = value;
         }
       }
 
@@ -1682,10 +2606,10 @@ namespace SRBanking.ThriftInterface
       [Serializable]
       #endif
       public struct Isset {
-        public bool swarm;
+        public bool swarmID;
       }
 
-      public DelSwarm_args() {
+      public delSwarm_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -1702,8 +2626,8 @@ namespace SRBanking.ThriftInterface
           {
             case 1:
               if (field.Type == TType.Struct) {
-                Swarm = new Swarm();
-                Swarm.Read(iprot);
+                SwarmID = new TransferID();
+                SwarmID.Read(iprot);
               } else { 
                 TProtocolUtil.Skip(iprot, field.Type);
               }
@@ -1718,15 +2642,15 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("DelSwarm_args");
+        TStruct struc = new TStruct("delSwarm_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
-        if (Swarm != null && __isset.swarm) {
-          field.Name = "swarm";
+        if (SwarmID != null && __isset.swarmID) {
+          field.Name = "swarmID";
           field.Type = TType.Struct;
           field.ID = 1;
           oprot.WriteFieldBegin(field);
-          Swarm.Write(oprot);
+          SwarmID.Write(oprot);
           oprot.WriteFieldEnd();
         }
         oprot.WriteFieldStop();
@@ -1734,9 +2658,9 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("DelSwarm_args(");
-        sb.Append("Swarm: ");
-        sb.Append(Swarm== null ? "<null>" : Swarm.ToString());
+        StringBuilder sb = new StringBuilder("delSwarm_args(");
+        sb.Append("SwarmID: ");
+        sb.Append(SwarmID== null ? "<null>" : SwarmID.ToString());
         sb.Append(")");
         return sb.ToString();
       }
@@ -1747,7 +2671,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class DelSwarm_result : TBase
+    public partial class delSwarm_result : TBase
     {
       private NotSwarmMemeber _exc;
       private WrongSwarmLeader _exc2;
@@ -1788,7 +2712,7 @@ namespace SRBanking.ThriftInterface
         public bool exc2;
       }
 
-      public DelSwarm_result() {
+      public delSwarm_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -1829,7 +2753,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("DelSwarm_result");
+        TStruct struc = new TStruct("delSwarm_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -1857,7 +2781,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("DelSwarm_result(");
+        StringBuilder sb = new StringBuilder("delSwarm_result(");
         sb.Append("Exc: ");
         sb.Append(Exc== null ? "<null>" : Exc.ToString());
         sb.Append(",Exc2: ");
@@ -1872,7 +2796,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class GetSwarm_args : TBase
+    public partial class getSwarm_args : TBase
     {
       private TransferID _transfer;
 
@@ -1898,7 +2822,7 @@ namespace SRBanking.ThriftInterface
         public bool transfer;
       }
 
-      public GetSwarm_args() {
+      public getSwarm_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -1931,7 +2855,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetSwarm_args");
+        TStruct struc = new TStruct("getSwarm_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (Transfer != null && __isset.transfer) {
@@ -1947,7 +2871,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetSwarm_args(");
+        StringBuilder sb = new StringBuilder("getSwarm_args(");
         sb.Append("Transfer: ");
         sb.Append(Transfer== null ? "<null>" : Transfer.ToString());
         sb.Append(")");
@@ -1960,7 +2884,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class GetSwarm_result : TBase
+    public partial class getSwarm_result : TBase
     {
       private Swarm _success;
       private NotSwarmMemeber _exc;
@@ -2001,7 +2925,7 @@ namespace SRBanking.ThriftInterface
         public bool exc;
       }
 
-      public GetSwarm_result() {
+      public getSwarm_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -2042,7 +2966,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetSwarm_result");
+        TStruct struc = new TStruct("getSwarm_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -2070,7 +2994,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetSwarm_result(");
+        StringBuilder sb = new StringBuilder("getSwarm_result(");
         sb.Append("Success: ");
         sb.Append(Success== null ? "<null>" : Success.ToString());
         sb.Append(",Exc: ");
@@ -2085,7 +3009,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class ElectSwarmLeader_args : TBase
+    public partial class electSwarmLeader_args : TBase
     {
       private NodeID _cadidate;
       private TransferID _Transfer;
@@ -2126,7 +3050,7 @@ namespace SRBanking.ThriftInterface
         public bool Transfer;
       }
 
-      public ElectSwarmLeader_args() {
+      public electSwarmLeader_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -2167,7 +3091,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("ElectSwarmLeader_args");
+        TStruct struc = new TStruct("electSwarmLeader_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (Cadidate != null && __isset.cadidate) {
@@ -2191,7 +3115,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("ElectSwarmLeader_args(");
+        StringBuilder sb = new StringBuilder("electSwarmLeader_args(");
         sb.Append("Cadidate: ");
         sb.Append(Cadidate== null ? "<null>" : Cadidate.ToString());
         sb.Append(",Transfer: ");
@@ -2206,7 +3130,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class ElectSwarmLeader_result : TBase
+    public partial class electSwarmLeader_result : TBase
     {
       private bool _success;
       private NotSwarmMemeber _exc;
@@ -2247,7 +3171,7 @@ namespace SRBanking.ThriftInterface
         public bool exc;
       }
 
-      public ElectSwarmLeader_result() {
+      public electSwarmLeader_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -2287,7 +3211,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("ElectSwarmLeader_result");
+        TStruct struc = new TStruct("electSwarmLeader_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -2313,7 +3237,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("ElectSwarmLeader_result(");
+        StringBuilder sb = new StringBuilder("electSwarmLeader_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(",Exc: ");
@@ -2328,7 +3252,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class ElectionEndedSwarm_args : TBase
+    public partial class electionEndedSwarm_args : TBase
     {
       private Swarm _swarm;
 
@@ -2354,7 +3278,7 @@ namespace SRBanking.ThriftInterface
         public bool swarm;
       }
 
-      public ElectionEndedSwarm_args() {
+      public electionEndedSwarm_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -2387,7 +3311,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("ElectionEndedSwarm_args");
+        TStruct struc = new TStruct("electionEndedSwarm_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (Swarm != null && __isset.swarm) {
@@ -2403,7 +3327,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("ElectionEndedSwarm_args(");
+        StringBuilder sb = new StringBuilder("electionEndedSwarm_args(");
         sb.Append("Swarm: ");
         sb.Append(Swarm== null ? "<null>" : Swarm.ToString());
         sb.Append(")");
@@ -2416,7 +3340,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class ElectionEndedSwarm_result : TBase
+    public partial class electionEndedSwarm_result : TBase
     {
       private NotSwarmMemeber _exc;
 
@@ -2442,7 +3366,7 @@ namespace SRBanking.ThriftInterface
         public bool exc;
       }
 
-      public ElectionEndedSwarm_result() {
+      public electionEndedSwarm_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -2475,7 +3399,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("ElectionEndedSwarm_result");
+        TStruct struc = new TStruct("electionEndedSwarm_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -2494,7 +3418,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("ElectionEndedSwarm_result(");
+        StringBuilder sb = new StringBuilder("electionEndedSwarm_result(");
         sb.Append("Exc: ");
         sb.Append(Exc== null ? "<null>" : Exc.ToString());
         sb.Append(")");
@@ -2507,7 +3431,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class MakeTransfer_args : TBase
+    public partial class deliverTransfer_args : TBase
     {
       private TransferData _transfer;
 
@@ -2533,7 +3457,7 @@ namespace SRBanking.ThriftInterface
         public bool transfer;
       }
 
-      public MakeTransfer_args() {
+      public deliverTransfer_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -2566,7 +3490,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("MakeTransfer_args");
+        TStruct struc = new TStruct("deliverTransfer_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (Transfer != null && __isset.transfer) {
@@ -2582,7 +3506,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("MakeTransfer_args(");
+        StringBuilder sb = new StringBuilder("deliverTransfer_args(");
         sb.Append("Transfer: ");
         sb.Append(Transfer== null ? "<null>" : Transfer.ToString());
         sb.Append(")");
@@ -2595,10 +3519,10 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class MakeTransfer_result : TBase
+    public partial class deliverTransfer_result : TBase
     {
 
-      public MakeTransfer_result() {
+      public deliverTransfer_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -2623,7 +3547,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("MakeTransfer_result");
+        TStruct struc = new TStruct("deliverTransfer_result");
         oprot.WriteStructBegin(struc);
 
         oprot.WriteFieldStop();
@@ -2631,7 +3555,587 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("MakeTransfer_result(");
+        StringBuilder sb = new StringBuilder("deliverTransfer_result(");
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class getSwarmList_args : TBase
+    {
+
+      public getSwarmList_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("getSwarmList_args");
+        oprot.WriteStructBegin(struc);
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("getSwarmList_args(");
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class getSwarmList_result : TBase
+    {
+      private List<Swarm> _success;
+
+      public List<Swarm> Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool success;
+      }
+
+      public getSwarmList_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.List) {
+                {
+                  Success = new List<Swarm>();
+                  TList _list4 = iprot.ReadListBegin();
+                  for( int _i5 = 0; _i5 < _list4.Count; ++_i5)
+                  {
+                    Swarm _elem6 = new Swarm();
+                    _elem6 = new Swarm();
+                    _elem6.Read(iprot);
+                    Success.Add(_elem6);
+                  }
+                  iprot.ReadListEnd();
+                }
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("getSwarmList_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          if (Success != null) {
+            field.Name = "Success";
+            field.Type = TType.List;
+            field.ID = 0;
+            oprot.WriteFieldBegin(field);
+            {
+              oprot.WriteListBegin(new TList(TType.Struct, Success.Count));
+              foreach (Swarm _iter7 in Success)
+              {
+                _iter7.Write(oprot);
+              }
+              oprot.WriteListEnd();
+            }
+            oprot.WriteFieldEnd();
+          }
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("getSwarmList_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class startSwarmElection_args : TBase
+    {
+      private TransferID _transfer;
+
+      public TransferID Transfer
+      {
+        get
+        {
+          return _transfer;
+        }
+        set
+        {
+          __isset.transfer = true;
+          this._transfer = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool transfer;
+      }
+
+      public startSwarmElection_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                Transfer = new TransferID();
+                Transfer.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("startSwarmElection_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (Transfer != null && __isset.transfer) {
+          field.Name = "transfer";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          Transfer.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("startSwarmElection_args(");
+        sb.Append("Transfer: ");
+        sb.Append(Transfer== null ? "<null>" : Transfer.ToString());
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class startSwarmElection_result : TBase
+    {
+      private NotSwarmMemeber _exc;
+
+      public NotSwarmMemeber Exc
+      {
+        get
+        {
+          return _exc;
+        }
+        set
+        {
+          __isset.exc = true;
+          this._exc = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool exc;
+      }
+
+      public startSwarmElection_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                Exc = new NotSwarmMemeber();
+                Exc.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("startSwarmElection_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.exc) {
+          if (Exc != null) {
+            field.Name = "Exc";
+            field.Type = TType.Struct;
+            field.ID = 1;
+            oprot.WriteFieldBegin(field);
+            Exc.Write(oprot);
+            oprot.WriteFieldEnd();
+          }
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("startSwarmElection_result(");
+        sb.Append("Exc: ");
+        sb.Append(Exc== null ? "<null>" : Exc.ToString());
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class getTransfers_args : TBase
+    {
+
+      public getTransfers_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("getTransfers_args");
+        oprot.WriteStructBegin(struc);
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("getTransfers_args(");
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class getTransfers_result : TBase
+    {
+      private List<TransferData> _success;
+
+      public List<TransferData> Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool success;
+      }
+
+      public getTransfers_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.List) {
+                {
+                  Success = new List<TransferData>();
+                  TList _list8 = iprot.ReadListBegin();
+                  for( int _i9 = 0; _i9 < _list8.Count; ++_i9)
+                  {
+                    TransferData _elem10 = new TransferData();
+                    _elem10 = new TransferData();
+                    _elem10.Read(iprot);
+                    Success.Add(_elem10);
+                  }
+                  iprot.ReadListEnd();
+                }
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("getTransfers_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          if (Success != null) {
+            field.Name = "Success";
+            field.Type = TType.List;
+            field.ID = 0;
+            oprot.WriteFieldBegin(field);
+            {
+              oprot.WriteListBegin(new TList(TType.Struct, Success.Count));
+              foreach (TransferData _iter11 in Success)
+              {
+                _iter11.Write(oprot);
+              }
+              oprot.WriteListEnd();
+            }
+            oprot.WriteFieldEnd();
+          }
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("getTransfers_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class stop_args : TBase
+    {
+
+      public stop_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("stop_args");
+        oprot.WriteStructBegin(struc);
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("stop_args(");
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class stop_result : TBase
+    {
+
+      public stop_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("stop_result");
+        oprot.WriteStructBegin(struc);
+
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("stop_result(");
         sb.Append(")");
         return sb.ToString();
       }

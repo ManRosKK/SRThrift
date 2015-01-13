@@ -23,19 +23,33 @@ namespace SRBanking.ThriftInterface
   #endif
   public partial class TransferData : TBase
   {
-    private TransferID _transfer;
-    private long _Value;
+    private TransferID _transferID;
+    private NodeID _receiver;
+    private long _value;
 
-    public TransferID Transfer
+    public TransferID TransferID
     {
       get
       {
-        return _transfer;
+        return _transferID;
       }
       set
       {
-        __isset.transfer = true;
-        this._transfer = value;
+        __isset.transferID = true;
+        this._transferID = value;
+      }
+    }
+
+    public NodeID Receiver
+    {
+      get
+      {
+        return _receiver;
+      }
+      set
+      {
+        __isset.receiver = true;
+        this._receiver = value;
       }
     }
 
@@ -43,12 +57,12 @@ namespace SRBanking.ThriftInterface
     {
       get
       {
-        return _Value;
+        return _value;
       }
       set
       {
-        __isset.Value = true;
-        this._Value = value;
+        __isset.value = true;
+        this._value = value;
       }
     }
 
@@ -58,8 +72,9 @@ namespace SRBanking.ThriftInterface
     [Serializable]
     #endif
     public struct Isset {
-      public bool transfer;
-      public bool Value;
+      public bool transferID;
+      public bool receiver;
+      public bool value;
     }
 
     public TransferData() {
@@ -79,13 +94,21 @@ namespace SRBanking.ThriftInterface
         {
           case 1:
             if (field.Type == TType.Struct) {
-              Transfer = new TransferID();
-              Transfer.Read(iprot);
+              TransferID = new TransferID();
+              TransferID.Read(iprot);
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
             break;
           case 2:
+            if (field.Type == TType.Struct) {
+              Receiver = new NodeID();
+              Receiver.Read(iprot);
+            } else { 
+              TProtocolUtil.Skip(iprot, field.Type);
+            }
+            break;
+          case 3:
             if (field.Type == TType.I64) {
               Value = iprot.ReadI64();
             } else { 
@@ -105,18 +128,26 @@ namespace SRBanking.ThriftInterface
       TStruct struc = new TStruct("TransferData");
       oprot.WriteStructBegin(struc);
       TField field = new TField();
-      if (Transfer != null && __isset.transfer) {
-        field.Name = "transfer";
+      if (TransferID != null && __isset.transferID) {
+        field.Name = "transferID";
         field.Type = TType.Struct;
         field.ID = 1;
         oprot.WriteFieldBegin(field);
-        Transfer.Write(oprot);
+        TransferID.Write(oprot);
         oprot.WriteFieldEnd();
       }
-      if (__isset.Value) {
-        field.Name = "Value";
-        field.Type = TType.I64;
+      if (Receiver != null && __isset.receiver) {
+        field.Name = "receiver";
+        field.Type = TType.Struct;
         field.ID = 2;
+        oprot.WriteFieldBegin(field);
+        Receiver.Write(oprot);
+        oprot.WriteFieldEnd();
+      }
+      if (__isset.value) {
+        field.Name = "value";
+        field.Type = TType.I64;
+        field.ID = 3;
         oprot.WriteFieldBegin(field);
         oprot.WriteI64(Value);
         oprot.WriteFieldEnd();
@@ -127,8 +158,10 @@ namespace SRBanking.ThriftInterface
 
     public override string ToString() {
       StringBuilder sb = new StringBuilder("TransferData(");
-      sb.Append("Transfer: ");
-      sb.Append(Transfer== null ? "<null>" : Transfer.ToString());
+      sb.Append("TransferID: ");
+      sb.Append(TransferID== null ? "<null>" : TransferID.ToString());
+      sb.Append(",Receiver: ");
+      sb.Append(Receiver== null ? "<null>" : Receiver.ToString());
       sb.Append(",Value: ");
       sb.Append(Value);
       sb.Append(")");

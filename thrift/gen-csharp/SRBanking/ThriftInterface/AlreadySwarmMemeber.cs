@@ -23,20 +23,20 @@ namespace SRBanking.ThriftInterface
   #endif
   public partial class AlreadySwarmMemeber : TException, TBase
   {
-    private NodeID _ReceiverNode;
-    private NodeID _Leader;
-    private TransferID _Transfer;
+    private NodeID _receiverNode;
+    private NodeID _leader;
+    private TransferID _transfer;
 
     public NodeID ReceiverNode
     {
       get
       {
-        return _ReceiverNode;
+        return _receiverNode;
       }
       set
       {
-        __isset.ReceiverNode = true;
-        this._ReceiverNode = value;
+        __isset.receiverNode = true;
+        this._receiverNode = value;
       }
     }
 
@@ -44,12 +44,12 @@ namespace SRBanking.ThriftInterface
     {
       get
       {
-        return _Leader;
+        return _leader;
       }
       set
       {
-        __isset.Leader = true;
-        this._Leader = value;
+        __isset.leader = true;
+        this._leader = value;
       }
     }
 
@@ -57,12 +57,12 @@ namespace SRBanking.ThriftInterface
     {
       get
       {
-        return _Transfer;
+        return _transfer;
       }
       set
       {
-        __isset.Transfer = true;
-        this._Transfer = value;
+        __isset.transfer = true;
+        this._transfer = value;
       }
     }
 
@@ -72,9 +72,9 @@ namespace SRBanking.ThriftInterface
     [Serializable]
     #endif
     public struct Isset {
-      public bool ReceiverNode;
-      public bool Leader;
-      public bool Transfer;
+      public bool receiverNode;
+      public bool leader;
+      public bool transfer;
     }
 
     public AlreadySwarmMemeber() {
@@ -129,24 +129,24 @@ namespace SRBanking.ThriftInterface
       TStruct struc = new TStruct("AlreadySwarmMemeber");
       oprot.WriteStructBegin(struc);
       TField field = new TField();
-      if (ReceiverNode != null && __isset.ReceiverNode) {
-        field.Name = "ReceiverNode";
+      if (ReceiverNode != null && __isset.receiverNode) {
+        field.Name = "receiverNode";
         field.Type = TType.Struct;
         field.ID = 1;
         oprot.WriteFieldBegin(field);
         ReceiverNode.Write(oprot);
         oprot.WriteFieldEnd();
       }
-      if (Leader != null && __isset.Leader) {
-        field.Name = "Leader";
+      if (Leader != null && __isset.leader) {
+        field.Name = "leader";
         field.Type = TType.Struct;
         field.ID = 2;
         oprot.WriteFieldBegin(field);
         Leader.Write(oprot);
         oprot.WriteFieldEnd();
       }
-      if (Transfer != null && __isset.Transfer) {
-        field.Name = "Transfer";
+      if (Transfer != null && __isset.transfer) {
+        field.Name = "transfer";
         field.Type = TType.Struct;
         field.ID = 3;
         oprot.WriteFieldBegin(field);

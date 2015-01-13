@@ -21,48 +21,34 @@ namespace SRBanking.ThriftInterface
   #if !SILVERLIGHT
   [Serializable]
   #endif
-  public partial class TransferID : TBase
+  public partial class NotEnoughMoney : TException, TBase
   {
-    private NodeID _Sender;
-    private NodeID _Receiver;
-    private long _LP;
+    private long _moneyAvailable;
+    private long _moneyRequested;
 
-    public NodeID Sender
+    public long MoneyAvailable
     {
       get
       {
-        return _Sender;
+        return _moneyAvailable;
       }
       set
       {
-        __isset.Sender = true;
-        this._Sender = value;
+        __isset.moneyAvailable = true;
+        this._moneyAvailable = value;
       }
     }
 
-    public NodeID Receiver
+    public long MoneyRequested
     {
       get
       {
-        return _Receiver;
+        return _moneyRequested;
       }
       set
       {
-        __isset.Receiver = true;
-        this._Receiver = value;
-      }
-    }
-
-    public long LP
-    {
-      get
-      {
-        return _LP;
-      }
-      set
-      {
-        __isset.LP = true;
-        this._LP = value;
+        __isset.moneyRequested = true;
+        this._moneyRequested = value;
       }
     }
 
@@ -72,12 +58,11 @@ namespace SRBanking.ThriftInterface
     [Serializable]
     #endif
     public struct Isset {
-      public bool Sender;
-      public bool Receiver;
-      public bool LP;
+      public bool moneyAvailable;
+      public bool moneyRequested;
     }
 
-    public TransferID() {
+    public NotEnoughMoney() {
     }
 
     public void Read (TProtocol iprot)
@@ -93,24 +78,15 @@ namespace SRBanking.ThriftInterface
         switch (field.ID)
         {
           case 1:
-            if (field.Type == TType.Struct) {
-              Sender = new NodeID();
-              Sender.Read(iprot);
+            if (field.Type == TType.I64) {
+              MoneyAvailable = iprot.ReadI64();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
             break;
           case 2:
-            if (field.Type == TType.Struct) {
-              Receiver = new NodeID();
-              Receiver.Read(iprot);
-            } else { 
-              TProtocolUtil.Skip(iprot, field.Type);
-            }
-            break;
-          case 3:
             if (field.Type == TType.I64) {
-              LP = iprot.ReadI64();
+              MoneyRequested = iprot.ReadI64();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
@@ -125,31 +101,23 @@ namespace SRBanking.ThriftInterface
     }
 
     public void Write(TProtocol oprot) {
-      TStruct struc = new TStruct("TransferID");
+      TStruct struc = new TStruct("NotEnoughMoney");
       oprot.WriteStructBegin(struc);
       TField field = new TField();
-      if (Sender != null && __isset.Sender) {
-        field.Name = "Sender";
-        field.Type = TType.Struct;
+      if (__isset.moneyAvailable) {
+        field.Name = "moneyAvailable";
+        field.Type = TType.I64;
         field.ID = 1;
         oprot.WriteFieldBegin(field);
-        Sender.Write(oprot);
+        oprot.WriteI64(MoneyAvailable);
         oprot.WriteFieldEnd();
       }
-      if (Receiver != null && __isset.Receiver) {
-        field.Name = "Receiver";
-        field.Type = TType.Struct;
+      if (__isset.moneyRequested) {
+        field.Name = "moneyRequested";
+        field.Type = TType.I64;
         field.ID = 2;
         oprot.WriteFieldBegin(field);
-        Receiver.Write(oprot);
-        oprot.WriteFieldEnd();
-      }
-      if (__isset.LP) {
-        field.Name = "LP";
-        field.Type = TType.I64;
-        field.ID = 3;
-        oprot.WriteFieldBegin(field);
-        oprot.WriteI64(LP);
+        oprot.WriteI64(MoneyRequested);
         oprot.WriteFieldEnd();
       }
       oprot.WriteFieldStop();
@@ -157,13 +125,11 @@ namespace SRBanking.ThriftInterface
     }
 
     public override string ToString() {
-      StringBuilder sb = new StringBuilder("TransferID(");
-      sb.Append("Sender: ");
-      sb.Append(Sender== null ? "<null>" : Sender.ToString());
-      sb.Append(",Receiver: ");
-      sb.Append(Receiver== null ? "<null>" : Receiver.ToString());
-      sb.Append(",LP: ");
-      sb.Append(LP);
+      StringBuilder sb = new StringBuilder("NotEnoughMoney(");
+      sb.Append("MoneyAvailable: ");
+      sb.Append(MoneyAvailable);
+      sb.Append(",MoneyRequested: ");
+      sb.Append(MoneyRequested);
       sb.Append(")");
       return sb.ToString();
     }

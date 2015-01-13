@@ -1,0 +1,1 @@
+thrift-0.9.1.exe -gen csharp -o ..\ ..\interface.thrift
