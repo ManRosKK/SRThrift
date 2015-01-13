@@ -44,22 +44,18 @@
     <Reference Include="System.Xml" />
     <Reference Include="Thrift, Version=0.9.1.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Thrift.dll</HintPath>
+      <HintPath>..\..\..\thrift\thrift_binary\lib\net35\Thrift.dll</HintPath>
+    </Reference>
+    <Reference Include="ThriftInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\thrift\gen-csharp\SRBanking\ThriftInterface\bin\Debug\ThriftInterface.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IniFile.cs" />
+    <Compile Include="NodeServicesHamdler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SRBanking\ThriftInterface\AlreadySwarmMemeber.cs" />
-    <Compile Include="SRBanking\ThriftInterface\DebugService.cs" />
-    <Compile Include="SRBanking\ThriftInterface\IPAddress.cs" />
-    <Compile Include="SRBanking\ThriftInterface\NodeID.cs" />
-    <Compile Include="SRBanking\ThriftInterface\NodeService.cs" />
-    <Compile Include="SRBanking\ThriftInterface\NotSwarmMemeber.cs" />
-    <Compile Include="SRBanking\ThriftInterface\Swarm.cs" />
-    <Compile Include="SRBanking\ThriftInterface\TransferData.cs" />
-    <Compile Include="SRBanking\ThriftInterface\TransferID.cs" />
-    <Compile Include="SRBanking\ThriftInterface\WrongSwarmLeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

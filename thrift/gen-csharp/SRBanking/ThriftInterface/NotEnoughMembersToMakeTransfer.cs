@@ -21,34 +21,34 @@ namespace SRBanking.ThriftInterface
   #if !SILVERLIGHT
   [Serializable]
   #endif
-  public partial class TransferData : TBase
+  public partial class NotEnoughMembersToMakeTransfer : TException, TBase
   {
-    private TransferID _transfer;
-    private long _Value;
+    private long _membersAvailable;
+    private long _membersRequested;
 
-    public TransferID Transfer
+    public long MembersAvailable
     {
       get
       {
-        return _transfer;
+        return _membersAvailable;
       }
       set
       {
-        __isset.transfer = true;
-        this._transfer = value;
+        __isset.membersAvailable = true;
+        this._membersAvailable = value;
       }
     }
 
-    public long Value
+    public long MembersRequested
     {
       get
       {
-        return _Value;
+        return _membersRequested;
       }
       set
       {
-        __isset.Value = true;
-        this._Value = value;
+        __isset.membersRequested = true;
+        this._membersRequested = value;
       }
     }
 
@@ -58,11 +58,11 @@ namespace SRBanking.ThriftInterface
     [Serializable]
     #endif
     public struct Isset {
-      public bool transfer;
-      public bool Value;
+      public bool membersAvailable;
+      public bool membersRequested;
     }
 
-    public TransferData() {
+    public NotEnoughMembersToMakeTransfer() {
     }
 
     public void Read (TProtocol iprot)
@@ -78,16 +78,15 @@ namespace SRBanking.ThriftInterface
         switch (field.ID)
         {
           case 1:
-            if (field.Type == TType.Struct) {
-              Transfer = new TransferID();
-              Transfer.Read(iprot);
+            if (field.Type == TType.I64) {
+              MembersAvailable = iprot.ReadI64();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
             break;
           case 2:
             if (field.Type == TType.I64) {
-              Value = iprot.ReadI64();
+              MembersRequested = iprot.ReadI64();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
@@ -102,23 +101,23 @@ namespace SRBanking.ThriftInterface
     }
 
     public void Write(TProtocol oprot) {
-      TStruct struc = new TStruct("TransferData");
+      TStruct struc = new TStruct("NotEnoughMembersToMakeTransfer");
       oprot.WriteStructBegin(struc);
       TField field = new TField();
-      if (Transfer != null && __isset.transfer) {
-        field.Name = "transfer";
-        field.Type = TType.Struct;
+      if (__isset.membersAvailable) {
+        field.Name = "membersAvailable";
+        field.Type = TType.I64;
         field.ID = 1;
         oprot.WriteFieldBegin(field);
-        Transfer.Write(oprot);
+        oprot.WriteI64(MembersAvailable);
         oprot.WriteFieldEnd();
       }
-      if (__isset.Value) {
-        field.Name = "Value";
+      if (__isset.membersRequested) {
+        field.Name = "membersRequested";
         field.Type = TType.I64;
         field.ID = 2;
         oprot.WriteFieldBegin(field);
-        oprot.WriteI64(Value);
+        oprot.WriteI64(MembersRequested);
         oprot.WriteFieldEnd();
       }
       oprot.WriteFieldStop();
@@ -126,11 +125,11 @@ namespace SRBanking.ThriftInterface
     }
 
     public override string ToString() {
-      StringBuilder sb = new StringBuilder("TransferData(");
-      sb.Append("Transfer: ");
-      sb.Append(Transfer== null ? "<null>" : Transfer.ToString());
-      sb.Append(",Value: ");
-      sb.Append(Value);
+      StringBuilder sb = new StringBuilder("NotEnoughMembersToMakeTransfer(");
+      sb.Append("MembersAvailable: ");
+      sb.Append(MembersAvailable);
+      sb.Append(",MembersRequested: ");
+      sb.Append(MembersRequested);
       sb.Append(")");
       return sb.ToString();
     }

@@ -23,19 +23,19 @@ namespace SRBanking.ThriftInterface
   #endif
   public partial class NodeID : TBase
   {
-    private IPAddress _Address;
-    private int _Port;
+    private string _IP;
+    private int _port;
 
-    public IPAddress Address
+    public string IP
     {
       get
       {
-        return _Address;
+        return _IP;
       }
       set
       {
-        __isset.Address = true;
-        this._Address = value;
+        __isset.IP = true;
+        this._IP = value;
       }
     }
 
@@ -43,12 +43,12 @@ namespace SRBanking.ThriftInterface
     {
       get
       {
-        return _Port;
+        return _port;
       }
       set
       {
-        __isset.Port = true;
-        this._Port = value;
+        __isset.port = true;
+        this._port = value;
       }
     }
 
@@ -58,8 +58,8 @@ namespace SRBanking.ThriftInterface
     [Serializable]
     #endif
     public struct Isset {
-      public bool Address;
-      public bool Port;
+      public bool IP;
+      public bool port;
     }
 
     public NodeID() {
@@ -78,9 +78,8 @@ namespace SRBanking.ThriftInterface
         switch (field.ID)
         {
           case 1:
-            if (field.Type == TType.Struct) {
-              Address = new IPAddress();
-              Address.Read(iprot);
+            if (field.Type == TType.String) {
+              IP = iprot.ReadString();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
@@ -105,16 +104,16 @@ namespace SRBanking.ThriftInterface
       TStruct struc = new TStruct("NodeID");
       oprot.WriteStructBegin(struc);
       TField field = new TField();
-      if (Address != null && __isset.Address) {
-        field.Name = "Address";
-        field.Type = TType.Struct;
+      if (IP != null && __isset.IP) {
+        field.Name = "IP";
+        field.Type = TType.String;
         field.ID = 1;
         oprot.WriteFieldBegin(field);
-        Address.Write(oprot);
+        oprot.WriteString(IP);
         oprot.WriteFieldEnd();
       }
-      if (__isset.Port) {
-        field.Name = "Port";
+      if (__isset.port) {
+        field.Name = "port";
         field.Type = TType.I32;
         field.ID = 2;
         oprot.WriteFieldBegin(field);
@@ -127,8 +126,8 @@ namespace SRBanking.ThriftInterface
 
     public override string ToString() {
       StringBuilder sb = new StringBuilder("NodeID(");
-      sb.Append("Address: ");
-      sb.Append(Address== null ? "<null>" : Address.ToString());
+      sb.Append("IP: ");
+      sb.Append(IP);
       sb.Append(",Port: ");
       sb.Append(Port);
       sb.Append(")");

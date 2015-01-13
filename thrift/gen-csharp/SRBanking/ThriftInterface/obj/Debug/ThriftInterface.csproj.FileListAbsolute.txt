@@ -1,0 +1,7 @@
+D:\studia\SR\proj\SRThrift\thrift\gen-csharp\SRBanking\ThriftInterface\bin\Debug\ThriftInterface.dll
+D:\studia\SR\proj\SRThrift\thrift\gen-csharp\SRBanking\ThriftInterface\bin\Debug\ThriftInterface.pdb
+D:\studia\SR\proj\SRThrift\thrift\gen-csharp\SRBanking\ThriftInterface\bin\Debug\Thrift.dll
+D:\studia\SR\proj\SRThrift\thrift\gen-csharp\SRBanking\ThriftInterface\bin\Debug\Thrift.pdb
+D:\studia\SR\proj\SRThrift\thrift\gen-csharp\SRBanking\ThriftInterface\obj\Debug\ResolveAssemblyReference.cache
+D:\studia\SR\proj\SRThrift\thrift\gen-csharp\SRBanking\ThriftInterface\obj\Debug\ThriftInterface.dll
+D:\studia\SR\proj\SRThrift\thrift\gen-csharp\SRBanking\ThriftInterface\obj\Debug\ThriftInterface.pdb

@@ -53,6 +53,16 @@ public class ThriftServerHandler implements NodeService.Iface{
     }
 
     @Override
+    public void addToSwarm(Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, TException {
+
+    }
+
+    @Override
+    public void delSwarm(TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, TException {
+
+    }
+
+    @Override
     public void addToSwarm(Swarm swarm) throws AlreadySwarmMemeber, TException {
 
     }

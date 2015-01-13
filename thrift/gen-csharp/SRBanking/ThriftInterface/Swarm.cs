@@ -23,20 +23,33 @@ namespace SRBanking.ThriftInterface
   #endif
   public partial class Swarm : TBase
   {
-    private NodeID _Leader;
-    private List<NodeID> _Members;
-    private TransferID _Transfer;
+    private TransferID _transfer;
+    private NodeID _leader;
+    private List<NodeID> _members;
+
+    public TransferID Transfer
+    {
+      get
+      {
+        return _transfer;
+      }
+      set
+      {
+        __isset.transfer = true;
+        this._transfer = value;
+      }
+    }
 
     public NodeID Leader
     {
       get
       {
-        return _Leader;
+        return _leader;
       }
       set
       {
-        __isset.Leader = true;
-        this._Leader = value;
+        __isset.leader = true;
+        this._leader = value;
       }
     }
 
@@ -44,25 +57,12 @@ namespace SRBanking.ThriftInterface
     {
       get
       {
-        return _Members;
+        return _members;
       }
       set
       {
-        __isset.Members = true;
-        this._Members = value;
-      }
-    }
-
-    public TransferID Transfer
-    {
-      get
-      {
-        return _Transfer;
-      }
-      set
-      {
-        __isset.Transfer = true;
-        this._Transfer = value;
+        __isset.members = true;
+        this._members = value;
       }
     }
 
@@ -72,9 +72,9 @@ namespace SRBanking.ThriftInterface
     [Serializable]
     #endif
     public struct Isset {
-      public bool Leader;
-      public bool Members;
-      public bool Transfer;
+      public bool transfer;
+      public bool leader;
+      public bool members;
     }
 
     public Swarm() {
@@ -94,34 +94,34 @@ namespace SRBanking.ThriftInterface
         {
           case 1:
             if (field.Type == TType.Struct) {
+              Transfer = new TransferID();
+              Transfer.Read(iprot);
+            } else { 
+              TProtocolUtil.Skip(iprot, field.Type);
+            }
+            break;
+          case 2:
+            if (field.Type == TType.Struct) {
               Leader = new NodeID();
               Leader.Read(iprot);
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
             break;
-          case 2:
+          case 3:
             if (field.Type == TType.List) {
               {
                 Members = new List<NodeID>();
-                TList _list4 = iprot.ReadListBegin();
-                for( int _i5 = 0; _i5 < _list4.Count; ++_i5)
+                TList _list0 = iprot.ReadListBegin();
+                for( int _i1 = 0; _i1 < _list0.Count; ++_i1)
                 {
-                  NodeID _elem6 = new NodeID();
-                  _elem6 = new NodeID();
-                  _elem6.Read(iprot);
-                  Members.Add(_elem6);
+                  NodeID _elem2 = new NodeID();
+                  _elem2 = new NodeID();
+                  _elem2.Read(iprot);
+                  Members.Add(_elem2);
                 }
                 iprot.ReadListEnd();
               }
-            } else { 
-              TProtocolUtil.Skip(iprot, field.Type);
-            }
-            break;
-          case 3:
-            if (field.Type == TType.Struct) {
-              Transfer = new TransferID();
-              Transfer.Read(iprot);
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
@@ -139,35 +139,35 @@ namespace SRBanking.ThriftInterface
       TStruct struc = new TStruct("Swarm");
       oprot.WriteStructBegin(struc);
       TField field = new TField();
-      if (Leader != null && __isset.Leader) {
-        field.Name = "Leader";
+      if (Transfer != null && __isset.transfer) {
+        field.Name = "transfer";
         field.Type = TType.Struct;
         field.ID = 1;
+        oprot.WriteFieldBegin(field);
+        Transfer.Write(oprot);
+        oprot.WriteFieldEnd();
+      }
+      if (Leader != null && __isset.leader) {
+        field.Name = "leader";
+        field.Type = TType.Struct;
+        field.ID = 2;
         oprot.WriteFieldBegin(field);
         Leader.Write(oprot);
         oprot.WriteFieldEnd();
       }
-      if (Members != null && __isset.Members) {
-        field.Name = "Members";
+      if (Members != null && __isset.members) {
+        field.Name = "members";
         field.Type = TType.List;
-        field.ID = 2;
+        field.ID = 3;
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.Struct, Members.Count));
-          foreach (NodeID _iter7 in Members)
+          foreach (NodeID _iter3 in Members)
           {
-            _iter7.Write(oprot);
+            _iter3.Write(oprot);
           }
           oprot.WriteListEnd();
         }
-        oprot.WriteFieldEnd();
-      }
-      if (Transfer != null && __isset.Transfer) {
-        field.Name = "Transfer";
-        field.Type = TType.Struct;
-        field.ID = 3;
-        oprot.WriteFieldBegin(field);
-        Transfer.Write(oprot);
         oprot.WriteFieldEnd();
       }
       oprot.WriteFieldStop();
@@ -176,12 +176,12 @@ namespace SRBanking.ThriftInterface
 
     public override string ToString() {
       StringBuilder sb = new StringBuilder("Swarm(");
-      sb.Append("Leader: ");
+      sb.Append("Transfer: ");
+      sb.Append(Transfer== null ? "<null>" : Transfer.ToString());
+      sb.Append(",Leader: ");
       sb.Append(Leader== null ? "<null>" : Leader.ToString());
       sb.Append(",Members: ");
       sb.Append(Members);
-      sb.Append(",Transfer: ");
-      sb.Append(Transfer== null ? "<null>" : Transfer.ToString());
       sb.Append(")");
       return sb.ToString();
     }

@@ -23,46 +23,32 @@ namespace SRBanking.ThriftInterface
   #endif
   public partial class TransferID : TBase
   {
-    private NodeID _Sender;
-    private NodeID _Receiver;
-    private long _LP;
+    private NodeID _sender;
+    private long _counter;
 
     public NodeID Sender
     {
       get
       {
-        return _Sender;
+        return _sender;
       }
       set
       {
-        __isset.Sender = true;
-        this._Sender = value;
+        __isset.sender = true;
+        this._sender = value;
       }
     }
 
-    public NodeID Receiver
+    public long Counter
     {
       get
       {
-        return _Receiver;
+        return _counter;
       }
       set
       {
-        __isset.Receiver = true;
-        this._Receiver = value;
-      }
-    }
-
-    public long LP
-    {
-      get
-      {
-        return _LP;
-      }
-      set
-      {
-        __isset.LP = true;
-        this._LP = value;
+        __isset.counter = true;
+        this._counter = value;
       }
     }
 
@@ -72,9 +58,8 @@ namespace SRBanking.ThriftInterface
     [Serializable]
     #endif
     public struct Isset {
-      public bool Sender;
-      public bool Receiver;
-      public bool LP;
+      public bool sender;
+      public bool counter;
     }
 
     public TransferID() {
@@ -101,16 +86,8 @@ namespace SRBanking.ThriftInterface
             }
             break;
           case 2:
-            if (field.Type == TType.Struct) {
-              Receiver = new NodeID();
-              Receiver.Read(iprot);
-            } else { 
-              TProtocolUtil.Skip(iprot, field.Type);
-            }
-            break;
-          case 3:
             if (field.Type == TType.I64) {
-              LP = iprot.ReadI64();
+              Counter = iprot.ReadI64();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
@@ -128,28 +105,20 @@ namespace SRBanking.ThriftInterface
       TStruct struc = new TStruct("TransferID");
       oprot.WriteStructBegin(struc);
       TField field = new TField();
-      if (Sender != null && __isset.Sender) {
-        field.Name = "Sender";
+      if (Sender != null && __isset.sender) {
+        field.Name = "sender";
         field.Type = TType.Struct;
         field.ID = 1;
         oprot.WriteFieldBegin(field);
         Sender.Write(oprot);
         oprot.WriteFieldEnd();
       }
-      if (Receiver != null && __isset.Receiver) {
-        field.Name = "Receiver";
-        field.Type = TType.Struct;
+      if (__isset.counter) {
+        field.Name = "counter";
+        field.Type = TType.I64;
         field.ID = 2;
         oprot.WriteFieldBegin(field);
-        Receiver.Write(oprot);
-        oprot.WriteFieldEnd();
-      }
-      if (__isset.LP) {
-        field.Name = "LP";
-        field.Type = TType.I64;
-        field.ID = 3;
-        oprot.WriteFieldBegin(field);
-        oprot.WriteI64(LP);
+        oprot.WriteI64(Counter);
         oprot.WriteFieldEnd();
       }
       oprot.WriteFieldStop();
@@ -160,10 +129,8 @@ namespace SRBanking.ThriftInterface
       StringBuilder sb = new StringBuilder("TransferID(");
       sb.Append("Sender: ");
       sb.Append(Sender== null ? "<null>" : Sender.ToString());
-      sb.Append(",Receiver: ");
-      sb.Append(Receiver== null ? "<null>" : Receiver.ToString());
-      sb.Append(",LP: ");
-      sb.Append(LP);
+      sb.Append(",Counter: ");
+      sb.Append(Counter);
       sb.Append(")");
       return sb.ToString();
     }
