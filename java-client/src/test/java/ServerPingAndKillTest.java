@@ -14,7 +14,7 @@ public class ServerPingAndKillTest {
     {
         int lowserver = 9080;
         int count = 10;
-        String IP = "localhost";
+        String IP = "127.0.0.1";
 
         Util.runNServers(IP,lowserver, count);
         Util.pingNServers(IP,lowserver, count);
@@ -27,7 +27,7 @@ public class ServerPingAndKillTest {
         //run server
         int port1 = 9080;
         int port2 = 9090;
-        String IP = "localhost";
+        String IP = "127.0.0.1";
         Util.runServer(IP,port1);
         Util.runServer(IP,port2);
 
@@ -65,7 +65,7 @@ public class ServerPingAndKillTest {
     public void testPingAndKill9080() throws Exception {
         //run server
         int port = 9080;
-        String IP = "localhost";
+        String IP = "127.0.0.1";
         Util.runServer(IP,port);
 
         //ping server
@@ -89,7 +89,7 @@ public class ServerPingAndKillTest {
     public void testPingAndKill9090() throws Exception {
         //run server
         int port = 9090;
-        String IP = "localhost";
+        String IP = "127.0.0.1";
         Util.runServer(IP,port);
 
         //ping server

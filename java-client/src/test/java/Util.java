@@ -2,6 +2,7 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
+import org.ini4j.Profile;
 import org.testng.Reporter;
 
 import java.io.*;
@@ -24,22 +25,24 @@ public class Util {
     public static String defaultLanguage;
     public static Map<Integer,Process> processMap = new HashMap<Integer,Process>();
     static {
-        Preferences prefs = null;
+        Ini prefs = null;
         try {
-            prefs = new IniPreferences(new Ini(new File(filename)));
+            prefs = new Ini(new File(filename));
         } catch (IOException e) {
             System.out.println("Preferences load failure");
             System.exit(1);
         }
-        String python = prefs.node("shellStrings").get("python", null);
-        shellStrings.put("python",python);
-        String java = prefs.node("shellStrings").get("java", null);
-        shellStrings.put("java",java);
-        defaultLanguage = prefs.node("shellStrings").get("default", null);
-
-        if (python == null || java == null || defaultLanguage == null) {
-            System.err.println("shellStrings not complete, check " + filename);
-            System.exit(1);
+        Profile.Section shellStringsSection = prefs.get("shellStrings");
+        for (String option: shellStringsSection.keySet()) {
+            System.out.println(option +  ":" + shellStringsSection.get(option));
+            if("default".equals(option))
+            {
+                defaultLanguage = shellStringsSection.get(option);
+            }
+            else
+            {
+                shellStrings.put(option, shellStringsSection.get(option));
+            }
         }
         System.out.println(new File(defaultConfigFile).getAbsolutePath());
     }
@@ -56,8 +59,12 @@ public class Util {
         System.out.println(execString);
         System.out.flush();
         Process proc = Runtime.getRuntime ().exec(execString);
-
         processMap.put(port,proc);
+        try {
+            EasyClient.pingserver(IP,port);
+        } catch (TException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void runServer(String IP, int port, long balance, String configFile) throws IOException {
@@ -127,7 +134,7 @@ public class Util {
                 }
                 else
                 {
-                    System.out.println("Proces not available " + port);
+                    System.out.println("Process not available " + port);
                     System.out.flush();
                 }
 
@@ -141,13 +148,5 @@ public class Util {
         ;
     }
 
-    public static void main(String [] args) {
-        //kill
-        try {
-            Util.killNServers("localhost",9080,11);
-        } catch (TException e) {
-            e.printStackTrace();
-        }
-    }
 }
 

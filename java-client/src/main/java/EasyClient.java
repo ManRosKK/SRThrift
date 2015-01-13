@@ -49,34 +49,7 @@ public class EasyClient {
 
     public static void main(String[] args)
     {
-        String IP = "localhost";
-        int port = 9080;
-        long balance = 501;
-        String IP2 = "localhost";
-        int port2 = 9081;
-        long balance2 = 502;
-        String IPReceiver = "localhost";
-        int portReceiver = 13467;
-        String configFile = "config\\testSwarmBasics.ini";
-        try {
-            int value = 5;
-            EasyClient.makeTransfer(IP, port, IP2, portReceiver, value);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
-            assertEquals(1,swarmList.size());
-            assertEquals(2,swarmList.get(0).getMembersSize());
-            assertEquals(port,swarmList.get(0).getLeader().getPort());
-            assert((port == swarmList.get(0).getMembers().get(0).getPort())
-                    || port == swarmList.get(0).getMembers().get(1).getPort());
-            assert((port2 == swarmList.get(0).getMembers().get(0).getPort())
-                    || port2 == swarmList.get(0).getMembers().get(1).getPort());
-        } catch (TException e) {
-            e.printStackTrace();
-        }
+
     }
 
 
