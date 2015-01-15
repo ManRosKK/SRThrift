@@ -6,7 +6,7 @@ using Thrift;
 using SRBanking;
 namespace BankingNode
 {
-    class NodeServicesHamdler : SRBanking.ThriftInterface.NodeService.Iface
+    class NodeServicesHandler : SRBanking.ThriftInterface.NodeService.Iface
     {
         public void addToSwarm(SRBanking.ThriftInterface.Swarm swarm, SRBanking.ThriftInterface.TransferData transferData)
         {
