@@ -1,6 +1,7 @@
 import sys, glob, os, signal
 import logging
 from multiprocessing import freeze_support
+from random import shuffle
 import threading
 from threading import Thread
 from SRBanking.ThriftInterface import NodeService
@@ -9,6 +10,7 @@ from SRBanking.ThriftInterface.ttypes import TransferData, NodeID, TransferID,\
 from SRBanking.ThriftInterface import NodeService
 from ConfigParser import ConfigParser
 import time
+from thrift.transport.TTransport import TTransportException
 logging.basicConfig()
 sys.path.append('../thrift/gen-py/')
 
@@ -71,17 +73,59 @@ class ServerHandler:
                         print("Delivered")
                         #remove myself and others from swarm
                         self.unmakeSwarm(swarm)
+                        continue
                     except:
                         print("Not delivered",sys.exc_info()[0])
 
-                    #TODO: check whether others are alive
+                    #check whether others are alive
+                    for node in swarm.members:
+                        if(node != self.nodeID):
+                            try:
+                                with AutoClient(node.IP,node.port) as client:
+                                    client.ping()
+                            except TTransportException:
+                                print("Unable to ping, gotta find someone else")
+                                deathCounter = self.deathCounter.get(node)
+                                if(deathCounter is None):
+                                    print("Death counter on!")
+                                    deathCounter = 1
+                                    self.deathCounter[node]=deathCounter
+                                else:
+                                    print("Death!")
+                                    self.deathCounter[node]= deathCounter + 1
+                                    if self.deathCounter[node] > 1:
+                                        self.funeral(swarm,node)
+
+                    print("Checking fellows")
+                    #check whether there is enough members in swarm
+                    if self.getSwarmSize() > len(swarm.members):
+                        print("recruit em all!")
+                        how_much = self.getSwarmSize() - len(swarm.members)
+                        neighbours = self.getNeighbours(how_much,swarm.members)
+                        print("enough neighbours!")
+                        swarm.members += neighbours
+                        #inform them
+                        for x in neighbours:
+                            with AutoClient(x.IP,x.port) as client:
+                                client.addToSwarm(swarm,self.getTransferByID(swarm.transfer))
+                        #inform the rest
+                        for x in swarm.members[0:-how_much]:
+                            with AutoClient(x.IP,x.port) as client:
+                                client.updateSwarmMembers(swarm)
+
+
                 else:
                     #check if pinged recently
                     pass
             time.sleep(config.getint("config", "try_deliver_transfer_every")/1000.0)
-
+    def updateSwarmMembers(self,swarm):
+        swarmlocal = self.getSwarmByID(swarm.transfer)
+        swarmlocal.members = swarm.members
     def getTransferByID(self,transferID):
         transfersByID = [i for i in self.pendingTransfers if i.transferID==transferID]
+        return transfersByID[0]
+    def getSwarmByID(self,transferID):
+        transfersByID = [i for i in self.mySwarms if i.transfer==transferID]
         return transfersByID[0]
 
     def __init__(self, ip, port, accountBalance,config):
@@ -93,6 +137,7 @@ class ServerHandler:
         self.pendingTransfers = []
         self.transferHistory = []
         self.endThread = False
+        self.deathCounter = {}
         t1 = threading.Thread(target=self.run_leader_thread)
         t1.start()
 
@@ -136,11 +181,11 @@ class ServerHandler:
     def makeSwarm(self,transferData):
         print("making swarm")
         #scan for ppl
-        neighbours = self.getNeighbours()
+        how_much = self.getSwarmSize() - 1
+        neighbours = self.getNeighbours(how_much,[])
         print("neighbours",neighbours)
 
         #choose first n-1 neighbours
-        how_much = self.getSwarmSize() - 1
         if(len(neighbours) >= how_much):
             print("enough to swarm")
             swarm = Swarm(transfer=transferData.transferID, leader=self.nodeID, members=neighbours[0:how_much]+[self.nodeID])
@@ -169,17 +214,39 @@ class ServerHandler:
         self.delSwarm(swarm.transfer)
         print("got me")
 
+    def funeral(self,swarm,nodeID):
+        #remove from swarm members
+        swarm.members.remove(nodeID)
+        #inform everyone
+        for node in swarm.members:
+            if(node != self.nodeID):
+                try:
+                    with AutoClient(node.IP,node.port) as client:
+                        client.updateSwarmMembers(swarm)
+                except:
+                    print("client not informed about funeral...",sys.exc_info()[0],node.IP,node.port)
+
+
     def delSwarm(self,transferID):
         self.mySwarms = [x for x in self.mySwarms if x.transfer != transferID]
         self.pendingTransfers= [x for x in self.pendingTransfers if x.transferID != transferID]
 
-    def getNeighbours(self):
+    def getNeighbours(self,how_much_max,blacklist):
         nlist = []
-        for ip in self.getIPList():
-            for port in self.getPortList():
+        iplist = self.getIPList()
+        portlist = self.getPortList()
+        shuffle(iplist)
+        shuffle(portlist)
+        for ip in iplist:
+            for port in portlist:
                 try:
+                    if (len(nlist) >= how_much_max):
+                        break
                     if (ip==self.nodeID.IP and port==self.nodeID.port):
                         continue
+                    for node in blacklist:
+                        if (ip==node.IP and port==node.port):
+                            continue
                     with AutoClient(ip,port) as client:
                         client.ping()
                         nlist += [NodeID(IP=ip, port=port)]

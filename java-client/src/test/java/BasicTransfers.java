@@ -14,10 +14,10 @@ import static org.testng.Assert.fail;
  */
 public class BasicTransfers {
 
-    String IP = "localhost";
+    String IP = "127.0.0.1";
     int port = 9080;
     long balance = 501;
-    String IP2 = "localhost";
+    String IP2 = "127.0.0.1";
     int port2 = 9081;
     long balance2 = 502;
 

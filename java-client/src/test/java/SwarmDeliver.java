@@ -21,9 +21,10 @@ public class SwarmDeliver {
     int port2 = 9081;
     long balance2 = 502;
     String IPReceiver = "127.0.0.1";
-    int portReceiver = 13467;
-    long balanceReceiver = 13541;
+    int portReceiver = 9082;
+    long balanceReceiver = 503;
     String configFile = "config\\testSwarmBasics.ini";
+    String configFileOne = "config\\testSwarmBasicsOne.ini";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -42,12 +43,10 @@ public class SwarmDeliver {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        Thread.sleep(200);
-
         int value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
 
-        Util.runServer(IPReceiver, portReceiver, balance2, configFile);
+        Util.runServer(IPReceiver, portReceiver, balanceReceiver, configFile);
 
         Thread.sleep(1000);
 
@@ -72,11 +71,38 @@ public class SwarmDeliver {
     }
 
     @Test
+    public void SwarmDeliverOne() throws Exception {
+        //arrange
+        Util.runServer(IP, port, balance, configFileOne);
+
+        int value = 5;
+        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+
+        Util.runServer(IPReceiver, portReceiver, balanceReceiver, configFileOne);
+
+        Thread.sleep(1000);
+
+        //assert
+        List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
+        List<Swarm> swarmListR = EasyClient.getSwarmList(IPReceiver, portReceiver);
+        assertEquals(swarmList.size(),0);
+        assertEquals(swarmListR.size(),0);
+
+        List<TransferData> history = EasyClient.getHistory(IP, port);
+        List<TransferData> historyR = EasyClient.getHistory(IPReceiver, portReceiver);
+        assertEquals(history.size(), 0);
+        assertEquals(historyR.size(), 1);
+        assertEquals(historyR.get(0).getValue(), value);
+        assertEquals(historyR.get(0).getTransferID().getSender().getIP(), IP);
+        assertEquals(historyR.get(0).getTransferID().getSender().getPort(), port);
+        assertEquals(historyR.get(0).getReceiver().getIP(), IPReceiver);
+        assertEquals(historyR.get(0).getReceiver().getPort(), portReceiver);
+    }
+
+    @Test
     public void SwarmDoubleDeliver() throws Exception {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
-
-        Thread.sleep(200);
 
         int value1 = 10;
         int value2 = 20;
