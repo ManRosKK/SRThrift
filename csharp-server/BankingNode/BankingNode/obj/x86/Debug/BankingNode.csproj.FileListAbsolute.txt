@@ -1,0 +1,16 @@
+D:\studia\SR\proj\SRThrift\Projects\BankingNode\BankingNode\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\studia\SR\proj\SRThrift\Projects\BankingNode\BankingNode\bin\Debug\BankingNode.exe.config
+D:\studia\SR\proj\SRThrift\Projects\BankingNode\BankingNode\bin\Debug\BankingNode.exe
+D:\studia\SR\proj\SRThrift\Projects\BankingNode\BankingNode\bin\Debug\BankingNode.pdb
+D:\studia\SR\proj\SRThrift\Projects\BankingNode\BankingNode\obj\x86\Debug\BankingNode.exe
+D:\studia\SR\proj\SRThrift\Projects\BankingNode\BankingNode\obj\x86\Debug\BankingNode.pdb
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\bin\Debug\BankingNode.exe.config
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\obj\x86\Debug\BankingNode.exe
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\obj\x86\Debug\BankingNode.pdb
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\bin\Debug\BankingNode.exe
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\bin\Debug\BankingNode.pdb
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\bin\Debug\Thrift.dll
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\bin\Debug\ThriftInterface.dll
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\bin\Debug\Thrift.pdb
+D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\bin\Debug\ThriftInterface.pdb
