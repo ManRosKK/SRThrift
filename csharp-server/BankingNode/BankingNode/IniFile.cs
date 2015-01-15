@@ -56,5 +56,66 @@ namespace Ini
             return temp.ToString();
 
         }
+        /// <summary>
+        /// Read Data Value From the Ini File
+        /// </summary>
+        /// <PARAM name="Section"></PARAM>
+        /// <PARAM name="Key"></PARAM>
+        /// <PARAM name="Path"></PARAM>
+        /// <returns></returns>
+        public Int64 IniReadInt(string Section, string Key)
+        {
+            StringBuilder temp = new StringBuilder(255);
+            int i = GetPrivateProfileString(Section, Key, "", temp,
+                                            255, this.path);
+            Int64 val = Int64.Parse(temp.ToString());
+            return val;
+        }
+        /// <summary>
+        /// Read Data Value From the Ini File
+        /// </summary>
+        /// <PARAM name="Section"></PARAM>
+        /// <PARAM name="Key"></PARAM>
+        /// <PARAM name="Path"></PARAM>
+        /// <returns></returns>
+        public Int64[][] IniReadInts(string Section, string Key)
+        {
+            StringBuilder temp = new StringBuilder(255);
+            int i = GetPrivateProfileString(Section, Key, "", temp,
+                                            255, this.path);
+            string[] divided = temp.ToString().Split(',');
+            Int64[][] ret = new Int64[divided.Length][];
+            for (int j = 0; j < divided.Length; j++)
+            {
+                string[] div2 = divided[j].Split('-');
+                if (div2.Length == 2)
+                {
+                    ret[j] = new Int64[2];
+                    ret[j][0] = Int64.Parse(div2[0]);
+                    ret[j][1] = Int64.Parse(div2[1]);
+                }
+                else
+                {
+                    ret[j] = new Int64[1];
+                    ret[j][0] = Int64.Parse(div2[0]);
+                }
+            }
+            return ret;
+        }
+        /// <summary>
+        /// Read Data Value From the Ini File
+        /// </summary>
+        /// <PARAM name="Section"></PARAM>
+        /// <PARAM name="Key"></PARAM>
+        /// <PARAM name="Path"></PARAM>
+        /// <returns></returns>
+        public string[] IniReadStrings(string Section, string Key)
+        {
+            StringBuilder temp = new StringBuilder(255);
+            int i = GetPrivateProfileString(Section, Key, "", temp,
+                                            255, this.path);
+            string[] divided = temp.ToString().Split(',');
+            return divided;
+        }
     }
 }
