@@ -40,9 +40,10 @@ namespace SRBanking.ThriftInterface
       /// <summary>
       /// pings node
       /// </summary>
-      void ping();
+      /// <param name="sender"></param>
+      void ping(NodeID sender);
       #if SILVERLIGHT
-      IAsyncResult Begin_ping(AsyncCallback callback, object state);
+      IAsyncResult Begin_ping(AsyncCallback callback, object state, NodeID sender);
       void End_ping(IAsyncResult asyncResult);
       #endif
       /// <summary>
@@ -134,6 +135,11 @@ namespace SRBanking.ThriftInterface
       #if SILVERLIGHT
       IAsyncResult Begin_getTransfers(AsyncCallback callback, object state);
       List<TransferData> End_getTransfers(IAsyncResult asyncResult);
+      #endif
+      void AddBlackList(List<NodeID> blackList);
+      #if SILVERLIGHT
+      IAsyncResult Begin_AddBlackList(AsyncCallback callback, object state, List<NodeID> blackList);
+      void End_AddBlackList(IAsyncResult asyncResult);
       #endif
       void stop();
       #if SILVERLIGHT
@@ -335,9 +341,9 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_ping(AsyncCallback callback, object state)
+      public IAsyncResult Begin_ping(AsyncCallback callback, object state, NodeID sender)
       {
-        return send_ping(callback, state);
+        return send_ping(callback, state, sender);
       }
 
       public void End_ping(IAsyncResult asyncResult)
@@ -351,26 +357,28 @@ namespace SRBanking.ThriftInterface
       /// <summary>
       /// pings node
       /// </summary>
-      public void ping()
+      /// <param name="sender"></param>
+      public void ping(NodeID sender)
       {
         #if !SILVERLIGHT
-        send_ping();
+        send_ping(sender);
         recv_ping();
 
         #else
-        var asyncResult = Begin_ping(null, null);
+        var asyncResult = Begin_ping(null, null, sender);
         End_ping(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_ping(AsyncCallback callback, object state)
+      public IAsyncResult send_ping(AsyncCallback callback, object state, NodeID sender)
       #else
-      public void send_ping()
+      public void send_ping(NodeID sender)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("ping", TMessageType.Call, seqid_));
         ping_args args = new ping_args();
+        args.Sender = sender;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         #if SILVERLIGHT
@@ -1123,6 +1131,65 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
+      public IAsyncResult Begin_AddBlackList(AsyncCallback callback, object state, List<NodeID> blackList)
+      {
+        return send_AddBlackList(callback, state, blackList);
+      }
+
+      public void End_AddBlackList(IAsyncResult asyncResult)
+      {
+        oprot_.Transport.EndFlush(asyncResult);
+        recv_AddBlackList();
+      }
+
+      #endif
+
+      public void AddBlackList(List<NodeID> blackList)
+      {
+        #if !SILVERLIGHT
+        send_AddBlackList(blackList);
+        recv_AddBlackList();
+
+        #else
+        var asyncResult = Begin_AddBlackList(null, null, blackList);
+        End_AddBlackList(asyncResult);
+
+        #endif
+      }
+      #if SILVERLIGHT
+      public IAsyncResult send_AddBlackList(AsyncCallback callback, object state, List<NodeID> blackList)
+      #else
+      public void send_AddBlackList(List<NodeID> blackList)
+      #endif
+      {
+        oprot_.WriteMessageBegin(new TMessage("AddBlackList", TMessageType.Call, seqid_));
+        AddBlackList_args args = new AddBlackList_args();
+        args.BlackList = blackList;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        #if SILVERLIGHT
+        return oprot_.Transport.BeginFlush(callback, state);
+        #else
+        oprot_.Transport.Flush();
+        #endif
+      }
+
+      public void recv_AddBlackList()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        AddBlackList_result result = new AddBlackList_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        return;
+      }
+
+      
+      #if SILVERLIGHT
       public IAsyncResult Begin_stop(AsyncCallback callback, object state)
       {
         return send_stop(callback, state);
@@ -1198,6 +1265,7 @@ namespace SRBanking.ThriftInterface
         processMap_["getSwarmList"] = getSwarmList_Process;
         processMap_["startSwarmElection"] = startSwarmElection_Process;
         processMap_["getTransfers"] = getTransfers_Process;
+        processMap_["AddBlackList"] = AddBlackList_Process;
         processMap_["stop"] = stop_Process;
       }
 
@@ -1269,7 +1337,7 @@ namespace SRBanking.ThriftInterface
         args.Read(iprot);
         iprot.ReadMessageEnd();
         ping_result result = new ping_result();
-        iface_.ping();
+        iface_.ping(args.Sender);
         oprot.WriteMessageBegin(new TMessage("ping", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
@@ -1450,6 +1518,19 @@ namespace SRBanking.ThriftInterface
         getTransfers_result result = new getTransfers_result();
         result.Success = iface_.getTransfers();
         oprot.WriteMessageBegin(new TMessage("getTransfers", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void AddBlackList_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        AddBlackList_args args = new AddBlackList_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        AddBlackList_result result = new AddBlackList_result();
+        iface_.AddBlackList(args.BlackList);
+        oprot.WriteMessageBegin(new TMessage("AddBlackList", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -1855,6 +1936,29 @@ namespace SRBanking.ThriftInterface
     #endif
     public partial class ping_args : TBase
     {
+      private NodeID _sender;
+
+      public NodeID Sender
+      {
+        get
+        {
+          return _sender;
+        }
+        set
+        {
+          __isset.sender = true;
+          this._sender = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool sender;
+      }
 
       public ping_args() {
       }
@@ -1871,6 +1975,14 @@ namespace SRBanking.ThriftInterface
           }
           switch (field.ID)
           {
+            case 1:
+              if (field.Type == TType.Struct) {
+                Sender = new NodeID();
+                Sender.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
             default: 
               TProtocolUtil.Skip(iprot, field.Type);
               break;
@@ -1883,12 +1995,23 @@ namespace SRBanking.ThriftInterface
       public void Write(TProtocol oprot) {
         TStruct struc = new TStruct("ping_args");
         oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (Sender != null && __isset.sender) {
+          field.Name = "sender";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          Sender.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
         oprot.WriteFieldStop();
         oprot.WriteStructEnd();
       }
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("ping_args(");
+        sb.Append("Sender: ");
+        sb.Append(Sender== null ? "<null>" : Sender.ToString());
         sb.Append(")");
         return sb.ToString();
       }
@@ -4043,6 +4166,158 @@ namespace SRBanking.ThriftInterface
         StringBuilder sb = new StringBuilder("getTransfers_result(");
         sb.Append("Success: ");
         sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class AddBlackList_args : TBase
+    {
+      private List<NodeID> _blackList;
+
+      public List<NodeID> BlackList
+      {
+        get
+        {
+          return _blackList;
+        }
+        set
+        {
+          __isset.blackList = true;
+          this._blackList = value;
+        }
+      }
+
+
+      public Isset __isset;
+      #if !SILVERLIGHT
+      [Serializable]
+      #endif
+      public struct Isset {
+        public bool blackList;
+      }
+
+      public AddBlackList_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.List) {
+                {
+                  BlackList = new List<NodeID>();
+                  TList _list12 = iprot.ReadListBegin();
+                  for( int _i13 = 0; _i13 < _list12.Count; ++_i13)
+                  {
+                    NodeID _elem14 = new NodeID();
+                    _elem14 = new NodeID();
+                    _elem14.Read(iprot);
+                    BlackList.Add(_elem14);
+                  }
+                  iprot.ReadListEnd();
+                }
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("AddBlackList_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (BlackList != null && __isset.blackList) {
+          field.Name = "blackList";
+          field.Type = TType.List;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          {
+            oprot.WriteListBegin(new TList(TType.Struct, BlackList.Count));
+            foreach (NodeID _iter15 in BlackList)
+            {
+              _iter15.Write(oprot);
+            }
+            oprot.WriteListEnd();
+          }
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("AddBlackList_args(");
+        sb.Append("BlackList: ");
+        sb.Append(BlackList);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    #if !SILVERLIGHT
+    [Serializable]
+    #endif
+    public partial class AddBlackList_result : TBase
+    {
+
+      public AddBlackList_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("AddBlackList_result");
+        oprot.WriteStructBegin(struc);
+
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("AddBlackList_result(");
         sb.Append(")");
         return sb.ToString();
       }

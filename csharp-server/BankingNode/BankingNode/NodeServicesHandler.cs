@@ -58,11 +58,6 @@ namespace BankingNode
             throw new NotImplementedException();
         }
 
-        public void ping()
-        {
-            throw new NotImplementedException();
-        }
-
         public void pingSwarm(SRBanking.ThriftInterface.NodeID leader, SRBanking.ThriftInterface.TransferID transfer)
         {
             throw new NotImplementedException();
@@ -79,6 +74,16 @@ namespace BankingNode
         }
 
         public void updateSwarmMembers(SRBanking.ThriftInterface.Swarm swarm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddBlackList(List<SRBanking.ThriftInterface.NodeID> blackList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ping(SRBanking.ThriftInterface.NodeID sender)
         {
             throw new NotImplementedException();
         }
