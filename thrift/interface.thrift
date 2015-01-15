@@ -108,7 +108,7 @@ service NodeService
 
     list<TransferData> getTransfers(),
 	
-	void AddBlackList(1:list<NodeID> blackList),
+	void addBlackList(1:list<NodeID> blackList),
 
     void stop()
 }

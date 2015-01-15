@@ -78,7 +78,7 @@ namespace BankingNode
             throw new NotImplementedException();
         }
 
-        public void AddBlackList(List<SRBanking.ThriftInterface.NodeID> blackList)
+        public void addBlackList(List<SRBanking.ThriftInterface.NodeID> blackList)
         {
             throw new NotImplementedException();
         }

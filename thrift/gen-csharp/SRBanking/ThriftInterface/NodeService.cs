@@ -136,10 +136,10 @@ namespace SRBanking.ThriftInterface
       IAsyncResult Begin_getTransfers(AsyncCallback callback, object state);
       List<TransferData> End_getTransfers(IAsyncResult asyncResult);
       #endif
-      void AddBlackList(List<NodeID> blackList);
+      void addBlackList(List<NodeID> blackList);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddBlackList(AsyncCallback callback, object state, List<NodeID> blackList);
-      void End_AddBlackList(IAsyncResult asyncResult);
+      IAsyncResult Begin_addBlackList(AsyncCallback callback, object state, List<NodeID> blackList);
+      void End_addBlackList(IAsyncResult asyncResult);
       #endif
       void stop();
       #if SILVERLIGHT
@@ -1131,39 +1131,39 @@ namespace SRBanking.ThriftInterface
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddBlackList(AsyncCallback callback, object state, List<NodeID> blackList)
+      public IAsyncResult Begin_addBlackList(AsyncCallback callback, object state, List<NodeID> blackList)
       {
-        return send_AddBlackList(callback, state, blackList);
+        return send_addBlackList(callback, state, blackList);
       }
 
-      public void End_AddBlackList(IAsyncResult asyncResult)
+      public void End_addBlackList(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        recv_AddBlackList();
+        recv_addBlackList();
       }
 
       #endif
 
-      public void AddBlackList(List<NodeID> blackList)
+      public void addBlackList(List<NodeID> blackList)
       {
         #if !SILVERLIGHT
-        send_AddBlackList(blackList);
-        recv_AddBlackList();
+        send_addBlackList(blackList);
+        recv_addBlackList();
 
         #else
-        var asyncResult = Begin_AddBlackList(null, null, blackList);
-        End_AddBlackList(asyncResult);
+        var asyncResult = Begin_addBlackList(null, null, blackList);
+        End_addBlackList(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddBlackList(AsyncCallback callback, object state, List<NodeID> blackList)
+      public IAsyncResult send_addBlackList(AsyncCallback callback, object state, List<NodeID> blackList)
       #else
-      public void send_AddBlackList(List<NodeID> blackList)
+      public void send_addBlackList(List<NodeID> blackList)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("AddBlackList", TMessageType.Call, seqid_));
-        AddBlackList_args args = new AddBlackList_args();
+        oprot_.WriteMessageBegin(new TMessage("addBlackList", TMessageType.Call, seqid_));
+        addBlackList_args args = new addBlackList_args();
         args.BlackList = blackList;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -1174,7 +1174,7 @@ namespace SRBanking.ThriftInterface
         #endif
       }
 
-      public void recv_AddBlackList()
+      public void recv_addBlackList()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -1182,7 +1182,7 @@ namespace SRBanking.ThriftInterface
           iprot_.ReadMessageEnd();
           throw x;
         }
-        AddBlackList_result result = new AddBlackList_result();
+        addBlackList_result result = new addBlackList_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         return;
@@ -1265,7 +1265,7 @@ namespace SRBanking.ThriftInterface
         processMap_["getSwarmList"] = getSwarmList_Process;
         processMap_["startSwarmElection"] = startSwarmElection_Process;
         processMap_["getTransfers"] = getTransfers_Process;
-        processMap_["AddBlackList"] = AddBlackList_Process;
+        processMap_["addBlackList"] = addBlackList_Process;
         processMap_["stop"] = stop_Process;
       }
 
@@ -1523,14 +1523,14 @@ namespace SRBanking.ThriftInterface
         oprot.Transport.Flush();
       }
 
-      public void AddBlackList_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void addBlackList_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        AddBlackList_args args = new AddBlackList_args();
+        addBlackList_args args = new addBlackList_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        AddBlackList_result result = new AddBlackList_result();
-        iface_.AddBlackList(args.BlackList);
-        oprot.WriteMessageBegin(new TMessage("AddBlackList", TMessageType.Reply, seqid)); 
+        addBlackList_result result = new addBlackList_result();
+        iface_.addBlackList(args.BlackList);
+        oprot.WriteMessageBegin(new TMessage("addBlackList", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -4176,7 +4176,7 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class AddBlackList_args : TBase
+    public partial class addBlackList_args : TBase
     {
       private List<NodeID> _blackList;
 
@@ -4202,7 +4202,7 @@ namespace SRBanking.ThriftInterface
         public bool blackList;
       }
 
-      public AddBlackList_args() {
+      public addBlackList_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -4245,7 +4245,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("AddBlackList_args");
+        TStruct struc = new TStruct("addBlackList_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (BlackList != null && __isset.blackList) {
@@ -4268,7 +4268,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("AddBlackList_args(");
+        StringBuilder sb = new StringBuilder("addBlackList_args(");
         sb.Append("BlackList: ");
         sb.Append(BlackList);
         sb.Append(")");
@@ -4281,10 +4281,10 @@ namespace SRBanking.ThriftInterface
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class AddBlackList_result : TBase
+    public partial class addBlackList_result : TBase
     {
 
-      public AddBlackList_result() {
+      public addBlackList_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -4309,7 +4309,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("AddBlackList_result");
+        TStruct struc = new TStruct("addBlackList_result");
         oprot.WriteStructBegin(struc);
 
         oprot.WriteFieldStop();
@@ -4317,7 +4317,7 @@ namespace SRBanking.ThriftInterface
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("AddBlackList_result(");
+        StringBuilder sb = new StringBuilder("addBlackList_result(");
         sb.Append(")");
         return sb.ToString();
       }
