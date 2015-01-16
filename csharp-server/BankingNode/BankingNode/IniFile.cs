@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using log4net;
+using System.Reflection;
 
 namespace Ini
 {
@@ -11,6 +13,7 @@ namespace Ini
     {
         public string path;
 
+        private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         [DllImport("kernel32")]
         private static extern long WritePrivateProfileString(string section,
             string key, string val, string filePath);
@@ -80,6 +83,7 @@ namespace Ini
         /// <returns></returns>
         public Int64[][] IniReadInts(string Section, string Key)
         {
+            string text = "";
             StringBuilder temp = new StringBuilder(255);
             int i = GetPrivateProfileString(Section, Key, "", temp,
                                             255, this.path);
@@ -93,13 +97,16 @@ namespace Ini
                     ret[j] = new Int64[2];
                     ret[j][0] = Int64.Parse(div2[0]);
                     ret[j][1] = Int64.Parse(div2[1]);
+                    text += "{ " + ret[j][0].ToString() + " - " + ret[j][1].ToString() + " },";
                 }
                 else
                 {
                     ret[j] = new Int64[1];
                     ret[j][0] = Int64.Parse(div2[0]);
+                    text += "{ " + ret[j][0].ToString() +  " },";
                 }
             }
+            logerr.Info(text);
             return ret;
         }
         /// <summary>
@@ -115,6 +122,7 @@ namespace Ini
             int i = GetPrivateProfileString(Section, Key, "", temp,
                                             255, this.path);
             string[] divided = temp.ToString().Split(',');
+            logerr.Info(temp.ToString());
             return divided;
         }
     }

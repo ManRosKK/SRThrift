@@ -56,13 +56,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BalanceManager.cs" />
     <Compile Include="ConfigLoader.cs" />
     <Compile Include="ConfigWrongKeyException.cs" />
     <Compile Include="IniFile.cs" />
+    <Compile Include="NodeID.cs" />
     <Compile Include="NodeServicesHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwarmManagers.cs" />
+    <Compile Include="Swarm.cs" />
+    <Compile Include="SwarmManager.cs" />
+    <Compile Include="TransferData.cs" />
+    <Compile Include="TransferID.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

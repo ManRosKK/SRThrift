@@ -1,0 +1,1870 @@
+2015-01-16 06:08:02,242 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:08:02,273 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:08:02,276 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:08:02,281 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:08:02,282 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:08:02,284 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:08:02,284 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:08:02,288 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:08:41,992 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:08:42,019 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:08:42,021 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:08:42,026 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:08:42,027 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:08:42,029 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:08:42,029 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:08:42,032 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:08:42,922 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:08:42,927 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:08:42,928 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:08:42,928 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:08:42,929 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:08:42,931 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:08:42,932 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:08:42,933 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:08:42,933 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:08:42,934 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:08:42,942 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:08:42,943 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:08:42,944 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:08:42,944 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:08:42,945 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:09:05,703 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:09:05,730 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:09:05,732 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:09:05,736 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:09:05,736 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:09:05,738 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:09:05,738 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:09:05,741 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:09:06,623 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:09:06,628 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:09:06,628 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:09:06,629 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:09:06,629 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:09:06,631 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:09:06,632 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:09:06,632 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:09:06,633 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:09:06,633 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:09:41,025 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:09:41,053 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:09:41,055 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:09:41,059 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:09:41,060 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:09:41,061 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:09:41,062 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:09:41,064 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:09:41,957 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:09:41,961 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:09:41,962 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:09:41,962 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:09:41,963 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:09:41,966 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:09:41,966 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:09:41,967 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:09:41,967 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:09:41,968 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:09:42,004 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:09:42,005 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:09:42,006 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:09:42,006 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:09:42,007 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:10:05,090 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:10:05,118 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:10:05,120 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:10:05,125 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:10:05,126 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:10:05,129 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:10:05,130 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:10:05,132 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:10:06,051 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:10:06,055 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:10:06,056 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:10:06,056 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:10:06,057 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:10:06,060 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:10:06,060 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:10:06,061 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:10:06,062 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:10:06,062 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:10:27,298 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:10:27,325 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:10:27,327 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:10:27,333 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:10:27,334 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:10:27,335 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:10:27,336 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:10:27,338 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:10:28,237 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:10:28,240 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:10:28,241 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:10:28,241 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:10:28,242 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:18:35,074 [10] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:18:35,109 [10] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: localhost|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\defaultExt.ini|
+2015-01-16 06:18:35,111 [10] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:18:47,135 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:18:47,176 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:18:47,179 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:18:47,189 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:18:47,191 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:18:47,194 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:18:47,195 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:18:47,199 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:18:48,148 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:18:48,154 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:18:48,156 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:18:48,157 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:18:48,158 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:18:48,158 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:18:48,158 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:18:48,160 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:18:48,160 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:18:48,161 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:18:48,161 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:18:48,162 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:18:48,162 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:18:48,167 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:18:48,168 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:18:48,169 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:18:48,169 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:18:48,170 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:18:48,170 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:18:48,170 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:26:22,363 [9] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:26:22,394 [9] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: localhost|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\defaultExt.ini|
+2015-01-16 06:26:22,396 [9] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:26:33,375 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:26:33,440 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:26:33,444 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:26:33,452 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:26:33,453 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:26:33,455 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:33,456 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:33,459 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:26:34,368 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:26:34,425 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:34,444 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:34,563 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:26:34,589 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:26:34,591 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:26:34,595 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:26:34,596 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:26:34,597 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:34,598 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:34,600 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:26:35,514 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:26:35,520 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:26:35,522 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:35,523 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:35,523 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:35,524 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:35,525 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:35,527 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:26:35,527 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:35,528 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:35,528 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:35,528 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:35,529 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:35,534 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:26:35,536 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:26:35,539 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:26:35,577 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:35,598 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:35,717 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:26:35,748 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:26:35,750 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:26:35,754 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:26:35,755 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:26:35,756 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:35,757 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:35,759 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:26:36,671 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:26:36,678 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:26:36,680 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:36,681 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:36,682 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:36,683 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:36,683 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:36,686 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:26:36,687 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:36,687 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:36,688 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:36,688 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:36,689 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:36,709 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:26:36,769 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:36,790 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:36,921 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:26:36,946 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:26:36,948 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:26:36,952 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:26:36,952 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:26:36,954 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:36,954 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:36,956 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:26:37,859 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:26:37,865 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:26:37,867 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:37,868 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:37,868 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:37,869 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:37,869 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:37,871 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:26:37,872 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:37,872 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:37,873 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:37,873 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:37,873 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:37,908 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:26:37,909 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:37,909 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:37,910 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:37,910 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:37,910 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:37,911 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:26:37,913 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:26:37,959 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:37,979 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:38,103 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:26:38,128 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:26:38,130 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:26:38,134 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:26:38,135 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:26:38,136 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:38,136 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:38,139 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:26:39,026 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:26:39,031 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:26:39,033 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:39,034 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:39,034 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:39,035 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:39,035 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:39,037 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:26:39,038 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:39,038 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:39,039 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:39,039 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:39,039 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:39,110 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:39,128 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:39,251 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:26:39,276 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:26:39,278 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:26:39,282 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:26:39,283 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:26:39,285 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:39,285 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:39,288 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:26:40,180 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:26:40,186 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:26:40,188 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:26:40,189 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:26:40,189 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:26:40,190 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:26:40,190 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:26:40,236 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:26:40,257 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:30:58,734 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:30:58,765 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:30:58,767 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:30:58,774 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:30:58,775 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:30:58,780 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:30:58,780 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:30:58,784 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:30:59,748 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:30:59,754 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:30:59,755 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:30:59,756 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:30:59,757 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:30:59,757 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:30:59,758 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:30:59,760 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:30:59,760 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:30:59,761 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:30:59,761 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:30:59,762 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:30:59,762 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:30:59,784 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:30:59,842 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:30:59,860 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:05,663 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:33:05,706 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:33:05,708 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:33:05,712 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:33:05,713 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:33:05,715 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:05,716 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:05,719 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:33:06,754 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:33:06,812 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:06,830 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:06,953 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:33:06,977 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:33:06,979 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:33:06,983 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:33:06,984 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:33:06,986 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:06,986 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:06,988 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:33:07,905 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:33:07,910 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:33:07,912 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:07,912 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:07,913 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:07,913 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:07,913 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:07,915 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:33:07,916 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:07,916 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:07,916 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:07,917 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:07,917 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:07,922 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:33:07,923 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:33:07,924 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:33:07,924 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:33:07,927 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:33:07,967 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:07,993 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:08,124 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:33:08,150 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:33:08,151 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:33:08,155 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:33:08,156 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:33:08,158 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:08,158 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:08,161 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:33:09,090 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:33:09,098 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:33:09,100 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:09,101 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:09,102 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:09,102 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:09,103 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:09,105 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:33:09,106 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:09,106 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:09,107 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:09,107 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:09,107 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:09,125 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:33:09,126 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:09,126 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:09,127 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:09,127 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:09,128 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:09,130 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:33:09,177 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:09,204 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:09,331 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:33:09,357 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:33:09,359 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:33:09,363 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:33:09,363 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:33:09,365 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:09,366 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:09,368 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:33:10,248 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:33:10,253 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:33:10,256 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:10,256 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:10,257 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:10,258 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:10,258 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:10,260 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:33:10,260 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:10,261 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:10,261 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:10,262 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:10,262 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:10,281 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:33:10,282 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:10,282 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:10,283 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:10,283 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:10,284 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:10,304 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:33:10,305 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9081] vs 127.0.0.1[9080]
+2015-01-16 06:33:10,305 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:10,306 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:10,306 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:10,307 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:10,307 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:10,307 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:33:10,314 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:33:10,370 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:10,394 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:10,514 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:33:10,539 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:33:10,540 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:33:10,544 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:33:10,545 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:33:10,547 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:10,547 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:10,550 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:33:11,454 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:33:11,463 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:33:11,467 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:11,468 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:11,469 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:11,470 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:11,471 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:11,474 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:33:11,475 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:11,475 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:11,476 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:11,477 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:11,477 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:11,500 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:33:11,501 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:11,502 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:11,502 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:11,503 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:11,503 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:11,571 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:11,592 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:11,727 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:33:11,754 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:33:11,756 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:33:11,762 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:33:11,763 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:33:11,765 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:11,766 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:11,768 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:33:12,664 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:33:12,669 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:33:12,670 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:33:12,671 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:33:12,671 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:33:12,672 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:33:12,672 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:33:12,725 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:33:12,747 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:12,683 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:12,773 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:12,776 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:12,782 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:12,783 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:35:12,790 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:12,791 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:12,794 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:13,702 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:35:13,757 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:13,777 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:13,901 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:13,928 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:13,930 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:13,934 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:13,935 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:35:13,937 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:13,938 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:13,940 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:14,851 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:35:14,858 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:35:14,860 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:14,861 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:14,861 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:14,862 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:14,862 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:14,864 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:35:14,864 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:14,865 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:14,865 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:14,865 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:14,866 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:14,871 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:35:14,872 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:35:14,873 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:35:14,873 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:35:14,876 [7] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:35:14,916 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:14,938 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:15,065 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:15,090 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:15,091 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:15,095 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:15,096 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:35:15,098 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:15,098 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:15,100 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:16,027 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:35:16,039 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:35:16,042 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:16,043 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:16,044 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:16,045 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:16,046 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:16,049 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:35:16,050 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:16,051 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:16,051 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:16,052 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:16,053 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:16,073 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:35:16,073 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:16,074 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:16,074 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:16,074 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:16,075 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:16,077 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:35:16,119 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:16,141 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:16,287 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:16,313 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:16,315 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:16,321 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:16,322 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:35:16,324 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:16,324 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:16,327 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:17,213 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:35:17,220 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:35:17,223 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:17,224 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:17,225 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:17,226 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:17,226 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:17,229 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:35:17,230 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:17,231 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:17,231 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:17,232 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:17,232 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:17,250 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:35:17,251 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:17,251 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:17,252 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:17,252 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:17,253 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:17,273 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:35:17,274 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9081] vs 127.0.0.1[9080]
+2015-01-16 06:35:17,274 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:17,275 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:17,275 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:17,276 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:17,276 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:17,276 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:35:17,286 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:35:17,339 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:17,358 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:17,481 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:17,507 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:17,510 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:17,515 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:17,516 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:35:17,518 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:17,519 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:17,521 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:18,434 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:35:18,440 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:35:18,442 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:18,444 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:18,444 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:18,445 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:18,446 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:18,448 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:35:18,449 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:18,449 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:18,450 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:18,450 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:18,451 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:18,475 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:35:18,476 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:18,476 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:18,477 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:18,477 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:18,478 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:18,533 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:18,552 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:18,670 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:18,698 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:18,700 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:18,704 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:18,705 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:35:18,706 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:18,707 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:18,709 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:19,617 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:35:19,624 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:35:19,626 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:35:19,627 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:35:19,627 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:19,627 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:19,628 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:35:19,680 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:19,699 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:37,302 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:37,336 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:37,339 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:37,345 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:37,346 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:35:37,349 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:37,349 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:37,353 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:42,536 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,554 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,575 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,596 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,618 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,638 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,657 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,682 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,705 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:42,726 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:52,894 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:52,920 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:52,922 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:52,926 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:52,927 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:35:52,928 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:52,928 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:52,931 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:53,338 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:54,500 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:54,525 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9090|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:54,527 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:54,531 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:54,531 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:35:54,533 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:54,533 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9090
+2015-01-16 06:35:54,535 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:54,948 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:56,093 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:35:56,118 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:35:56,120 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:35:56,124 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:35:56,124 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:35:56,126 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:35:56,126 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:35:56,128 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:35:57,075 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:35:57,096 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:11,655 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:11,685 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:11,688 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:11,693 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:11,694 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:36:11,696 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:11,696 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:11,699 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:16,927 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:16,945 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:16,966 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:16,988 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:17,013 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:17,033 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:17,053 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:17,084 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:17,117 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:17,139 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:27,324 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:27,351 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:27,353 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:27,357 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:27,358 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:36:27,359 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:27,360 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:27,362 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:27,779 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:28,907 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:28,932 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9090|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:28,934 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:28,938 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:28,939 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:36:28,940 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:28,941 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9090
+2015-01-16 06:36:28,943 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:29,382 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:30,540 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:30,565 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:30,567 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:30,571 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:30,572 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:36:30,573 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:30,573 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:30,576 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:31,505 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:31,526 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:33,705 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:33,731 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:36:33,733 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:33,737 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:33,738 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:33,739 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:33,740 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:33,742 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:34,667 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:36:35,759 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:35,778 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:35,893 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:35,919 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:36:35,921 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:35,926 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:35,927 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:35,928 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:35,929 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:35,932 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:37,352 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:36:38,426 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:38,446 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:38,562 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:38,588 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsTooBig.ini|
+2015-01-16 06:36:38,589 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:38,593 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:38,594 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:38,596 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:38,596 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:38,598 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:39,528 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:36:40,613 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:40,633 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:40,747 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:40,773 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:36:40,775 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:40,779 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:40,780 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:40,781 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:40,782 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:40,784 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:41,695 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:36:42,762 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:42,782 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:42,899 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:42,925 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:36:42,927 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:42,931 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:42,932 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:42,933 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:42,934 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:42,936 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:43,824 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:36:44,888 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:44,908 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:45,025 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:45,050 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:45,052 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:45,056 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:45,057 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:45,058 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:45,059 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:45,061 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:45,970 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:36:46,033 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:46,051 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:46,181 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:46,206 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:46,208 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:46,212 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:46,213 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:46,214 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:46,215 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:46,217 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:47,144 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:36:47,154 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:36:47,159 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:47,162 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:47,162 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:47,163 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:47,164 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:47,167 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:36:47,168 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:47,169 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:47,170 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:47,170 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:47,171 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:47,178 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:36:47,180 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:36:47,181 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:36:47,182 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:36:47,186 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:36:47,223 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:47,245 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:47,361 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:47,386 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:47,387 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:47,391 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:47,392 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:47,394 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:47,394 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:47,397 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:48,309 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:36:48,315 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:36:48,318 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:48,318 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:48,319 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:48,320 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:48,320 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:48,322 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:36:48,323 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:48,323 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:48,323 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:48,324 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:48,324 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:48,342 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:36:48,343 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:48,343 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:48,344 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:48,344 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:48,344 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:48,347 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:36:48,389 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:48,407 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:48,525 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:48,550 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:48,552 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:48,555 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:48,556 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:48,558 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:48,558 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:48,560 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:49,463 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:36:49,469 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:36:49,471 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:49,472 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:49,473 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:49,473 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:49,474 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:49,476 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:36:49,477 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:49,478 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:49,478 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:49,479 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:49,479 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:49,497 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:36:49,498 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:49,498 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:49,499 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:49,499 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:49,500 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:49,521 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:36:49,522 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9081] vs 127.0.0.1[9080]
+2015-01-16 06:36:49,522 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:49,523 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:49,523 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:49,524 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:49,524 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:49,524 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:36:49,531 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:36:49,592 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:49,620 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:49,752 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:49,783 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:49,785 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:49,790 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:49,791 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:49,792 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:49,792 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:49,795 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:50,684 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:36:50,689 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:36:50,691 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:50,692 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:50,692 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:50,693 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:50,693 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:50,695 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:36:50,696 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:50,696 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:50,697 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:50,697 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:50,698 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:50,715 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:36:50,716 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:50,717 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:50,717 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:50,717 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:50,718 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:50,773 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:50,790 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:50,906 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:50,932 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:36:50,934 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:50,938 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:50,940 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:50,942 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:50,943 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:50,946 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:51,843 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:36:51,853 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:36:51,855 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:51,855 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:51,856 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:51,856 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:51,857 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:51,899 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:51,918 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:52,048 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:52,073 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:36:52,074 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:52,079 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:52,079 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:52,081 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:52,081 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:52,083 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:52,970 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:36:52,976 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:36:52,978 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:52,979 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:52,979 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:52,980 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:52,980 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:52,982 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:36:52,983 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:52,983 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:52,984 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:52,984 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:52,985 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:53,003 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9082]
+2015-01-16 06:36:53,003 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:36:53,004 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:36:53,004 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:53,005 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:53,005 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:36:54,096 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:54,114 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:54,136 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:54,246 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:54,278 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:36:54,280 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:54,286 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:54,288 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:54,290 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:54,291 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:54,294 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:54,654 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:36:55,731 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:57,894 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:36:57,920 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:36:57,922 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:36:57,925 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:36:57,926 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:36:57,927 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:36:57,928 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:36:57,930 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:36:58,815 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:36:59,890 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:36:59,908 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:37:01,050 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:37:01,075 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:37:01,077 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:37:01,081 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:37:01,082 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:37:01,083 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:37:01,084 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:37:01,086 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:37:01,983 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:37:03,074 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:37:03,094 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:44:26,458 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:44:26,593 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:44:26,596 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:44:26,603 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:44:26,604 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:44:26,606 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:44:26,607 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:44:26,610 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:44:27,470 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:44:28,571 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:44:28,594 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:44:29,745 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:44:29,769 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:44:29,771 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:44:29,775 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:44:29,775 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:44:29,777 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:44:29,778 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:44:29,780 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:44:30,132 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:44:31,222 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:44:33,403 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:44:33,433 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:44:33,435 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:44:33,439 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:44:33,440 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:44:33,441 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:44:33,442 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:44:33,444 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:44:34,324 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:44:35,372 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:44:35,393 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:45:23,550 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:45:23,631 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:45:23,633 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:45:23,638 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:45:23,639 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:45:23,641 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:45:23,642 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:45:23,645 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:45:24,568 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:45:25,643 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:45:25,671 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:45:26,818 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:45:26,845 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:45:26,848 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:45:26,853 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:45:26,854 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:45:26,856 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:45:26,856 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:45:26,859 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:45:27,220 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:45:28,303 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:45:30,473 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:45:30,497 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:45:30,499 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:45:30,503 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:45:30,504 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:45:30,505 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:45:30,506 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:45:30,508 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:45:31,393 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:45:32,477 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:45:32,505 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:32,478 [9] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:46:32,505 [9] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: localhost|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\defaultExt.ini|
+2015-01-16 06:46:32,507 [9] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:46:52,840 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:46:52,878 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:46:52,880 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:46:52,885 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:46:52,886 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:46:52,887 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:52,888 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:52,891 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:46:53,808 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:46:53,868 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:53,891 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:54,025 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:46:54,050 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:46:54,051 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:46:54,055 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:46:54,056 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:46:54,058 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:54,058 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:54,061 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:46:54,955 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:46:54,961 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:46:54,963 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:54,964 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:54,964 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:54,965 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:54,965 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:54,967 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:46:54,968 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:54,968 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:54,969 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:54,969 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:54,970 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:54,975 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:46:54,976 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:46:54,977 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:46:54,978 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:46:54,981 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:46:55,018 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:55,041 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:55,162 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:46:55,188 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:46:55,190 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:46:55,195 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:46:55,195 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:46:55,197 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:55,197 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:55,200 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:46:56,083 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:46:56,089 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:46:56,091 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:56,092 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:56,092 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:56,092 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:56,093 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:56,095 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:46:56,096 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:56,096 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:56,097 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:56,097 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:56,097 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:56,114 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:46:56,115 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:56,115 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:56,116 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:56,116 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:56,117 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:56,119 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:46:56,163 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:56,189 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:56,314 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:46:56,339 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:46:56,340 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:46:56,344 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:46:56,345 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:46:56,347 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:56,347 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:56,349 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:46:57,239 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:46:57,244 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:46:57,246 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:57,247 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:57,247 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:57,248 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:57,248 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:57,250 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:46:57,251 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:57,251 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:57,252 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:57,252 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:57,253 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:57,271 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:46:57,272 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:57,272 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:57,273 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:57,273 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:57,274 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:57,296 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:46:57,297 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9081] vs 127.0.0.1[9080]
+2015-01-16 06:46:57,298 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:57,298 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:57,299 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:57,300 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:57,300 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:57,301 [6] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:46:57,308 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:46:57,355 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:57,375 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:57,498 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:46:57,527 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:46:57,528 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:46:57,532 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:46:57,533 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:46:57,534 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:57,534 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:57,537 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:46:58,458 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:46:58,466 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:46:58,470 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:58,471 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:58,472 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:58,473 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:58,474 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:58,478 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:46:58,478 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:58,479 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:58,480 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:58,480 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:58,481 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:58,499 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:46:58,500 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:58,500 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:58,501 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:58,501 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:58,502 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:58,566 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:58,587 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:58,722 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:46:58,747 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:46:58,749 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:46:58,753 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:46:58,754 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:46:58,757 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:58,758 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:58,761 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:46:59,646 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:46:59,652 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:46:59,654 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:46:59,655 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:46:59,655 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:46:59,656 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:46:59,656 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:46:59,703 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:46:59,722 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:07,223 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:07,274 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:47:07,276 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:07,283 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:07,284 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:07,287 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:07,287 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:07,291 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:08,198 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:47:09,262 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:09,285 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:09,409 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:09,435 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:47:09,436 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:09,442 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:09,443 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:09,444 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:09,445 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:09,447 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:10,847 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:47:11,892 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:11,920 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:12,037 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:12,062 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsTooBig.ini|
+2015-01-16 06:47:12,064 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:12,069 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:12,070 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:12,071 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:12,072 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:12,074 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:12,980 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:47:14,053 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:14,083 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:14,200 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:14,225 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:47:14,227 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:14,231 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:14,232 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:14,234 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:14,234 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:14,236 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:15,147 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:47:16,206 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:16,229 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:16,354 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:16,380 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:47:16,382 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:16,386 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:16,387 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:16,388 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:16,389 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:16,391 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:17,310 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:47:18,372 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:18,393 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:26,373 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:26,414 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:47:26,417 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:26,424 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:26,425 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:26,428 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:26,430 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:26,446 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:27,410 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:47:27,416 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:47:27,419 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:47:27,420 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:47:27,421 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:27,421 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:27,422 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:47:27,425 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:47:27,425 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:47:27,426 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:47:27,426 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:27,427 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:27,427 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:47:27,446 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9082]
+2015-01-16 06:47:27,447 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:47:27,447 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:47:27,448 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:27,448 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:27,449 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:47:28,528 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:28,550 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:28,572 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:28,702 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:28,731 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:47:28,733 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:28,740 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:28,741 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:28,743 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:28,743 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:28,745 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:29,111 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:47:30,172 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:32,300 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:47:32,327 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:47:32,329 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:47:32,333 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:47:32,333 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:47:32,335 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:47:32,335 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:47:32,338 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:47:33,259 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:47:34,321 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:47:34,340 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:49:55,003 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:49:55,075 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:49:55,077 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:49:55,083 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:49:55,084 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:49:55,086 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:49:55,086 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:49:55,090 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:49:56,037 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:49:57,123 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:49:57,152 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:49:58,273 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:49:58,298 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:49:58,299 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:49:58,303 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:49:58,304 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:49:58,306 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:49:58,306 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:49:58,308 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:49:58,701 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:49:59,765 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:50:01,915 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:50:01,940 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:50:01,942 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:50:01,946 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:50:01,947 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:50:01,949 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:50:01,949 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:50:01,951 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:50:02,832 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:50:03,900 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:50:03,924 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:51:42,287 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:51:42,327 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:51:42,329 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:51:42,335 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:51:42,336 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:51:42,338 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:51:42,338 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:51:42,341 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:51:43,317 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:51:43,324 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:51:43,328 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:51:43,329 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:51:43,330 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:51:43,331 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:51:43,331 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:51:44,336 [5] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:51:44,440 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:51:44,465 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:51:45,619 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:51:45,648 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:51:45,650 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:51:45,655 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:51:45,655 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:51:45,657 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:51:45,657 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:51:45,660 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:51:46,017 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:51:46,022 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:51:46,024 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:51:46,025 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:51:46,025 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:51:46,025 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:51:46,026 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:51:47,043 [5] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:51:47,111 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:51:49,239 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:51:49,264 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:51:49,266 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:51:49,270 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:51:49,271 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:51:49,273 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:51:49,273 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:51:49,275 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:51:50,162 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:51:50,169 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:51:50,171 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:51:50,172 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:51:50,173 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:51:50,174 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:51:50,174 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:51:51,191 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:51:51,245 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:51:51,269 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:35,679 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:57:35,723 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:57:35,726 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:57:35,733 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:57:35,734 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:57:35,736 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:57:35,737 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:57:35,740 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:57:36,702 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:57:36,707 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:57:36,709 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:57:36,710 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:57:36,711 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:57:36,712 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:57:36,712 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:57:37,718 [5] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:57:39,401 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:39,421 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:39,442 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:39,563 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:57:39,593 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:57:39,595 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:57:39,599 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:57:39,601 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:57:39,603 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:57:39,604 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:57:39,606 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:57:39,991 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:57:40,000 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:57:40,002 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:57:40,004 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:57:40,004 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:57:40,005 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:57:40,005 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:57:41,019 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:57:42,652 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:43,677 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:43,804 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:57:43,829 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:57:43,831 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:57:43,835 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:57:43,836 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:57:43,837 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:57:43,838 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:57:43,840 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:57:44,724 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:57:44,728 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 06:57:44,730 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:57:44,730 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:57:44,731 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:57:44,731 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:57:44,731 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:57:45,740 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:57:48,401 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:48,420 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:57:48,443 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:11,808 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:11,840 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:11,842 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:11,846 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:11,847 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:59:11,848 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:11,849 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:11,851 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:17,194 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,212 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,233 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,253 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,277 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,304 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,331 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,356 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,380 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:17,404 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:27,589 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:27,617 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:27,618 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:27,622 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:27,623 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:59:27,624 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:27,625 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:27,627 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:28,020 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:29,150 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:29,176 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9090|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:29,177 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:29,181 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:29,182 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:59:29,183 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:29,183 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9090
+2015-01-16 06:59:29,186 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:29,605 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:30,756 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:30,782 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|500|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:30,784 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:30,788 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:30,788 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 500
+2015-01-16 06:59:30,790 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:30,790 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:30,792 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:31,740 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:31,758 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:33,881 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:33,906 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:59:33,908 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:33,912 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:33,913 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:33,914 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:33,915 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:33,917 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:34,841 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:34,847 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:34,850 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:34,851 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:34,851 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:34,852 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:34,852 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:35,857 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:13467
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:59:35,940 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:35,961 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:36,077 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:36,103 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:59:36,105 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:36,109 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:36,110 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:36,111 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:36,111 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:36,114 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:37,528 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:37,533 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:37,534 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:37,535 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:37,536 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:37,536 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:37,536 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:38,540 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:13467
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:59:38,583 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:38,606 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:38,734 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:38,762 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsTooBig.ini|
+2015-01-16 06:59:38,763 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:38,768 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:38,769 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:38,771 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:38,771 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:38,773 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:39,658 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:39,662 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:39,664 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:39,665 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:39,666 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:39,666 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:39,667 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:40,667 [5] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:13467
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:59:40,704 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:40,725 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:40,848 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:40,873 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:59:40,875 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:40,878 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:40,879 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:40,881 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:40,881 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:40,883 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:41,787 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:41,791 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:41,793 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:41,794 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:41,794 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:41,795 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:41,795 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:42,793 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:13467
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:59:43,864 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:43,883 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:44,000 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:44,027 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:59:44,028 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:44,032 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:44,033 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:44,035 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:44,035 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:44,038 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:44,923 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:44,927 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:44,929 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:44,929 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:44,930 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:44,930 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:44,930 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:45,941 [5] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:13467
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:59:45,994 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:45,995 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 06:59:45,995 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:45,996 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:45,996 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:45,996 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:45,997 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:46,997 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:13467
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:59:47,030 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:47,058 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:47,177 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:47,202 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:47,204 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:47,208 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:47,208 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:47,210 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:47,211 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:47,213 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:48,115 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:59:48,164 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:48,181 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:48,299 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:48,326 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:48,327 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:48,331 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:48,332 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:48,334 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:48,335 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:48,337 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:49,251 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:59:49,258 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:59:49,261 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:49,262 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:49,263 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:49,264 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:49,265 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:49,270 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9080) | 35
+2015-01-16 06:59:49,271 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:49,272 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:49,272 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:49,273 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:49,273 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:49,278 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:59:49,280 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:59:49,280 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:59:49,281 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9080]
+2015-01-16 06:59:49,284 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:59:49,321 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:49,339 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:49,475 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:49,500 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:49,502 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:49,505 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:49,506 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:49,508 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:49,508 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:49,510 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:50,397 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:59:50,404 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:59:50,407 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:50,410 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:50,411 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:50,411 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:50,412 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:50,416 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:59:50,416 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:50,417 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:50,417 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:50,418 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:50,418 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:50,440 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:59:50,440 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:50,441 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:50,441 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:50,442 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:50,443 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:50,445 [5] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:59:50,487 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:50,506 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:50,632 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:50,658 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:50,660 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:50,664 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:50,665 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:50,667 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:50,667 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:50,669 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:51,555 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:59:51,560 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:59:51,562 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:51,563 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:51,563 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:51,564 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:51,565 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:51,568 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 06:59:51,569 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:51,570 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:51,570 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:51,571 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:51,572 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:51,592 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:59:51,593 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:51,594 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:51,594 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:51,595 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:51,595 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:51,620 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - Transfer Delivered 
+2015-01-16 06:59:51,621 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9081] vs 127.0.0.1[9080]
+2015-01-16 06:59:51,622 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:51,622 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:51,623 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:51,623 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:51,624 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:51,624 [5] INFO  BankingNode.NodeServicesHandler.deliverTransfer [(null)] - After Delivered 
+2015-01-16 06:59:51,632 [6] INFO  BankingNode.NodeServicesHandler.getAccountBalance [(null)] - Balanced1 
+2015-01-16 06:59:51,687 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:51,706 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:51,831 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:51,857 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:51,860 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:51,866 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:51,867 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:51,870 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:51,871 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:51,875 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:52,759 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:59:52,763 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:59:52,765 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:52,765 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:52,766 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:52,767 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:52,767 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:52,771 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 30
+2015-01-16 06:59:52,771 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:52,772 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:52,772 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:52,773 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:52,773 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:52,792 [6] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9081]
+2015-01-16 06:59:52,793 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:52,793 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:52,793 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:52,794 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:52,794 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:52,889 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:52,909 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:53,034 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:53,060 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 06:59:53,062 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:53,068 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:53,069 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:53,072 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:53,073 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:53,075 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:53,980 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:59:53,986 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 99999999
+2015-01-16 06:59:53,989 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:53,991 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:53,992 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:53,993 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:53,993 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:54,040 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:54,059 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:54,187 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:54,213 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 06:59:54,214 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:54,218 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:54,219 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:54,221 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:54,221 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:54,224 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:55,096 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:59:55,100 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:59:55,102 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:55,103 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:55,103 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:55,104 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:55,104 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:55,107 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:59:55,108 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:55,108 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:55,108 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:55,109 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:55,109 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:55,127 [5] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - 127.0.0.1[9080] vs 127.0.0.1[9082]
+2015-01-16 06:59:55,128 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:55,129 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:55,129 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:55,130 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:55,130 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:56,203 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:56,223 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:56,242 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 06:59:56,347 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 06:59:56,374 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasicsOne.ini|
+2015-01-16 06:59:56,377 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 06:59:56,382 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 06:59:56,383 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 06:59:56,385 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:56,385 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:56,387 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 06:59:56,767 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:59:56,773 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 5
+2015-01-16 06:59:56,775 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 06:59:56,776 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 06:59:56,776 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 06:59:56,777 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 06:59:56,777 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 06:59:57,777 [5] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 06:59:59,356 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 07:00:00,388 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 07:00:00,518 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 07:00:00,546 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 07:00:00,548 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 07:00:00,552 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 07:00:00,553 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 07:00:00,555 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 07:00:00,555 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 07:00:00,557 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 07:00:01,459 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 07:00:01,467 [5] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9082) | 10
+2015-01-16 07:00:01,470 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 07:00:01,472 [5] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 07:00:01,473 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 07:00:01,474 [5] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 07:00:01,475 [5] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 07:00:02,481 [5] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:9082
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 07:00:05,137 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 07:00:05,163 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 07:00:05,185 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 07:00:05,304 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 07:00:05,334 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\testSwarmBasics.ini|
+2015-01-16 07:00:05,337 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 07:00:05,342 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 07:00:05,343 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 07:00:05,344 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 07:00:05,345 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 07:00:05,348 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 07:00:06,216 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 07:00:06,221 [6] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 13467) | 5
+2015-01-16 07:00:06,223 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 07:00:06,223 [6] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 07:00:06,224 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 07:00:06,224 [6] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 07:00:06,224 [6] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 07:00:07,223 [6] ERROR BankingNode.NodeServicesHandler.makeTransfer [(null)] - Exception 
+System.Net.Sockets.SocketException (0x80004005): Nie mo¿na nawi¹zaæ po³¹czenia, poniewa¿ komputer docelowy aktywnie go odmawia 127.0.0.1:13467
+   at System.Net.Sockets.TcpClient.Connect(String hostname, Int32 port)
+   at Thrift.Transport.TSocket.Open() in d:\thrift-nuget\lib\csharp\src\Transport\TSocket.cs:line 136
+   at BankingNode.NodeServicesHandler.makeTransfer(NodeID receiver, Int64 value) in D:\studia\SR\proj\SRThrift\csharp-server\BankingNode\BankingNode\NodeServicesHandler.cs:line 144
+2015-01-16 07:00:12,834 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
+2015-01-16 07:00:13,862 [1] INFO  BankingNode.Program.Main [(null)] - Server closed
