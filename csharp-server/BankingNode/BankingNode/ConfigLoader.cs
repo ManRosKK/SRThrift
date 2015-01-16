@@ -113,11 +113,12 @@ namespace BankingNode
         }
         public NodeID ConfigGetSelfId()
         {
-            
+
             SRBanking.ThriftInterface.NodeID self = new SRBanking.ThriftInterface.NodeID();
             self.IP = ConfigGetString(ConfigLoaderKeys.SelfIp);
             self.Port = (int)ConfigGetInt(ConfigLoaderKeys.SelfPort);
-            logerr.Info(self.IP.ToString()+"|"+ self.Port.ToString());
+            logerr.Info(self.IP.ToString() + "|" + self.Port.ToString());
+            
             return new NodeID(self);
         }
         public override string  ToString()

@@ -48,19 +48,31 @@ namespace BankingNode
             logerr.Info(transaction.TransferID.Sender.ToString() + " vs " + transaction.Receiver.ToString());
             if (transaction.TransferID.Sender == transaction.Receiver)
                 return;
+
             if (transaction.TransferID.Sender == ConfigLoader.Instance.ConfigGetSelfId())
             {
+
                 if (Balance - transaction.Value < 0)
                 {
+
                     throw new SRBanking.ThriftInterface.NotEnoughMoney();
                 }
                 //Transacitons.Add(transaction);
-                Balance -= transaction.Value;
+
+                lock (_lock)
+                {
+                    Balance -= transaction.Value;
+                }
+
             }
             else
             {
-                Transacitons.Add(transaction);
-                Balance += transaction.Value;
+                lock (_lock)
+                {
+                    Transacitons.Add(transaction);
+                    Balance += transaction.Value;
+                }
+
             }
             
         }

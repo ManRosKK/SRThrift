@@ -100,5 +100,9 @@ namespace BankingNode
         {
             return internalObject;
         }
+        public override string ToString()
+        {
+            return TransferID.ToString()+"("+Value.ToString()+")----->"+Receiver.ToString();
+        }
     }
 }

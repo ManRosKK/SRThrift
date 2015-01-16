@@ -9,6 +9,8 @@ using Thrift.Protocol;
 using log4net;
 using System.Reflection;
 using Thrift.Server;
+using log4net.Repository.Hierarchy;
+using log4net.Appender;
 namespace BankingNode
 {
     class NodeServicesHandler : SRBanking.ThriftInterface.NodeService.Iface
@@ -85,10 +87,33 @@ namespace BankingNode
 
         public void deliverTransfer(SRBanking.ThriftInterface.TransferData transfer)
         {
-
-            logerr.Info("Transfer Delivered ");
+            foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
+            {
+                var buffered = appender as BufferingAppenderSkeleton;
+                if (buffered != null)
+                {
+                    buffered.Flush();
+                }
+            }
+            logerr.Info("Transfer Delivered " + transfer.ToString());
+            foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
+            {
+                var buffered = appender as BufferingAppenderSkeleton;
+                if (buffered != null)
+                {
+                    buffered.Flush();
+                }
+            }
             balanceManager.CommitTransfer(new TransferData(transfer));
-            logerr.Info("After Delivered ");
+            logerr.Info("Transfer Commited " + transfer.ToString());
+            foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
+            {
+                var buffered = appender as BufferingAppenderSkeleton;
+                if (buffered != null)
+                {
+                    buffered.Flush();
+                }
+            }
         }
 
         public bool electSwarmLeader(SRBanking.ThriftInterface.NodeID cadidate, SRBanking.ThriftInterface.TransferID Transfer)
@@ -124,33 +149,65 @@ namespace BankingNode
 
         public void makeTransfer(SRBanking.ThriftInterface.NodeID receiver, long value)
         {
-
+            foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
+            {
+                var buffered = appender as BufferingAppenderSkeleton;
+                if (buffered != null)
+                {
+                    buffered.Flush();
+                }
+            }
             logerr.Info("Making Transfer " + receiver.ToString() + " | " + value.ToString());
+            foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
+            {
+                var buffered = appender as BufferingAppenderSkeleton;
+                if (buffered != null)
+                {
+                    buffered.Flush();
+                }
+            }
             NodeID rec = new NodeID( receiver);
             var transport = new TSocket(rec.IP, rec.Port);
             var protocol = new TBinaryProtocol(transport);
             var client = new SRBanking.ThriftInterface.NodeService.Client(protocol);
 
 
-            logerr.Info("After open " + receiver.ToString() + " | " + value.ToString());
             TransferData data = new TransferData(null);
             
             data.TransferID = balanceManager.generateTransactionID();
             data.Value = value;
             data.Receiver = rec;
+
+           // logerr.Info("Transfer Prepared " + data.ToString());
             balanceManager.checkTransfer(data);
             try
             {
-                transport.Open();
                 logerr.Info("In try" + receiver.ToString() + " | " + value.ToString());
+                balanceManager.CommitTransfer(data);
+                logerr.Info("Before open " + receiver.ToString() + " | " + value.ToString());
+                transport.Open();
+                logerr.Info("After open " + receiver.ToString() + " | " + value.ToString());
                 client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
                 client.deliverTransfer(data.ToBase());
-                balanceManager.CommitTransfer(data);
+               // logerr.Info("Transfer Commited " + data.ToString());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logerr.Error("Exception ",ex);
-               // throw new SRBanking.ThriftInterface.NotEnoughMembersToMakeTransfer();
+                logerr.Error("Exception ", ex);
+                // throw new SRBanking.ThriftInterface.NotEnoughMembersToMakeTransfer();
+            }
+            finally
+            {
+                transport.Close();
+            }
+            logerr.Info("koniec");
+            foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
+            {
+                var buffered = appender as BufferingAppenderSkeleton;
+                if (buffered != null)
+                {
+                    buffered.Flush();
+                }
             }
         }
 

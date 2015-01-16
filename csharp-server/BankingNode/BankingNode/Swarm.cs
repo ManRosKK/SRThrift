@@ -136,5 +136,16 @@ namespace BankingNode
         {
             return internalObject;
         }
+        public override string ToString()
+        {
+            string text = "";
+            text += Transfer.ToString();
+            text+= "<"+Leader.ToString()+"> --->";
+            foreach(NodeID x in Members)
+            {
+                text += x.ToString() + ",";
+            }
+            return text;
+        }
     }
 }

@@ -71,7 +71,10 @@ public class EasyClient {
             log.info("About to ping server");
 
             try {
-                client.ping();
+                NodeID receiver = new NodeID();
+                receiver.setPort(port);
+                receiver.setIP(IP);
+                client.ping(receiver);
             } catch (TException e) {
                 e.printStackTrace();
                 log.error("Connected but unable to ping??");

@@ -85,5 +85,9 @@ namespace BankingNode
         {
             return internalObject;
         }
+        public override string ToString()
+        {
+            return Sender.ToString() + "/" + Counter.ToString();
+        }
     }
 }

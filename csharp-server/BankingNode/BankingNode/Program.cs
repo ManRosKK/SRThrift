@@ -13,15 +13,19 @@ using log4net.Config;
 using System.Reflection;
 using Thrift.Transport;
 using Thrift.Server;
+using System.Xml;
+using System.Xml.XPath;
 namespace BankingNode
 {
     class Program
     {
         static private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        
         static void Main(string[] args)
         {
             try
             {
+                log4net.GlobalContext.Properties["LogName"] = args[1] + ".log";
                 XmlConfigurator.Configure();
                 logerr.Info("Start application");
                 ConfigLoader.Instance.Args = args;

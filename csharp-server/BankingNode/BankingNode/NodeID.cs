@@ -84,7 +84,7 @@ namespace BankingNode
         }
         public override string ToString()
         {
-            return IP.ToString() + "[" + Port.ToString() + "]";
+            return "[" + IP.ToString() + "|" + Port.ToString() + "]";
         }
 
     }
