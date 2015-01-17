@@ -20,13 +20,15 @@ public class ThriftServer {
         String arg0 = "";
         Integer arg1 = 0;
         Integer arg2 = 0;
+        String arg3 = "";
 
-        if (args.length ==  3)
+        if (args.length ==  4)
         {
             try {
                 arg0 = args[0];
                 arg1 = Integer.parseInt(args[1]);
                 arg2 = Integer.parseInt(args[2]);
+                arg3 = args[3];
             } catch (NumberFormatException e) {
                 System.err.println("Argument 1 and argument 2 " + args[0] + " must be integers.");
                 System.exit(1);
@@ -34,16 +36,17 @@ public class ThriftServer {
         }
         else
         {
-            System.err.println("Usage: ./server ip port balance");
+            System.err.println("Usage: ./server ip port balance .iniFilePath");
             System.exit(1);
         }
 
         final String IP = arg0;
         final Integer port = arg1;
         final Integer balance = arg2;
+        final String iniPath = arg3;
 
         try {
-            ThriftServerHandler handler = new ThriftServerHandler(IP,port,balance);
+            ThriftServerHandler handler = new ThriftServerHandler(IP, port, balance, arg3);
             final NodeService.Processor processor = new NodeService.Processor(handler);
 
             Runnable simple = new Runnable() {

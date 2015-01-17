@@ -1,6 +1,8 @@
 java-client/target/
 java-client/logs/
 java-server/target/
+java-server/src/main/java/SRBanking
 java-server/logs/
+java-server/*.iml
 **/.idea/workspace.xml
 **/.idea/tasks.xml
