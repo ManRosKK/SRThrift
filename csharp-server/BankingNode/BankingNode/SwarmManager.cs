@@ -11,10 +11,17 @@ namespace BankingNode
     class SwarmManager
     {
         private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private struct SwarmDescription
+        public enum SwarmState
+        {
+            Idle,
+            Election,
+            Dirty
+        }
+        private class SwarmDescription
         {
             public Timer timer ;
             public TransferData data;
+            public SwarmState state;
         }
         public delegate void SwarmTimeoutDelegate(TransferID id,SwarmManager swarmManager);
         public delegate void SwarmLeaderTimeToPingDelegate(TransferID id, SwarmManager swarmManager);
@@ -57,6 +64,7 @@ namespace BankingNode
                     sd.timer.Interval   = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm);
                     sd.timer.AutoReset  = true;
                     sd.data = data;
+                    sd.state = SwarmState.Dirty;
                     swarmsDescription.Add(s.Transfer, sd);
                     sd.timer.Enabled    = true;
                     sd.timer.Start();
@@ -70,11 +78,53 @@ namespace BankingNode
                     sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm);
                     sd.timer.AutoReset = false;
                     sd.data = data;
+                    sd.state = SwarmState.Idle;
                     swarmsDescription.Add(s.Transfer, sd);
                     sd.timer.Enabled = true;
                     sd.timer.Start();
                 }
             }
+        }
+        public void DirtySwarm(TransferID id)
+        {
+            if (swarmsDescription.ContainsKey(id))
+            {
+                if(swarmsDescription[id].state != SwarmState.Election)
+                    swarmsDescription[id].state = SwarmState.Dirty;
+                return;
+            }
+            throw new SRBanking.ThriftInterface.NotSwarmMemeber();
+        }
+        public void CleanSwarm(TransferID id)
+        {
+            if (swarmsDescription.ContainsKey(id))
+            {
+                if (swarmsDescription[id].state != SwarmState.Election)
+                    swarmsDescription[id].state = SwarmState.Election;
+                return;
+            }
+            throw new SRBanking.ThriftInterface.NotSwarmMemeber();
+        }
+        public bool IsDirtySwarm(TransferID id)
+        {
+            if (swarmsDescription.ContainsKey(id))
+            {
+
+                return swarmsDescription[id].state == SwarmState.Dirty;
+            }
+            throw new SRBanking.ThriftInterface.NotSwarmMemeber();
+        }
+        public void BeginElection(TransferID id)
+        {
+            if (swarms[id].Leader != ConfigLoader.Instance.ConfigGetSelfId())
+            {
+                swarms[id].Leader = null;
+                swarmsDescription[id].state = SwarmState.Election;
+            }
+        }
+        public void EndElection(TransferID id)
+        {
+            swarmsDescription[id].state = SwarmState.Idle;
         }
         public void DeleteSwarm(TransferID id)
         {
@@ -107,9 +157,9 @@ namespace BankingNode
                 {
                     throw new SRBanking.ThriftInterface.WrongSwarmLeader();
                 }
-                swarms.Remove(id);
-                swarmsDescription[id].timer.Dispose();
-                swarmsDescription.Remove(id);
+                //swarms.Remove(id);
+                //swarmsDescription[id].timer.Dispose();
+                //swarmsDescription.Remove(id);
             }else
                 throw new SRBanking.ThriftInterface.NotSwarmMemeber(); 
         }
@@ -134,5 +184,6 @@ namespace BankingNode
             }
             return ll;
         }
+
     }
 }

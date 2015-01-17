@@ -92,6 +92,7 @@ namespace BankingNode
             if (node == null)
             {
                 internalObject = new SRBanking.ThriftInterface.Swarm();
+                internalObject.Members = new List<SRBanking.ThriftInterface.NodeID>();
             }
             else
             {
@@ -146,6 +147,11 @@ namespace BankingNode
                 text += x.ToString() + ",";
             }
             return text;
+        }
+
+        public void DeleteMember(NodeID x)
+        {
+            internalObject.Members.Remove(x.ToBase());
         }
     }
 }

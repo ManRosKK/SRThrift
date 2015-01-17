@@ -15,6 +15,11 @@ namespace BankingNode
 {
     class NodeServicesHandler : SRBanking.ThriftInterface.NodeService.Iface
     {
+        class NodeInfo
+        {
+            public NodeID node;
+            public bool isActive;
+        }
         public TServer server;
         private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private SwarmManager swamManager = new SwarmManager();
@@ -33,33 +38,298 @@ namespace BankingNode
         {
             transport.Close();
         }
-        private void pingNode(NodeID node)
+        private bool PingNode(NodeID node)
         {
-            SRBanking.ThriftInterface.NodeService.Client client = null;
-            TSocket transport = this.connectToServer(node,out client);
-            client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
-            closeConnection(transport);
+            try
+            {
+                SRBanking.ThriftInterface.NodeService.Client client = null;
+                TSocket transport = this.connectToServer(node, out client);
+                client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
+                closeConnection(transport);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
         }
 
-        private List<NodeID> findNodes(long count)
+        private Dictionary<int, NodeInfo> findNodes()
         {
             string[] ips = ConfigLoader.Instance.ConfigGetStrings(ConfigLoader.ConfigLoaderKeys.IpList);
             long[][] ports = ConfigLoader.Instance.ConfigGetRanges(ConfigLoader.ConfigLoaderKeys.PortList);
             List<NodeID> l = new List<NodeID>();
-            for (int i = 0; i < ips.Length; i++)
+            Random rng = new Random();
+            Dictionary<int, NodeInfo> nodes = new Dictionary<int, NodeInfo>();
+            int nodesCount = 0;
+            for (int j = 0; j < ports.Length; j++)
             {
-                for (int j = 0; j < ports.Length; j++)
+                int currPort;
+                int k = 0;
+                int kstop = 0;
+                if (ports[j].Length == 1)
+                {
+                    k=kstop = (int)ports[j][0];
+                }
+                else
+                {
+                    k = (int)ports[j][0];
+                    kstop = (int)ports[j][1];
+                }
+                    for (; k <= kstop; k++)
+                    {
+                        currPort = k;
+                        for (int i = 0; i < ips.Length; i++)
+                        {
+                            nodesCount++;
+                        }
+                    }
+                
+            }
+
+
+
+            for (int j = 0; j < ports.Length; j++)
+            {
+                int currPort;
+                int k = 0;
+                int kstop = 0;
+                if (ports[j].Length == 1)
+                {
+                    k = kstop = (int)ports[j][0];
+                }
+                else
+                {
+                    k = (int)ports[j][0];
+                    kstop = (int)ports[j][1];
+                }
+                for (; k <= kstop; k++)
+                {
+                    currPort = k;
+                    for (int i = 0; i < ips.Length; i++)
+                    {
+                        int cc = rng.Next(0, nodesCount);
+                        if (nodes.ContainsKey(cc))
+                        {
+                            for (int y = 0; y < nodesCount; y++)
+                            {
+                                if (!nodes.ContainsKey(y))
+                                {
+                                    cc = y;
+                                    break;
+                                }
+                            }
+                        }
+                        NodeID tmp = new NodeID();
+                        tmp.IP = ips[i];
+                        tmp.Port = currPort;
+
+                        NodeInfo inf = new NodeInfo();
+                        inf.isActive = false;
+                        inf.node = tmp;
+                        nodes.Add(cc, inf);
+                    }
+                }
+
+            }
+            
+            return nodes;
+        }
+        private bool updateSwarm(Swarm swarm)
+        {
+            bool flag = true;
+            List<NodeID> list = swarm.Members;
+            foreach (NodeID x in list)
+            {
+                try
+                {
+                    SRBanking.ThriftInterface.NodeService.Client client = null;
+                    TSocket transport = this.connectToServer(x, out client);
+                    client.delSwarm(swarm.Transfer.ToBase());
+                    closeConnection(transport);
+                }
+                catch (Exception ex)
+                {
+                    flag = false;
+                }
+            }
+            return flag;
+        }
+        private Swarm createSwarm(Dictionary<int, NodeInfo> nodes,TransferData data)
+        {
+            Swarm swarm = new Swarm();
+            swarm.Leader = ConfigLoader.Instance.ConfigGetSelfId();
+            swarm.Transfer = data.TransferID;
+            List<NodeID> list = new List<NodeID>();
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                NodeID n = nodes[i].node;
+                try
+                {
+                    SRBanking.ThriftInterface.NodeService.Client client = null;
+                    TSocket transport = this.connectToServer(n, out client);
+                    client.ping(swarm.Leader.ToBase());
+                    List<NodeID> tmp = new List<NodeID>();
+                    swarm.Members = tmp;
+                    client.addToSwarm(swarm.ToBase(), data.ToBase());
+                    list.Add(n);
+                    //swarm.AddToSwarm(n);
+                    closeConnection(transport);
+
+                }
+                catch (Exception)
+                {
+                }
+                if (list.Count >= ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize))
+                {
+                    swarm.Members = list;
+                    return swarm;
+                }
+            }
+            foreach (NodeID x in list)
+            {
+                try
+                {
+                    SRBanking.ThriftInterface.NodeService.Client client = null;
+                    TSocket transport = this.connectToServer(x, out client);
+                    client.delSwarm(swarm.Transfer.ToBase());
+                    closeConnection(transport);
+                }
+                catch (Exception ex)
                 {
 
                 }
             }
-            return null;
+            throw new SRBanking.ThriftInterface.NotEnoughMembersToMakeTransfer();
         }
-        private void createSwarm(List<NodeID> nodes)
+        private Swarm addNewToSwarm(Swarm swarm,Dictionary<int, NodeInfo> nodes, TransferData data)
+        {
+            //swarm.Leader = ConfigLoader.Instance.ConfigGetSelfId();
+            //swarm.Transfer = data.TransferID;
+            List<NodeID> list = swarm.Members ;
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                NodeID n = nodes[i].node;
+                if (list.Contains(n)) continue;
+                try
+                {
+
+                    SRBanking.ThriftInterface.NodeService.Client client = null;
+                    TSocket transport = this.connectToServer(n, out client);
+                    client.ping(swarm.Leader.ToBase());
+
+                    List<NodeID> tmp = new List<NodeID>();
+                    swarm.Members = tmp;
+                    client.addToSwarm(swarm.ToBase(), data.ToBase());
+                    list.Add(n);
+                    swamManager.DirtySwarm(data.TransferID);
+                    closeConnection(transport);
+
+                }
+                catch (Exception)
+                {
+                }
+            }
+            swarm.Members = list;
+            return swarm;
+        }
+        public void SwarmTimeoutDelegate(TransferID id, SwarmManager swarmManager)
+        {
+            Swarm swarm = swamManager.GetSwarm(id);
+            logerr.Info("Not Pinged " + id.ToString() + "|" + swarm.Leader.ToString());
+            swamManager.BeginElection(id);
+            List<NodeID> list = swarm.Members;
+            bool flag = true;
+            NodeID we = ConfigLoader.Instance.ConfigGetSelfId();
+            foreach (NodeID x in list)
+            {
+                try
+                {
+                    SRBanking.ThriftInterface.NodeService.Client client = null;
+                    TSocket transport = this.connectToServer(x, out client);
+                    client.startSwarmElection(id.ToBase());
+                    if (!client.electSwarmLeader(ConfigLoader.Instance.ConfigGetSelfId().ToBase(),id.ToBase()))
+                    {
+                        flag = false;
+                        closeConnection(transport);
+                        break;
+                    }
+                    closeConnection(transport);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            if (flag)
+            {
+                foreach (NodeID x in list)
+                {
+                    try
+                    {
+                        SRBanking.ThriftInterface.NodeService.Client client = null;
+                        TSocket transport = this.connectToServer(x, out client);
+                        client.startSwarmElection(id.ToBase());
+                        if (!client.electSwarmLeader(ConfigLoader.Instance.ConfigGetSelfId().ToBase(), id.ToBase()))
+                        {
+                            flag = false;
+                            closeConnection(transport);
+                            break;
+                        }
+                        closeConnection(transport);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+            }
+        }
+        public void SwarmLeaderTimeToPingDelegate(TransferID id, SwarmManager swarmManager)
         {
             
-        }
+            Swarm swarm = swamManager.GetSwarm(id);
+            logerr.Info("Time to Ping all members " + id.ToString() + "|" + swarm.Leader.ToString());
+            List<NodeID> list = swarm.Members;
+            List<NodeID> ListToDel = new List<NodeID>();
 
+            if (swamManager.IsDirtySwarm(id))
+                if (updateSwarm(swarm))
+                {
+                    swamManager.CleanSwarm(id);
+                }
+            foreach (NodeID x in list)
+            {
+                try
+                {
+                    SRBanking.ThriftInterface.NodeService.Client client = null;
+                    TSocket transport = this.connectToServer(x, out client);
+                    client.delSwarm(swarm.Transfer.ToBase());
+                    client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
+                    closeConnection(transport);
+                    logerr.Info("Pinged " + x.ToString() );
+                }
+                catch (Exception ex)
+                {
+                    logerr.Error("Ping Error " + x.ToString(),ex);
+                    swamManager.DirtySwarm(id);
+                    ListToDel.Add(x);
+                }
+            }
+            if (swamManager.IsDirtySwarm(id) || swarm.Members.Count<ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize))
+            {
+                foreach( NodeID x in ListToDel)
+                {
+                    swarm.DeleteMember(x);
+                }
+                swarm = addNewToSwarm(swarm, findNodes(), swamManager.GetTransferData(id));
+                swamManager.UpdateSwarm(swarm);
+                if (updateSwarm(swarm))
+                {
+                    swamManager.CleanSwarm(id);
+                }
+            }
+        }
         public NodeServicesHandler()
         {
             balanceManager.Balance = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.Balance);
@@ -189,16 +459,23 @@ namespace BankingNode
                 logerr.Info("After open " + receiver.ToString() + " | " + value.ToString());
                 client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
                 client.deliverTransfer(data.ToBase());
+                transport.Close();
                // logerr.Info("Transfer Commited " + data.ToString());
             }
             catch (Exception ex)
             {
+                transport.Close();
                 logerr.Error("Exception ", ex);
-                // throw new SRBanking.ThriftInterface.NotEnoughMembersToMakeTransfer();
+                Swarm swarm =  createSwarm(findNodes(), data);
+                swamManager.CreateSwarm(swarm, data);
+                if(swamManager.IsDirtySwarm(data.TransferID) )
+                    if (updateSwarm(swarm))
+                    {
+                        swamManager.CleanSwarm(data.TransferID);
+                    }
             }
             finally
             {
-                transport.Close();
             }
             logerr.Info("koniec");
             foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
