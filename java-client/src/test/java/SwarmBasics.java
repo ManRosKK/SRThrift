@@ -39,6 +39,7 @@ public class SwarmBasics {
     public void tearDown() throws Exception {
         Util.killServerNoException(IP,port);
         Util.killServerNoException(IP2, port2);
+        Util.killServerNoException(IP3, port3);
     }
 
      @Test
@@ -48,6 +49,7 @@ public class SwarmBasics {
 
         int value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
         assertEquals(swarmList.size(),1);
         assertEquals(swarmList.get(0).getMembersSize(),2);

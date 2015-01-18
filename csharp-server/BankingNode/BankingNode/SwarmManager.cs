@@ -46,8 +46,11 @@ namespace BankingNode
             }else
                 throw new SRBanking.ThriftInterface.NotSwarmMemeber();
         }
+
         public void CreateSwarm(Swarm s,TransferData data)
         {
+
+            logerr.Info("CREATE SWARM : " + swarms.Count);
             if (swarms.ContainsKey(s.Transfer))
             {
                 throw new SRBanking.ThriftInterface.AlreadySwarmMemeber();
@@ -55,9 +58,12 @@ namespace BankingNode
             else
             {
                 swarms.Add(s.Transfer, s);
+                logerr.Info("SWARM : " + swarms.Count);
                 if (s.Leader == ConfigLoader.Instance.ConfigGetSelfId())
                 {
                     //ja jestem liderem
+
+                    logerr.Info("---SETTING ping time): " +s);
                     SwarmDescription sd = new SwarmDescription();
                     sd.timer = new Timer();
                     sd.timer.Elapsed    += new ElapsedEventHandler( (object source, ElapsedEventArgs e)=>{SwarmLeaderTimeToPing(s.Transfer, this);});
@@ -71,11 +77,12 @@ namespace BankingNode
                 }
                 else
                 {
+                    logerr.Info("---SETTING TIMEOUT): " + s);
                     //ja jestem czlonkiem
                     SwarmDescription sd = new SwarmDescription();
                     sd.timer = new Timer();
                     sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmTimeout(s.Transfer, this); });
-                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm);
+                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm)*4+5000;
                     sd.timer.AutoReset = false;
                     sd.data = data;
                     sd.state = SwarmState.Idle;
@@ -84,6 +91,8 @@ namespace BankingNode
                     sd.timer.Start();
                 }
             }
+            logerr.Info("SWARM : " + swarms.Count);
+            GetSwarmList();
         }
         public void DirtySwarm(TransferID id)
         {
@@ -124,7 +133,32 @@ namespace BankingNode
         }
         public void EndElection(TransferID id)
         {
-            swarmsDescription[id].state = SwarmState.Idle;
+            if (swarms[id].Leader == ConfigLoader.Instance.ConfigGetSelfId())
+            {
+                //ja jestem liderem
+                SwarmDescription sd = swarmsDescription[id];
+                sd.timer.Dispose();
+                sd.timer = new Timer();
+                sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmLeaderTimeToPing(id, this); });
+                sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm);
+                sd.timer.AutoReset = true;
+                sd.state = SwarmState.Dirty;
+                sd.timer.Enabled = true;
+                sd.timer.Start();
+            }
+            else
+            {
+                //ja jestem czlonkiem
+                SwarmDescription sd =  swarmsDescription[id];
+                sd.timer = new Timer();
+                sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmTimeout(id, this); });
+                sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm) * 4 + 5000; ;
+                sd.timer.AutoReset = false;
+                sd.state = SwarmState.Idle;
+                sd.timer.Enabled = true;
+                sd.timer.Start();
+            }
+
         }
         public void DeleteSwarm(TransferID id)
         {
@@ -139,12 +173,19 @@ namespace BankingNode
         }
         public void PingSwarm(NodeID leader, TransferID id)
         {
+            logerr.Info("SWARM PINGED BY: " + leader + " | " + id);
             if (swarmsDescription.ContainsKey(id))
             {
-                if (leader == swarms[id].Leader)
+                if (leader == swarms[id].Leader )
                 {
+                    if (leader == ConfigLoader.Instance.ConfigGetSelfId())
+                        return;
                     swarmsDescription[id].timer.Dispose();
                     SwarmDescription sd = swarmsDescription[id];
+                    sd.timer.Stop();
+                    sd.timer.Dispose();
+
+                    logerr.Info("SWARM PINGED BY (SETTING TIMEOUT): " + leader + " | " + id);
                     sd.timer = new Timer();
                     sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmTimeout(id, this); });
                     sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm);
@@ -155,13 +196,19 @@ namespace BankingNode
                 }
                 else
                 {
+
                     throw new SRBanking.ThriftInterface.WrongSwarmLeader();
                 }
                 //swarms.Remove(id);
                 //swarmsDescription[id].timer.Dispose();
                 //swarmsDescription.Remove(id);
-            }else
-                throw new SRBanking.ThriftInterface.NotSwarmMemeber(); 
+            }
+            else
+            {
+
+                logerr.Info("NOT SWARM MEMBER " + leader + " | " + id+"--->"+swarms[id]);
+                throw new SRBanking.ThriftInterface.NotSwarmMemeber();
+            }
         }
         public TransferData GetTransferData(TransferID id)
         {
@@ -173,14 +220,18 @@ namespace BankingNode
         }
         public Swarm GetSwarm(TransferID id)
         {
-            return swarms[id];
+            if(swarms.ContainsKey(id))
+                return swarms[id];
+            throw new SRBanking.ThriftInterface.NotSwarmMemeber();
         }
         public List<SRBanking.ThriftInterface.Swarm> GetSwarmList()
         {
             List<SRBanking.ThriftInterface.Swarm> ll = new List<SRBanking.ThriftInterface.Swarm>();
+            logerr.Info("GET SWARM LIST: " + swarms.Count+"|" +swarms.Values.Count.ToString());
             foreach (Swarm x in swarms.Values)
             {
                 ll.Add(x.ToBase());
+                logerr.Info("SWARM name: " + x);
             }
             return ll;
         }

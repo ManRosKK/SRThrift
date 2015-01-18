@@ -67,10 +67,14 @@ namespace BankingNode
             }
             else
             {
+                
                 lock (_lock)
                 {
-                    Transacitons.Add(transaction);
-                    Balance += transaction.Value;
+                    if (!Transacitons.Contains(transaction))
+                    {
+                        Transacitons.Add(transaction);
+                        Balance += transaction.Value;
+                    }
                 }
 
             }

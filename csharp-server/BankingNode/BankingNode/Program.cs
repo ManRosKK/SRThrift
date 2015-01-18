@@ -53,6 +53,7 @@ namespace BankingNode
 
                 TServerTransport transport = new TServerSocket((int)ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SelfPort));
                 TServer server = new TThreadPoolServer(processor, transport);
+                
                 handler.server = server;
                 logerr.Info("Server started");
                 server.Serve();

@@ -139,7 +139,7 @@ namespace BankingNode
         }
         public override string ToString()
         {
-            string text = "";
+            string text = "swarm:";
             text += Transfer.ToString();
             text+= "<"+Leader.ToString()+"> --->";
             foreach(NodeID x in Members)
