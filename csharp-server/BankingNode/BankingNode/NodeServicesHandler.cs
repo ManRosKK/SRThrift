@@ -26,31 +26,33 @@ namespace BankingNode
         private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private SwarmManager swamManager = new SwarmManager();
         private BalanceManager balanceManager = new BalanceManager();
+        private ClientManager clientManager = new ClientManager();
         private List<SRBanking.ThriftInterface.NodeID> blackList = null;
-        private TSocket connectToServer(NodeID node,out SRBanking.ThriftInterface.NodeService.Client client)
+        /*private TSocket connectToServer(NodeID node,out SRBanking.ThriftInterface.NodeService.Client client)
         {
             var transport = new TSocket(node.IP, node.Port);
             var protocol = new TBinaryProtocol(transport);
             client = new SRBanking.ThriftInterface.NodeService.Client(protocol);
-
+            
             transport.Open();
             return transport;
         }
         private void closeConnection(TSocket transport)
         {
             transport.Close();
-        }
+        }*/
         private bool PingNode(NodeID node)
         {
             try
             {
-                SRBanking.ThriftInterface.NodeService.Client client = null;
-                TSocket transport = this.connectToServer(node, out client);
+                SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(node);
                 client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
-                closeConnection(transport);
+                clientManager.ReturnClient(node);
             }
             catch (Exception ex)
             {
+                
+                clientManager.ReturnClient(node);
                 return false;
             }
             return true;
@@ -144,16 +146,14 @@ namespace BankingNode
             {
                 try
                 {
-                    lock (_m)
-                    {
-                        SRBanking.ThriftInterface.NodeService.Client client = null;
-                        TSocket transport = this.connectToServer(x, out client);
+                        SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                         client.updateSwarmMembers(swarm.ToBase());
-                        closeConnection(transport);
-                    }
+                    clientManager.ReturnClient(x);
                 }
                 catch (Exception ex)
                 {
+                    clientManager.ReturnClient(x);
+                    
                     flag = false;
                 }
             }
@@ -175,21 +175,15 @@ namespace BankingNode
                     continue;
                 try
                 {
-
-                    lock (_m)
-                    {
-                        SRBanking.ThriftInterface.NodeService.Client client = null;
-                        TSocket transport = null;
+                        SRBanking.ThriftInterface.NodeService.Client client  =clientManager.TakeClient(n);
                         try
                         {
-                            transport = this.connectToServer(n, out client);
                             client.ping(swarm.Leader.ToBase());
                         }
                         catch
                         {
                             //closeConnection(transport);
-                            Thread.Sleep(300);
-                            transport = this.connectToServer(n, out client);
+                            clientManager.connectToNode(n);
                             client.ping(swarm.Leader.ToBase());
                         }
                         List<NodeID> tmp = new List<NodeID>();
@@ -198,12 +192,12 @@ namespace BankingNode
                         list.Add(n);
                         logerr.Info("STARTING CREATING SWARM(ADDED node:)" + n);
                         //swarm.AddToSwarm(n);
-                        closeConnection(transport);
-                    }
+                        clientManager.ReturnClient(n);
 
                 }
                 catch (Exception e)
                 {
+                    clientManager.ReturnClient(n);
                     logerr.Error("pinging beafore ad to swarm",e);
                 }
                 if (list.Count >= ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize))
@@ -216,17 +210,13 @@ namespace BankingNode
             {
                 try
                 {
-                    lock (_m)
-                    {
-                        SRBanking.ThriftInterface.NodeService.Client client = null;
-                        TSocket transport = this.connectToServer(x, out client);
+                        SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                         client.delSwarm(swarm.Transfer.ToBase());
-                        closeConnection(transport);
-                    }
+                        clientManager.ReturnClient(x);
                 }
                 catch (Exception ex)
                 {
-
+                    clientManager.ReturnClient(x);
                 }
             }
             logerr.Error("COS nie tak CREATE SWARM");
@@ -243,10 +233,7 @@ namespace BankingNode
                 if (list.Contains(n)) continue;
                 try
                 {
-                    lock (_m)
-                    {
-                        SRBanking.ThriftInterface.NodeService.Client client = null;
-                        TSocket transport = this.connectToServer(n, out client);
+                        SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(n);
                         client.ping(swarm.Leader.ToBase());
 
                         List<NodeID> tmp = new List<NodeID>();
@@ -254,13 +241,14 @@ namespace BankingNode
                         client.addToSwarm(swarm.ToBase(), data.ToBase());
                         list.Add(n);
                         swamManager.DirtySwarm(data.TransferID);
-                        closeConnection(transport);
-                    }
+                        clientManager.ReturnClient(n);
+                    
 
 
                 }
                 catch (Exception)
                 {
+                    clientManager.ReturnClient(n);
                 }
             }
             swarm.Members = list;
@@ -280,17 +268,14 @@ namespace BankingNode
             {
                 try
                 {
-                    lock (_m)
-                    {
-                        SRBanking.ThriftInterface.NodeService.Client client = null;
-                        TSocket transport = this.connectToServer(x, out client);
+                        SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                         client.startSwarmElection(id.ToBase());
                         if (we < x)
                         {
                             if (!client.electSwarmLeader(we.ToBase(), id.ToBase()))
                             {
                                 flag = false;
-                                closeConnection(transport);
+                                clientManager.ReturnClient(x);
                                 return;
                             }
                         }
@@ -298,11 +283,12 @@ namespace BankingNode
                         {
                             toInform.Add(x);
                         }
-                        closeConnection(transport);
-                    }
+                        clientManager.ReturnClient(x);
+                    
                 }
                 catch (Exception ex)
                 {
+                    clientManager.ReturnClient(x);
                     //closeConnection(transport);
                 }
             }
@@ -317,14 +303,14 @@ namespace BankingNode
                     {
                         lock (_m)
                         {
-                            SRBanking.ThriftInterface.NodeService.Client client = null;
-                            TSocket transport = this.connectToServer(x, out client);
+                            SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                             client.electionEndedSwarm(swarm.ToBase());
-                            closeConnection(transport);
+                            clientManager.ReturnClient(x);
                         }
                     }
                     catch (Exception ex)
                     {
+                        clientManager.ReturnClient(x);
 
                     }
                 }
@@ -340,18 +326,17 @@ namespace BankingNode
             bool f = false;
             try
             {
-                lock (_m)
-                {
-                    SRBanking.ThriftInterface.NodeService.Client client = null;
-                    TSocket transport = this.connectToServer(d.Receiver, out client);
-                    client.makeTransfer(d.TransferID.Sender.ToBase(), d.Value);
-                    client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
-                    closeConnection(transport);
-                }
+                    SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(d.Receiver);
+                    client.deliverTransfer(d.ToBase());
+                    //client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
+                    //client.delSwarm(swarm);
+                    clientManager.ReturnClient(d.Receiver);
+                
                 f = true;
             }
             catch (Exception)
             {
+               clientManager.ReturnClient(d.Receiver);
 
             }
             if (f)
@@ -361,13 +346,10 @@ namespace BankingNode
                 {
                     try
                     {
-                        lock (_m)
-                        {
-                            SRBanking.ThriftInterface.NodeService.Client client = null;
-                            TSocket transport = this.connectToServer(d.Receiver, out client);
+                            SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                             client.delSwarm(swarm.Transfer.ToBase());
-                            closeConnection(transport);
-                        }
+                            clientManager.ReturnClient(x);
+                        
                     }
                     catch (Exception)
                     {
@@ -392,29 +374,33 @@ namespace BankingNode
                 {
 
                     logerr.Info("try Pinged " + x.ToString()+" with "+swarm.Leader+"|"+swarm.Transfer);
-                    lock (_m)
-                    {
-                        SRBanking.ThriftInterface.NodeService.Client client = null;
-                        TSocket transport = this.connectToServer(x, out client);
+                        SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                         //client.delSwarm(swarm.Transfer.ToBase());
                         client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
-                        closeConnection(transport);
-                    }
+                        clientManager.ReturnClient(x);
+                    
                     logerr.Info("Pinged " + x.ToString() );
                 }
                 catch (Exception ex)
                 {
+                    clientManager.ReturnClient(x);
                     logerr.Error("Ping Error " + x.ToString(),ex);
+                    logerr.Error("Ping Error info" + swamManager.IsDirtySwarm(id));
                     swamManager.DirtySwarm(id);
+                    logerr.Error("Ping Error after info" + swamManager.IsDirtySwarm(id));
                     ListToDel.Add(x);
                 }
             }
-            if (swamManager.IsDirtySwarm(id) || swarm.Members.Count<ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize))
+            logerr.Error("Przed warunkiem " + swamManager.IsDirtySwarm(id));
+            if (swamManager.IsDirtySwarm(id) || swarm.Members.Count < ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize))
             {
+                logerr.Error("w Warunku ");
                 foreach( NodeID x in ListToDel)
                 {
+                    logerr.Error("usuwamy " + x.ToString());
                     swarm.DeleteMember(x);
                 }
+                logerr.Error("szukamy nowego " );
                 swarm = addNewToSwarm(swarm, findNodes(), swamManager.GetTransferData(id));
                 swamManager.UpdateSwarm(swarm);
                 if (updateSwarm(swarm))
@@ -548,9 +534,6 @@ namespace BankingNode
             }
             NodeID rec = new NodeID( receiver);
             
-            var transport = new TSocket(rec.IP, rec.Port);
-            var protocol = new TBinaryProtocol(transport);
-            var client = new SRBanking.ThriftInterface.NodeService.Client(protocol);
 
 
             TransferData data = new TransferData(null);
@@ -561,25 +544,36 @@ namespace BankingNode
 
            // logerr.Info("Transfer Prepared " + data.ToString());
             balanceManager.checkTransfer(data);
+            SRBanking.ThriftInterface.NodeService.Client client = null; 
             try
             {
+                client = clientManager.TakeClient(rec);
                 logerr.Info("In try" + receiver.ToString() + " | " + value.ToString());
                 balanceManager.CommitTransfer(data);
                 logerr.Info("Before open " + receiver.ToString() + " | " + value.ToString());
-                lock (_m)
-                {
-                    transport.Open();
-                    logerr.Info("After open " + receiver.ToString() + " | " + value.ToString());
-                    client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
-                    client.deliverTransfer(data.ToBase());
-                    transport.Close();
-                }
+                
+                logerr.Info("After open " + receiver.ToString() + " | " + value.ToString());
+                client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
+                client.deliverTransfer(data.ToBase());
+                clientManager.ReturnClient(rec);
+                
                // logerr.Info("Transfer Commited " + data.ToString());
             }
             catch (Exception ex)
             {
-                transport.Close();
+                logerr.Info(rec);
                 logerr.Error("Exception ", ex);
+                foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
+                {
+                    var buffered = appender as BufferingAppenderSkeleton;
+                    if (buffered != null)
+                    {
+                        buffered.Flush();
+                    }
+                }
+
+                logerr.Info("przed klientem");
+                clientManager.ReturnClient(rec);
                 Swarm swarm = createSwarm(findNodes(), data);
                 logerr.Error("----1 ");
                 swamManager.CreateSwarm(swarm, data);

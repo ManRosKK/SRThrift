@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BalanceManager.cs" />
+    <Compile Include="ClientManager.cs" />
     <Compile Include="ConfigLoader.cs" />
     <Compile Include="ConfigWrongKeyException.cs" />
     <Compile Include="IniFile.cs" />

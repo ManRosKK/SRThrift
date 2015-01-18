@@ -96,10 +96,17 @@ namespace BankingNode
         }
         public void DirtySwarm(TransferID id)
         {
+            logerr.Info("w dirtyswarm" + id);
             if (swarmsDescription.ContainsKey(id))
             {
-                if(swarmsDescription[id].state != SwarmState.Election)
+                logerr.Info("w dirtyswarm 2222 " + id);
+                logerr.Info("w dirtyswarm xxxx" + swarmsDescription[id].state);
+                if (swarmsDescription[id].state != SwarmState.Election)
+                {
+                    logerr.Info("w dirtyswarm 3333 " + id);
                     swarmsDescription[id].state = SwarmState.Dirty;
+                    logerr.Info("w dirtyswarm yyyyy" + swarmsDescription[id].state);
+                }
                 return;
             }
             throw new SRBanking.ThriftInterface.NotSwarmMemeber();
@@ -109,7 +116,7 @@ namespace BankingNode
             if (swarmsDescription.ContainsKey(id))
             {
                 if (swarmsDescription[id].state != SwarmState.Election)
-                    swarmsDescription[id].state = SwarmState.Election;
+                    swarmsDescription[id].state = SwarmState.Idle;
                 return;
             }
             throw new SRBanking.ThriftInterface.NotSwarmMemeber();
@@ -118,8 +125,7 @@ namespace BankingNode
         {
             if (swarmsDescription.ContainsKey(id))
             {
-
-                return swarmsDescription[id].state == SwarmState.Dirty;
+                return (swarmsDescription[id].state == SwarmState.Dirty);
             }
             throw new SRBanking.ThriftInterface.NotSwarmMemeber();
         }
@@ -188,7 +194,7 @@ namespace BankingNode
                     logerr.Info("SWARM PINGED BY (SETTING TIMEOUT): " + leader + " | " + id);
                     sd.timer = new Timer();
                     sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmTimeout(id, this); });
-                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm);
+                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm)*4+5000;
                     sd.timer.AutoReset = false;
 
                     sd.timer.Enabled = true;
@@ -206,7 +212,7 @@ namespace BankingNode
             else
             {
 
-                logerr.Info("NOT SWARM MEMBER " + leader + " | " + id+"--->"+swarms[id]);
+                //logerr.Info("NOT SWARM MEMBER " + leader + " | " + id+"--->"+swarms[id]);
                 throw new SRBanking.ThriftInterface.NotSwarmMemeber();
             }
         }
