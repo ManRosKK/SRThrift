@@ -111,7 +111,9 @@ public class SwarmDeliver {
 
         Util.runServer(IPReceiver, portReceiver, balanceReceiver, configFile);
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
+        System.out.println("Test");
+        System.out.flush();
 
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
         List<Swarm> swarmList2 = EasyClient.getSwarmList(IP2, port2);

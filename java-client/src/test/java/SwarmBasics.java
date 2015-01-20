@@ -39,6 +39,7 @@ public class SwarmBasics {
     public void tearDown() throws Exception {
         Util.killServerNoException(IP,port);
         Util.killServerNoException(IP2, port2);
+        Util.killServerNoException(IP3, port3);
     }
 
      @Test

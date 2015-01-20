@@ -34,7 +34,6 @@ public class Util {
         }
         Profile.Section shellStringsSection = prefs.get("shellStrings");
         for (String option: shellStringsSection.keySet()) {
-            System.out.println(option +  ":" + shellStringsSection.get(option));
             if("default".equals(option))
             {
                 defaultLanguage = shellStringsSection.get(option);
@@ -44,7 +43,6 @@ public class Util {
                 shellStrings.put(option, shellStringsSection.get(option));
             }
         }
-        System.out.println(new File(defaultConfigFile).getAbsolutePath());
     }
 
     static String convertStreamToString(java.io.InputStream is) {
