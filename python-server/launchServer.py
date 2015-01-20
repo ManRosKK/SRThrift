@@ -120,7 +120,9 @@ class ServerHandler(NodeService.Iface):
                 else:
                     #slave mode on
                     #check if pinged recently
-                    if time.time() - self.hb[swarm.transfer] > config.getint("config", "leader_considered_dead_after"):
+                    print("checking heartbeat")
+                    if time.time() - self.hb[swarm.transfer] > config.getint("config", "leader_considered_dead_after")/1000.0:
+                        print("The king is dead. ",swarm)
                         self.localElectNewLeader(swarm)
             time.sleep(config.getint("config", "try_deliver_transfer_every")/1000.0)
 
@@ -247,12 +249,13 @@ class ServerHandler(NodeService.Iface):
     #UTILLLLLLLLLLLLLLS
 
     def localElectNewLeader(self,swarm):
-        print("Electing new leader...")
+        print("Electing new leader...",swarm)
         #get alive ppl
         alive_ppl = self.getAlivePpl(swarm.members)
 
         #check if leader is up?
         if swarm.leader in alive_ppl:
+            #if leader is up, no need to elect new one
             return
 
         #start election
@@ -260,7 +263,38 @@ class ServerHandler(NodeService.Iface):
         for node in alive_ppl:
             if (node == self.nodeID):
                 continue
-            #check alive
+            #check alive - elect
+            try:
+                with AutoClient(node.IP,node.port) as client:
+                    result = client.electSwarmLeader(self.nodeID,self.nodeID,swarm.transfer)
+
+                    #result means "he wants to be a leader badly.
+                    if result == True:
+                        print(node.port," wants to be a leader. Badly.",swarm)
+                        return
+                    else:
+                        print(node.port," thinks I am superior",swarm)
+            except:
+                #dead - don't care
+                pass
+
+        swarm.leader = self.nodeID
+        swarm.members = alive_ppl
+        print("I AM NOW THE EMPEROR",swarm)
+
+        # not found anyone better, so become a leader!
+        for node in alive_ppl:
+            if (node == self.nodeID):
+                continue
+            #check alive - elect
+            try:
+                with AutoClient(node.IP,node.port) as client:
+                    client.electionEndedSwarm(self.nodeID,swarm)
+            except:
+                #dead - don't care, will take care of it later
+                pass
+
+
 
     def getAlivePpl(self,list_of_nodes):
         alive = []
@@ -295,21 +329,18 @@ class ServerHandler(NodeService.Iface):
         print("makeSwarm exit: mySwarm is now: ",self.mySwarms)
 
     def unmakeSwarm(self,swarm):
-        print("unmaking swarm")
+        print("unmaking swarm", swarm)
 
         #get members
         for node in swarm.members:
-            print("got members")
             if(node != self.nodeID):
-                print("got not self")
                 try:
                     with AutoClient(node.IP,node.port) as client:
                         client.delSwarm(self.nodeID,swarm.transfer)
                 except:
                     print("client not delted from swarm",sys.exc_info()[0],node.IP,node.port)
-        print("got all but me")
         self.delSwarm(self.nodeID,swarm.transfer)
-        print("got me")
+        print("unmade swarm", swarm)
 
     def funeral(self,swarm,nodeID):
         #remove from swarm members
