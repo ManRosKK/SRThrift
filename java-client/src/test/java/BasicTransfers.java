@@ -45,6 +45,7 @@ public class BasicTransfers {
 
     @Test
     public void BasicTransfer() throws Exception {
+        Thread.sleep(1000);
         long value = 30;
         EasyClient.makeTransfer(IP, port, IP2, port2, value);
 

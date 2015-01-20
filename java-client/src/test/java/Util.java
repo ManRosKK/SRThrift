@@ -24,6 +24,8 @@ public class Util {
     public static Map<String,String> shellStrings = new HashMap<String,String>();
     public static String defaultLanguage;
     public static Map<Integer,Process> processMap = new HashMap<Integer,Process>();
+    public static Map<Integer,StringBuilder> stdoutMap = new HashMap<Integer,StringBuilder>();
+    public static Map<Integer,StringBuilder> stderrMap = new HashMap<Integer,StringBuilder>();
     static {
         Ini prefs = null;
         try {
@@ -63,6 +65,45 @@ public class Util {
         } catch (TException e) {
             e.printStackTrace();
         }
+
+        stdoutMap.put(port, new StringBuilder());
+        stderrMap.put(port, new StringBuilder());
+
+        final BufferedReader readerStdout = new BufferedReader (new InputStreamReader(proc.getInputStream()));
+        final BufferedReader readerStderr = new BufferedReader (new InputStreamReader(proc.getErrorStream()));
+
+        Thread T=new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    String line;
+                    while ((line = readerStdout.readLine()) != null) {
+                        stdoutMap.get(port).append("Stdout" + port + ": " + line + "\n");
+                }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } );
+        T.start();
+
+        Thread T2=new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    String line;
+                    while ((line = readerStderr.readLine()) != null) {
+                        stderrMap.get(port).append("StdErr" + port + ": " + line + "\n");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } );
+        T2.start();
+
     }
 
     public static void runServer(String IP, int port, long balance, String configFile) throws IOException {
@@ -123,11 +164,13 @@ public class Util {
                 Process process = processMap.get(port);
                 if(process != null)
                 {
-                    System.out.println("Error" + port + ":");
-                    System.out.println(convertStreamToString(process.getErrorStream()));
-                    System.out.println("StdOut" + port + ": ");
-                    System.out.println(convertStreamToString(process.getInputStream()));
-                    System.out.flush();
+                    //System.out.println("Error" + port + ":");
+                    //System.out.println(convertStreamToString(process.getErrorStream()));
+                    Reporter.log(stdoutMap.get(port).toString(),true);
+                    Reporter.log(stderrMap.get(port).toString(),true);
+                    //System.out.println("StdOut" + port + ": ");
+                    //System.out.println(convertStreamToString(process.getInputStream()));
+                    //System.out.flush();
                     processMap.remove(port);
                 }
                 else

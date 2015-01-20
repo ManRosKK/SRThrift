@@ -68,7 +68,7 @@ public class EasyClient {
         try(AutoClosingClient acclient = getClient(IP, port)){
             NodeService.Client client = acclient.getClient();
 
-            log.info("About to ping server");
+            //log.info("About to ping server");
 
             try {
                 NodeID receiver = new NodeID();
@@ -81,7 +81,7 @@ public class EasyClient {
                 throw e;
             }
 
-            log.info("Server pigned");
+            log.info("Server is up " + port);
         } catch (TException e) {
             throw e;
         } catch (Exception e) {

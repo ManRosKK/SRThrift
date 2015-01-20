@@ -155,7 +155,9 @@ class ServerHandler(NodeService.Iface):
             raise NotEnoughMoney(moneyAvailable=self.accountBalance, moneyRequested=value)
         try:
             with AutoClient(address,port) as client:
+                print("port open")
                 client.deliverTransfer(self.nodeID,transferData)
+                print("transfer send")
         except:
             print("transfer not made",sys.exc_info()[0])
             #receiver offline
