@@ -34,88 +34,101 @@ class Iface(object):
     """
     pass
 
-  def ping(self):
+  def ping(self, sender):
     """
     pings node
+
+    Parameters:
+     - sender
     """
     pass
 
-  def pingSwarm(self, leader, transfer):
+  def pingSwarm(self, sender, transfer):
     """
-    pings Swarm and checks if leader is a leader
+    pings Swarm and checks if sender is a leader
 
     Parameters:
-     - leader
+     - sender
      - transfer
     """
     pass
 
-  def updateSwarmMembers(self, swarm):
+  def updateSwarmMembers(self, sender, swarm):
     """
-
+      
 
     Parameters:
+     - sender
      - swarm
     """
     pass
 
-  def addToSwarm(self, swarm, transferData):
+  def addToSwarm(self, sender, swarm, transferData):
     """
 
 
     Parameters:
+     - sender
      - swarm
      - transferData
     """
     pass
 
-  def delSwarm(self, swarmID):
+  def delSwarm(self, sender, swarmID):
     """
 
 
     Parameters:
+     - sender
      - swarmID
     """
     pass
 
-  def getSwarm(self, transfer):
+  def getSwarm(self, sender, transfer):
     """
 
 
     Parameters:
+     - sender
      - transfer
     """
     pass
 
-  def electSwarmLeader(self, cadidate, Transfer):
+  def electSwarmLeader(self, sender, cadidate, Transfer):
     """
     returns true if candidateNodeID> current
 
     Parameters:
+     - sender
      - cadidate
      - Transfer
     """
     pass
 
-  def electionEndedSwarm(self, swarm):
+  def electionEndedSwarm(self, sender, swarm):
     """
     new leader broadcast that he is a leader
 
     Parameters:
+     - sender
      - swarm
     """
     pass
 
-  def deliverTransfer(self, transfer):
+  def deliverTransfer(self, sender, transfer):
     """
 
 
     Parameters:
+     - sender
      - transfer
     """
     pass
 
   def getSwarmList(self):
+    """
+    DEBUG
+    """
     pass
 
   def startSwarmElection(self, transfer):
@@ -126,6 +139,15 @@ class Iface(object):
     pass
 
   def getTransfers(self):
+    pass
+
+  def setBlacklist(self, blacklist):
+    """
+    Sender not needed
+
+    Parameters:
+     - blacklist
+    """
     pass
 
   def stop(self):
@@ -203,16 +225,20 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "getAccountBalance failed: unknown result");
 
-  def ping(self):
+  def ping(self, sender):
     """
     pings node
+
+    Parameters:
+     - sender
     """
-    self.send_ping()
+    self.send_ping(sender)
     self.recv_ping()
 
-  def send_ping(self):
+  def send_ping(self, sender):
     self._oprot.writeMessageBegin('ping', TMessageType.CALL, self._seqid)
     args = ping_args()
+    args.sender = sender
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -229,21 +255,21 @@ class Client(Iface):
     self._iprot.readMessageEnd()
     return
 
-  def pingSwarm(self, leader, transfer):
+  def pingSwarm(self, sender, transfer):
     """
-    pings Swarm and checks if leader is a leader
+    pings Swarm and checks if sender is a leader
 
     Parameters:
-     - leader
+     - sender
      - transfer
     """
-    self.send_pingSwarm(leader, transfer)
+    self.send_pingSwarm(sender, transfer)
     self.recv_pingSwarm()
 
-  def send_pingSwarm(self, leader, transfer):
+  def send_pingSwarm(self, sender, transfer):
     self._oprot.writeMessageBegin('pingSwarm', TMessageType.CALL, self._seqid)
     args = pingSwarm_args()
-    args.leader = leader
+    args.sender = sender
     args.transfer = transfer
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
@@ -263,19 +289,21 @@ class Client(Iface):
       raise result.exc
     return
 
-  def updateSwarmMembers(self, swarm):
+  def updateSwarmMembers(self, sender, swarm):
     """
-
+      
 
     Parameters:
+     - sender
      - swarm
     """
-    self.send_updateSwarmMembers(swarm)
+    self.send_updateSwarmMembers(sender, swarm)
     self.recv_updateSwarmMembers()
 
-  def send_updateSwarmMembers(self, swarm):
+  def send_updateSwarmMembers(self, sender, swarm):
     self._oprot.writeMessageBegin('updateSwarmMembers', TMessageType.CALL, self._seqid)
     args = updateSwarmMembers_args()
+    args.sender = sender
     args.swarm = swarm
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
@@ -297,20 +325,22 @@ class Client(Iface):
       raise result.exc2
     return
 
-  def addToSwarm(self, swarm, transferData):
+  def addToSwarm(self, sender, swarm, transferData):
     """
 
 
     Parameters:
+     - sender
      - swarm
      - transferData
     """
-    self.send_addToSwarm(swarm, transferData)
+    self.send_addToSwarm(sender, swarm, transferData)
     self.recv_addToSwarm()
 
-  def send_addToSwarm(self, swarm, transferData):
+  def send_addToSwarm(self, sender, swarm, transferData):
     self._oprot.writeMessageBegin('addToSwarm', TMessageType.CALL, self._seqid)
     args = addToSwarm_args()
+    args.sender = sender
     args.swarm = swarm
     args.transferData = transferData
     args.write(self._oprot)
@@ -331,19 +361,21 @@ class Client(Iface):
       raise result.exc
     return
 
-  def delSwarm(self, swarmID):
+  def delSwarm(self, sender, swarmID):
     """
 
 
     Parameters:
+     - sender
      - swarmID
     """
-    self.send_delSwarm(swarmID)
+    self.send_delSwarm(sender, swarmID)
     self.recv_delSwarm()
 
-  def send_delSwarm(self, swarmID):
+  def send_delSwarm(self, sender, swarmID):
     self._oprot.writeMessageBegin('delSwarm', TMessageType.CALL, self._seqid)
     args = delSwarm_args()
+    args.sender = sender
     args.swarmID = swarmID
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
@@ -365,19 +397,21 @@ class Client(Iface):
       raise result.exc2
     return
 
-  def getSwarm(self, transfer):
+  def getSwarm(self, sender, transfer):
     """
 
 
     Parameters:
+     - sender
      - transfer
     """
-    self.send_getSwarm(transfer)
+    self.send_getSwarm(sender, transfer)
     return self.recv_getSwarm()
 
-  def send_getSwarm(self, transfer):
+  def send_getSwarm(self, sender, transfer):
     self._oprot.writeMessageBegin('getSwarm', TMessageType.CALL, self._seqid)
     args = getSwarm_args()
+    args.sender = sender
     args.transfer = transfer
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
@@ -399,20 +433,22 @@ class Client(Iface):
       raise result.exc
     raise TApplicationException(TApplicationException.MISSING_RESULT, "getSwarm failed: unknown result");
 
-  def electSwarmLeader(self, cadidate, Transfer):
+  def electSwarmLeader(self, sender, cadidate, Transfer):
     """
     returns true if candidateNodeID> current
 
     Parameters:
+     - sender
      - cadidate
      - Transfer
     """
-    self.send_electSwarmLeader(cadidate, Transfer)
+    self.send_electSwarmLeader(sender, cadidate, Transfer)
     return self.recv_electSwarmLeader()
 
-  def send_electSwarmLeader(self, cadidate, Transfer):
+  def send_electSwarmLeader(self, sender, cadidate, Transfer):
     self._oprot.writeMessageBegin('electSwarmLeader', TMessageType.CALL, self._seqid)
     args = electSwarmLeader_args()
+    args.sender = sender
     args.cadidate = cadidate
     args.Transfer = Transfer
     args.write(self._oprot)
@@ -435,19 +471,21 @@ class Client(Iface):
       raise result.exc
     raise TApplicationException(TApplicationException.MISSING_RESULT, "electSwarmLeader failed: unknown result");
 
-  def electionEndedSwarm(self, swarm):
+  def electionEndedSwarm(self, sender, swarm):
     """
     new leader broadcast that he is a leader
 
     Parameters:
+     - sender
      - swarm
     """
-    self.send_electionEndedSwarm(swarm)
+    self.send_electionEndedSwarm(sender, swarm)
     self.recv_electionEndedSwarm()
 
-  def send_electionEndedSwarm(self, swarm):
+  def send_electionEndedSwarm(self, sender, swarm):
     self._oprot.writeMessageBegin('electionEndedSwarm', TMessageType.CALL, self._seqid)
     args = electionEndedSwarm_args()
+    args.sender = sender
     args.swarm = swarm
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
@@ -467,19 +505,21 @@ class Client(Iface):
       raise result.exc
     return
 
-  def deliverTransfer(self, transfer):
+  def deliverTransfer(self, sender, transfer):
     """
 
 
     Parameters:
+     - sender
      - transfer
     """
-    self.send_deliverTransfer(transfer)
+    self.send_deliverTransfer(sender, transfer)
     self.recv_deliverTransfer()
 
-  def send_deliverTransfer(self, transfer):
+  def send_deliverTransfer(self, sender, transfer):
     self._oprot.writeMessageBegin('deliverTransfer', TMessageType.CALL, self._seqid)
     args = deliverTransfer_args()
+    args.sender = sender
     args.transfer = transfer
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
@@ -498,6 +538,9 @@ class Client(Iface):
     return
 
   def getSwarmList(self):
+    """
+    DEBUG
+    """
     self.send_getSwarmList()
     return self.recv_getSwarmList()
 
@@ -577,6 +620,36 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "getTransfers failed: unknown result");
 
+  def setBlacklist(self, blacklist):
+    """
+    Sender not needed
+
+    Parameters:
+     - blacklist
+    """
+    self.send_setBlacklist(blacklist)
+    self.recv_setBlacklist()
+
+  def send_setBlacklist(self, blacklist):
+    self._oprot.writeMessageBegin('setBlacklist', TMessageType.CALL, self._seqid)
+    args = setBlacklist_args()
+    args.blacklist = blacklist
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_setBlacklist(self):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = setBlacklist_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    return
+
   def stop(self):
     self.send_stop()
     self.recv_stop()
@@ -619,6 +692,7 @@ class Processor(Iface, TProcessor):
     self._processMap["getSwarmList"] = Processor.process_getSwarmList
     self._processMap["startSwarmElection"] = Processor.process_startSwarmElection
     self._processMap["getTransfers"] = Processor.process_getTransfers
+    self._processMap["setBlacklist"] = Processor.process_setBlacklist
     self._processMap["stop"] = Processor.process_stop
 
   def process(self, iprot, oprot):
@@ -668,7 +742,7 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = ping_result()
-    self._handler.ping()
+    self._handler.ping(args.sender)
     oprot.writeMessageBegin("ping", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -680,7 +754,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = pingSwarm_result()
     try:
-      self._handler.pingSwarm(args.leader, args.transfer)
+      self._handler.pingSwarm(args.sender, args.transfer)
     except NotSwarmMemeber, exc:
       result.exc = exc
     oprot.writeMessageBegin("pingSwarm", TMessageType.REPLY, seqid)
@@ -694,7 +768,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = updateSwarmMembers_result()
     try:
-      self._handler.updateSwarmMembers(args.swarm)
+      self._handler.updateSwarmMembers(args.sender, args.swarm)
     except NotSwarmMemeber, exc:
       result.exc = exc
     except WrongSwarmLeader, exc2:
@@ -710,7 +784,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = addToSwarm_result()
     try:
-      self._handler.addToSwarm(args.swarm, args.transferData)
+      self._handler.addToSwarm(args.sender, args.swarm, args.transferData)
     except AlreadySwarmMemeber, exc:
       result.exc = exc
     oprot.writeMessageBegin("addToSwarm", TMessageType.REPLY, seqid)
@@ -724,7 +798,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = delSwarm_result()
     try:
-      self._handler.delSwarm(args.swarmID)
+      self._handler.delSwarm(args.sender, args.swarmID)
     except NotSwarmMemeber, exc:
       result.exc = exc
     except WrongSwarmLeader, exc2:
@@ -740,7 +814,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = getSwarm_result()
     try:
-      result.success = self._handler.getSwarm(args.transfer)
+      result.success = self._handler.getSwarm(args.sender, args.transfer)
     except NotSwarmMemeber, exc:
       result.exc = exc
     oprot.writeMessageBegin("getSwarm", TMessageType.REPLY, seqid)
@@ -754,7 +828,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = electSwarmLeader_result()
     try:
-      result.success = self._handler.electSwarmLeader(args.cadidate, args.Transfer)
+      result.success = self._handler.electSwarmLeader(args.sender, args.cadidate, args.Transfer)
     except NotSwarmMemeber, exc:
       result.exc = exc
     oprot.writeMessageBegin("electSwarmLeader", TMessageType.REPLY, seqid)
@@ -768,7 +842,7 @@ class Processor(Iface, TProcessor):
     iprot.readMessageEnd()
     result = electionEndedSwarm_result()
     try:
-      self._handler.electionEndedSwarm(args.swarm)
+      self._handler.electionEndedSwarm(args.sender, args.swarm)
     except NotSwarmMemeber, exc:
       result.exc = exc
     oprot.writeMessageBegin("electionEndedSwarm", TMessageType.REPLY, seqid)
@@ -781,7 +855,7 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = deliverTransfer_result()
-    self._handler.deliverTransfer(args.transfer)
+    self._handler.deliverTransfer(args.sender, args.transfer)
     oprot.writeMessageBegin("deliverTransfer", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -819,6 +893,17 @@ class Processor(Iface, TProcessor):
     result = getTransfers_result()
     result.success = self._handler.getTransfers()
     oprot.writeMessageBegin("getTransfers", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_setBlacklist(self, seqid, iprot, oprot):
+    args = setBlacklist_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = setBlacklist_result()
+    self._handler.setBlacklist(args.blacklist)
+    oprot.writeMessageBegin("setBlacklist", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -1086,9 +1171,18 @@ class getAccountBalance_result(object):
     return not (self == other)
 
 class ping_args(object):
+  """
+  Attributes:
+   - sender
+  """
 
   thrift_spec = (
+    None, # 0
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
   )
+
+  def __init__(self, sender=None,):
+    self.sender = sender
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -1099,6 +1193,12 @@ class ping_args(object):
       (fname, ftype, fid) = iprot.readFieldBegin()
       if ftype == TType.STOP:
         break
+      if fid == 1:
+        if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -1109,6 +1209,10 @@ class ping_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('ping_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 
@@ -1172,18 +1276,18 @@ class ping_result(object):
 class pingSwarm_args(object):
   """
   Attributes:
-   - leader
+   - sender
    - transfer
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'leader', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
     (2, TType.STRUCT, 'transfer', (TransferID, TransferID.thrift_spec), None, ), # 2
   )
 
-  def __init__(self, leader=None, transfer=None,):
-    self.leader = leader
+  def __init__(self, sender=None, transfer=None,):
+    self.sender = sender
     self.transfer = transfer
 
   def read(self, iprot):
@@ -1197,8 +1301,8 @@ class pingSwarm_args(object):
         break
       if fid == 1:
         if ftype == TType.STRUCT:
-          self.leader = NodeID()
-          self.leader.read(iprot)
+          self.sender = NodeID()
+          self.sender.read(iprot)
         else:
           iprot.skip(ftype)
       elif fid == 2:
@@ -1217,9 +1321,9 @@ class pingSwarm_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('pingSwarm_args')
-    if self.leader is not None:
-      oprot.writeFieldBegin('leader', TType.STRUCT, 1)
-      self.leader.write(oprot)
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
       oprot.writeFieldEnd()
     if self.transfer is not None:
       oprot.writeFieldBegin('transfer', TType.STRUCT, 2)
@@ -1307,15 +1411,18 @@ class pingSwarm_result(object):
 class updateSwarmMembers_args(object):
   """
   Attributes:
+   - sender
    - swarm
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 2
   )
 
-  def __init__(self, swarm=None,):
+  def __init__(self, sender=None, swarm=None,):
+    self.sender = sender
     self.swarm = swarm
 
   def read(self, iprot):
@@ -1328,6 +1435,12 @@ class updateSwarmMembers_args(object):
       if ftype == TType.STOP:
         break
       if fid == 1:
+        if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
         if ftype == TType.STRUCT:
           self.swarm = Swarm()
           self.swarm.read(iprot)
@@ -1343,8 +1456,12 @@ class updateSwarmMembers_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('updateSwarmMembers_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     if self.swarm is not None:
-      oprot.writeFieldBegin('swarm', TType.STRUCT, 1)
+      oprot.writeFieldBegin('swarm', TType.STRUCT, 2)
       self.swarm.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -1442,17 +1559,20 @@ class updateSwarmMembers_result(object):
 class addToSwarm_args(object):
   """
   Attributes:
+   - sender
    - swarm
    - transferData
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 1
-    (2, TType.STRUCT, 'transferData', (TransferData, TransferData.thrift_spec), None, ), # 2
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 2
+    (3, TType.STRUCT, 'transferData', (TransferData, TransferData.thrift_spec), None, ), # 3
   )
 
-  def __init__(self, swarm=None, transferData=None,):
+  def __init__(self, sender=None, swarm=None, transferData=None,):
+    self.sender = sender
     self.swarm = swarm
     self.transferData = transferData
 
@@ -1467,11 +1587,17 @@ class addToSwarm_args(object):
         break
       if fid == 1:
         if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.STRUCT:
           self.swarm = Swarm()
           self.swarm.read(iprot)
         else:
           iprot.skip(ftype)
-      elif fid == 2:
+      elif fid == 3:
         if ftype == TType.STRUCT:
           self.transferData = TransferData()
           self.transferData.read(iprot)
@@ -1487,12 +1613,16 @@ class addToSwarm_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('addToSwarm_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     if self.swarm is not None:
-      oprot.writeFieldBegin('swarm', TType.STRUCT, 1)
+      oprot.writeFieldBegin('swarm', TType.STRUCT, 2)
       self.swarm.write(oprot)
       oprot.writeFieldEnd()
     if self.transferData is not None:
-      oprot.writeFieldBegin('transferData', TType.STRUCT, 2)
+      oprot.writeFieldBegin('transferData', TType.STRUCT, 3)
       self.transferData.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -1577,15 +1707,18 @@ class addToSwarm_result(object):
 class delSwarm_args(object):
   """
   Attributes:
+   - sender
    - swarmID
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'swarmID', (TransferID, TransferID.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'swarmID', (TransferID, TransferID.thrift_spec), None, ), # 2
   )
 
-  def __init__(self, swarmID=None,):
+  def __init__(self, sender=None, swarmID=None,):
+    self.sender = sender
     self.swarmID = swarmID
 
   def read(self, iprot):
@@ -1598,6 +1731,12 @@ class delSwarm_args(object):
       if ftype == TType.STOP:
         break
       if fid == 1:
+        if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
         if ftype == TType.STRUCT:
           self.swarmID = TransferID()
           self.swarmID.read(iprot)
@@ -1613,8 +1752,12 @@ class delSwarm_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('delSwarm_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     if self.swarmID is not None:
-      oprot.writeFieldBegin('swarmID', TType.STRUCT, 1)
+      oprot.writeFieldBegin('swarmID', TType.STRUCT, 2)
       self.swarmID.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -1712,15 +1855,18 @@ class delSwarm_result(object):
 class getSwarm_args(object):
   """
   Attributes:
+   - sender
    - transfer
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'transfer', (TransferID, TransferID.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'transfer', (TransferID, TransferID.thrift_spec), None, ), # 2
   )
 
-  def __init__(self, transfer=None,):
+  def __init__(self, sender=None, transfer=None,):
+    self.sender = sender
     self.transfer = transfer
 
   def read(self, iprot):
@@ -1733,6 +1879,12 @@ class getSwarm_args(object):
       if ftype == TType.STOP:
         break
       if fid == 1:
+        if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
         if ftype == TType.STRUCT:
           self.transfer = TransferID()
           self.transfer.read(iprot)
@@ -1748,8 +1900,12 @@ class getSwarm_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('getSwarm_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     if self.transfer is not None:
-      oprot.writeFieldBegin('transfer', TType.STRUCT, 1)
+      oprot.writeFieldBegin('transfer', TType.STRUCT, 2)
       self.transfer.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -1846,17 +2002,20 @@ class getSwarm_result(object):
 class electSwarmLeader_args(object):
   """
   Attributes:
+   - sender
    - cadidate
    - Transfer
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'cadidate', (NodeID, NodeID.thrift_spec), None, ), # 1
-    (2, TType.STRUCT, 'Transfer', (TransferID, TransferID.thrift_spec), None, ), # 2
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'cadidate', (NodeID, NodeID.thrift_spec), None, ), # 2
+    (3, TType.STRUCT, 'Transfer', (TransferID, TransferID.thrift_spec), None, ), # 3
   )
 
-  def __init__(self, cadidate=None, Transfer=None,):
+  def __init__(self, sender=None, cadidate=None, Transfer=None,):
+    self.sender = sender
     self.cadidate = cadidate
     self.Transfer = Transfer
 
@@ -1871,11 +2030,17 @@ class electSwarmLeader_args(object):
         break
       if fid == 1:
         if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.STRUCT:
           self.cadidate = NodeID()
           self.cadidate.read(iprot)
         else:
           iprot.skip(ftype)
-      elif fid == 2:
+      elif fid == 3:
         if ftype == TType.STRUCT:
           self.Transfer = TransferID()
           self.Transfer.read(iprot)
@@ -1891,12 +2056,16 @@ class electSwarmLeader_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('electSwarmLeader_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     if self.cadidate is not None:
-      oprot.writeFieldBegin('cadidate', TType.STRUCT, 1)
+      oprot.writeFieldBegin('cadidate', TType.STRUCT, 2)
       self.cadidate.write(oprot)
       oprot.writeFieldEnd()
     if self.Transfer is not None:
-      oprot.writeFieldBegin('Transfer', TType.STRUCT, 2)
+      oprot.writeFieldBegin('Transfer', TType.STRUCT, 3)
       self.Transfer.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -1992,15 +2161,18 @@ class electSwarmLeader_result(object):
 class electionEndedSwarm_args(object):
   """
   Attributes:
+   - sender
    - swarm
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'swarm', (Swarm, Swarm.thrift_spec), None, ), # 2
   )
 
-  def __init__(self, swarm=None,):
+  def __init__(self, sender=None, swarm=None,):
+    self.sender = sender
     self.swarm = swarm
 
   def read(self, iprot):
@@ -2013,6 +2185,12 @@ class electionEndedSwarm_args(object):
       if ftype == TType.STOP:
         break
       if fid == 1:
+        if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
         if ftype == TType.STRUCT:
           self.swarm = Swarm()
           self.swarm.read(iprot)
@@ -2028,8 +2206,12 @@ class electionEndedSwarm_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('electionEndedSwarm_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     if self.swarm is not None:
-      oprot.writeFieldBegin('swarm', TType.STRUCT, 1)
+      oprot.writeFieldBegin('swarm', TType.STRUCT, 2)
       self.swarm.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -2114,15 +2296,18 @@ class electionEndedSwarm_result(object):
 class deliverTransfer_args(object):
   """
   Attributes:
+   - sender
    - transfer
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.STRUCT, 'transfer', (TransferData, TransferData.thrift_spec), None, ), # 1
+    (1, TType.STRUCT, 'sender', (NodeID, NodeID.thrift_spec), None, ), # 1
+    (2, TType.STRUCT, 'transfer', (TransferData, TransferData.thrift_spec), None, ), # 2
   )
 
-  def __init__(self, transfer=None,):
+  def __init__(self, sender=None, transfer=None,):
+    self.sender = sender
     self.transfer = transfer
 
   def read(self, iprot):
@@ -2135,6 +2320,12 @@ class deliverTransfer_args(object):
       if ftype == TType.STOP:
         break
       if fid == 1:
+        if ftype == TType.STRUCT:
+          self.sender = NodeID()
+          self.sender.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
         if ftype == TType.STRUCT:
           self.transfer = TransferData()
           self.transfer.read(iprot)
@@ -2150,8 +2341,12 @@ class deliverTransfer_args(object):
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('deliverTransfer_args')
+    if self.sender is not None:
+      oprot.writeFieldBegin('sender', TType.STRUCT, 1)
+      self.sender.write(oprot)
+      oprot.writeFieldEnd()
     if self.transfer is not None:
-      oprot.writeFieldBegin('transfer', TType.STRUCT, 1)
+      oprot.writeFieldBegin('transfer', TType.STRUCT, 2)
       self.transfer.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -2538,6 +2733,117 @@ class getTransfers_result(object):
         iter20.write(oprot)
       oprot.writeListEnd()
       oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class setBlacklist_args(object):
+  """
+  Attributes:
+   - blacklist
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.LIST, 'blacklist', (TType.STRUCT,(NodeID, NodeID.thrift_spec)), None, ), # 1
+  )
+
+  def __init__(self, blacklist=None,):
+    self.blacklist = blacklist
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.LIST:
+          self.blacklist = []
+          (_etype24, _size21) = iprot.readListBegin()
+          for _i25 in xrange(_size21):
+            _elem26 = NodeID()
+            _elem26.read(iprot)
+            self.blacklist.append(_elem26)
+          iprot.readListEnd()
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('setBlacklist_args')
+    if self.blacklist is not None:
+      oprot.writeFieldBegin('blacklist', TType.LIST, 1)
+      oprot.writeListBegin(TType.STRUCT, len(self.blacklist))
+      for iter27 in self.blacklist:
+        iter27.write(oprot)
+      oprot.writeListEnd()
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class setBlacklist_result(object):
+
+  thrift_spec = (
+  )
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('setBlacklist_result')
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 

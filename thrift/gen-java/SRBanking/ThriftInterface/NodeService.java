@@ -57,71 +57,86 @@ public class NodeService {
     public void ping(NodeID sender) throws org.apache.thrift.TException;
 
     /**
-     * pings Swarm and checks if leader is a leader
+     * pings Swarm and checks if sender is a leader
      * 
-     * @param leader
+     * @param sender
      * @param transfer
      */
-    public void pingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public void pingSwarm(NodeID sender, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
+     *   
      * 
-     * 
+     * @param sender
      * @param swarm
      */
-    public void updateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
+    public void updateSwarmMembers(NodeID sender, Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
 
     /**
      * 
      * 
+     * @param sender
      * @param swarm
      * @param transferData
      */
-    public void addToSwarm(Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, org.apache.thrift.TException;
+    public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, org.apache.thrift.TException;
 
     /**
      * 
      * 
+     * @param sender
      * @param swarmID
      */
-    public void delSwarm(TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
+    public void delSwarm(NodeID sender, TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException;
 
     /**
      * 
      * 
+     * @param sender
      * @param transfer
      */
-    public Swarm getSwarm(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public Swarm getSwarm(NodeID sender, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
      * returns true if candidateNodeID> current
      * 
+     * @param sender
      * @param cadidate
      * @param Transfer
      */
-    public boolean electSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public boolean electSwarmLeader(NodeID sender, NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
      * new leader broadcast that he is a leader
      * 
+     * @param sender
      * @param swarm
      */
-    public void electionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException;
+    public void electionEndedSwarm(NodeID sender, Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     /**
      * 
      * 
+     * @param sender
      * @param transfer
      */
-    public void deliverTransfer(TransferData transfer) throws org.apache.thrift.TException;
+    public void deliverTransfer(NodeID sender, TransferData transfer) throws org.apache.thrift.TException;
 
+    /**
+     * DEBUG
+     */
     public List<Swarm> getSwarmList() throws org.apache.thrift.TException;
 
     public void startSwarmElection(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException;
 
     public List<TransferData> getTransfers() throws org.apache.thrift.TException;
 
-    public void addBlackList(List<NodeID> blackList) throws org.apache.thrift.TException;
+    /**
+     * Sender not needed
+     * 
+     * @param blacklist
+     */
+    public void setBlacklist(List<NodeID> blacklist) throws org.apache.thrift.TException;
 
     public void stop() throws org.apache.thrift.TException;
 
@@ -135,21 +150,21 @@ public class NodeService {
 
     public void ping(NodeID sender, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void pingSwarm(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void pingSwarm(NodeID sender, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void updateSwarmMembers(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void updateSwarmMembers(NodeID sender, Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void addToSwarm(Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void delSwarm(TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void delSwarm(NodeID sender, TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void getSwarm(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getSwarm(NodeID sender, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void electSwarmLeader(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void electSwarmLeader(NodeID sender, NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void electionEndedSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void electionEndedSwarm(NodeID sender, Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void deliverTransfer(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void deliverTransfer(NodeID sender, TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void getSwarmList(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -157,7 +172,7 @@ public class NodeService {
 
     public void getTransfers(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void addBlackList(List<NodeID> blackList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void setBlacklist(List<NodeID> blacklist, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void stop(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -252,16 +267,16 @@ public class NodeService {
       return;
     }
 
-    public void pingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
+    public void pingSwarm(NodeID sender, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_pingSwarm(leader, transfer);
+      send_pingSwarm(sender, transfer);
       recv_pingSwarm();
     }
 
-    public void send_pingSwarm(NodeID leader, TransferID transfer) throws org.apache.thrift.TException
+    public void send_pingSwarm(NodeID sender, TransferID transfer) throws org.apache.thrift.TException
     {
       pingSwarm_args args = new pingSwarm_args();
-      args.setLeader(leader);
+      args.setSender(sender);
       args.setTransfer(transfer);
       sendBase("pingSwarm", args);
     }
@@ -276,15 +291,16 @@ public class NodeService {
       return;
     }
 
-    public void updateSwarmMembers(Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
+    public void updateSwarmMembers(NodeID sender, Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
     {
-      send_updateSwarmMembers(swarm);
+      send_updateSwarmMembers(sender, swarm);
       recv_updateSwarmMembers();
     }
 
-    public void send_updateSwarmMembers(Swarm swarm) throws org.apache.thrift.TException
+    public void send_updateSwarmMembers(NodeID sender, Swarm swarm) throws org.apache.thrift.TException
     {
       updateSwarmMembers_args args = new updateSwarmMembers_args();
+      args.setSender(sender);
       args.setSwarm(swarm);
       sendBase("updateSwarmMembers", args);
     }
@@ -302,15 +318,16 @@ public class NodeService {
       return;
     }
 
-    public void addToSwarm(Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, org.apache.thrift.TException
+    public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, org.apache.thrift.TException
     {
-      send_addToSwarm(swarm, transferData);
+      send_addToSwarm(sender, swarm, transferData);
       recv_addToSwarm();
     }
 
-    public void send_addToSwarm(Swarm swarm, TransferData transferData) throws org.apache.thrift.TException
+    public void send_addToSwarm(NodeID sender, Swarm swarm, TransferData transferData) throws org.apache.thrift.TException
     {
       addToSwarm_args args = new addToSwarm_args();
+      args.setSender(sender);
       args.setSwarm(swarm);
       args.setTransferData(transferData);
       sendBase("addToSwarm", args);
@@ -326,15 +343,16 @@ public class NodeService {
       return;
     }
 
-    public void delSwarm(TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
+    public void delSwarm(NodeID sender, TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, org.apache.thrift.TException
     {
-      send_delSwarm(swarmID);
+      send_delSwarm(sender, swarmID);
       recv_delSwarm();
     }
 
-    public void send_delSwarm(TransferID swarmID) throws org.apache.thrift.TException
+    public void send_delSwarm(NodeID sender, TransferID swarmID) throws org.apache.thrift.TException
     {
       delSwarm_args args = new delSwarm_args();
+      args.setSender(sender);
       args.setSwarmID(swarmID);
       sendBase("delSwarm", args);
     }
@@ -352,15 +370,16 @@ public class NodeService {
       return;
     }
 
-    public Swarm getSwarm(TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
+    public Swarm getSwarm(NodeID sender, TransferID transfer) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_getSwarm(transfer);
+      send_getSwarm(sender, transfer);
       return recv_getSwarm();
     }
 
-    public void send_getSwarm(TransferID transfer) throws org.apache.thrift.TException
+    public void send_getSwarm(NodeID sender, TransferID transfer) throws org.apache.thrift.TException
     {
       getSwarm_args args = new getSwarm_args();
+      args.setSender(sender);
       args.setTransfer(transfer);
       sendBase("getSwarm", args);
     }
@@ -378,15 +397,16 @@ public class NodeService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getSwarm failed: unknown result");
     }
 
-    public boolean electSwarmLeader(NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException
+    public boolean electSwarmLeader(NodeID sender, NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_electSwarmLeader(cadidate, Transfer);
+      send_electSwarmLeader(sender, cadidate, Transfer);
       return recv_electSwarmLeader();
     }
 
-    public void send_electSwarmLeader(NodeID cadidate, TransferID Transfer) throws org.apache.thrift.TException
+    public void send_electSwarmLeader(NodeID sender, NodeID cadidate, TransferID Transfer) throws org.apache.thrift.TException
     {
       electSwarmLeader_args args = new electSwarmLeader_args();
+      args.setSender(sender);
       args.setCadidate(cadidate);
       args.setTransfer(Transfer);
       sendBase("electSwarmLeader", args);
@@ -405,15 +425,16 @@ public class NodeService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "electSwarmLeader failed: unknown result");
     }
 
-    public void electionEndedSwarm(Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException
+    public void electionEndedSwarm(NodeID sender, Swarm swarm) throws NotSwarmMemeber, org.apache.thrift.TException
     {
-      send_electionEndedSwarm(swarm);
+      send_electionEndedSwarm(sender, swarm);
       recv_electionEndedSwarm();
     }
 
-    public void send_electionEndedSwarm(Swarm swarm) throws org.apache.thrift.TException
+    public void send_electionEndedSwarm(NodeID sender, Swarm swarm) throws org.apache.thrift.TException
     {
       electionEndedSwarm_args args = new electionEndedSwarm_args();
+      args.setSender(sender);
       args.setSwarm(swarm);
       sendBase("electionEndedSwarm", args);
     }
@@ -428,15 +449,16 @@ public class NodeService {
       return;
     }
 
-    public void deliverTransfer(TransferData transfer) throws org.apache.thrift.TException
+    public void deliverTransfer(NodeID sender, TransferData transfer) throws org.apache.thrift.TException
     {
-      send_deliverTransfer(transfer);
+      send_deliverTransfer(sender, transfer);
       recv_deliverTransfer();
     }
 
-    public void send_deliverTransfer(TransferData transfer) throws org.apache.thrift.TException
+    public void send_deliverTransfer(NodeID sender, TransferData transfer) throws org.apache.thrift.TException
     {
       deliverTransfer_args args = new deliverTransfer_args();
+      args.setSender(sender);
       args.setTransfer(transfer);
       sendBase("deliverTransfer", args);
     }
@@ -515,23 +537,23 @@ public class NodeService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getTransfers failed: unknown result");
     }
 
-    public void addBlackList(List<NodeID> blackList) throws org.apache.thrift.TException
+    public void setBlacklist(List<NodeID> blacklist) throws org.apache.thrift.TException
     {
-      send_addBlackList(blackList);
-      recv_addBlackList();
+      send_setBlacklist(blacklist);
+      recv_setBlacklist();
     }
 
-    public void send_addBlackList(List<NodeID> blackList) throws org.apache.thrift.TException
+    public void send_setBlacklist(List<NodeID> blacklist) throws org.apache.thrift.TException
     {
-      addBlackList_args args = new addBlackList_args();
-      args.setBlackList(blackList);
-      sendBase("addBlackList", args);
+      setBlacklist_args args = new setBlacklist_args();
+      args.setBlacklist(blacklist);
+      sendBase("setBlacklist", args);
     }
 
-    public void recv_addBlackList() throws org.apache.thrift.TException
+    public void recv_setBlacklist() throws org.apache.thrift.TException
     {
-      addBlackList_result result = new addBlackList_result();
-      receiveBase(result, "addBlackList");
+      setBlacklist_result result = new setBlacklist_result();
+      receiveBase(result, "setBlacklist");
       return;
     }
 
@@ -668,26 +690,26 @@ public class NodeService {
       }
     }
 
-    public void pingSwarm(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void pingSwarm(NodeID sender, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      pingSwarm_call method_call = new pingSwarm_call(leader, transfer, resultHandler, this, ___protocolFactory, ___transport);
+      pingSwarm_call method_call = new pingSwarm_call(sender, transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class pingSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private NodeID leader;
+      private NodeID sender;
       private TransferID transfer;
-      public pingSwarm_call(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public pingSwarm_call(NodeID sender, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.leader = leader;
+        this.sender = sender;
         this.transfer = transfer;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("pingSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
         pingSwarm_args args = new pingSwarm_args();
-        args.setLeader(leader);
+        args.setSender(sender);
         args.setTransfer(transfer);
         args.write(prot);
         prot.writeMessageEnd();
@@ -703,23 +725,26 @@ public class NodeService {
       }
     }
 
-    public void updateSwarmMembers(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void updateSwarmMembers(NodeID sender, Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      updateSwarmMembers_call method_call = new updateSwarmMembers_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      updateSwarmMembers_call method_call = new updateSwarmMembers_call(sender, swarm, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class updateSwarmMembers_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private NodeID sender;
       private Swarm swarm;
-      public updateSwarmMembers_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public updateSwarmMembers_call(NodeID sender, Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
         this.swarm = swarm;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("updateSwarmMembers", org.apache.thrift.protocol.TMessageType.CALL, 0));
         updateSwarmMembers_args args = new updateSwarmMembers_args();
+        args.setSender(sender);
         args.setSwarm(swarm);
         args.write(prot);
         prot.writeMessageEnd();
@@ -735,18 +760,20 @@ public class NodeService {
       }
     }
 
-    public void addToSwarm(Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      addToSwarm_call method_call = new addToSwarm_call(swarm, transferData, resultHandler, this, ___protocolFactory, ___transport);
+      addToSwarm_call method_call = new addToSwarm_call(sender, swarm, transferData, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class addToSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private NodeID sender;
       private Swarm swarm;
       private TransferData transferData;
-      public addToSwarm_call(Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public addToSwarm_call(NodeID sender, Swarm swarm, TransferData transferData, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
         this.swarm = swarm;
         this.transferData = transferData;
       }
@@ -754,6 +781,7 @@ public class NodeService {
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("addToSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
         addToSwarm_args args = new addToSwarm_args();
+        args.setSender(sender);
         args.setSwarm(swarm);
         args.setTransferData(transferData);
         args.write(prot);
@@ -770,23 +798,26 @@ public class NodeService {
       }
     }
 
-    public void delSwarm(TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void delSwarm(NodeID sender, TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      delSwarm_call method_call = new delSwarm_call(swarmID, resultHandler, this, ___protocolFactory, ___transport);
+      delSwarm_call method_call = new delSwarm_call(sender, swarmID, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class delSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private NodeID sender;
       private TransferID swarmID;
-      public delSwarm_call(TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public delSwarm_call(NodeID sender, TransferID swarmID, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
         this.swarmID = swarmID;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("delSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
         delSwarm_args args = new delSwarm_args();
+        args.setSender(sender);
         args.setSwarmID(swarmID);
         args.write(prot);
         prot.writeMessageEnd();
@@ -802,23 +833,26 @@ public class NodeService {
       }
     }
 
-    public void getSwarm(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getSwarm(NodeID sender, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      getSwarm_call method_call = new getSwarm_call(transfer, resultHandler, this, ___protocolFactory, ___transport);
+      getSwarm_call method_call = new getSwarm_call(sender, transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class getSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private NodeID sender;
       private TransferID transfer;
-      public getSwarm_call(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public getSwarm_call(NodeID sender, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
         this.transfer = transfer;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
         getSwarm_args args = new getSwarm_args();
+        args.setSender(sender);
         args.setTransfer(transfer);
         args.write(prot);
         prot.writeMessageEnd();
@@ -834,18 +868,20 @@ public class NodeService {
       }
     }
 
-    public void electSwarmLeader(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void electSwarmLeader(NodeID sender, NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      electSwarmLeader_call method_call = new electSwarmLeader_call(cadidate, Transfer, resultHandler, this, ___protocolFactory, ___transport);
+      electSwarmLeader_call method_call = new electSwarmLeader_call(sender, cadidate, Transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class electSwarmLeader_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private NodeID sender;
       private NodeID cadidate;
       private TransferID Transfer;
-      public electSwarmLeader_call(NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public electSwarmLeader_call(NodeID sender, NodeID cadidate, TransferID Transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
         this.cadidate = cadidate;
         this.Transfer = Transfer;
       }
@@ -853,6 +889,7 @@ public class NodeService {
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("electSwarmLeader", org.apache.thrift.protocol.TMessageType.CALL, 0));
         electSwarmLeader_args args = new electSwarmLeader_args();
+        args.setSender(sender);
         args.setCadidate(cadidate);
         args.setTransfer(Transfer);
         args.write(prot);
@@ -869,23 +906,26 @@ public class NodeService {
       }
     }
 
-    public void electionEndedSwarm(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void electionEndedSwarm(NodeID sender, Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      electionEndedSwarm_call method_call = new electionEndedSwarm_call(swarm, resultHandler, this, ___protocolFactory, ___transport);
+      electionEndedSwarm_call method_call = new electionEndedSwarm_call(sender, swarm, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class electionEndedSwarm_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private NodeID sender;
       private Swarm swarm;
-      public electionEndedSwarm_call(Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public electionEndedSwarm_call(NodeID sender, Swarm swarm, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
         this.swarm = swarm;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("electionEndedSwarm", org.apache.thrift.protocol.TMessageType.CALL, 0));
         electionEndedSwarm_args args = new electionEndedSwarm_args();
+        args.setSender(sender);
         args.setSwarm(swarm);
         args.write(prot);
         prot.writeMessageEnd();
@@ -901,23 +941,26 @@ public class NodeService {
       }
     }
 
-    public void deliverTransfer(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void deliverTransfer(NodeID sender, TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      deliverTransfer_call method_call = new deliverTransfer_call(transfer, resultHandler, this, ___protocolFactory, ___transport);
+      deliverTransfer_call method_call = new deliverTransfer_call(sender, transfer, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class deliverTransfer_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private NodeID sender;
       private TransferData transfer;
-      public deliverTransfer_call(TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public deliverTransfer_call(NodeID sender, TransferData transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
         this.transfer = transfer;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("deliverTransfer", org.apache.thrift.protocol.TMessageType.CALL, 0));
         deliverTransfer_args args = new deliverTransfer_args();
+        args.setSender(sender);
         args.setTransfer(transfer);
         args.write(prot);
         prot.writeMessageEnd();
@@ -1023,24 +1066,24 @@ public class NodeService {
       }
     }
 
-    public void addBlackList(List<NodeID> blackList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void setBlacklist(List<NodeID> blacklist, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      addBlackList_call method_call = new addBlackList_call(blackList, resultHandler, this, ___protocolFactory, ___transport);
+      setBlacklist_call method_call = new setBlacklist_call(blacklist, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class addBlackList_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private List<NodeID> blackList;
-      public addBlackList_call(List<NodeID> blackList, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class setBlacklist_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private List<NodeID> blacklist;
+      public setBlacklist_call(List<NodeID> blacklist, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.blackList = blackList;
+        this.blacklist = blacklist;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("addBlackList", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        addBlackList_args args = new addBlackList_args();
-        args.setBlackList(blackList);
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("setBlacklist", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        setBlacklist_args args = new setBlacklist_args();
+        args.setBlacklist(blacklist);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -1051,7 +1094,7 @@ public class NodeService {
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        (new Client(prot)).recv_addBlackList();
+        (new Client(prot)).recv_setBlacklist();
       }
     }
 
@@ -1111,7 +1154,7 @@ public class NodeService {
       processMap.put("getSwarmList", new getSwarmList());
       processMap.put("startSwarmElection", new startSwarmElection());
       processMap.put("getTransfers", new getTransfers());
-      processMap.put("addBlackList", new addBlackList());
+      processMap.put("setBlacklist", new setBlacklist());
       processMap.put("stop", new stop());
       return processMap;
     }
@@ -1199,7 +1242,7 @@ public class NodeService {
       public pingSwarm_result getResult(I iface, pingSwarm_args args) throws org.apache.thrift.TException {
         pingSwarm_result result = new pingSwarm_result();
         try {
-          iface.pingSwarm(args.leader, args.transfer);
+          iface.pingSwarm(args.sender, args.transfer);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1223,7 +1266,7 @@ public class NodeService {
       public updateSwarmMembers_result getResult(I iface, updateSwarmMembers_args args) throws org.apache.thrift.TException {
         updateSwarmMembers_result result = new updateSwarmMembers_result();
         try {
-          iface.updateSwarmMembers(args.swarm);
+          iface.updateSwarmMembers(args.sender, args.swarm);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         } catch (WrongSwarmLeader exc2) {
@@ -1249,7 +1292,7 @@ public class NodeService {
       public addToSwarm_result getResult(I iface, addToSwarm_args args) throws org.apache.thrift.TException {
         addToSwarm_result result = new addToSwarm_result();
         try {
-          iface.addToSwarm(args.swarm, args.transferData);
+          iface.addToSwarm(args.sender, args.swarm, args.transferData);
         } catch (AlreadySwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1273,7 +1316,7 @@ public class NodeService {
       public delSwarm_result getResult(I iface, delSwarm_args args) throws org.apache.thrift.TException {
         delSwarm_result result = new delSwarm_result();
         try {
-          iface.delSwarm(args.swarmID);
+          iface.delSwarm(args.sender, args.swarmID);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         } catch (WrongSwarmLeader exc2) {
@@ -1299,7 +1342,7 @@ public class NodeService {
       public getSwarm_result getResult(I iface, getSwarm_args args) throws org.apache.thrift.TException {
         getSwarm_result result = new getSwarm_result();
         try {
-          result.success = iface.getSwarm(args.transfer);
+          result.success = iface.getSwarm(args.sender, args.transfer);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1323,7 +1366,7 @@ public class NodeService {
       public electSwarmLeader_result getResult(I iface, electSwarmLeader_args args) throws org.apache.thrift.TException {
         electSwarmLeader_result result = new electSwarmLeader_result();
         try {
-          result.success = iface.electSwarmLeader(args.cadidate, args.Transfer);
+          result.success = iface.electSwarmLeader(args.sender, args.cadidate, args.Transfer);
           result.setSuccessIsSet(true);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
@@ -1348,7 +1391,7 @@ public class NodeService {
       public electionEndedSwarm_result getResult(I iface, electionEndedSwarm_args args) throws org.apache.thrift.TException {
         electionEndedSwarm_result result = new electionEndedSwarm_result();
         try {
-          iface.electionEndedSwarm(args.swarm);
+          iface.electionEndedSwarm(args.sender, args.swarm);
         } catch (NotSwarmMemeber exc) {
           result.exc = exc;
         }
@@ -1371,7 +1414,7 @@ public class NodeService {
 
       public deliverTransfer_result getResult(I iface, deliverTransfer_args args) throws org.apache.thrift.TException {
         deliverTransfer_result result = new deliverTransfer_result();
-        iface.deliverTransfer(args.transfer);
+        iface.deliverTransfer(args.sender, args.transfer);
         return result;
       }
     }
@@ -1440,22 +1483,22 @@ public class NodeService {
       }
     }
 
-    public static class addBlackList<I extends Iface> extends org.apache.thrift.ProcessFunction<I, addBlackList_args> {
-      public addBlackList() {
-        super("addBlackList");
+    public static class setBlacklist<I extends Iface> extends org.apache.thrift.ProcessFunction<I, setBlacklist_args> {
+      public setBlacklist() {
+        super("setBlacklist");
       }
 
-      public addBlackList_args getEmptyArgsInstance() {
-        return new addBlackList_args();
+      public setBlacklist_args getEmptyArgsInstance() {
+        return new setBlacklist_args();
       }
 
       protected boolean isOneway() {
         return false;
       }
 
-      public addBlackList_result getResult(I iface, addBlackList_args args) throws org.apache.thrift.TException {
-        addBlackList_result result = new addBlackList_result();
-        iface.addBlackList(args.blackList);
+      public setBlacklist_result getResult(I iface, setBlacklist_args args) throws org.apache.thrift.TException {
+        setBlacklist_result result = new setBlacklist_result();
+        iface.setBlacklist(args.blacklist);
         return result;
       }
     }
@@ -1507,7 +1550,7 @@ public class NodeService {
       processMap.put("getSwarmList", new getSwarmList());
       processMap.put("startSwarmElection", new startSwarmElection());
       processMap.put("getTransfers", new getTransfers());
-      processMap.put("addBlackList", new addBlackList());
+      processMap.put("setBlacklist", new setBlacklist());
       processMap.put("stop", new stop());
       return processMap;
     }
@@ -1727,7 +1770,7 @@ public class NodeService {
       }
 
       public void start(I iface, pingSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.pingSwarm(args.leader, args.transfer,resultHandler);
+        iface.pingSwarm(args.sender, args.transfer,resultHandler);
       }
     }
 
@@ -1788,7 +1831,7 @@ public class NodeService {
       }
 
       public void start(I iface, updateSwarmMembers_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.updateSwarmMembers(args.swarm,resultHandler);
+        iface.updateSwarmMembers(args.sender, args.swarm,resultHandler);
       }
     }
 
@@ -1844,7 +1887,7 @@ public class NodeService {
       }
 
       public void start(I iface, addToSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.addToSwarm(args.swarm, args.transferData,resultHandler);
+        iface.addToSwarm(args.sender, args.swarm, args.transferData,resultHandler);
       }
     }
 
@@ -1905,7 +1948,7 @@ public class NodeService {
       }
 
       public void start(I iface, delSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.delSwarm(args.swarmID,resultHandler);
+        iface.delSwarm(args.sender, args.swarmID,resultHandler);
       }
     }
 
@@ -1962,7 +2005,7 @@ public class NodeService {
       }
 
       public void start(I iface, getSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Swarm> resultHandler) throws TException {
-        iface.getSwarm(args.transfer,resultHandler);
+        iface.getSwarm(args.sender, args.transfer,resultHandler);
       }
     }
 
@@ -2020,7 +2063,7 @@ public class NodeService {
       }
 
       public void start(I iface, electSwarmLeader_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
-        iface.electSwarmLeader(args.cadidate, args.Transfer,resultHandler);
+        iface.electSwarmLeader(args.sender, args.cadidate, args.Transfer,resultHandler);
       }
     }
 
@@ -2076,7 +2119,7 @@ public class NodeService {
       }
 
       public void start(I iface, electionEndedSwarm_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.electionEndedSwarm(args.swarm,resultHandler);
+        iface.electionEndedSwarm(args.sender, args.swarm,resultHandler);
       }
     }
 
@@ -2126,7 +2169,7 @@ public class NodeService {
       }
 
       public void start(I iface, deliverTransfer_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.deliverTransfer(args.transfer,resultHandler);
+        iface.deliverTransfer(args.sender, args.transfer,resultHandler);
       }
     }
 
@@ -2288,20 +2331,20 @@ public class NodeService {
       }
     }
 
-    public static class addBlackList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, addBlackList_args, Void> {
-      public addBlackList() {
-        super("addBlackList");
+    public static class setBlacklist<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, setBlacklist_args, Void> {
+      public setBlacklist() {
+        super("setBlacklist");
       }
 
-      public addBlackList_args getEmptyArgsInstance() {
-        return new addBlackList_args();
+      public setBlacklist_args getEmptyArgsInstance() {
+        return new setBlacklist_args();
       }
 
       public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            addBlackList_result result = new addBlackList_result();
+            setBlacklist_result result = new setBlacklist_result();
             try {
               fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
               return;
@@ -2313,7 +2356,7 @@ public class NodeService {
           public void onError(Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TBase msg;
-            addBlackList_result result = new addBlackList_result();
+            setBlacklist_result result = new setBlacklist_result();
             {
               msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
               msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
@@ -2333,8 +2376,8 @@ public class NodeService {
         return false;
       }
 
-      public void start(I iface, addBlackList_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.addBlackList(args.blackList,resultHandler);
+      public void start(I iface, setBlacklist_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.setBlacklist(args.blacklist,resultHandler);
       }
     }
 
@@ -4513,7 +4556,7 @@ public class NodeService {
   public static class pingSwarm_args implements org.apache.thrift.TBase<pingSwarm_args, pingSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<pingSwarm_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("pingSwarm_args");
 
-    private static final org.apache.thrift.protocol.TField LEADER_FIELD_DESC = new org.apache.thrift.protocol.TField("leader", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -4522,12 +4565,12 @@ public class NodeService {
       schemes.put(TupleScheme.class, new pingSwarm_argsTupleSchemeFactory());
     }
 
-    public NodeID leader; // required
+    public NodeID sender; // required
     public TransferID transfer; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      LEADER((short)1, "leader"),
+      SENDER((short)1, "sender"),
       TRANSFER((short)2, "transfer");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -4543,8 +4586,8 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // LEADER
-            return LEADER;
+          case 1: // SENDER
+            return SENDER;
           case 2: // TRANSFER
             return TRANSFER;
           default:
@@ -4590,7 +4633,7 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.LEADER, new org.apache.thrift.meta_data.FieldMetaData("leader", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
@@ -4602,11 +4645,11 @@ public class NodeService {
     }
 
     public pingSwarm_args(
-      NodeID leader,
+      NodeID sender,
       TransferID transfer)
     {
       this();
-      this.leader = leader;
+      this.sender = sender;
       this.transfer = transfer;
     }
 
@@ -4614,8 +4657,8 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public pingSwarm_args(pingSwarm_args other) {
-      if (other.isSetLeader()) {
-        this.leader = new NodeID(other.leader);
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
       }
       if (other.isSetTransfer()) {
         this.transfer = new TransferID(other.transfer);
@@ -4628,31 +4671,31 @@ public class NodeService {
 
     @Override
     public void clear() {
-      this.leader = null;
+      this.sender = null;
       this.transfer = null;
     }
 
-    public NodeID getLeader() {
-      return this.leader;
+    public NodeID getSender() {
+      return this.sender;
     }
 
-    public pingSwarm_args setLeader(NodeID leader) {
-      this.leader = leader;
+    public pingSwarm_args setSender(NodeID sender) {
+      this.sender = sender;
       return this;
     }
 
-    public void unsetLeader() {
-      this.leader = null;
+    public void unsetSender() {
+      this.sender = null;
     }
 
-    /** Returns true if field leader is set (has been assigned a value) and false otherwise */
-    public boolean isSetLeader() {
-      return this.leader != null;
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
     }
 
-    public void setLeaderIsSet(boolean value) {
+    public void setSenderIsSet(boolean value) {
       if (!value) {
-        this.leader = null;
+        this.sender = null;
       }
     }
 
@@ -4682,11 +4725,11 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case LEADER:
+      case SENDER:
         if (value == null) {
-          unsetLeader();
+          unsetSender();
         } else {
-          setLeader((NodeID)value);
+          setSender((NodeID)value);
         }
         break;
 
@@ -4703,8 +4746,8 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case LEADER:
-        return getLeader();
+      case SENDER:
+        return getSender();
 
       case TRANSFER:
         return getTransfer();
@@ -4720,8 +4763,8 @@ public class NodeService {
       }
 
       switch (field) {
-      case LEADER:
-        return isSetLeader();
+      case SENDER:
+        return isSetSender();
       case TRANSFER:
         return isSetTransfer();
       }
@@ -4741,12 +4784,12 @@ public class NodeService {
       if (that == null)
         return false;
 
-      boolean this_present_leader = true && this.isSetLeader();
-      boolean that_present_leader = true && that.isSetLeader();
-      if (this_present_leader || that_present_leader) {
-        if (!(this_present_leader && that_present_leader))
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
           return false;
-        if (!this.leader.equals(that.leader))
+        if (!this.sender.equals(that.sender))
           return false;
       }
 
@@ -4775,12 +4818,12 @@ public class NodeService {
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetLeader()).compareTo(other.isSetLeader());
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetLeader()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.leader, other.leader);
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -4815,11 +4858,11 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("pingSwarm_args(");
       boolean first = true;
 
-      sb.append("leader:");
-      if (this.leader == null) {
+      sb.append("sender:");
+      if (this.sender == null) {
         sb.append("null");
       } else {
-        sb.append(this.leader);
+        sb.append(this.sender);
       }
       first = false;
       if (!first) sb.append(", ");
@@ -4837,8 +4880,8 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (leader != null) {
-        leader.validate();
+      if (sender != null) {
+        sender.validate();
       }
       if (transfer != null) {
         transfer.validate();
@@ -4879,11 +4922,11 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // LEADER
+            case 1: // SENDER
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.leader = new NodeID();
-                struct.leader.read(iprot);
-                struct.setLeaderIsSet(true);
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -4912,9 +4955,9 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.leader != null) {
-          oprot.writeFieldBegin(LEADER_FIELD_DESC);
-          struct.leader.write(oprot);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
           oprot.writeFieldEnd();
         }
         if (struct.transfer != null) {
@@ -4940,15 +4983,15 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, pingSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetLeader()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
         if (struct.isSetTransfer()) {
           optionals.set(1);
         }
         oprot.writeBitSet(optionals, 2);
-        if (struct.isSetLeader()) {
-          struct.leader.write(oprot);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
         }
         if (struct.isSetTransfer()) {
           struct.transfer.write(oprot);
@@ -4960,9 +5003,9 @@ public class NodeService {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.leader = new NodeID();
-          struct.leader.read(iprot);
-          struct.setLeaderIsSet(true);
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
         }
         if (incoming.get(1)) {
           struct.transfer = new TransferID();
@@ -5333,7 +5376,8 @@ public class NodeService {
   public static class updateSwarmMembers_args implements org.apache.thrift.TBase<updateSwarmMembers_args, updateSwarmMembers_args._Fields>, java.io.Serializable, Cloneable, Comparable<updateSwarmMembers_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("updateSwarmMembers_args");
 
-    private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -5341,11 +5385,13 @@ public class NodeService {
       schemes.put(TupleScheme.class, new updateSwarmMembers_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
     public Swarm swarm; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SWARM((short)1, "swarm");
+      SENDER((short)1, "sender"),
+      SWARM((short)2, "swarm");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -5360,7 +5406,9 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // SWARM
+          case 1: // SENDER
+            return SENDER;
+          case 2: // SWARM
             return SWARM;
           default:
             return null;
@@ -5405,6 +5453,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -5415,9 +5465,11 @@ public class NodeService {
     }
 
     public updateSwarmMembers_args(
+      NodeID sender,
       Swarm swarm)
     {
       this();
+      this.sender = sender;
       this.swarm = swarm;
     }
 
@@ -5425,6 +5477,9 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public updateSwarmMembers_args(updateSwarmMembers_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
       }
@@ -5436,7 +5491,32 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
       this.swarm = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public updateSwarmMembers_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public Swarm getSwarm() {
@@ -5465,6 +5545,14 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       case SWARM:
         if (value == null) {
           unsetSwarm();
@@ -5478,6 +5566,9 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       case SWARM:
         return getSwarm();
 
@@ -5492,6 +5583,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       case SWARM:
         return isSetSwarm();
       }
@@ -5510,6 +5603,15 @@ public class NodeService {
     public boolean equals(updateSwarmMembers_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
 
       boolean this_present_swarm = true && this.isSetSwarm();
       boolean that_present_swarm = true && that.isSetSwarm();
@@ -5536,6 +5638,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetSwarm()).compareTo(other.isSetSwarm());
       if (lastComparison != 0) {
         return lastComparison;
@@ -5566,6 +5678,14 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("updateSwarmMembers_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("swarm:");
       if (this.swarm == null) {
         sb.append("null");
@@ -5580,6 +5700,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
       if (swarm != null) {
         swarm.validate();
       }
@@ -5619,7 +5742,16 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // SWARM
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // SWARM
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.swarm = new Swarm();
                 struct.swarm.read(iprot);
@@ -5643,6 +5775,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.swarm != null) {
           oprot.writeFieldBegin(SWARM_FIELD_DESC);
           struct.swarm.write(oprot);
@@ -5666,10 +5803,16 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, updateSwarmMembers_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSwarm()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSwarm()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
         if (struct.isSetSwarm()) {
           struct.swarm.write(oprot);
         }
@@ -5678,8 +5821,13 @@ public class NodeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, updateSwarmMembers_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.swarm = new Swarm();
           struct.swarm.read(iprot);
           struct.setSwarmIsSet(true);
@@ -6150,8 +6298,9 @@ public class NodeService {
   public static class addToSwarm_args implements org.apache.thrift.TBase<addToSwarm_args, addToSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<addToSwarm_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addToSwarm_args");
 
-    private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-    private static final org.apache.thrift.protocol.TField TRANSFER_DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("transferData", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField TRANSFER_DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("transferData", org.apache.thrift.protocol.TType.STRUCT, (short)3);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -6159,13 +6308,15 @@ public class NodeService {
       schemes.put(TupleScheme.class, new addToSwarm_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
     public Swarm swarm; // required
     public TransferData transferData; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SWARM((short)1, "swarm"),
-      TRANSFER_DATA((short)2, "transferData");
+      SENDER((short)1, "sender"),
+      SWARM((short)2, "swarm"),
+      TRANSFER_DATA((short)3, "transferData");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -6180,9 +6331,11 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // SWARM
+          case 1: // SENDER
+            return SENDER;
+          case 2: // SWARM
             return SWARM;
-          case 2: // TRANSFER_DATA
+          case 3: // TRANSFER_DATA
             return TRANSFER_DATA;
           default:
             return null;
@@ -6227,6 +6380,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
       tmpMap.put(_Fields.TRANSFER_DATA, new org.apache.thrift.meta_data.FieldMetaData("transferData", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -6239,10 +6394,12 @@ public class NodeService {
     }
 
     public addToSwarm_args(
+      NodeID sender,
       Swarm swarm,
       TransferData transferData)
     {
       this();
+      this.sender = sender;
       this.swarm = swarm;
       this.transferData = transferData;
     }
@@ -6251,6 +6408,9 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public addToSwarm_args(addToSwarm_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
       }
@@ -6265,8 +6425,33 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
       this.swarm = null;
       this.transferData = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public addToSwarm_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public Swarm getSwarm() {
@@ -6319,6 +6504,14 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       case SWARM:
         if (value == null) {
           unsetSwarm();
@@ -6340,6 +6533,9 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       case SWARM:
         return getSwarm();
 
@@ -6357,6 +6553,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       case SWARM:
         return isSetSwarm();
       case TRANSFER_DATA:
@@ -6377,6 +6575,15 @@ public class NodeService {
     public boolean equals(addToSwarm_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
 
       boolean this_present_swarm = true && this.isSetSwarm();
       boolean that_present_swarm = true && that.isSetSwarm();
@@ -6412,6 +6619,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetSwarm()).compareTo(other.isSetSwarm());
       if (lastComparison != 0) {
         return lastComparison;
@@ -6452,6 +6669,14 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("addToSwarm_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("swarm:");
       if (this.swarm == null) {
         sb.append("null");
@@ -6474,6 +6699,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
       if (swarm != null) {
         swarm.validate();
       }
@@ -6516,7 +6744,16 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // SWARM
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // SWARM
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.swarm = new Swarm();
                 struct.swarm.read(iprot);
@@ -6525,7 +6762,7 @@ public class NodeService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // TRANSFER_DATA
+            case 3: // TRANSFER_DATA
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.transferData = new TransferData();
                 struct.transferData.read(iprot);
@@ -6549,6 +6786,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.swarm != null) {
           oprot.writeFieldBegin(SWARM_FIELD_DESC);
           struct.swarm.write(oprot);
@@ -6577,13 +6819,19 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, addToSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSwarm()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
-        if (struct.isSetTransferData()) {
+        if (struct.isSetSwarm()) {
           optionals.set(1);
         }
-        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetTransferData()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
         if (struct.isSetSwarm()) {
           struct.swarm.write(oprot);
         }
@@ -6595,13 +6843,18 @@ public class NodeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, addToSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.swarm = new Swarm();
           struct.swarm.read(iprot);
           struct.setSwarmIsSet(true);
         }
-        if (incoming.get(1)) {
+        if (incoming.get(2)) {
           struct.transferData = new TransferData();
           struct.transferData.read(iprot);
           struct.setTransferDataIsSet(true);
@@ -6970,7 +7223,8 @@ public class NodeService {
   public static class delSwarm_args implements org.apache.thrift.TBase<delSwarm_args, delSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<delSwarm_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("delSwarm_args");
 
-    private static final org.apache.thrift.protocol.TField SWARM_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("swarmID", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SWARM_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("swarmID", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -6978,11 +7232,13 @@ public class NodeService {
       schemes.put(TupleScheme.class, new delSwarm_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
     public TransferID swarmID; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SWARM_ID((short)1, "swarmID");
+      SENDER((short)1, "sender"),
+      SWARM_ID((short)2, "swarmID");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -6997,7 +7253,9 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // SWARM_ID
+          case 1: // SENDER
+            return SENDER;
+          case 2: // SWARM_ID
             return SWARM_ID;
           default:
             return null;
@@ -7042,6 +7300,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.SWARM_ID, new org.apache.thrift.meta_data.FieldMetaData("swarmID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -7052,9 +7312,11 @@ public class NodeService {
     }
 
     public delSwarm_args(
+      NodeID sender,
       TransferID swarmID)
     {
       this();
+      this.sender = sender;
       this.swarmID = swarmID;
     }
 
@@ -7062,6 +7324,9 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public delSwarm_args(delSwarm_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
       if (other.isSetSwarmID()) {
         this.swarmID = new TransferID(other.swarmID);
       }
@@ -7073,7 +7338,32 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
       this.swarmID = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public delSwarm_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public TransferID getSwarmID() {
@@ -7102,6 +7392,14 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       case SWARM_ID:
         if (value == null) {
           unsetSwarmID();
@@ -7115,6 +7413,9 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       case SWARM_ID:
         return getSwarmID();
 
@@ -7129,6 +7430,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       case SWARM_ID:
         return isSetSwarmID();
       }
@@ -7147,6 +7450,15 @@ public class NodeService {
     public boolean equals(delSwarm_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
 
       boolean this_present_swarmID = true && this.isSetSwarmID();
       boolean that_present_swarmID = true && that.isSetSwarmID();
@@ -7173,6 +7485,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetSwarmID()).compareTo(other.isSetSwarmID());
       if (lastComparison != 0) {
         return lastComparison;
@@ -7203,6 +7525,14 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("delSwarm_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("swarmID:");
       if (this.swarmID == null) {
         sb.append("null");
@@ -7217,6 +7547,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
       if (swarmID != null) {
         swarmID.validate();
       }
@@ -7256,7 +7589,16 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // SWARM_ID
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // SWARM_ID
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.swarmID = new TransferID();
                 struct.swarmID.read(iprot);
@@ -7280,6 +7622,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.swarmID != null) {
           oprot.writeFieldBegin(SWARM_ID_FIELD_DESC);
           struct.swarmID.write(oprot);
@@ -7303,10 +7650,16 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, delSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSwarmID()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSwarmID()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
         if (struct.isSetSwarmID()) {
           struct.swarmID.write(oprot);
         }
@@ -7315,8 +7668,13 @@ public class NodeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, delSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.swarmID = new TransferID();
           struct.swarmID.read(iprot);
           struct.setSwarmIDIsSet(true);
@@ -7787,7 +8145,8 @@ public class NodeService {
   public static class getSwarm_args implements org.apache.thrift.TBase<getSwarm_args, getSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<getSwarm_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getSwarm_args");
 
-    private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -7795,11 +8154,13 @@ public class NodeService {
       schemes.put(TupleScheme.class, new getSwarm_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
     public TransferID transfer; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      TRANSFER((short)1, "transfer");
+      SENDER((short)1, "sender"),
+      TRANSFER((short)2, "transfer");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -7814,7 +8175,9 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // TRANSFER
+          case 1: // SENDER
+            return SENDER;
+          case 2: // TRANSFER
             return TRANSFER;
           default:
             return null;
@@ -7859,6 +8222,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferID.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -7869,9 +8234,11 @@ public class NodeService {
     }
 
     public getSwarm_args(
+      NodeID sender,
       TransferID transfer)
     {
       this();
+      this.sender = sender;
       this.transfer = transfer;
     }
 
@@ -7879,6 +8246,9 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public getSwarm_args(getSwarm_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
       if (other.isSetTransfer()) {
         this.transfer = new TransferID(other.transfer);
       }
@@ -7890,7 +8260,32 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
       this.transfer = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public getSwarm_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public TransferID getTransfer() {
@@ -7919,6 +8314,14 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       case TRANSFER:
         if (value == null) {
           unsetTransfer();
@@ -7932,6 +8335,9 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       case TRANSFER:
         return getTransfer();
 
@@ -7946,6 +8352,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       case TRANSFER:
         return isSetTransfer();
       }
@@ -7964,6 +8372,15 @@ public class NodeService {
     public boolean equals(getSwarm_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
 
       boolean this_present_transfer = true && this.isSetTransfer();
       boolean that_present_transfer = true && that.isSetTransfer();
@@ -7990,6 +8407,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetTransfer()).compareTo(other.isSetTransfer());
       if (lastComparison != 0) {
         return lastComparison;
@@ -8020,6 +8447,14 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("getSwarm_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("transfer:");
       if (this.transfer == null) {
         sb.append("null");
@@ -8034,6 +8469,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
       if (transfer != null) {
         transfer.validate();
       }
@@ -8073,7 +8511,16 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // TRANSFER
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // TRANSFER
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.transfer = new TransferID();
                 struct.transfer.read(iprot);
@@ -8097,6 +8544,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.transfer != null) {
           oprot.writeFieldBegin(TRANSFER_FIELD_DESC);
           struct.transfer.write(oprot);
@@ -8120,10 +8572,16 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, getSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetTransfer()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetTransfer()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
         if (struct.isSetTransfer()) {
           struct.transfer.write(oprot);
         }
@@ -8132,8 +8590,13 @@ public class NodeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, getSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.transfer = new TransferID();
           struct.transfer.read(iprot);
           struct.setTransferIsSet(true);
@@ -8607,8 +9070,9 @@ public class NodeService {
   public static class electSwarmLeader_args implements org.apache.thrift.TBase<electSwarmLeader_args, electSwarmLeader_args._Fields>, java.io.Serializable, Cloneable, Comparable<electSwarmLeader_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("electSwarmLeader_args");
 
-    private static final org.apache.thrift.protocol.TField CADIDATE_FIELD_DESC = new org.apache.thrift.protocol.TField("cadidate", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-    private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("Transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField CADIDATE_FIELD_DESC = new org.apache.thrift.protocol.TField("cadidate", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("Transfer", org.apache.thrift.protocol.TType.STRUCT, (short)3);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -8616,13 +9080,15 @@ public class NodeService {
       schemes.put(TupleScheme.class, new electSwarmLeader_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
     public NodeID cadidate; // required
     public TransferID Transfer; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      CADIDATE((short)1, "cadidate"),
-      TRANSFER((short)2, "Transfer");
+      SENDER((short)1, "sender"),
+      CADIDATE((short)2, "cadidate"),
+      TRANSFER((short)3, "Transfer");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -8637,9 +9103,11 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // CADIDATE
+          case 1: // SENDER
+            return SENDER;
+          case 2: // CADIDATE
             return CADIDATE;
-          case 2: // TRANSFER
+          case 3: // TRANSFER
             return TRANSFER;
           default:
             return null;
@@ -8684,6 +9152,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.CADIDATE, new org.apache.thrift.meta_data.FieldMetaData("cadidate", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("Transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -8696,10 +9166,12 @@ public class NodeService {
     }
 
     public electSwarmLeader_args(
+      NodeID sender,
       NodeID cadidate,
       TransferID Transfer)
     {
       this();
+      this.sender = sender;
       this.cadidate = cadidate;
       this.Transfer = Transfer;
     }
@@ -8708,6 +9180,9 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public electSwarmLeader_args(electSwarmLeader_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
       if (other.isSetCadidate()) {
         this.cadidate = new NodeID(other.cadidate);
       }
@@ -8722,8 +9197,33 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
       this.cadidate = null;
       this.Transfer = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public electSwarmLeader_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public NodeID getCadidate() {
@@ -8776,6 +9276,14 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       case CADIDATE:
         if (value == null) {
           unsetCadidate();
@@ -8797,6 +9305,9 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       case CADIDATE:
         return getCadidate();
 
@@ -8814,6 +9325,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       case CADIDATE:
         return isSetCadidate();
       case TRANSFER:
@@ -8834,6 +9347,15 @@ public class NodeService {
     public boolean equals(electSwarmLeader_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
 
       boolean this_present_cadidate = true && this.isSetCadidate();
       boolean that_present_cadidate = true && that.isSetCadidate();
@@ -8869,6 +9391,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetCadidate()).compareTo(other.isSetCadidate());
       if (lastComparison != 0) {
         return lastComparison;
@@ -8909,6 +9441,14 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("electSwarmLeader_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("cadidate:");
       if (this.cadidate == null) {
         sb.append("null");
@@ -8931,6 +9471,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
       if (cadidate != null) {
         cadidate.validate();
       }
@@ -8973,7 +9516,16 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // CADIDATE
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // CADIDATE
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.cadidate = new NodeID();
                 struct.cadidate.read(iprot);
@@ -8982,7 +9534,7 @@ public class NodeService {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // TRANSFER
+            case 3: // TRANSFER
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.Transfer = new TransferID();
                 struct.Transfer.read(iprot);
@@ -9006,6 +9558,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.cadidate != null) {
           oprot.writeFieldBegin(CADIDATE_FIELD_DESC);
           struct.cadidate.write(oprot);
@@ -9034,13 +9591,19 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, electSwarmLeader_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetCadidate()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
-        if (struct.isSetTransfer()) {
+        if (struct.isSetCadidate()) {
           optionals.set(1);
         }
-        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetTransfer()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
         if (struct.isSetCadidate()) {
           struct.cadidate.write(oprot);
         }
@@ -9052,13 +9615,18 @@ public class NodeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, electSwarmLeader_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(2);
+        BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.cadidate = new NodeID();
           struct.cadidate.read(iprot);
           struct.setCadidateIsSet(true);
         }
-        if (incoming.get(1)) {
+        if (incoming.get(2)) {
           struct.Transfer = new TransferID();
           struct.Transfer.read(iprot);
           struct.setTransferIsSet(true);
@@ -9527,7 +10095,8 @@ public class NodeService {
   public static class electionEndedSwarm_args implements org.apache.thrift.TBase<electionEndedSwarm_args, electionEndedSwarm_args._Fields>, java.io.Serializable, Cloneable, Comparable<electionEndedSwarm_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("electionEndedSwarm_args");
 
-    private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SWARM_FIELD_DESC = new org.apache.thrift.protocol.TField("swarm", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -9535,11 +10104,13 @@ public class NodeService {
       schemes.put(TupleScheme.class, new electionEndedSwarm_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
     public Swarm swarm; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SWARM((short)1, "swarm");
+      SENDER((short)1, "sender"),
+      SWARM((short)2, "swarm");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -9554,7 +10125,9 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // SWARM
+          case 1: // SENDER
+            return SENDER;
+          case 2: // SWARM
             return SWARM;
           default:
             return null;
@@ -9599,6 +10172,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.SWARM, new org.apache.thrift.meta_data.FieldMetaData("swarm", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Swarm.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -9609,9 +10184,11 @@ public class NodeService {
     }
 
     public electionEndedSwarm_args(
+      NodeID sender,
       Swarm swarm)
     {
       this();
+      this.sender = sender;
       this.swarm = swarm;
     }
 
@@ -9619,6 +10196,9 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public electionEndedSwarm_args(electionEndedSwarm_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
       if (other.isSetSwarm()) {
         this.swarm = new Swarm(other.swarm);
       }
@@ -9630,7 +10210,32 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
       this.swarm = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public electionEndedSwarm_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public Swarm getSwarm() {
@@ -9659,6 +10264,14 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       case SWARM:
         if (value == null) {
           unsetSwarm();
@@ -9672,6 +10285,9 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       case SWARM:
         return getSwarm();
 
@@ -9686,6 +10302,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       case SWARM:
         return isSetSwarm();
       }
@@ -9704,6 +10322,15 @@ public class NodeService {
     public boolean equals(electionEndedSwarm_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
 
       boolean this_present_swarm = true && this.isSetSwarm();
       boolean that_present_swarm = true && that.isSetSwarm();
@@ -9730,6 +10357,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetSwarm()).compareTo(other.isSetSwarm());
       if (lastComparison != 0) {
         return lastComparison;
@@ -9760,6 +10397,14 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("electionEndedSwarm_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("swarm:");
       if (this.swarm == null) {
         sb.append("null");
@@ -9774,6 +10419,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
       if (swarm != null) {
         swarm.validate();
       }
@@ -9813,7 +10461,16 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // SWARM
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // SWARM
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.swarm = new Swarm();
                 struct.swarm.read(iprot);
@@ -9837,6 +10494,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.swarm != null) {
           oprot.writeFieldBegin(SWARM_FIELD_DESC);
           struct.swarm.write(oprot);
@@ -9860,10 +10522,16 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, electionEndedSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetSwarm()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSwarm()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
         if (struct.isSetSwarm()) {
           struct.swarm.write(oprot);
         }
@@ -9872,8 +10540,13 @@ public class NodeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, electionEndedSwarm_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.swarm = new Swarm();
           struct.swarm.read(iprot);
           struct.setSwarmIsSet(true);
@@ -10242,7 +10915,8 @@ public class NodeService {
   public static class deliverTransfer_args implements org.apache.thrift.TBase<deliverTransfer_args, deliverTransfer_args._Fields>, java.io.Serializable, Cloneable, Comparable<deliverTransfer_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("deliverTransfer_args");
 
-    private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField TRANSFER_FIELD_DESC = new org.apache.thrift.protocol.TField("transfer", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -10250,11 +10924,13 @@ public class NodeService {
       schemes.put(TupleScheme.class, new deliverTransfer_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
     public TransferData transfer; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      TRANSFER((short)1, "transfer");
+      SENDER((short)1, "sender"),
+      TRANSFER((short)2, "transfer");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -10269,7 +10945,9 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // TRANSFER
+          case 1: // SENDER
+            return SENDER;
+          case 2: // TRANSFER
             return TRANSFER;
           default:
             return null;
@@ -10314,6 +10992,8 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       tmpMap.put(_Fields.TRANSFER, new org.apache.thrift.meta_data.FieldMetaData("transfer", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TransferData.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -10324,9 +11004,11 @@ public class NodeService {
     }
 
     public deliverTransfer_args(
+      NodeID sender,
       TransferData transfer)
     {
       this();
+      this.sender = sender;
       this.transfer = transfer;
     }
 
@@ -10334,6 +11016,9 @@ public class NodeService {
      * Performs a deep copy on <i>other</i>.
      */
     public deliverTransfer_args(deliverTransfer_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
       if (other.isSetTransfer()) {
         this.transfer = new TransferData(other.transfer);
       }
@@ -10345,7 +11030,32 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
       this.transfer = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public deliverTransfer_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public TransferData getTransfer() {
@@ -10374,6 +11084,14 @@ public class NodeService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       case TRANSFER:
         if (value == null) {
           unsetTransfer();
@@ -10387,6 +11105,9 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       case TRANSFER:
         return getTransfer();
 
@@ -10401,6 +11122,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       case TRANSFER:
         return isSetTransfer();
       }
@@ -10419,6 +11142,15 @@ public class NodeService {
     public boolean equals(deliverTransfer_args that) {
       if (that == null)
         return false;
+
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
 
       boolean this_present_transfer = true && this.isSetTransfer();
       boolean that_present_transfer = true && that.isSetTransfer();
@@ -10445,6 +11177,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetTransfer()).compareTo(other.isSetTransfer());
       if (lastComparison != 0) {
         return lastComparison;
@@ -10475,6 +11217,14 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("deliverTransfer_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("transfer:");
       if (this.transfer == null) {
         sb.append("null");
@@ -10489,6 +11239,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
       if (transfer != null) {
         transfer.validate();
       }
@@ -10528,7 +11281,16 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // TRANSFER
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // TRANSFER
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.transfer = new TransferData();
                 struct.transfer.read(iprot);
@@ -10552,6 +11314,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.transfer != null) {
           oprot.writeFieldBegin(TRANSFER_FIELD_DESC);
           struct.transfer.write(oprot);
@@ -10575,10 +11342,16 @@ public class NodeService {
       public void write(org.apache.thrift.protocol.TProtocol prot, deliverTransfer_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetTransfer()) {
+        if (struct.isSetSender()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetTransfer()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
         if (struct.isSetTransfer()) {
           struct.transfer.write(oprot);
         }
@@ -10587,8 +11360,13 @@ public class NodeService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, deliverTransfer_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.transfer = new TransferData();
           struct.transfer.read(iprot);
           struct.setTransferIsSet(true);
@@ -12867,22 +13645,22 @@ public class NodeService {
 
   }
 
-  public static class addBlackList_args implements org.apache.thrift.TBase<addBlackList_args, addBlackList_args._Fields>, java.io.Serializable, Cloneable, Comparable<addBlackList_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addBlackList_args");
+  public static class setBlacklist_args implements org.apache.thrift.TBase<setBlacklist_args, setBlacklist_args._Fields>, java.io.Serializable, Cloneable, Comparable<setBlacklist_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setBlacklist_args");
 
-    private static final org.apache.thrift.protocol.TField BLACK_LIST_FIELD_DESC = new org.apache.thrift.protocol.TField("blackList", org.apache.thrift.protocol.TType.LIST, (short)1);
+    private static final org.apache.thrift.protocol.TField BLACKLIST_FIELD_DESC = new org.apache.thrift.protocol.TField("blacklist", org.apache.thrift.protocol.TType.LIST, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new addBlackList_argsStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new addBlackList_argsTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new setBlacklist_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setBlacklist_argsTupleSchemeFactory());
     }
 
-    public List<NodeID> blackList; // required
+    public List<NodeID> blacklist; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      BLACK_LIST((short)1, "blackList");
+      BLACKLIST((short)1, "blacklist");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -12897,8 +13675,8 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // BLACK_LIST
-            return BLACK_LIST;
+          case 1: // BLACKLIST
+            return BLACKLIST;
           default:
             return null;
         }
@@ -12942,91 +13720,91 @@ public class NodeService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.BLACK_LIST, new org.apache.thrift.meta_data.FieldMetaData("blackList", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.BLACKLIST, new org.apache.thrift.meta_data.FieldMetaData("blacklist", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
               new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addBlackList_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setBlacklist_args.class, metaDataMap);
     }
 
-    public addBlackList_args() {
+    public setBlacklist_args() {
     }
 
-    public addBlackList_args(
-      List<NodeID> blackList)
+    public setBlacklist_args(
+      List<NodeID> blacklist)
     {
       this();
-      this.blackList = blackList;
+      this.blacklist = blacklist;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public addBlackList_args(addBlackList_args other) {
-      if (other.isSetBlackList()) {
-        List<NodeID> __this__blackList = new ArrayList<NodeID>(other.blackList.size());
-        for (NodeID other_element : other.blackList) {
-          __this__blackList.add(new NodeID(other_element));
+    public setBlacklist_args(setBlacklist_args other) {
+      if (other.isSetBlacklist()) {
+        List<NodeID> __this__blacklist = new ArrayList<NodeID>(other.blacklist.size());
+        for (NodeID other_element : other.blacklist) {
+          __this__blacklist.add(new NodeID(other_element));
         }
-        this.blackList = __this__blackList;
+        this.blacklist = __this__blacklist;
       }
     }
 
-    public addBlackList_args deepCopy() {
-      return new addBlackList_args(this);
+    public setBlacklist_args deepCopy() {
+      return new setBlacklist_args(this);
     }
 
     @Override
     public void clear() {
-      this.blackList = null;
+      this.blacklist = null;
     }
 
-    public int getBlackListSize() {
-      return (this.blackList == null) ? 0 : this.blackList.size();
+    public int getBlacklistSize() {
+      return (this.blacklist == null) ? 0 : this.blacklist.size();
     }
 
-    public java.util.Iterator<NodeID> getBlackListIterator() {
-      return (this.blackList == null) ? null : this.blackList.iterator();
+    public java.util.Iterator<NodeID> getBlacklistIterator() {
+      return (this.blacklist == null) ? null : this.blacklist.iterator();
     }
 
-    public void addToBlackList(NodeID elem) {
-      if (this.blackList == null) {
-        this.blackList = new ArrayList<NodeID>();
+    public void addToBlacklist(NodeID elem) {
+      if (this.blacklist == null) {
+        this.blacklist = new ArrayList<NodeID>();
       }
-      this.blackList.add(elem);
+      this.blacklist.add(elem);
     }
 
-    public List<NodeID> getBlackList() {
-      return this.blackList;
+    public List<NodeID> getBlacklist() {
+      return this.blacklist;
     }
 
-    public addBlackList_args setBlackList(List<NodeID> blackList) {
-      this.blackList = blackList;
+    public setBlacklist_args setBlacklist(List<NodeID> blacklist) {
+      this.blacklist = blacklist;
       return this;
     }
 
-    public void unsetBlackList() {
-      this.blackList = null;
+    public void unsetBlacklist() {
+      this.blacklist = null;
     }
 
-    /** Returns true if field blackList is set (has been assigned a value) and false otherwise */
-    public boolean isSetBlackList() {
-      return this.blackList != null;
+    /** Returns true if field blacklist is set (has been assigned a value) and false otherwise */
+    public boolean isSetBlacklist() {
+      return this.blacklist != null;
     }
 
-    public void setBlackListIsSet(boolean value) {
+    public void setBlacklistIsSet(boolean value) {
       if (!value) {
-        this.blackList = null;
+        this.blacklist = null;
       }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case BLACK_LIST:
+      case BLACKLIST:
         if (value == null) {
-          unsetBlackList();
+          unsetBlacklist();
         } else {
-          setBlackList((List<NodeID>)value);
+          setBlacklist((List<NodeID>)value);
         }
         break;
 
@@ -13035,8 +13813,8 @@ public class NodeService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case BLACK_LIST:
-        return getBlackList();
+      case BLACKLIST:
+        return getBlacklist();
 
       }
       throw new IllegalStateException();
@@ -13049,8 +13827,8 @@ public class NodeService {
       }
 
       switch (field) {
-      case BLACK_LIST:
-        return isSetBlackList();
+      case BLACKLIST:
+        return isSetBlacklist();
       }
       throw new IllegalStateException();
     }
@@ -13059,21 +13837,21 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof addBlackList_args)
-        return this.equals((addBlackList_args)that);
+      if (that instanceof setBlacklist_args)
+        return this.equals((setBlacklist_args)that);
       return false;
     }
 
-    public boolean equals(addBlackList_args that) {
+    public boolean equals(setBlacklist_args that) {
       if (that == null)
         return false;
 
-      boolean this_present_blackList = true && this.isSetBlackList();
-      boolean that_present_blackList = true && that.isSetBlackList();
-      if (this_present_blackList || that_present_blackList) {
-        if (!(this_present_blackList && that_present_blackList))
+      boolean this_present_blacklist = true && this.isSetBlacklist();
+      boolean that_present_blacklist = true && that.isSetBlacklist();
+      if (this_present_blacklist || that_present_blacklist) {
+        if (!(this_present_blacklist && that_present_blacklist))
           return false;
-        if (!this.blackList.equals(that.blackList))
+        if (!this.blacklist.equals(that.blacklist))
           return false;
       }
 
@@ -13086,19 +13864,19 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(addBlackList_args other) {
+    public int compareTo(setBlacklist_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
 
       int lastComparison = 0;
 
-      lastComparison = Boolean.valueOf(isSetBlackList()).compareTo(other.isSetBlackList());
+      lastComparison = Boolean.valueOf(isSetBlacklist()).compareTo(other.isSetBlacklist());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetBlackList()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.blackList, other.blackList);
+      if (isSetBlacklist()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.blacklist, other.blacklist);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -13120,14 +13898,14 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("addBlackList_args(");
+      StringBuilder sb = new StringBuilder("setBlacklist_args(");
       boolean first = true;
 
-      sb.append("blackList:");
-      if (this.blackList == null) {
+      sb.append("blacklist:");
+      if (this.blacklist == null) {
         sb.append("null");
       } else {
-        sb.append(this.blackList);
+        sb.append(this.blacklist);
       }
       first = false;
       sb.append(")");
@@ -13155,15 +13933,15 @@ public class NodeService {
       }
     }
 
-    private static class addBlackList_argsStandardSchemeFactory implements SchemeFactory {
-      public addBlackList_argsStandardScheme getScheme() {
-        return new addBlackList_argsStandardScheme();
+    private static class setBlacklist_argsStandardSchemeFactory implements SchemeFactory {
+      public setBlacklist_argsStandardScheme getScheme() {
+        return new setBlacklist_argsStandardScheme();
       }
     }
 
-    private static class addBlackList_argsStandardScheme extends StandardScheme<addBlackList_args> {
+    private static class setBlacklist_argsStandardScheme extends StandardScheme<setBlacklist_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, addBlackList_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setBlacklist_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -13173,21 +13951,21 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // BLACK_LIST
+            case 1: // BLACKLIST
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
                   org.apache.thrift.protocol.TList _list24 = iprot.readListBegin();
-                  struct.blackList = new ArrayList<NodeID>(_list24.size);
+                  struct.blacklist = new ArrayList<NodeID>(_list24.size);
                   for (int _i25 = 0; _i25 < _list24.size; ++_i25)
                   {
                     NodeID _elem26;
                     _elem26 = new NodeID();
                     _elem26.read(iprot);
-                    struct.blackList.add(_elem26);
+                    struct.blacklist.add(_elem26);
                   }
                   iprot.readListEnd();
                 }
-                struct.setBlackListIsSet(true);
+                struct.setBlacklistIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -13203,15 +13981,15 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, addBlackList_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setBlacklist_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.blackList != null) {
-          oprot.writeFieldBegin(BLACK_LIST_FIELD_DESC);
+        if (struct.blacklist != null) {
+          oprot.writeFieldBegin(BLACKLIST_FIELD_DESC);
           {
-            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.blackList.size()));
-            for (NodeID _iter27 : struct.blackList)
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.blacklist.size()));
+            for (NodeID _iter27 : struct.blacklist)
             {
               _iter27.write(oprot);
             }
@@ -13225,26 +14003,26 @@ public class NodeService {
 
     }
 
-    private static class addBlackList_argsTupleSchemeFactory implements SchemeFactory {
-      public addBlackList_argsTupleScheme getScheme() {
-        return new addBlackList_argsTupleScheme();
+    private static class setBlacklist_argsTupleSchemeFactory implements SchemeFactory {
+      public setBlacklist_argsTupleScheme getScheme() {
+        return new setBlacklist_argsTupleScheme();
       }
     }
 
-    private static class addBlackList_argsTupleScheme extends TupleScheme<addBlackList_args> {
+    private static class setBlacklist_argsTupleScheme extends TupleScheme<setBlacklist_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, addBlackList_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, setBlacklist_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetBlackList()) {
+        if (struct.isSetBlacklist()) {
           optionals.set(0);
         }
         oprot.writeBitSet(optionals, 1);
-        if (struct.isSetBlackList()) {
+        if (struct.isSetBlacklist()) {
           {
-            oprot.writeI32(struct.blackList.size());
-            for (NodeID _iter28 : struct.blackList)
+            oprot.writeI32(struct.blacklist.size());
+            for (NodeID _iter28 : struct.blacklist)
             {
               _iter28.write(oprot);
             }
@@ -13253,36 +14031,36 @@ public class NodeService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, addBlackList_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, setBlacklist_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
             org.apache.thrift.protocol.TList _list29 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.blackList = new ArrayList<NodeID>(_list29.size);
+            struct.blacklist = new ArrayList<NodeID>(_list29.size);
             for (int _i30 = 0; _i30 < _list29.size; ++_i30)
             {
               NodeID _elem31;
               _elem31 = new NodeID();
               _elem31.read(iprot);
-              struct.blackList.add(_elem31);
+              struct.blacklist.add(_elem31);
             }
           }
-          struct.setBlackListIsSet(true);
+          struct.setBlacklistIsSet(true);
         }
       }
     }
 
   }
 
-  public static class addBlackList_result implements org.apache.thrift.TBase<addBlackList_result, addBlackList_result._Fields>, java.io.Serializable, Cloneable, Comparable<addBlackList_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addBlackList_result");
+  public static class setBlacklist_result implements org.apache.thrift.TBase<setBlacklist_result, setBlacklist_result._Fields>, java.io.Serializable, Cloneable, Comparable<setBlacklist_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("setBlacklist_result");
 
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
-      schemes.put(StandardScheme.class, new addBlackList_resultStandardSchemeFactory());
-      schemes.put(TupleScheme.class, new addBlackList_resultTupleSchemeFactory());
+      schemes.put(StandardScheme.class, new setBlacklist_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new setBlacklist_resultTupleSchemeFactory());
     }
 
 
@@ -13345,20 +14123,20 @@ public class NodeService {
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       metaDataMap = Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addBlackList_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(setBlacklist_result.class, metaDataMap);
     }
 
-    public addBlackList_result() {
+    public setBlacklist_result() {
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public addBlackList_result(addBlackList_result other) {
+    public setBlacklist_result(setBlacklist_result other) {
     }
 
-    public addBlackList_result deepCopy() {
-      return new addBlackList_result(this);
+    public setBlacklist_result deepCopy() {
+      return new setBlacklist_result(this);
     }
 
     @Override
@@ -13391,12 +14169,12 @@ public class NodeService {
     public boolean equals(Object that) {
       if (that == null)
         return false;
-      if (that instanceof addBlackList_result)
-        return this.equals((addBlackList_result)that);
+      if (that instanceof setBlacklist_result)
+        return this.equals((setBlacklist_result)that);
       return false;
     }
 
-    public boolean equals(addBlackList_result that) {
+    public boolean equals(setBlacklist_result that) {
       if (that == null)
         return false;
 
@@ -13409,7 +14187,7 @@ public class NodeService {
     }
 
     @Override
-    public int compareTo(addBlackList_result other) {
+    public int compareTo(setBlacklist_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -13433,7 +14211,7 @@ public class NodeService {
 
     @Override
     public String toString() {
-      StringBuilder sb = new StringBuilder("addBlackList_result(");
+      StringBuilder sb = new StringBuilder("setBlacklist_result(");
       boolean first = true;
 
       sb.append(")");
@@ -13461,15 +14239,15 @@ public class NodeService {
       }
     }
 
-    private static class addBlackList_resultStandardSchemeFactory implements SchemeFactory {
-      public addBlackList_resultStandardScheme getScheme() {
-        return new addBlackList_resultStandardScheme();
+    private static class setBlacklist_resultStandardSchemeFactory implements SchemeFactory {
+      public setBlacklist_resultStandardScheme getScheme() {
+        return new setBlacklist_resultStandardScheme();
       }
     }
 
-    private static class addBlackList_resultStandardScheme extends StandardScheme<addBlackList_result> {
+    private static class setBlacklist_resultStandardScheme extends StandardScheme<setBlacklist_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, addBlackList_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, setBlacklist_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -13490,7 +14268,7 @@ public class NodeService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, addBlackList_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, setBlacklist_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -13500,21 +14278,21 @@ public class NodeService {
 
     }
 
-    private static class addBlackList_resultTupleSchemeFactory implements SchemeFactory {
-      public addBlackList_resultTupleScheme getScheme() {
-        return new addBlackList_resultTupleScheme();
+    private static class setBlacklist_resultTupleSchemeFactory implements SchemeFactory {
+      public setBlacklist_resultTupleScheme getScheme() {
+        return new setBlacklist_resultTupleScheme();
       }
     }
 
-    private static class addBlackList_resultTupleScheme extends TupleScheme<addBlackList_result> {
+    private static class setBlacklist_resultTupleScheme extends TupleScheme<setBlacklist_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, addBlackList_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, setBlacklist_result struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, addBlackList_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, setBlacklist_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }

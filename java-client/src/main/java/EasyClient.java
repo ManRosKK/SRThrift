@@ -118,13 +118,6 @@ public class EasyClient {
         }
     }
 
-    public static void delSwarm(String IP,int port, TransferID swarmID ) throws TException {
-        try(AutoClosingClient acclient = getClient(IP, port)) {
-            NodeService.Client client = acclient.getClient();
-            client.delSwarm(swarmID);
-        }
-    }
-
     public static void makeTransfer(String IPS, int portS,String IPR, int portR, long value) throws TException {
         try(AutoClosingClient acclient = getClient(IPS, portS)) {
             NodeService.Client client = acclient.getClient();

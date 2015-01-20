@@ -65,50 +65,70 @@ service NodeService
     */ 
     AccountBalanceType getAccountBalance(),
   
+  
+  
+    /**
+    * INTERNODE INTERFACE
+    */
+    
     /**
     * pings node
     */
     void ping(1:NodeID sender),
+    
     /**
-    * pings Swarm and checks if leader is a leader
+    * pings Swarm and checks if sender is a leader
     */
-    void pingSwarm(1: NodeID leader,2: TransferID transfer ) throws (1: NotSwarmMemeber exc),
+    void pingSwarm(1:NodeID sender,2: TransferID transfer ) throws (1: NotSwarmMemeber exc),
+    
     /**
-    *
+    *  
     */
-    void updateSwarmMembers(1:Swarm swarm) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
-    /**
-    *
-    */
-    void addToSwarm(1:Swarm swarm,2: TransferData transferData) throws (1: AlreadySwarmMemeber exc),
-    /**
-    *
-    */
-    void delSwarm(1:TransferID swarmID) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
+    void updateSwarmMembers(1:NodeID sender,2:Swarm swarm) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
+    
     /**
     *
     */
-    Swarm getSwarm(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
+    void addToSwarm(1:NodeID sender, 2:Swarm swarm, 3: TransferData transferData) throws (1: AlreadySwarmMemeber exc),
+    
+    /**
+    *
+    */
+    void delSwarm(1:NodeID sender, 2:TransferID swarmID) throws (1: NotSwarmMemeber exc,2:WrongSwarmLeader exc2 ),
+    
+    /**
+    *
+    */
+    Swarm getSwarm(1:NodeID sender, 2:TransferID transfer) throws (1: NotSwarmMemeber exc ),
+    
     /**
     * returns true if candidateNodeID> current
     */
-    bool electSwarmLeader(1:NodeID cadidate,2:TransferID Transfer) throws (1: NotSwarmMemeber exc ),
+    bool electSwarmLeader(1:NodeID sender, 2:NodeID cadidate, 3:TransferID Transfer) throws (1: NotSwarmMemeber exc ),
+    
     /**
     * new leader broadcast that he is a leader
     */
-    void electionEndedSwarm(1:Swarm swarm) throws (1: NotSwarmMemeber exc ),
+    void electionEndedSwarm(1:NodeID sender, 2:Swarm swarm) throws (1: NotSwarmMemeber exc ),
+    
     /**
     *
     */ 
-    void deliverTransfer(1: TransferData transfer),
+    void deliverTransfer(1:NodeID sender, 2:TransferData transfer),
 
+    /**
+    * DEBUG
+    */
     list<Swarm> getSwarmList(),
 
     void startSwarmElection(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
 
     list<TransferData> getTransfers(),
-	
-	void addBlackList(1:list<NodeID> blackList),
+
+    /**
+    *  Sender not needed
+    */
+    void setBlacklist(1: list<NodeID> blacklist),
 
     void stop()
 }

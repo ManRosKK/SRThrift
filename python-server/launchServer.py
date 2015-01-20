@@ -12,6 +12,7 @@ from SRBanking.ThriftInterface import NodeService
 from ConfigParser import ConfigParser
 import time
 from thrift.transport.TTransport import TTransportException
+import SRBanking
 logging.basicConfig()
 sys.path.append('../thrift/gen-py/')
 
@@ -44,9 +45,13 @@ class AutoClient:
 
 
 
+def overrides(interface_class):
+    def overrider(method):
+        assert(method.__name__ in dir(interface_class))
+        return method
+    return overrider
 
-
-class ServerHandler:
+class ServerHandler(NodeService.Iface):
     """
     List of fields:
     - nodeID
@@ -57,7 +62,6 @@ class ServerHandler:
     - pendingTransfers
     - transferHistory
     """
-
 
     def run_leader_thread(self):
         while not self.endThread:
@@ -70,7 +74,7 @@ class ServerHandler:
                     transferData = self.getTransferByID(swarm.transfer)
                     try:
                         with AutoClient(transferData.receiver.IP,transferData.receiver.port) as client:
-                            client.deliverTransfer(transferData)
+                            client.deliverTransfer(self.nodeID,transferData)
                         print("Delivered")
                         #remove myself and others from swarm
                         self.unmakeSwarm(swarm)
@@ -83,7 +87,7 @@ class ServerHandler:
                         if(node != self.nodeID):
                             try:
                                 with AutoClient(node.IP,node.port) as client:
-                                    client.ping()
+                                    client.ping(self.nodeID)
                             except TTransportException:
                                 print("Unable to ping, gotta find someone else")
                                 deathCounter = self.deathCounter.get(node)
@@ -108,17 +112,137 @@ class ServerHandler:
                         #inform them
                         for x in neighbours:
                             with AutoClient(x.IP,x.port) as client:
-                                client.addToSwarm(swarm,self.getTransferByID(swarm.transfer))
+                                client.addToSwarm(self.nodeID,swarm,self.getTransferByID(swarm.transfer))
                         #inform the rest
                         for x in swarm.members[0:-how_much]:
                             with AutoClient(x.IP,x.port) as client:
-                                client.updateSwarmMembers(swarm)
+                                client.updateSwarmMembers(self.nodeID,swarm)
                 else:
                     #slave mode on
                     #check if pinged recently
                     if time.time() - self.hb[swarm.transfer] > config.getint("config", "leader_considered_dead_after"):
                         self.localElectNewLeader(swarm)
             time.sleep(config.getint("config", "try_deliver_transfer_every")/1000.0)
+
+    def __init__(self, ip, port, accountBalance,config):
+        self.nodeID = NodeID(IP=ip,port=port)
+        self.accountBalance = accountBalance
+        self.counter = 0;
+        self.config = config
+        self.mySwarms = []
+        self.pendingTransfers = []
+        self.transferHistory = []
+        self.endThread = False
+        self.deathCounter = {}
+        self.hb = {}
+        t1 = threading.Thread(target=self.run_leader_thread)
+        t1.start()
+
+    @overrides(NodeService.Iface)
+    def makeTransfer(self, receiver, value):
+
+        #prepare transfer data
+        transferID = TransferID(sender=self.nodeID, counter=self.counter)
+        self.counter = self.counter + 1
+        transferData = TransferData(transferID=transferID, receiver=receiver,value=value)
+
+        #open connection to server
+        address = receiver.IP
+        port = receiver.port
+        if(self.accountBalance >= value):
+            self.accountBalance -= value
+        else:
+            raise NotEnoughMoney(moneyAvailable=self.accountBalance, moneyRequested=value)
+        try:
+            with AutoClient(address,port) as client:
+                client.deliverTransfer(self.nodeID,transferData)
+        except:
+            print("transfer not made",sys.exc_info()[0])
+            #receiver offline
+            self.makeSwarm(transferData)
+        print("makeTransfer: return")
+
+    @overrides(NodeService.Iface)
+    def getAccountBalance(self):
+        return self.accountBalance
+
+
+
+    @overrides(NodeService.Iface)
+    def ping(self, sender):
+        #this method is intentionally left blank
+        pass
+
+    @overrides(NodeService.Iface)
+    def pingSwarm(self, sender, transfer):
+        swarm = None
+        try:
+            swarm = self.getSwarmByID(transfer)
+        except:
+            raise NotSwarmMemeber(receiverNode=self.nodeID, transfer=transfer)
+        if (swarm.leader != sender):
+            raise WrongSwarmLeader(receiverNode=self.nodeID, sender=swarm.leader, transfer=transfer)
+        self.hb[transfer] = time.time()
+
+    @overrides(NodeService.Iface)
+    def updateSwarmMembers(self,sender,swarm):
+        swarmlocal = self.getSwarmByID(swarm.transfer)
+        swarmlocal.members = swarm.members
+
+    @overrides(NodeService.Iface)
+    def addToSwarm(self,sender,swarm,transferData):
+        self.mySwarms += [swarm]
+        self.pendingTransfers += [transferData]
+        self.hb[swarm.transfer] = time.time()
+        print("added to swarm!",swarm.transfer)
+
+    @overrides(NodeService.Iface)
+    def delSwarm(self,sender,transferID):
+        self.mySwarms = [x for x in self.mySwarms if x.transfer != transferID]
+        self.pendingTransfers= [x for x in self.pendingTransfers if x.transferID != transferID]
+
+    #elect swarm member
+
+    @overrides(NodeService.Iface)
+    def electSwarmLeader(self, sender, candidate, transfer):
+        swarm = None
+        try:
+            swarm = self.getSwarmByID(transfer)
+        except:
+            raise NotSwarmMemeber(receiverNode=self.nodeID, transfer=transfer)
+
+        if (self.nodeID.IP == candidate.IP):
+            return self.nodeID.port > candidate.port
+        return self.nodeID.IP > candidate.IP
+
+    @overrides(NodeService.Iface)
+    def electionEndedSwarm(self, sender,swarmnew):
+        swarmold = self.getSwarmByID(swarmnew.transfer)
+        self.mySwarms.remove(swarmold)
+        self.mySwarms.append(swarmnew)
+
+    @overrides(NodeService.Iface)
+    def deliverTransfer(self, sender,transfer_data):
+        print("Received transfer",transfer_data)
+        self.accountBalance += transfer_data.value
+        self.transferHistory += [transfer_data]
+
+    #debug
+
+    def getSwarmList(self):
+        return self.mySwarms
+
+    #start swarm election
+
+    def getTransfers(self):
+        return self.transferHistory
+
+    def stop(self):
+        print("Stopping server with SIGINT")
+        os.kill(os.getpid(),signal.SIGINT)
+
+
+    #UTILLLLLLLLLLLLLLS
 
     def localElectNewLeader(self,swarm):
         print("Electing new leader...")
@@ -136,105 +260,17 @@ class ServerHandler:
                 continue
             #check alive
 
-    def electSwarmLeader(self,candidate, transfer):
-        swarm = None
-        try:
-            swarm = self.getSwarmByID(transfer)
-        except:
-            raise NotSwarmMemeber(receiverNode=self.nodeID, transfer=transfer)
-
-        if (self.nodeID.IP == candidate.IP):
-            return self.nodeID.port > candidate.port
-        return self.nodeID.IP > candidate.IP
-
-    def electionEndedSwarm(self,swarmnew):
-        swarmold = self.getSwarmByID(swarmnew.transfer)
-        self.mySwarms.remove(swarmold)
-        self.mySwarms.append(swarmnew)
-
     def getAlivePpl(self,list_of_nodes):
         alive = []
         for node in list_of_nodes:
             try:
                 with AutoClient(ip,port) as client:
-                    client.ping()
+                    client.ping(self.nodeID)
                     alive += [NodeID(IP=ip, port=port)]
             except:
                 #dead - don't care
                 pass
         return alive
-
-    def updateSwarmMembers(self,swarm):
-        swarmlocal = self.getSwarmByID(swarm.transfer)
-        swarmlocal.members = swarm.members
-    def getTransferByID(self,transferID):
-        transfersByID = [i for i in self.pendingTransfers if i.transferID==transferID]
-        return transfersByID[0]
-    def getSwarmByID(self,transferID):
-        transfersByID = [i for i in self.mySwarms if i.transfer==transferID]
-        return transfersByID[0]
-
-    def __init__(self, ip, port, accountBalance,config):
-        self.nodeID = NodeID(IP=ip,port=port)
-        self.accountBalance = accountBalance
-        self.counter = 0;
-        self.config = config
-        self.mySwarms = []
-        self.pendingTransfers = []
-        self.transferHistory = []
-        self.endThread = False
-        self.deathCounter = {}
-        self.hb = {}
-        t1 = threading.Thread(target=self.run_leader_thread)
-        t1.start()
-
-    def ping(self):
-        #this method is intentionally left blank
-        pass
-    def pingSwarm(self, leader, transfer):
-        swarm = None
-        try:
-            swarm = self.getSwarmByID(transfer)
-        except:
-            raise NotSwarmMemeber(receiverNode=self.nodeID, transfer=transfer)
-        if (swarm.leader != leader):
-            raise WrongSwarmLeader(receiverNode=self.nodeID, leader=swarm.leader, transfer=transfer)
-        self.hb[transfer] = time.time()
-
-    def stop(self):
-        print("Stopping server with SIGINT")
-        os.kill(os.getpid(),signal.SIGINT)
-
-    def getAccountBalance(self):
-        return self.accountBalance
-    def getTransfers(self):
-        return self.transferHistory
-    def deliverTransfer(self,transfer_data):
-        print("Received transfer",transfer_data)
-        self.accountBalance += transfer_data.value
-        self.transferHistory += [transfer_data]
-    def makeTransfer(self, receiver, value):
-
-        #prepare transfer data
-        transferID = TransferID(sender=self.nodeID, counter=self.counter)
-        self.counter = self.counter + 1
-        transferData = TransferData(transferID=transferID, receiver=receiver,value=value)
-
-        #open connection to server
-        address = receiver.IP
-        port = receiver.port
-        if(self.accountBalance >= value):
-            self.accountBalance -= value
-        else:
-            raise NotEnoughMoney(moneyAvailable=self.accountBalance, moneyRequested=value)
-        try:
-            with AutoClient(address,port) as client:
-                client.deliverTransfer(transferData)
-        except:
-            print("transfer not made",sys.exc_info()[0])
-            #receiver offline
-            self.makeSwarm(transferData)
-        print("makeTransfer: return")
 
     def makeSwarm(self,transferData):
         print("making swarm")
@@ -251,10 +287,11 @@ class ServerHandler:
             self.pendingTransfers += [transferData]
             for i in xrange(how_much):
                 with AutoClient(neighbours[i].IP,neighbours[i].port) as client:
-                    client.addToSwarm(swarm,transferData)
+                    client.addToSwarm(self.nodeID,swarm,transferData)
         else:
             raise NotEnoughMembersToMakeTransfer(membersAvailable=len(neighbours),membersRequested=how_much)
         print("makeSwarm exit: mySwarm is now: ",self.mySwarms)
+
     def unmakeSwarm(self,swarm):
         print("unmaking swarm")
 
@@ -265,11 +302,11 @@ class ServerHandler:
                 print("got not self")
                 try:
                     with AutoClient(node.IP,node.port) as client:
-                        client.delSwarm(swarm.transfer)
+                        client.delSwarm(self.nodeID,swarm.transfer)
                 except:
                     print("client not delted from swarm",sys.exc_info()[0],node.IP,node.port)
         print("got all but me")
-        self.delSwarm(swarm.transfer)
+        self.delSwarm(self.nodeID,swarm.transfer)
         print("got me")
 
     def funeral(self,swarm,nodeID):
@@ -280,14 +317,9 @@ class ServerHandler:
             if(node != self.nodeID):
                 try:
                     with AutoClient(node.IP,node.port) as client:
-                        client.updateSwarmMembers(swarm)
+                        client.updateSwarmMembers(self.nodeID,swarm)
                 except:
                     print("client not informed about funeral...",sys.exc_info()[0],node.IP,node.port)
-
-
-    def delSwarm(self,transferID):
-        self.mySwarms = [x for x in self.mySwarms if x.transfer != transferID]
-        self.pendingTransfers= [x for x in self.pendingTransfers if x.transferID != transferID]
 
     def getNeighbours(self,how_much_max,blacklist):
         nlist = []
@@ -306,21 +338,19 @@ class ServerHandler:
                         if (ip==node.IP and port==node.port):
                             continue
                     with AutoClient(ip,port) as client:
-                        client.ping()
+                        client.ping(self.nodeID)
                         nlist += [NodeID(IP=ip, port=port)]
                 except:
                     pass
         return nlist
 
-    def addToSwarm(self,swarm,transferData):
-        self.mySwarms += [swarm]
-        self.pendingTransfers += [transferData]
-        self.hb[swarm.transfer] = time.time()
-        print("added to swarm!",swarm.transfer)
-
-    def getSwarmList(self):
-        return self.mySwarms
-
+    #localutils
+    def getTransferByID(self,transferID):
+        transfersByID = [i for i in self.pendingTransfers if i.transferID==transferID]
+        return transfersByID[0]
+    def getSwarmByID(self,transferID):
+        transfersByID = [i for i in self.mySwarms if i.transfer==transferID]
+        return transfersByID[0]
     def getIPList(self):
         get = config.get("config", "ip_list")
         return get.split(',')
@@ -353,12 +383,5 @@ if __name__ == "__main__":
     pfactory = TBinaryProtocol.TBinaryProtocolFactory()
     server = TServer.TThreadPoolServer(processor, transport, tfactory, pfactory)
     print('Starting the server...')
-    #sys.stdout.flush()
-    time.sleep(0.1);
     server.serve()
     print('done.')
-
-
-
-#parse config
-
