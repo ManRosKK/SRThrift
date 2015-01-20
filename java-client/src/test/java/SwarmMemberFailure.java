@@ -54,7 +54,7 @@ public class SwarmMemberFailure {
         Util.runServer(IP3, port3, balance3, configFile);
         Util.killServerNoException(IP2,port2);
 
-        Thread.sleep(5000);
+        Thread.sleep(15000);
 
         //assert
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);

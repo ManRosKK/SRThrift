@@ -49,6 +49,7 @@ public class SwarmBasics {
 
         int value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
         assertEquals(swarmList.size(),1);
         assertEquals(swarmList.get(0).getMembersSize(),2);

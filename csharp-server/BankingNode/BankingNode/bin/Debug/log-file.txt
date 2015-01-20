@@ -1,0 +1,33 @@
+2015-01-16 09:32:04,760 [1] INFO  BankingNode.Program.Main [(null)] - Start application
+2015-01-16 09:32:04,829 [1] INFO  BankingNode.ConfigLoader.set_Args [(null)] - Args: 127.0.0.1|9080|501|D:\studia\SR\proj\SRThrift\java-client\config\default.ini|
+2015-01-16 09:32:04,831 [1] INFO  BankingNode.Program.Main [(null)] - Starting server
+2015-01-16 09:32:04,837 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - Balance
+2015-01-16 09:32:04,838 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 501
+2015-01-16 09:32:04,840 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 09:32:04,841 [1] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 09:32:04,844 [1] INFO  BankingNode.Program.Main [(null)] - Server started
+2015-01-16 09:32:05,830 [7] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Making Transfer NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 09:32:05,837 [7] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 09:32:05,838 [7] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 09:32:05,838 [7] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 09:32:05,839 [7] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 09:32:05,839 [7] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 09:32:05,842 [7] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - In tryNodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 09:32:05,846 [7] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - [127.0.0.1|9080] vs [127.0.0.1|9081]
+2015-01-16 09:32:05,849 [7] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - [127.0.0.1|9080] vs1 [127.0.0.1|9081]
+2015-01-16 09:32:05,850 [7] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 09:32:05,851 [7] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 09:32:05,853 [7] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 09:32:05,855 [7] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 09:32:05,855 [7] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 09:32:05,856 [7] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - [127.0.0.1|9080] vs6 [127.0.0.1|9081]
+2015-01-16 09:32:05,856 [7] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - [127.0.0.1|9080] vs7 [127.0.0.1|9081]
+2015-01-16 09:32:05,857 [7] INFO  BankingNode.BalanceManager.CommitTransfer [(null)] - [127.0.0.1|9080] vs77 [127.0.0.1|9081]
+2015-01-16 09:32:05,857 [7] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - Before open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 09:32:05,859 [7] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - After open NodeID(IP: 127.0.0.1,Port: 9081) | 35
+2015-01-16 09:32:05,860 [7] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - SelfIp
+2015-01-16 09:32:05,860 [7] INFO  BankingNode.ConfigLoader.ConfigGetString [(null)] - 127.0.0.1
+2015-01-16 09:32:05,861 [7] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - SelfPort
+2015-01-16 09:32:05,861 [7] INFO  BankingNode.ConfigLoader.ConfigGetInt [(null)] - 9080
+2015-01-16 09:32:05,862 [7] INFO  BankingNode.ConfigLoader.ConfigGetSelfId [(null)] - 127.0.0.1|9080
+2015-01-16 09:32:05,889 [7] INFO  BankingNode.NodeServicesHandler.makeTransfer [(null)] - koniec

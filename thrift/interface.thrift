@@ -68,7 +68,7 @@ service NodeService
     /**
     * pings node
     */
-    void ping(),
+    void ping(1:NodeID sender),
     /**
     * pings Swarm and checks if leader is a leader
     */
@@ -107,6 +107,8 @@ service NodeService
     void startSwarmElection(1:TransferID transfer) throws (1: NotSwarmMemeber exc ),
 
     list<TransferData> getTransfers(),
+	
+	void addBlackList(1:list<NodeID> blackList),
 
     void stop()
 }

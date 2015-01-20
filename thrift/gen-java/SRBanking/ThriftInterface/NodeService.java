@@ -51,8 +51,10 @@ public class NodeService {
 
     /**
      * pings node
+     * 
+     * @param sender
      */
-    public void ping() throws org.apache.thrift.TException;
+    public void ping(NodeID sender) throws org.apache.thrift.TException;
 
     /**
      * pings Swarm and checks if leader is a leader
@@ -119,6 +121,8 @@ public class NodeService {
 
     public List<TransferData> getTransfers() throws org.apache.thrift.TException;
 
+    public void addBlackList(List<NodeID> blackList) throws org.apache.thrift.TException;
+
     public void stop() throws org.apache.thrift.TException;
 
   }
@@ -129,7 +133,7 @@ public class NodeService {
 
     public void getAccountBalance(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void ping(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void ping(NodeID sender, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void pingSwarm(NodeID leader, TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -152,6 +156,8 @@ public class NodeService {
     public void startSwarmElection(TransferID transfer, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void getTransfers(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void addBlackList(List<NodeID> blackList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void stop(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -226,15 +232,16 @@ public class NodeService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getAccountBalance failed: unknown result");
     }
 
-    public void ping() throws org.apache.thrift.TException
+    public void ping(NodeID sender) throws org.apache.thrift.TException
     {
-      send_ping();
+      send_ping(sender);
       recv_ping();
     }
 
-    public void send_ping() throws org.apache.thrift.TException
+    public void send_ping(NodeID sender) throws org.apache.thrift.TException
     {
       ping_args args = new ping_args();
+      args.setSender(sender);
       sendBase("ping", args);
     }
 
@@ -508,6 +515,26 @@ public class NodeService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getTransfers failed: unknown result");
     }
 
+    public void addBlackList(List<NodeID> blackList) throws org.apache.thrift.TException
+    {
+      send_addBlackList(blackList);
+      recv_addBlackList();
+    }
+
+    public void send_addBlackList(List<NodeID> blackList) throws org.apache.thrift.TException
+    {
+      addBlackList_args args = new addBlackList_args();
+      args.setBlackList(blackList);
+      sendBase("addBlackList", args);
+    }
+
+    public void recv_addBlackList() throws org.apache.thrift.TException
+    {
+      addBlackList_result result = new addBlackList_result();
+      receiveBase(result, "addBlackList");
+      return;
+    }
+
     public void stop() throws org.apache.thrift.TException
     {
       send_stop();
@@ -609,21 +636,24 @@ public class NodeService {
       }
     }
 
-    public void ping(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void ping(NodeID sender, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      ping_call method_call = new ping_call(resultHandler, this, ___protocolFactory, ___transport);
+      ping_call method_call = new ping_call(sender, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class ping_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public ping_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private NodeID sender;
+      public ping_call(NodeID sender, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.sender = sender;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("ping", org.apache.thrift.protocol.TMessageType.CALL, 0));
         ping_args args = new ping_args();
+        args.setSender(sender);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -993,6 +1023,38 @@ public class NodeService {
       }
     }
 
+    public void addBlackList(List<NodeID> blackList, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      addBlackList_call method_call = new addBlackList_call(blackList, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class addBlackList_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private List<NodeID> blackList;
+      public addBlackList_call(List<NodeID> blackList, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.blackList = blackList;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("addBlackList", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        addBlackList_args args = new addBlackList_args();
+        args.setBlackList(blackList);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public void getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_addBlackList();
+      }
+    }
+
     public void stop(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       stop_call method_call = new stop_call(resultHandler, this, ___protocolFactory, ___transport);
@@ -1049,6 +1111,7 @@ public class NodeService {
       processMap.put("getSwarmList", new getSwarmList());
       processMap.put("startSwarmElection", new startSwarmElection());
       processMap.put("getTransfers", new getTransfers());
+      processMap.put("addBlackList", new addBlackList());
       processMap.put("stop", new stop());
       return processMap;
     }
@@ -1115,7 +1178,7 @@ public class NodeService {
 
       public ping_result getResult(I iface, ping_args args) throws org.apache.thrift.TException {
         ping_result result = new ping_result();
-        iface.ping();
+        iface.ping(args.sender);
         return result;
       }
     }
@@ -1377,6 +1440,26 @@ public class NodeService {
       }
     }
 
+    public static class addBlackList<I extends Iface> extends org.apache.thrift.ProcessFunction<I, addBlackList_args> {
+      public addBlackList() {
+        super("addBlackList");
+      }
+
+      public addBlackList_args getEmptyArgsInstance() {
+        return new addBlackList_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public addBlackList_result getResult(I iface, addBlackList_args args) throws org.apache.thrift.TException {
+        addBlackList_result result = new addBlackList_result();
+        iface.addBlackList(args.blackList);
+        return result;
+      }
+    }
+
     public static class stop<I extends Iface> extends org.apache.thrift.ProcessFunction<I, stop_args> {
       public stop() {
         super("stop");
@@ -1424,6 +1507,7 @@ public class NodeService {
       processMap.put("getSwarmList", new getSwarmList());
       processMap.put("startSwarmElection", new startSwarmElection());
       processMap.put("getTransfers", new getTransfers());
+      processMap.put("addBlackList", new addBlackList());
       processMap.put("stop", new stop());
       return processMap;
     }
@@ -1587,7 +1671,7 @@ public class NodeService {
       }
 
       public void start(I iface, ping_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
-        iface.ping(resultHandler);
+        iface.ping(args.sender,resultHandler);
       }
     }
 
@@ -2201,6 +2285,56 @@ public class NodeService {
 
       public void start(I iface, getTransfers_args args, org.apache.thrift.async.AsyncMethodCallback<List<TransferData>> resultHandler) throws TException {
         iface.getTransfers(resultHandler);
+      }
+    }
+
+    public static class addBlackList<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, addBlackList_args, Void> {
+      public addBlackList() {
+        super("addBlackList");
+      }
+
+      public addBlackList_args getEmptyArgsInstance() {
+        return new addBlackList_args();
+      }
+
+      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
+            addBlackList_result result = new addBlackList_result();
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            addBlackList_result result = new addBlackList_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, addBlackList_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.addBlackList(args.blackList,resultHandler);
       }
     }
 
@@ -3774,6 +3908,7 @@ public class NodeService {
   public static class ping_args implements org.apache.thrift.TBase<ping_args, ping_args._Fields>, java.io.Serializable, Cloneable, Comparable<ping_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ping_args");
 
+    private static final org.apache.thrift.protocol.TField SENDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sender", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -3781,10 +3916,11 @@ public class NodeService {
       schemes.put(TupleScheme.class, new ping_argsTupleSchemeFactory());
     }
 
+    public NodeID sender; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      SENDER((short)1, "sender");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -3799,6 +3935,8 @@ public class NodeService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // SENDER
+            return SENDER;
           default:
             return null;
         }
@@ -3837,9 +3975,13 @@ public class NodeService {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SENDER, new org.apache.thrift.meta_data.FieldMetaData("sender", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ping_args.class, metaDataMap);
     }
@@ -3847,10 +3989,20 @@ public class NodeService {
     public ping_args() {
     }
 
+    public ping_args(
+      NodeID sender)
+    {
+      this();
+      this.sender = sender;
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public ping_args(ping_args other) {
+      if (other.isSetSender()) {
+        this.sender = new NodeID(other.sender);
+      }
     }
 
     public ping_args deepCopy() {
@@ -3859,15 +4011,51 @@ public class NodeService {
 
     @Override
     public void clear() {
+      this.sender = null;
+    }
+
+    public NodeID getSender() {
+      return this.sender;
+    }
+
+    public ping_args setSender(NodeID sender) {
+      this.sender = sender;
+      return this;
+    }
+
+    public void unsetSender() {
+      this.sender = null;
+    }
+
+    /** Returns true if field sender is set (has been assigned a value) and false otherwise */
+    public boolean isSetSender() {
+      return this.sender != null;
+    }
+
+    public void setSenderIsSet(boolean value) {
+      if (!value) {
+        this.sender = null;
+      }
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case SENDER:
+        if (value == null) {
+          unsetSender();
+        } else {
+          setSender((NodeID)value);
+        }
+        break;
+
       }
     }
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case SENDER:
+        return getSender();
+
       }
       throw new IllegalStateException();
     }
@@ -3879,6 +4067,8 @@ public class NodeService {
       }
 
       switch (field) {
+      case SENDER:
+        return isSetSender();
       }
       throw new IllegalStateException();
     }
@@ -3896,6 +4086,15 @@ public class NodeService {
       if (that == null)
         return false;
 
+      boolean this_present_sender = true && this.isSetSender();
+      boolean that_present_sender = true && that.isSetSender();
+      if (this_present_sender || that_present_sender) {
+        if (!(this_present_sender && that_present_sender))
+          return false;
+        if (!this.sender.equals(that.sender))
+          return false;
+      }
+
       return true;
     }
 
@@ -3912,6 +4111,16 @@ public class NodeService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetSender()).compareTo(other.isSetSender());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSender()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.sender, other.sender);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -3932,6 +4141,13 @@ public class NodeService {
       StringBuilder sb = new StringBuilder("ping_args(");
       boolean first = true;
 
+      sb.append("sender:");
+      if (this.sender == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.sender);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -3939,6 +4155,9 @@ public class NodeService {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (sender != null) {
+        sender.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -3975,6 +4194,15 @@ public class NodeService {
             break;
           }
           switch (schemeField.id) {
+            case 1: // SENDER
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.sender = new NodeID();
+                struct.sender.read(iprot);
+                struct.setSenderIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -3990,6 +4218,11 @@ public class NodeService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.sender != null) {
+          oprot.writeFieldBegin(SENDER_FIELD_DESC);
+          struct.sender.write(oprot);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -4007,11 +4240,25 @@ public class NodeService {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, ping_args struct) throws org.apache.thrift.TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSender()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSender()) {
+          struct.sender.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, ping_args struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.sender = new NodeID();
+          struct.sender.read(iprot);
+          struct.setSenderIsSet(true);
+        }
       }
     }
 
@@ -12615,6 +12862,660 @@ public class NodeService {
           }
           struct.setSuccessIsSet(true);
         }
+      }
+    }
+
+  }
+
+  public static class addBlackList_args implements org.apache.thrift.TBase<addBlackList_args, addBlackList_args._Fields>, java.io.Serializable, Cloneable, Comparable<addBlackList_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addBlackList_args");
+
+    private static final org.apache.thrift.protocol.TField BLACK_LIST_FIELD_DESC = new org.apache.thrift.protocol.TField("blackList", org.apache.thrift.protocol.TType.LIST, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new addBlackList_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new addBlackList_argsTupleSchemeFactory());
+    }
+
+    public List<NodeID> blackList; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      BLACK_LIST((short)1, "blackList");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // BLACK_LIST
+            return BLACK_LIST;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.BLACK_LIST, new org.apache.thrift.meta_data.FieldMetaData("blackList", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NodeID.class))));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addBlackList_args.class, metaDataMap);
+    }
+
+    public addBlackList_args() {
+    }
+
+    public addBlackList_args(
+      List<NodeID> blackList)
+    {
+      this();
+      this.blackList = blackList;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public addBlackList_args(addBlackList_args other) {
+      if (other.isSetBlackList()) {
+        List<NodeID> __this__blackList = new ArrayList<NodeID>(other.blackList.size());
+        for (NodeID other_element : other.blackList) {
+          __this__blackList.add(new NodeID(other_element));
+        }
+        this.blackList = __this__blackList;
+      }
+    }
+
+    public addBlackList_args deepCopy() {
+      return new addBlackList_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.blackList = null;
+    }
+
+    public int getBlackListSize() {
+      return (this.blackList == null) ? 0 : this.blackList.size();
+    }
+
+    public java.util.Iterator<NodeID> getBlackListIterator() {
+      return (this.blackList == null) ? null : this.blackList.iterator();
+    }
+
+    public void addToBlackList(NodeID elem) {
+      if (this.blackList == null) {
+        this.blackList = new ArrayList<NodeID>();
+      }
+      this.blackList.add(elem);
+    }
+
+    public List<NodeID> getBlackList() {
+      return this.blackList;
+    }
+
+    public addBlackList_args setBlackList(List<NodeID> blackList) {
+      this.blackList = blackList;
+      return this;
+    }
+
+    public void unsetBlackList() {
+      this.blackList = null;
+    }
+
+    /** Returns true if field blackList is set (has been assigned a value) and false otherwise */
+    public boolean isSetBlackList() {
+      return this.blackList != null;
+    }
+
+    public void setBlackListIsSet(boolean value) {
+      if (!value) {
+        this.blackList = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case BLACK_LIST:
+        if (value == null) {
+          unsetBlackList();
+        } else {
+          setBlackList((List<NodeID>)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case BLACK_LIST:
+        return getBlackList();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case BLACK_LIST:
+        return isSetBlackList();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof addBlackList_args)
+        return this.equals((addBlackList_args)that);
+      return false;
+    }
+
+    public boolean equals(addBlackList_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_blackList = true && this.isSetBlackList();
+      boolean that_present_blackList = true && that.isSetBlackList();
+      if (this_present_blackList || that_present_blackList) {
+        if (!(this_present_blackList && that_present_blackList))
+          return false;
+        if (!this.blackList.equals(that.blackList))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(addBlackList_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetBlackList()).compareTo(other.isSetBlackList());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetBlackList()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.blackList, other.blackList);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("addBlackList_args(");
+      boolean first = true;
+
+      sb.append("blackList:");
+      if (this.blackList == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.blackList);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class addBlackList_argsStandardSchemeFactory implements SchemeFactory {
+      public addBlackList_argsStandardScheme getScheme() {
+        return new addBlackList_argsStandardScheme();
+      }
+    }
+
+    private static class addBlackList_argsStandardScheme extends StandardScheme<addBlackList_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, addBlackList_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // BLACK_LIST
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list24 = iprot.readListBegin();
+                  struct.blackList = new ArrayList<NodeID>(_list24.size);
+                  for (int _i25 = 0; _i25 < _list24.size; ++_i25)
+                  {
+                    NodeID _elem26;
+                    _elem26 = new NodeID();
+                    _elem26.read(iprot);
+                    struct.blackList.add(_elem26);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setBlackListIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, addBlackList_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.blackList != null) {
+          oprot.writeFieldBegin(BLACK_LIST_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.blackList.size()));
+            for (NodeID _iter27 : struct.blackList)
+            {
+              _iter27.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class addBlackList_argsTupleSchemeFactory implements SchemeFactory {
+      public addBlackList_argsTupleScheme getScheme() {
+        return new addBlackList_argsTupleScheme();
+      }
+    }
+
+    private static class addBlackList_argsTupleScheme extends TupleScheme<addBlackList_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, addBlackList_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetBlackList()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetBlackList()) {
+          {
+            oprot.writeI32(struct.blackList.size());
+            for (NodeID _iter28 : struct.blackList)
+            {
+              _iter28.write(oprot);
+            }
+          }
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, addBlackList_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          {
+            org.apache.thrift.protocol.TList _list29 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.blackList = new ArrayList<NodeID>(_list29.size);
+            for (int _i30 = 0; _i30 < _list29.size; ++_i30)
+            {
+              NodeID _elem31;
+              _elem31 = new NodeID();
+              _elem31.read(iprot);
+              struct.blackList.add(_elem31);
+            }
+          }
+          struct.setBlackListIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class addBlackList_result implements org.apache.thrift.TBase<addBlackList_result, addBlackList_result._Fields>, java.io.Serializable, Cloneable, Comparable<addBlackList_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("addBlackList_result");
+
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new addBlackList_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new addBlackList_resultTupleSchemeFactory());
+    }
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(addBlackList_result.class, metaDataMap);
+    }
+
+    public addBlackList_result() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public addBlackList_result(addBlackList_result other) {
+    }
+
+    public addBlackList_result deepCopy() {
+      return new addBlackList_result(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof addBlackList_result)
+        return this.equals((addBlackList_result)that);
+      return false;
+    }
+
+    public boolean equals(addBlackList_result that) {
+      if (that == null)
+        return false;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(addBlackList_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("addBlackList_result(");
+      boolean first = true;
+
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class addBlackList_resultStandardSchemeFactory implements SchemeFactory {
+      public addBlackList_resultStandardScheme getScheme() {
+        return new addBlackList_resultStandardScheme();
+      }
+    }
+
+    private static class addBlackList_resultStandardScheme extends StandardScheme<addBlackList_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, addBlackList_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, addBlackList_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class addBlackList_resultTupleSchemeFactory implements SchemeFactory {
+      public addBlackList_resultTupleScheme getScheme() {
+        return new addBlackList_resultTupleScheme();
+      }
+    }
+
+    private static class addBlackList_resultTupleScheme extends TupleScheme<addBlackList_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, addBlackList_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, addBlackList_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
 
