@@ -4,3 +4,4 @@ java-server/target/
 java-server/logs/
 **/.idea/workspace.xml
 **/.idea/tasks.xml
+java-client/localSystem.ini
