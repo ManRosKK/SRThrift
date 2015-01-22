@@ -38,6 +38,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  void startSwarmElection(TransferID transfer)'
   print '   getTransfers()'
   print '  void setBlacklist( blacklist)'
+  print '  void virtualStop(bool shouldStop)'
   print '  void stop()'
   print ''
   sys.exit(0)
@@ -179,6 +180,12 @@ elif cmd == 'setBlacklist':
     print 'setBlacklist requires 1 args'
     sys.exit(1)
   pp.pprint(client.setBlacklist(eval(args[0]),))
+
+elif cmd == 'virtualStop':
+  if len(args) != 1:
+    print 'virtualStop requires 1 args'
+    sys.exit(1)
+  pp.pprint(client.virtualStop(eval(args[0]),))
 
 elif cmd == 'stop':
   if len(args) != 0:

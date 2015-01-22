@@ -132,11 +132,18 @@ public class NodeService {
     public List<TransferData> getTransfers() throws org.apache.thrift.TException;
 
     /**
-     * Sender not needed
+     * It sets "blacklist" - list of nodes which are not accessible (in both directions) for the callee
      * 
      * @param blacklist
      */
     public void setBlacklist(List<NodeID> blacklist) throws org.apache.thrift.TException;
+
+    /**
+     * The method simulates killing server - all non-debug methods should fail (maybe except getSwarm getAccountBalance)
+     * 
+     * @param shouldStop
+     */
+    public void virtualStop(boolean shouldStop) throws org.apache.thrift.TException;
 
     public void stop() throws org.apache.thrift.TException;
 
@@ -173,6 +180,8 @@ public class NodeService {
     public void getTransfers(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void setBlacklist(List<NodeID> blacklist, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void virtualStop(boolean shouldStop, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void stop(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
@@ -554,6 +563,26 @@ public class NodeService {
     {
       setBlacklist_result result = new setBlacklist_result();
       receiveBase(result, "setBlacklist");
+      return;
+    }
+
+    public void virtualStop(boolean shouldStop) throws org.apache.thrift.TException
+    {
+      send_virtualStop(shouldStop);
+      recv_virtualStop();
+    }
+
+    public void send_virtualStop(boolean shouldStop) throws org.apache.thrift.TException
+    {
+      virtualStop_args args = new virtualStop_args();
+      args.setShouldStop(shouldStop);
+      sendBase("virtualStop", args);
+    }
+
+    public void recv_virtualStop() throws org.apache.thrift.TException
+    {
+      virtualStop_result result = new virtualStop_result();
+      receiveBase(result, "virtualStop");
       return;
     }
 
@@ -1098,6 +1127,38 @@ public class NodeService {
       }
     }
 
+    public void virtualStop(boolean shouldStop, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      virtualStop_call method_call = new virtualStop_call(shouldStop, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class virtualStop_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private boolean shouldStop;
+      public virtualStop_call(boolean shouldStop, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.shouldStop = shouldStop;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("virtualStop", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        virtualStop_args args = new virtualStop_args();
+        args.setShouldStop(shouldStop);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public void getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_virtualStop();
+      }
+    }
+
     public void stop(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
       checkReady();
       stop_call method_call = new stop_call(resultHandler, this, ___protocolFactory, ___transport);
@@ -1155,6 +1216,7 @@ public class NodeService {
       processMap.put("startSwarmElection", new startSwarmElection());
       processMap.put("getTransfers", new getTransfers());
       processMap.put("setBlacklist", new setBlacklist());
+      processMap.put("virtualStop", new virtualStop());
       processMap.put("stop", new stop());
       return processMap;
     }
@@ -1503,6 +1565,26 @@ public class NodeService {
       }
     }
 
+    public static class virtualStop<I extends Iface> extends org.apache.thrift.ProcessFunction<I, virtualStop_args> {
+      public virtualStop() {
+        super("virtualStop");
+      }
+
+      public virtualStop_args getEmptyArgsInstance() {
+        return new virtualStop_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public virtualStop_result getResult(I iface, virtualStop_args args) throws org.apache.thrift.TException {
+        virtualStop_result result = new virtualStop_result();
+        iface.virtualStop(args.shouldStop);
+        return result;
+      }
+    }
+
     public static class stop<I extends Iface> extends org.apache.thrift.ProcessFunction<I, stop_args> {
       public stop() {
         super("stop");
@@ -1551,6 +1633,7 @@ public class NodeService {
       processMap.put("startSwarmElection", new startSwarmElection());
       processMap.put("getTransfers", new getTransfers());
       processMap.put("setBlacklist", new setBlacklist());
+      processMap.put("virtualStop", new virtualStop());
       processMap.put("stop", new stop());
       return processMap;
     }
@@ -2378,6 +2461,56 @@ public class NodeService {
 
       public void start(I iface, setBlacklist_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
         iface.setBlacklist(args.blacklist,resultHandler);
+      }
+    }
+
+    public static class virtualStop<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, virtualStop_args, Void> {
+      public virtualStop() {
+        super("virtualStop");
+      }
+
+      public virtualStop_args getEmptyArgsInstance() {
+        return new virtualStop_args();
+      }
+
+      public AsyncMethodCallback<Void> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
+            virtualStop_result result = new virtualStop_result();
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            virtualStop_result result = new virtualStop_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, virtualStop_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws TException {
+        iface.virtualStop(args.shouldStop,resultHandler);
       }
     }
 
@@ -14293,6 +14426,604 @@ public class NodeService {
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, setBlacklist_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+      }
+    }
+
+  }
+
+  public static class virtualStop_args implements org.apache.thrift.TBase<virtualStop_args, virtualStop_args._Fields>, java.io.Serializable, Cloneable, Comparable<virtualStop_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("virtualStop_args");
+
+    private static final org.apache.thrift.protocol.TField SHOULD_STOP_FIELD_DESC = new org.apache.thrift.protocol.TField("shouldStop", org.apache.thrift.protocol.TType.BOOL, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new virtualStop_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new virtualStop_argsTupleSchemeFactory());
+    }
+
+    public boolean shouldStop; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SHOULD_STOP((short)1, "shouldStop");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // SHOULD_STOP
+            return SHOULD_STOP;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SHOULDSTOP_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SHOULD_STOP, new org.apache.thrift.meta_data.FieldMetaData("shouldStop", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(virtualStop_args.class, metaDataMap);
+    }
+
+    public virtualStop_args() {
+    }
+
+    public virtualStop_args(
+      boolean shouldStop)
+    {
+      this();
+      this.shouldStop = shouldStop;
+      setShouldStopIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public virtualStop_args(virtualStop_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.shouldStop = other.shouldStop;
+    }
+
+    public virtualStop_args deepCopy() {
+      return new virtualStop_args(this);
+    }
+
+    @Override
+    public void clear() {
+      setShouldStopIsSet(false);
+      this.shouldStop = false;
+    }
+
+    public boolean isShouldStop() {
+      return this.shouldStop;
+    }
+
+    public virtualStop_args setShouldStop(boolean shouldStop) {
+      this.shouldStop = shouldStop;
+      setShouldStopIsSet(true);
+      return this;
+    }
+
+    public void unsetShouldStop() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SHOULDSTOP_ISSET_ID);
+    }
+
+    /** Returns true if field shouldStop is set (has been assigned a value) and false otherwise */
+    public boolean isSetShouldStop() {
+      return EncodingUtils.testBit(__isset_bitfield, __SHOULDSTOP_ISSET_ID);
+    }
+
+    public void setShouldStopIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SHOULDSTOP_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SHOULD_STOP:
+        if (value == null) {
+          unsetShouldStop();
+        } else {
+          setShouldStop((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SHOULD_STOP:
+        return Boolean.valueOf(isShouldStop());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SHOULD_STOP:
+        return isSetShouldStop();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof virtualStop_args)
+        return this.equals((virtualStop_args)that);
+      return false;
+    }
+
+    public boolean equals(virtualStop_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_shouldStop = true;
+      boolean that_present_shouldStop = true;
+      if (this_present_shouldStop || that_present_shouldStop) {
+        if (!(this_present_shouldStop && that_present_shouldStop))
+          return false;
+        if (this.shouldStop != that.shouldStop)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(virtualStop_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetShouldStop()).compareTo(other.isSetShouldStop());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetShouldStop()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.shouldStop, other.shouldStop);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("virtualStop_args(");
+      boolean first = true;
+
+      sb.append("shouldStop:");
+      sb.append(this.shouldStop);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class virtualStop_argsStandardSchemeFactory implements SchemeFactory {
+      public virtualStop_argsStandardScheme getScheme() {
+        return new virtualStop_argsStandardScheme();
+      }
+    }
+
+    private static class virtualStop_argsStandardScheme extends StandardScheme<virtualStop_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, virtualStop_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // SHOULD_STOP
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.shouldStop = iprot.readBool();
+                struct.setShouldStopIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, virtualStop_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldBegin(SHOULD_STOP_FIELD_DESC);
+        oprot.writeBool(struct.shouldStop);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class virtualStop_argsTupleSchemeFactory implements SchemeFactory {
+      public virtualStop_argsTupleScheme getScheme() {
+        return new virtualStop_argsTupleScheme();
+      }
+    }
+
+    private static class virtualStop_argsTupleScheme extends TupleScheme<virtualStop_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, virtualStop_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetShouldStop()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetShouldStop()) {
+          oprot.writeBool(struct.shouldStop);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, virtualStop_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.shouldStop = iprot.readBool();
+          struct.setShouldStopIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class virtualStop_result implements org.apache.thrift.TBase<virtualStop_result, virtualStop_result._Fields>, java.io.Serializable, Cloneable, Comparable<virtualStop_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("virtualStop_result");
+
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new virtualStop_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new virtualStop_resultTupleSchemeFactory());
+    }
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(virtualStop_result.class, metaDataMap);
+    }
+
+    public virtualStop_result() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public virtualStop_result(virtualStop_result other) {
+    }
+
+    public virtualStop_result deepCopy() {
+      return new virtualStop_result(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof virtualStop_result)
+        return this.equals((virtualStop_result)that);
+      return false;
+    }
+
+    public boolean equals(virtualStop_result that) {
+      if (that == null)
+        return false;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public int compareTo(virtualStop_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("virtualStop_result(");
+      boolean first = true;
+
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class virtualStop_resultStandardSchemeFactory implements SchemeFactory {
+      public virtualStop_resultStandardScheme getScheme() {
+        return new virtualStop_resultStandardScheme();
+      }
+    }
+
+    private static class virtualStop_resultStandardScheme extends StandardScheme<virtualStop_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, virtualStop_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, virtualStop_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class virtualStop_resultTupleSchemeFactory implements SchemeFactory {
+      public virtualStop_resultTupleScheme getScheme() {
+        return new virtualStop_resultTupleScheme();
+      }
+    }
+
+    private static class virtualStop_resultTupleScheme extends TupleScheme<virtualStop_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, virtualStop_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, virtualStop_result struct) throws org.apache.thrift.TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
