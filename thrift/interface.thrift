@@ -126,9 +126,14 @@ service NodeService
     list<TransferData> getTransfers(),
 
     /**
-    *  Sender not needed
+    *  It sets "blacklist" - list of nodes which are not accessible (in both directions) for the callee
     */
     void setBlacklist(1: list<NodeID> blacklist),
 
+    /**
+    *  The method simulates killing server - all non-debug methods should fail (maybe except getSwarm getAccountBalance)
+    */
+    void virtualStop(1: bool shouldStop),
+    
     void stop()
 }
