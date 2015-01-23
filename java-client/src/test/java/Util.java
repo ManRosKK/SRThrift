@@ -128,6 +128,13 @@ public class Util {
         }
     }
 
+    public static void runNServers(String IP, int portlow, long balance,String config, String language, int count) throws IOException {
+        for (int i=0;i<count;++i)
+        {
+            runServer(IP,portlow + i,balance,config,language);
+        }
+    }
+
     public static void pingNServers(String IP,int portlow, int count) throws TException {
         for (int i=0;i<count;++i)
         {

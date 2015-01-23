@@ -64,6 +64,9 @@ def overrides(interface_class):
         return method
     return overrider
 
+def smaller(node1,node2):
+        return ((str(node1.IP)+str(node1.port)) <  (str(node2.IP)+str(node2.port)))
+
 class ServerHandler(NodeService.Iface):
     """
     List of fields:
@@ -140,8 +143,7 @@ class ServerHandler(NodeService.Iface):
                     #slave mode on
                     #check if pinged recently
                     #logging.info(("checking heartbeat",swarm.transfer))
-                    #TODO: x10
-                    if time.time() - self.hb[str(swarm.transfer.sender)+str(swarm.transfer.counter)] > config.getint("config", "leader_considered_dead_after")/100.0:
+                    if time.time() - self.hb[str(swarm.transfer.sender)+str(swarm.transfer.counter)] > config.getint("config", "leader_considered_dead_after")/1000.0:
                         logging.info(("The king is dead. ",swarm))
                         self.localElectNewLeader(swarm)
             time.sleep(config.getint("config", "try_deliver_transfer_every")/1000.0)
@@ -218,7 +220,7 @@ class ServerHandler(NodeService.Iface):
         except:
             raise NotSwarmMemeber(receiverNode=self.nodeID, transfer=transfer)
         if (swarm.leader != sender):
-            raise WrongSwarmLeader(receiverNode=self.nodeID, sender=swarm.leader, transfer=transfer)
+            raise WrongSwarmLeader(receiverNode=self.nodeID, leader=swarm.leader, transfer=transfer)
 
         self.hb[str(transfer.sender)+str(transfer.counter)] = time.time()
 
@@ -259,6 +261,7 @@ class ServerHandler(NodeService.Iface):
 
     @overrides(NodeService.Iface)
     def electSwarmLeader(self, sender, candidate, transfer):
+        logging.info(("Received elect from",sender))
         global globalBlacklist
         if sender in globalBlacklist:
             raise TTransportException("Call from blacklisted member!")
@@ -270,7 +273,8 @@ class ServerHandler(NodeService.Iface):
         except:
             raise NotSwarmMemeber(receiverNode=self.nodeID, transfer=transfer)
 
-        return ((str(self.nodeID.IP)+str(self.nodeID.port)) <  (str(self.nodeID.IP)+str(self.nodeID.port)))
+        return smaller(self.nodeID,candidate)
+
 
     @overrides(NodeService.Iface)
     def electionEndedSwarm(self, sender,swarmnew):
@@ -349,6 +353,9 @@ class ServerHandler(NodeService.Iface):
         #for everyone and not me
         for node in alive_ppl:
             if (node == self.nodeID):
+                continue
+
+            if not smaller(node,self.nodeID):
                 continue
             #check alive - elect
             try:
