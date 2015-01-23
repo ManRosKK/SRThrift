@@ -37,23 +37,27 @@ namespace BankingNode
         }
         public static bool operator >(NodeID c1, NodeID c2)
         {
-            int addr1 = BitConverter.ToInt32(IPAddress.Parse(c1.IP).GetAddressBytes(), 0);
+            /*int addr1 = BitConverter.ToInt32(IPAddress.Parse(c1.IP).GetAddressBytes(), 0);
             int addr2 = BitConverter.ToInt32(IPAddress.Parse(c2.IP).GetAddressBytes(), 0);
             long n1 = addr1;
             long n2 = addr2;
             n1 += ((long)c1.Port) << 32;
-            n2 += ((long)c2.Port) << 32;
-            return n1 > n2;
+            n2 += ((long)c2.Port) << 32;*/
+            string n1 = c1.IP + c1.Port.ToString();
+            string n2 = c2.IP + c2.Port.ToString();
+            return string.Compare(n1, n2) > 0;
         }
         public static bool operator <(NodeID c1, NodeID c2)
         {
-            int addr1 = BitConverter.ToInt32(IPAddress.Parse(c1.IP).GetAddressBytes(), 0);
+            /*int addr1 = BitConverter.ToInt32(IPAddress.Parse(c1.IP).GetAddressBytes(), 0);
             int addr2 = BitConverter.ToInt32(IPAddress.Parse(c2.IP).GetAddressBytes(), 0);
             long n1 = addr1;
             long n2 = addr2;
             n1 += ((long)c1.Port) << 32;
-            n2 += ((long)c2.Port) << 32;
-            return n1 < n2;
+            n2 += ((long)c2.Port) << 32;*/
+            string n1 = c1.IP + c1.Port.ToString();
+            string n2 = c2.IP + c2.Port.ToString();
+            return string.Compare(n1,n2)<0;
         }
         public static bool operator ==(NodeID c1, NodeID c2)
         {

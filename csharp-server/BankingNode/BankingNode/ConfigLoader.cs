@@ -18,7 +18,8 @@ namespace BankingNode
             IpList,
             PortList,
             TimeBetweenRetransfers,
-            TimePingSwarm
+            TimePingSwarm,
+            TimeLeaderTimeout
         };
 
         private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -74,6 +75,11 @@ namespace BankingNode
             {
                 logerr.Info(iniDecoder.IniReadValue("config", "try_deliver_transfer_every"));
                 return Int64.Parse(iniDecoder.IniReadValue("config", "try_deliver_transfer_every"));
+            }
+            if (key == ConfigLoaderKeys.TimeLeaderTimeout)
+            {
+                logerr.Info(iniDecoder.IniReadValue("config", "leader_considered_dead_after"));
+                return Int64.Parse(iniDecoder.IniReadValue("config", "leader_considered_dead_after"));
             }
             if (key == ConfigLoaderKeys.TimePingSwarm)
             {

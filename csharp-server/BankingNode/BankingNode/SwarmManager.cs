@@ -82,7 +82,7 @@ namespace BankingNode
                     SwarmDescription sd = new SwarmDescription();
                     sd.timer = new Timer();
                     sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmTimeout(s.Transfer, this); });
-                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm)*4+5000;
+                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimeLeaderTimeout);
                     sd.timer.AutoReset = false;
                     sd.data = data;
                     sd.state = SwarmState.Idle;
@@ -158,7 +158,7 @@ namespace BankingNode
                 SwarmDescription sd =  swarmsDescription[id];
                 sd.timer = new Timer();
                 sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmTimeout(id, this); });
-                sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm) * 4 + 5000; ;
+                sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimeLeaderTimeout)  ;
                 sd.timer.AutoReset = false;
                 sd.state = SwarmState.Idle;
                 sd.timer.Enabled = true;
@@ -194,7 +194,7 @@ namespace BankingNode
                     logerr.Info("SWARM PINGED BY (SETTING TIMEOUT): " + leader + " | " + id);
                     sd.timer = new Timer();
                     sd.timer.Elapsed += new ElapsedEventHandler((object source, ElapsedEventArgs e) => { SwarmTimeout(id, this); });
-                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimePingSwarm)*4+5000;
+                    sd.timer.Interval = ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.TimeLeaderTimeout);
                     sd.timer.AutoReset = false;
 
                     sd.timer.Enabled = true;
@@ -237,7 +237,7 @@ namespace BankingNode
             foreach (Swarm x in swarms.Values)
             {
                 ll.Add(x.ToBase());
-                logerr.Info("SWARM name: " + x);
+                logerr.Info("SWARM name: " + x+"|||"+ x.Members.Count);
             }
             return ll;
         }
