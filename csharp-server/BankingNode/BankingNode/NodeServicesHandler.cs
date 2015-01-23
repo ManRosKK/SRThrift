@@ -147,7 +147,7 @@ namespace BankingNode
                 try
                 {
                         SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
-                        client.updateSwarmMembers(swarm.ToBase());
+                        client.updateSwarmMembers(ConfigLoader.Instance.ConfigGetSelfId().ToBase() ,swarm.ToBase());
                     clientManager.ReturnClient(x);
                 }
                 catch (Exception ex)
@@ -189,7 +189,7 @@ namespace BankingNode
                         }
                         List<NodeID> tmp = new List<NodeID>();
                         swarm.Members = tmp;
-                        client.addToSwarm(swarm.ToBase(), data.ToBase());
+                        client.addToSwarm(swarm.Leader.ToBase(), swarm.ToBase(), data.ToBase());
                         list.Add(n);
                         logerr.Info("STARTING CREATING SWARM(ADDED node:)" + n);
                         //swarm.AddToSwarm(n);
@@ -212,7 +212,7 @@ namespace BankingNode
                 try
                 {
                         SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
-                        client.delSwarm(swarm.Transfer.ToBase());
+                        client.delSwarm(swarm.Leader.ToBase(),swarm.Transfer.ToBase());
                         clientManager.ReturnClient(x);
                 }
                 catch (Exception ex)
@@ -242,7 +242,7 @@ namespace BankingNode
 
                         List<NodeID> tmp = new List<NodeID>();
                         swarm.Members = tmp;
-                        client.addToSwarm(swarm.ToBase(), data.ToBase());
+                        client.addToSwarm(swarm.Leader.ToBase(),swarm.ToBase(), data.ToBase());
                         list.Add(n);
                         swamManager.DirtySwarm(data.TransferID);
                         clientManager.ReturnClient(n);
@@ -278,7 +278,7 @@ namespace BankingNode
                         client.startSwarmElection(id.ToBase());
                         if (we > x)
                         {
-                            if (!client.electSwarmLeader(we.ToBase(), id.ToBase()))
+                            if (!client.electSwarmLeader(we.ToBase(),we.ToBase(), id.ToBase()))
                             {
                                 flag = false;
                                 clientManager.ReturnClient(x);
@@ -311,7 +311,7 @@ namespace BankingNode
                             lock (_m)
                             {
                                 SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
-                                client.electionEndedSwarm(swarm.ToBase());
+                                client.electionEndedSwarm(we.ToBase(),swarm.ToBase());
                                 clientManager.ReturnClient(x);
                             }
                         }
@@ -389,7 +389,7 @@ namespace BankingNode
                 try
                 {
                     SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(d.Receiver);
-                    client.deliverTransfer(d.ToBase());
+                    client.deliverTransfer(ConfigLoader.Instance.ConfigGetSelfId().ToBase(),d.ToBase());
                     //client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
                     //client.delSwarm(swarm);
                     clientManager.ReturnClient(d.Receiver);
@@ -409,7 +409,7 @@ namespace BankingNode
                         try
                         {
                             SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
-                            client.delSwarm(swarm.Transfer.ToBase());
+                            client.delSwarm(swarm.Leader.ToBase(),swarm.Transfer.ToBase());
                             clientManager.ReturnClient(x);
 
                         }
@@ -437,7 +437,7 @@ namespace BankingNode
         /// </summary>
         /// <param name="swarm"></param>
         /// <param name="transferData"></param>
-        public void addToSwarm(SRBanking.ThriftInterface.Swarm swarm, SRBanking.ThriftInterface.TransferData transferData)
+        public void addToSwarm(SRBanking.ThriftInterface.NodeID sender,SRBanking.ThriftInterface.Swarm swarm, SRBanking.ThriftInterface.TransferData transferData)
         {
             Swarm sw = new Swarm(swarm);
             TransferData tr = new TransferData(transferData);
@@ -447,12 +447,12 @@ namespace BankingNode
             getSwarmList();
         }
 
-        public void delSwarm(SRBanking.ThriftInterface.TransferID swarmID)
+        public void delSwarm(SRBanking.ThriftInterface.NodeID sender,SRBanking.ThriftInterface.TransferID swarmID)
         {
             swamManager.DeleteSwarm(new TransferID(swarmID));
         }
 
-        public void deliverTransfer(SRBanking.ThriftInterface.TransferData transfer)
+        public void deliverTransfer(SRBanking.ThriftInterface.NodeID sender, SRBanking.ThriftInterface.TransferData transfer)
         {
             foreach (IAppender appender in (logerr.Logger as Logger).Appenders)
             {
@@ -483,15 +483,15 @@ namespace BankingNode
             }
         }
 
-        public bool electSwarmLeader(SRBanking.ThriftInterface.NodeID cadidate, SRBanking.ThriftInterface.TransferID Transfer)
+        public bool electSwarmLeader(SRBanking.ThriftInterface.NodeID sender, SRBanking.ThriftInterface.NodeID cadidate, SRBanking.ThriftInterface.TransferID Transfer)
         {
             swamManager.GetSwarm(new TransferID(Transfer));
-            if (ConfigLoader.Instance.ConfigGetSelfId() > new NodeID(cadidate))
+            if (ConfigLoader.Instance.ConfigGetSelfId() < new NodeID(cadidate))
                 return false;
             return true;
         }
 
-        public void electionEndedSwarm(SRBanking.ThriftInterface.Swarm swarm)
+        public void electionEndedSwarm(SRBanking.ThriftInterface.NodeID sender, SRBanking.ThriftInterface.Swarm swarm)
         {
             Swarm sw = new Swarm(swarm);
 
@@ -512,7 +512,7 @@ namespace BankingNode
             return balanceManager.Balance;
         }
 
-        public SRBanking.ThriftInterface.Swarm getSwarm(SRBanking.ThriftInterface.TransferID transfer)
+        public SRBanking.ThriftInterface.Swarm getSwarm(SRBanking.ThriftInterface.NodeID sender, SRBanking.ThriftInterface.TransferID transfer)
         {
             return swamManager.GetSwarm(new TransferID(transfer)).ToBase();
         }
@@ -568,7 +568,7 @@ namespace BankingNode
                 
                 logerr.Info("After open " + receiver.ToString() + " | " + value.ToString());
                 client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
-                client.deliverTransfer(data.ToBase());
+                client.deliverTransfer(ConfigLoader.Instance.ConfigGetSelfId().ToBase() ,data.ToBase());
                 clientManager.ReturnClient(rec);
                 
                // logerr.Info("Transfer Commited " + data.ToString());
@@ -634,14 +634,14 @@ namespace BankingNode
             server.Stop();
         }
 
-        public void updateSwarmMembers(SRBanking.ThriftInterface.Swarm swarm)
+        public void updateSwarmMembers(SRBanking.ThriftInterface.NodeID sender, SRBanking.ThriftInterface.Swarm swarm)
         {
             swamManager.UpdateSwarm(new Swarm(swarm));
         }
 
-        public void addBlackList(List<SRBanking.ThriftInterface.NodeID> blackList)
+        public void setBlacklist(List<SRBanking.ThriftInterface.NodeID> blacklist)
         {
-            this.blackList = blackList;
+            this.blackList = blacklist;
         }
 
         public void ping(SRBanking.ThriftInterface.NodeID sender)
@@ -653,6 +653,11 @@ namespace BankingNode
 
             logerr.Info("simple Pinged "+ new NodeID(sender));
             return;
+        }
+
+        public void virtualStop(bool shouldStop)
+        {
+            throw new NotImplementedException();
         }
     }
 }
