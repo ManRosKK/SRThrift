@@ -64,6 +64,9 @@ def overrides(interface_class):
         return method
     return overrider
 
+def smaller(node1,node2):
+        return ((str(node1.IP)+str(node1.port)) <  (str(node2.IP)+str(node2.port)))
+
 class ServerHandler(NodeService.Iface):
     """
     List of fields:
@@ -270,9 +273,8 @@ class ServerHandler(NodeService.Iface):
         except:
             raise NotSwarmMemeber(receiverNode=self.nodeID, transfer=transfer)
 
+        return smaller(self.nodeID,candidate)
 
-
-        return ((str(self.nodeID.IP)+str(self.nodeID.port)) <  (str(candidate.IP)+str(candidate.port)))
 
     @overrides(NodeService.Iface)
     def electionEndedSwarm(self, sender,swarmnew):
@@ -351,6 +353,9 @@ class ServerHandler(NodeService.Iface):
         #for everyone and not me
         for node in alive_ppl:
             if (node == self.nodeID):
+                continue
+
+            if not smaller(node,self.nodeID):
                 continue
             #check alive - elect
             try:
