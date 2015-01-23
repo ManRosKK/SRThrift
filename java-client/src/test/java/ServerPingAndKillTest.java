@@ -16,7 +16,7 @@ public class ServerPingAndKillTest {
         int count = 10;
         String IP = "127.0.0.1";
 
-        Util.runNServers(IP,lowserver, count);
+        Util.runNServers(IP,lowserver,Util.defaultBalance,Util.defaultConfigFile, count);
         Util.pingNServers(IP,lowserver, count);
         Util.killNServers(IP,lowserver, count);
         Util.pingNServersExpectFail(IP,lowserver, count);

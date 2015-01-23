@@ -27,7 +27,12 @@ public class SwarmLeaderFailure {
     int portReceiver = 13467;
     long balanceReceiver = 503;
 
+    String IPN = "127.0.0.1";
+    int portLow = 9080;
+    int count = 10;
+
     String configFile = "config\\testSwarmBasics.ini";
+    String configBig = "config\\testSwarmBig.ini";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -40,6 +45,7 @@ public class SwarmLeaderFailure {
         Util.killServerNoException(IP2, port2);
         Util.killServerNoException(IP3, port3);
         Util.killServerNoException(IPReceiver, portReceiver);
+        Util.killNServers(IPN,portLow,count);
     }
 
     @Test
@@ -90,5 +96,63 @@ public class SwarmLeaderFailure {
         List<Swarm> swarmList = EasyClient.getSwarmList(IP2, port2);
         assertEquals(swarmList.size(),0);
 
+    }
+
+    /*
+    1+2 -> kill1 run3 -> 2+3 -> kill2 run1 -> 3+1
+     */
+    @Test
+    public void Carousel() throws Exception {
+        //arrange
+        Util.runServer(IP, port, balance, configFile);
+        Util.runServer(IP2, port2, balance2, configFile);
+
+        //act
+        int value = 5;
+        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
+        Util.killServerNoException(IP,port);
+        Util.runServer(IP3, port3, balance3, configFile);
+
+        //wait for new leader election and adding to swarm
+        Thread.sleep(4000);
+
+        //assert
+        List<Swarm> swarmList = EasyClient.getSwarmList(IP2, port2);
+        assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+        assert((swarmList.get(0).getMembers().get(0).getPort() == port3) || (swarmList.get(0).getMembers().get(1).getPort() == port3));
+
+        //act again
+        Util.killServerNoException(IP2,port2);
+        Util.runServer(IP, port, balance, configFile);
+
+        //wait for new leader election and adding to swarm
+        Thread.sleep(4000);
+
+        List<Swarm> swarmList3 = EasyClient.getSwarmList(IP3, port3);
+        assertEquals(swarmList3.size(),1);
+        assertEquals(swarmList3.get(0).getMembersSize(),2);
+        assertEquals(swarmList3.get(0).getLeader().getPort(),port3);
+        assert((swarmList3.get(0).getMembers().get(0).getPort() == port) || (swarmList3.get(0).getMembers().get(1).getPort() == port));
+    }
+
+    @Test
+    public void BigElection() throws Exception {
+        //arrange
+        Util.runNServers(IPN,portLow,Util.defaultBalance,configBig,count);
+
+        //act
+        int value = 5;
+        EasyClient.makeTransfer(IPN, portLow+count/2, IPReceiver, portReceiver, value);
+        Util.killServerNoException(IPN,portLow+count/2);
+
+        //wait for new leader election and adding to swarm
+        Thread.sleep(10000);
+
+        //assert
+        List<Swarm> swarmList = EasyClient.getSwarmList(IP2, portLow+count/2+1);
+        assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getMembersSize(),9);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow);
     }
 }

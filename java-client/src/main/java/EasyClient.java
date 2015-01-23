@@ -137,4 +137,18 @@ public class EasyClient {
             return balance;
         }
     }
+
+    public static void setBlacklist(String IP,int port, List<NodeID> blacklist) throws TException {
+        try(AutoClosingClient acclient = getClient(IP, port)) {
+            NodeService.Client client = acclient.getClient();
+            client.setBlacklist(blacklist);
+        }
+    }
+
+    public static void virtualStop(String IP,int port, boolean shouldStop) throws TException {
+        try(AutoClosingClient acclient = getClient(IP, port)) {
+            NodeService.Client client = acclient.getClient();
+            client.virtualStop(shouldStop);
+        }
+    }
 }

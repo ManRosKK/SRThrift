@@ -79,7 +79,9 @@ public class Util {
                 try {
                     String line;
                     while ((line = readerStdout.readLine()) != null) {
-                        stdoutMap.get(port).append("Stdout" + port + ": " + line + "\n");
+                        //stdoutMap.get(port).append("Stdout" + port + ": " + line + "\n");
+                        System.out.println("Stdout" + port + ": " + line);
+                        System.out.flush();
                 }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -95,7 +97,8 @@ public class Util {
                 try {
                     String line;
                     while ((line = readerStderr.readLine()) != null) {
-                        stderrMap.get(port).append("StdErr" + port + ": " + line + "\n");
+                        //stderrMap.get(port).append("StdErr" + port + ": " + line + "\n");
+                        System.out.println("StdErr" + port + ": " + line);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -118,10 +121,10 @@ public class Util {
         runServer(IP,port,defaultBalance);
     }
 
-    public static void runNServers(String IP, int portlow, int count) throws IOException {
+    public static void runNServers(String IP, int portlow, long balance,String config, int count) throws IOException {
         for (int i=0;i<count;++i)
         {
-            runServer(IP,portlow + i);
+            runServer(IP,portlow + i,balance,config);
         }
     }
 
@@ -166,7 +169,7 @@ public class Util {
                 {
                     //System.out.println("Error" + port + ":");
                     //System.out.println(convertStreamToString(process.getErrorStream()));
-                    Reporter.log(stdoutMap.get(port).toString(),true);
+                    //Reporter.log(stdoutMap.get(port).toString(),true);
                     Reporter.log(stderrMap.get(port).toString(),true);
                     //System.out.println("StdOut" + port + ": ");
                     //System.out.println(convertStreamToString(process.getInputStream()));
