@@ -152,6 +152,7 @@ namespace BankingNode
                 }
                 catch (Exception ex)
                 {
+                    logerr.Error("Nieudany update: " + x);
                     clientManager.ReturnClient(x);
                     
                     flag = false;
@@ -227,10 +228,13 @@ namespace BankingNode
             //swarm.Leader = ConfigLoader.Instance.ConfigGetSelfId();
             //swarm.Transfer = data.TransferID;
             List<NodeID> list = swarm.Members ;
-            for (int i = 0; i < nodes.Count; i++)
+            long needed= ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize);
+            for (int i = 0; i < nodes.Count && list.Count<needed; i++)
             {
                 NodeID n = nodes[i].node;
+                logerr.Info("szukanie nowego " + n + "|" + nodes.Count + "|");
                 if (list.Contains(n)) continue;
+                logerr.Info("PO---szukanie nowego " + n + "|" + nodes.Count + "|");
                 try
                 {
                         SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(n);
@@ -257,20 +261,22 @@ namespace BankingNode
         public void SwarmTimeoutDelegate(TransferID id, SwarmManager swarmManager)
         {
             Swarm swarm = swamManager.GetSwarm(id);
-            logerr.Info("Not Pinged " + id.ToString() + "|" + swarm.Leader.ToString());
-            
-            swamManager.BeginElection(id);
-            List<NodeID> list = swarm.Members;
-            bool flag = true;
-            NodeID we = ConfigLoader.Instance.ConfigGetSelfId();
-            List<NodeID> toInform = new List<NodeID>();
-            foreach (NodeID x in list)
+            lock (swarm)
             {
-                try
+                logerr.Info("Not Pinged " + id.ToString() + "|" + swarm.Leader.ToString());
+
+                swamManager.BeginElection(id);
+                List<NodeID> list = swarm.Members;
+                bool flag = true;
+                NodeID we = ConfigLoader.Instance.ConfigGetSelfId();
+                List<NodeID> toInform = new List<NodeID>();
+                foreach (NodeID x in list)
                 {
+                    try
+                    {
                         SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                         client.startSwarmElection(id.ToBase());
-                        if (we < x)
+                        if (we > x)
                         {
                             if (!client.electSwarmLeader(we.ToBase(), id.ToBase()))
                             {
@@ -284,34 +290,36 @@ namespace BankingNode
                             toInform.Add(x);
                         }
                         clientManager.ReturnClient(x);
-                    
-                }
-                catch (Exception ex)
-                {
-                    clientManager.ReturnClient(x);
-                    //closeConnection(transport);
-                }
-            }
-            if (flag)
-            {
-                swarm.Leader = we;
-                swarm.Members = toInform;
-                swamManager.UpdateSwarm(swarm);
-                foreach (NodeID x in toInform)
-                {
-                    try
-                    {
-                        lock (_m)
-                        {
-                            SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
-                            client.electionEndedSwarm(swarm.ToBase());
-                            clientManager.ReturnClient(x);
-                        }
+
                     }
                     catch (Exception ex)
                     {
                         clientManager.ReturnClient(x);
+                        //closeConnection(transport);
+                    }
+                }
+                if (flag)
+                {
+                    swarm.Leader = we;
+                    swarm.Members = toInform;
+                    swamManager.UpdateSwarm(swarm);
+                    swamManager.EndElection(id);
+                    foreach (NodeID x in toInform)
+                    {
+                        try
+                        {
+                            lock (_m)
+                            {
+                                SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
+                                client.electionEndedSwarm(swarm.ToBase());
+                                clientManager.ReturnClient(x);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            clientManager.ReturnClient(x);
 
+                        }
                     }
                 }
             }
@@ -319,93 +327,99 @@ namespace BankingNode
         public void SwarmLeaderTimeToPingDelegate(TransferID id, SwarmManager swarmManager)
         {
             Swarm swarm = swamManager.GetSwarm(id);
-            logerr.Info("Try to make transfer " + id.ToString() + "|" + swarm.Leader.ToString());
-           
-            TransferData d = swamManager.GetTransferData(id);
-            List<NodeID> list = swarm.Members;
-            bool f = false;
-            try
+            lock (swarm)
             {
+                TransferData d = swamManager.GetTransferData(id);
+                List<NodeID> list = swarm.Members;
+                logerr.Info("Time to Ping all members " + id.ToString() + "|" + swarm.Leader.ToString());
+                List<NodeID> ListToDel = new List<NodeID>();
+
+                if (swamManager.IsDirtySwarm(id))
+                    if (updateSwarm(swarm))
+                    {
+                        swamManager.CleanSwarm(id);
+                    }
+                foreach (NodeID x in list)
+                {
+                    if (x == ConfigLoader.Instance.ConfigGetSelfId()) continue;
+                    try
+                    {
+
+                        logerr.Info("try Pinged " + x.ToString() + " with " + swarm.Leader + "|" + swarm.Transfer);
+                        SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
+                        //client.delSwarm(swarm.Transfer.ToBase());
+                        client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
+                        clientManager.ReturnClient(x);
+
+                        logerr.Info("Pinged " + x.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        clientManager.ReturnClient(x);
+                        logerr.Error("Ping Error " + x.ToString(), ex);
+                        logerr.Error("Ping Error info" + swamManager.IsDirtySwarm(id));
+                        swamManager.DirtySwarm(id);
+                        logerr.Error("Ping Error after info" + swamManager.IsDirtySwarm(id));
+                        ListToDel.Add(x);
+                    }
+                }
+                logerr.Error("Przed warunkiem " + swamManager.IsDirtySwarm(id) + "|" + swarm);
+                if (swamManager.IsDirtySwarm(id) || swarm.Members.Count < ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize))
+                {
+                    logerr.Error("w Warunku ");
+                    foreach (NodeID x in ListToDel)
+                    {
+                        logerr.Error("usuwamy " + x.ToString());
+                        swarm.DeleteMember(x);
+                    }
+                    logerr.Error("szukamy nowego ");
+                    swarm = addNewToSwarm(swarm, findNodes(), swamManager.GetTransferData(id));
+                    logerr.Error("znaleziono: " + swarm);
+                    swamManager.UpdateSwarm(swarm);
+                    if (updateSwarm(swarm))
+                    {
+                        swamManager.CleanSwarm(id);
+                    }
+                }
+
+                logerr.Info("Try to make transfer " + id.ToString() + "|" + swarm.Leader.ToString());
+
+
+                bool f = false;
+                try
+                {
                     SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(d.Receiver);
                     client.deliverTransfer(d.ToBase());
                     //client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
                     //client.delSwarm(swarm);
                     clientManager.ReturnClient(d.Receiver);
-                
-                f = true;
-            }
-            catch (Exception)
-            {
-               clientManager.ReturnClient(d.Receiver);
 
-            }
-            if (f)
-            {
-
-                foreach (NodeID x in list)
+                    f = true;
+                }
+                catch (Exception)
                 {
-                    try
+                    clientManager.ReturnClient(d.Receiver);
+
+                }
+                if (f)
+                {
+
+                    foreach (NodeID x in list)
                     {
+                        try
+                        {
                             SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                             client.delSwarm(swarm.Transfer.ToBase());
                             clientManager.ReturnClient(x);
-                        
+
+                        }
+                        catch (Exception)
+                        {
+
+                        }
                     }
-                    catch (Exception)
-                    {
-
-                    }
-                }
-                swamManager.DeleteSwarm(id);
-                return;
-            }
-            logerr.Info("Time to Ping all members " + id.ToString() + "|" + swarm.Leader.ToString());
-            List<NodeID> ListToDel = new List<NodeID>();
-
-            if (swamManager.IsDirtySwarm(id))
-                if (updateSwarm(swarm))
-                {
-                    swamManager.CleanSwarm(id);
-                }
-            foreach (NodeID x in list)
-            {
-                if(x == ConfigLoader.Instance.ConfigGetSelfId())continue;
-                try
-                {
-
-                    logerr.Info("try Pinged " + x.ToString()+" with "+swarm.Leader+"|"+swarm.Transfer);
-                        SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
-                        //client.delSwarm(swarm.Transfer.ToBase());
-                        client.pingSwarm(swarm.Leader.ToBase(), swarm.Transfer.ToBase());
-                        clientManager.ReturnClient(x);
-                    
-                    logerr.Info("Pinged " + x.ToString() );
-                }
-                catch (Exception ex)
-                {
-                    clientManager.ReturnClient(x);
-                    logerr.Error("Ping Error " + x.ToString(),ex);
-                    logerr.Error("Ping Error info" + swamManager.IsDirtySwarm(id));
-                    swamManager.DirtySwarm(id);
-                    logerr.Error("Ping Error after info" + swamManager.IsDirtySwarm(id));
-                    ListToDel.Add(x);
-                }
-            }
-            logerr.Error("Przed warunkiem " + swamManager.IsDirtySwarm(id));
-            if (swamManager.IsDirtySwarm(id) || swarm.Members.Count < ConfigLoader.Instance.ConfigGetInt(ConfigLoader.ConfigLoaderKeys.SwarmSize))
-            {
-                logerr.Error("w Warunku ");
-                foreach( NodeID x in ListToDel)
-                {
-                    logerr.Error("usuwamy " + x.ToString());
-                    swarm.DeleteMember(x);
-                }
-                logerr.Error("szukamy nowego " );
-                swarm = addNewToSwarm(swarm, findNodes(), swamManager.GetTransferData(id));
-                swamManager.UpdateSwarm(swarm);
-                if (updateSwarm(swarm))
-                {
-                    swamManager.CleanSwarm(id);
+                    swamManager.DeleteSwarm(id);
+                    return;
                 }
             }
         }
