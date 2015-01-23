@@ -18,7 +18,9 @@ namespace BankingNode
             public TSocket transport = null;
         }
         private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private bool isStopped = false;
         Dictionary<NodeID, ConnectionObject> clients = new Dictionary<NodeID,ConnectionObject>();
+        Dictionary<NodeID, bool> blackList = new Dictionary<NodeID, bool>();
         public void connectToNode(NodeID node)
         {
             if (clients[node].client != null)
@@ -58,6 +60,8 @@ namespace BankingNode
                 }
             }
             Monitor.Enter(clients[node]);
+            if(blackList.ContainsKey(node) || isStopped )
+                throw new SRBanking.ThriftInterface.NotEnoughMoney();
             connectToNode(node);
             logerr.Warn("zajmuje: " + node);
             return clients[node].client;
@@ -68,6 +72,27 @@ namespace BankingNode
             if(clients.ContainsKey(node))
                 Monitor.Exit(clients[node]);    
         }
+        public void SetBlackList(List<SRBanking.ThriftInterface.NodeID> list)
+        {
+            blackList.Clear();
+            foreach (SRBanking.ThriftInterface.NodeID n in list)
+            {
+                blackList.Add(new NodeID(n),true);
+            }
+        }
+        public bool IsOnBlackList(NodeID node)
+        {
+            return (blackList.ContainsKey(node) || isStopped);
+        }
 
+        internal void StopAll()
+        {
+            isStopped = true;
+        }
+
+        internal void StartAll()
+        {
+            isStopped = false;
+        }
     }
 }

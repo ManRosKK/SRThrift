@@ -11,6 +11,7 @@ namespace BankingNode
     class SwarmManager
     {
         private readonly ILog logerr = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        //private bool isStopped = false;
         public enum SwarmState
         {
             Idle,
@@ -22,6 +23,7 @@ namespace BankingNode
             public Timer timer ;
             public TransferData data;
             public SwarmState state;
+            public object m_lock;
         }
         public delegate void SwarmTimeoutDelegate(TransferID id,SwarmManager swarmManager);
         public delegate void SwarmLeaderTimeToPingDelegate(TransferID id, SwarmManager swarmManager);
@@ -73,6 +75,7 @@ namespace BankingNode
                     sd.state = SwarmState.Dirty;
                     swarmsDescription.Add(s.Transfer, sd);
                     sd.timer.Enabled    = true;
+                    sd.m_lock = new object();
                     sd.timer.Start();
                 }
                 else
@@ -88,6 +91,7 @@ namespace BankingNode
                     sd.state = SwarmState.Idle;
                     swarmsDescription.Add(s.Transfer, sd);
                     sd.timer.Enabled = true;
+                    sd.m_lock = new object();
                     sd.timer.Start();
                 }
             }
@@ -216,6 +220,10 @@ namespace BankingNode
                 throw new SRBanking.ThriftInterface.NotSwarmMemeber();
             }
         }
+        public object GetLockObject(TransferID id)
+        {
+            return swarmsDescription[id].m_lock;
+        }
         public TransferData GetTransferData(TransferID id)
         {
             return swarmsDescription[id].data;
@@ -241,6 +249,19 @@ namespace BankingNode
             }
             return ll;
         }
-
+        public void StopAll()
+        {
+            foreach (SwarmDescription desc in swarmsDescription.Values)
+            {
+                desc.timer.Stop();
+            }
+        }
+        public void StartAll()
+        {
+            foreach (SwarmDescription desc in swarmsDescription.Values)
+            {
+                desc.timer.Start();
+            }
+        }
     }
 }

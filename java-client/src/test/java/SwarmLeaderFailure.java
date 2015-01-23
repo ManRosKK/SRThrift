@@ -114,7 +114,7 @@ public class SwarmLeaderFailure {
         Util.runServer(IP3, port3, balance3, configFile);
 
         //wait for new leader election and adding to swarm
-        Thread.sleep(4000);
+        Thread.sleep(8000);
 
         //assert
         List<Swarm> swarmList = EasyClient.getSwarmList(IP2, port2);
@@ -127,7 +127,7 @@ public class SwarmLeaderFailure {
         Util.runServer(IP, port, balance, configFile);
 
         //wait for new leader election and adding to swarm
-        Thread.sleep(4000);
+        Thread.sleep(8000);
 
         List<Swarm> swarmList3 = EasyClient.getSwarmList(IP3, port3);
         assertEquals(swarmList3.size(),1);
