@@ -43,7 +43,7 @@ public class SwarmBasics {
     }
 
      @Test
-      public void CreateSwarm() throws Exception {
+     public void CreateSwarm() throws Exception {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
