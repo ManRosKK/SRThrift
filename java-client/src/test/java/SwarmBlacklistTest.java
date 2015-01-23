@@ -1,9 +1,13 @@
+import SRBanking.ThriftInterface.NodeID;
+import SRBanking.ThriftInterface.NotEnoughMembersToMakeTransfer;
 import SRBanking.ThriftInterface.Swarm;
 import SRBanking.ThriftInterface.TransferData;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -16,12 +20,17 @@ public class SwarmBlacklistTest {
     String IP = "127.0.0.1";
     int port = 9080;
     long balance = 501;
+    NodeID node1 = new NodeID(IP,port);
+
     String IP2 = "127.0.0.1";
     int port2 = 9081;
     long balance2 = 502;
+    NodeID node2 = new NodeID(IP2,port2);
+
     String IP3 = "127.0.0.1";
     int port3 = 9082;
     long balance3 = 502;
+    NodeID node3 = new NodeID(IP3,port3);
 
     String IPReceiver = "127.0.0.1";
     int portReceiver = 13467;
@@ -32,7 +41,6 @@ public class SwarmBlacklistTest {
     int count = 10;
 
     String configFile = "config\\testSwarmBasics.ini";
-    String configBig = "config\\testSwarmBig.ini";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -43,116 +51,66 @@ public class SwarmBlacklistTest {
     public void tearDown() throws Exception {
         Util.killServerNoException(IP,port);
         Util.killServerNoException(IP2, port2);
-        Util.killServerNoException(IP3, port3);
-        Util.killServerNoException(IPReceiver, portReceiver);
-        Util.killNServers(IPN,portLow,count);
     }
 
-    @Test
-    public void TheKingIsDeadLongLiveTheKing() throws Exception {
-        //arrange
+    @Test(expectedExceptions = NotEnoughMembersToMakeTransfer.class)
+    public void BlacklistFrom() throws Exception {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        //act
-        int value = 5;
-        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
-        Util.killServerNoException(IP,port);
+        EasyClient.setBlacklist(IP,port, Arrays.asList(node2));
 
-        Thread.sleep(5000);
-
-        //assert
-        List<Swarm> swarmList = EasyClient.getSwarmList(IP2, port2);
-        assertEquals(swarmList.size(),1);
-        assertEquals(swarmList.get(0).getLeader().getPort(),port2);
+        long value = 3;
+        EasyClient.makeTransfer(IP,port,IP2,port2,value);
     }
 
-    @Test
-    public void TheNewReignDeliver() throws Exception {
-        //arrange
+    @Test(expectedExceptions = NotEnoughMembersToMakeTransfer.class)
+    public void BlacklistTo() throws Exception {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        //act
-        int value = 5;
-        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
-        Util.killServerNoException(IP,port);
+        EasyClient.setBlacklist(IP2,port2, Arrays.asList(node1));
 
-        //wait for new leader election
-        Thread.sleep(4000);
-
-        Util.runServer(IPReceiver, portReceiver, balance2, configFile);
-
-        //wait for transfer delivery
-        Thread.sleep(4000);
-
-        //assert
-        List<TransferData> historyR = EasyClient.getHistory(IPReceiver, portReceiver);
-        assertEquals(historyR.size(), 1);
-        assertEquals(historyR.get(0).getValue(), value);
-        assertEquals(historyR.get(0).getTransferID().getSender().getIP(), IP);
-        assertEquals(historyR.get(0).getTransferID().getSender().getPort(), port);
-
-        List<Swarm> swarmList = EasyClient.getSwarmList(IP2, port2);
-        assertEquals(swarmList.size(),0);
-
+        long value = 3;
+        EasyClient.makeTransfer(IP,port,IP2,port2,value);
     }
 
-    /*
-    1+2 -> kill1 run3 -> 2+3 -> kill2 run1 -> 3+1
-     */
     @Test
-    public void Carousel() throws Exception {
-        //arrange
+    public void BlacklistUnset() throws Exception {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        //act
-        int value = 5;
-        EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
-        Util.killServerNoException(IP,port);
-        Util.runServer(IP3, port3, balance3, configFile);
+        EasyClient.setBlacklist(IP,port, Arrays.asList(node2));
+        EasyClient.setBlacklist(IP,port, new ArrayList());
 
-        //wait for new leader election and adding to swarm
-        Thread.sleep(4000);
+        long value = 3;
+        EasyClient.makeTransfer(IP,port,IP2,port2,value);
+    }
 
-        //assert
-        List<Swarm> swarmList = EasyClient.getSwarmList(IP2, port2);
-        assertEquals(swarmList.size(),1);
-        assertEquals(swarmList.get(0).getMembersSize(),2);
-        assert((swarmList.get(0).getMembers().get(0).getPort() == port3) || (swarmList.get(0).getMembers().get(1).getPort() == port3));
-
-        //act again
-        Util.killServerNoException(IP2,port2);
+    @Test(expectedExceptions = NotEnoughMembersToMakeTransfer.class)
+    public void VirtualStopOne() throws Exception {
         Util.runServer(IP, port, balance, configFile);
+        Util.runServer(IP2, port2, balance2, configFile);
 
-        //wait for new leader election and adding to swarm
-        Thread.sleep(4000);
+        EasyClient.virtualStop(IP2,port2, true);
 
-        List<Swarm> swarmList3 = EasyClient.getSwarmList(IP3, port3);
-        assertEquals(swarmList3.size(),1);
-        assertEquals(swarmList3.get(0).getMembersSize(),2);
-        assertEquals(swarmList3.get(0).getLeader().getPort(),port3);
-        assert((swarmList3.get(0).getMembers().get(0).getPort() == port) || (swarmList3.get(0).getMembers().get(1).getPort() == port));
+        long value = 3;
+        EasyClient.makeTransfer(IP,port,IP2,port2,value);
     }
 
-    @Test
-    public void BigElection() throws Exception {
-        //arrange
-        Util.runNServers(IPN,portLow,Util.defaultBalance,configBig,count);
+    @Test()
+    public void VirtualStopStart() throws Exception {
+        Util.runServer(IP, port, balance, configFile);
+        Util.runServer(IP2, port2, balance2, configFile);
 
-        //act
-        int value = 5;
-        EasyClient.makeTransfer(IPN, portLow+count/2, IPReceiver, portReceiver, value);
-        Util.killServerNoException(IPN,portLow+count/2);
+        EasyClient.virtualStop(IP2,port2, true);
+        EasyClient.virtualStop(IP2,port2, false);
 
-        //wait for new leader election and adding to swarm
-        Thread.sleep(10000);
-
-        //assert
-        List<Swarm> swarmList = EasyClient.getSwarmList(IP2, portLow+count/2+1);
-        assertEquals(swarmList.size(),1);
-        assertEquals(swarmList.get(0).getMembersSize(),9);
-        assertEquals(swarmList.get(0).getLeader().getPort(),portLow);
+        long value = 3;
+        EasyClient.makeTransfer(IP,port,IP2,port2,value);
     }
+
+
+
+
 }

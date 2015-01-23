@@ -1,11 +1,13 @@
 import SRBanking.ThriftInterface.NodeID;
 import SRBanking.ThriftInterface.NotEnoughMembersToMakeTransfer;
+import SRBanking.ThriftInterface.Swarm;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
@@ -35,9 +37,9 @@ public class SplitBrainTest {
 
     String IPN = "127.0.0.1";
     int portLow = 9080;
-    int count = 10;
+    int maxcount = 4;
 
-    String configFile = "config\\testSwarmBasics.ini";
+    String config_p10_s2 = "config\\testSwarm_p10_s2.ini";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -46,68 +48,101 @@ public class SplitBrainTest {
 
     @AfterMethod
     public void tearDown() throws Exception {
-        Util.killServerNoException(IP,port);
-        Util.killServerNoException(IP2, port2);
-    }
-
-    @Test(expectedExceptions = NotEnoughMembersToMakeTransfer.class)
-    public void BlacklistFrom() throws Exception {
-        Util.runServer(IP, port, balance, configFile);
-        Util.runServer(IP2, port2, balance2, configFile);
-
-        EasyClient.setBlacklist(IP,port, Arrays.asList(node2));
-
-        long value = 3;
-        EasyClient.makeTransfer(IP,port,IP2,port2,value);
-    }
-
-    @Test(expectedExceptions = NotEnoughMembersToMakeTransfer.class)
-    public void BlacklistTo() throws Exception {
-        Util.runServer(IP, port, balance, configFile);
-        Util.runServer(IP2, port2, balance2, configFile);
-
-        EasyClient.setBlacklist(IP2,port2, Arrays.asList(node1));
-
-        long value = 3;
-        EasyClient.makeTransfer(IP,port,IP2,port2,value);
+        Util.killNServers(IPN,portLow,maxcount);
+        Util.killServerNoException(IPReceiver,portReceiver);
     }
 
     @Test
-    public void BlacklistUnset() throws Exception {
-        Util.runServer(IP, port, balance, configFile);
-        Util.runServer(IP2, port2, balance2, configFile);
+    public void FirstSurgery() throws Exception {
+        Util.runNServers(IPN, portLow,Util.defaultBalance,config_p10_s2,2);
+        long value = 1;
+        EasyClient.makeTransfer(IP,port,IPReceiver,portReceiver,value);
+        // nodes 0 and 1 should make a swarm
 
-        EasyClient.setBlacklist(IP,port, Arrays.asList(node2));
-        EasyClient.setBlacklist(IP,port, new ArrayList());
+        //run addtional servers and split the network: 0+2;1+3
+        Util.runNServers(IPN, portLow+2,Util.defaultBalance,config_p10_s2,2);
 
-        long value = 3;
-        EasyClient.makeTransfer(IP,port,IP2,port2,value);
+        //set first zone
+        List<NodeID> blacklist1 = Arrays.asList(
+                new NodeID(IPN,portLow+1),
+                new NodeID(IPN,portLow+3)
+        );
+        EasyClient.setBlacklist(IPN,portLow+0, blacklist1);
+        EasyClient.setBlacklist(IPN,portLow+2, blacklist1);
+
+        //set second zone
+        List<NodeID> blacklist2 = Arrays.asList(
+                new NodeID(IPN,portLow+0),
+                new NodeID(IPN,portLow+2)
+        );
+        EasyClient.setBlacklist(IPN,portLow+1, blacklist2);
+        EasyClient.setBlacklist(IPN,portLow+3, blacklist2);
+
+        //wait to see what will happen
+        Thread.sleep(10000);
+
+        List<Swarm> swarmList = null;
+
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 0);
+        assertEquals(swarmList.size(),1);
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 1);
+        assertEquals(swarmList.size(),1);
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 2);
+        assertEquals(swarmList.size(),1);
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 3);
+        assertEquals(swarmList.size(),1);
     }
 
-    @Test(expectedExceptions = NotEnoughMembersToMakeTransfer.class)
-    public void VirtualStopOne() throws Exception {
-        Util.runServer(IP, port, balance, configFile);
-        Util.runServer(IP2, port2, balance2, configFile);
+    @Test
+    public void FirstSurgeryDeliver() throws Exception {
+        Util.runNServers(IPN, portLow,Util.defaultBalance,config_p10_s2,2);
+        long value = 1;
+        EasyClient.makeTransfer(IP,port,IPReceiver,portReceiver,value);
+        // nodes 0 and 1 should make a swarm
 
-        EasyClient.virtualStop(IP2, port2, true);
+        //run addtional servers and split the network: 0+2;1+3
+        Util.runNServers(IPN, portLow+2,Util.defaultBalance,config_p10_s2,2);
 
-        long value = 3;
-        EasyClient.makeTransfer(IP,port,IP2,port2,value);
+        //set first zone
+        List<NodeID> blacklist1 = Arrays.asList(
+                new NodeID(IPN,portLow+1),
+                new NodeID(IPN,portLow+3)
+        );
+        EasyClient.setBlacklist(IPN,portLow+0, blacklist1);
+        EasyClient.setBlacklist(IPN,portLow+2, blacklist1);
+
+        //set second zone
+        List<NodeID> blacklist2 = Arrays.asList(
+                new NodeID(IPN,portLow+0),
+                new NodeID(IPN,portLow+2)
+        );
+        EasyClient.setBlacklist(IPN,portLow+1, blacklist2);
+        EasyClient.setBlacklist(IPN,portLow+3, blacklist2);
+
+        //wait to see what will happen
+        Thread.sleep(10000);
+
+        long balance = 400;
+        Util.runServer(IPReceiver,portReceiver,balanceReceiver,config_p10_s2);
+        Thread.sleep(5000);
+        //transfer should be delivered
+
+        //assert
+        long balanceRead = EasyClient.getBalance(IPReceiver, portReceiver);
+        assertEquals(balanceReceiver+value,balanceRead);
+
+        List<Swarm> swarmList = null;
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 0);
+        assertEquals(swarmList.size(),0);
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 1);
+        assertEquals(swarmList.size(),0);
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 2);
+        assertEquals(swarmList.size(),0);
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 3);
+        assertEquals(swarmList.size(),0);
+
+
     }
-
-    @Test()
-    public void VirtualStopStart() throws Exception {
-        Util.runServer(IP, port, balance, configFile);
-        Util.runServer(IP2, port2, balance2, configFile);
-
-        EasyClient.virtualStop(IP2,port2, true);
-        EasyClient.virtualStop(IP2,port2, false);
-
-        long value = 3;
-        EasyClient.makeTransfer(IP,port,IP2,port2,value);
-    }
-
-
 
 
 }
