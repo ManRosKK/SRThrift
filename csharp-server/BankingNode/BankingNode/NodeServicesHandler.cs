@@ -26,7 +26,6 @@ namespace BankingNode
         private SwarmManager swamManager = new SwarmManager();
         private BalanceManager balanceManager = new BalanceManager();
         private ClientManager clientManager = new ClientManager();
-        private List<SRBanking.ThriftInterface.NodeID> blackList = null;
         /*private TSocket connectToServer(NodeID node,out SRBanking.ThriftInterface.NodeService.Client client)
         {
             var transport = new TSocket(node.IP, node.Port);
@@ -256,9 +255,16 @@ namespace BankingNode
         }
         private void electionKingIteration(TransferID id)
         {
+            
             Swarm swarm = swamManager.GetSwarm(id);
-            swamManager.BeginElection(id);
+            try
+            {
+                logerr.Info("przed begin election w electionKingiteration");
+                swamManager.BeginElection(id);
+            }
+            catch { return; }
             List<NodeID> list = swarm.Members;
+            list.Sort();
             bool flag = true;
             NodeID we = ConfigLoader.Instance.ConfigGetSelfId();
             List<NodeID> toInform = new List<NodeID>();
@@ -270,7 +276,7 @@ namespace BankingNode
                     client.startSwarmElection(id.ToBase());
                     if (we > x)
                     {
-                        if (!client.electSwarmLeader(we.ToBase(), we.ToBase(), id.ToBase()))
+                        if (client.electSwarmLeader(we.ToBase(), we.ToBase(), id.ToBase()))
                         {
                             flag = false;
                             clientManager.ReturnClient(x);
@@ -515,31 +521,42 @@ namespace BankingNode
             {
                 throw new SRBanking.ThriftInterface.NotEnoughMoney();
             }
-            swamManager.GetSwarm(new TransferID(Transfer));
-            if (ConfigLoader.Instance.ConfigGetSelfId() < new NodeID(cadidate))
+            lock (swamManager.GetLockObject(new TransferID(Transfer)))
             {
-                electionKingIteration(new TransferID(Transfer));
+                swamManager.GetSwarm(new TransferID(Transfer));
+                if (ConfigLoader.Instance.ConfigGetSelfId() < new NodeID(cadidate))
+                {
+                    electionKingIteration(new TransferID(Transfer));
+                    return true;
+                }
                 return false;
             }
-            return true;
         }
 
         public void electionEndedSwarm(SRBanking.ThriftInterface.NodeID sender, SRBanking.ThriftInterface.Swarm swarm)
         {
+            logerr.Info("Ended elecetiob start " + new NodeID(sender));
             if (clientManager.IsOnBlackList(new NodeID(sender)))
             {
                 throw new SRBanking.ThriftInterface.NotEnoughMoney();
             }
             Swarm sw = new Swarm(swarm);
 
-            if (sw.Leader == ConfigLoader.Instance.ConfigGetSelfId())
+            logerr.Info("Ended elecetiob Middle " + sw);
+            if (swamManager.isInElectionState(sw.Transfer))
             {
-                swamManager.DirtySwarm(sw.Transfer);
-            }
-            else
-            {
-                swamManager.EndElection(sw.Transfer);
-                swamManager.UpdateSwarm(sw);
+                if (sw.Leader == ConfigLoader.Instance.ConfigGetSelfId())
+                {
+                    logerr.Info("Ended elecetiob Middle I am the king" + sw);
+                    swamManager.DirtySwarm(sw.Transfer);
+                }
+                else
+                {
+                    logerr.Info("Ended elecetiob update " + sw);
+                    swamManager.EndElection(sw.Transfer);
+                    swamManager.UpdateSwarm(sw);
+                    logerr.Info("Ended elecetiob finx:" + swamManager.GetSwarm(sw.Transfer));
+                }
             }
         }
 
@@ -662,12 +679,33 @@ namespace BankingNode
                 throw new SRBanking.ThriftInterface.NotSwarmMemeber();
             }*/
             logerr.Info("tiny pinged ");
-            swamManager.PingSwarm(new NodeID(leader),new TransferID( transfer));
+            lock (swamManager.GetLockObject(new TransferID(transfer)))
+            {
+                swamManager.PingSwarm(new NodeID(leader), new TransferID(transfer));
+            }
         }
 
         public void startSwarmElection(SRBanking.ThriftInterface.TransferID transfer)
         {
-            swamManager.BeginElection(new TransferID(transfer));
+            try
+            {
+                logerr.Info("start swarm election: " + transfer);
+                if (swamManager.isInElectionState(new TransferID(transfer))) return;
+                NodeID node = swamManager.GetSwarm(new TransferID(transfer)).Leader;
+                try
+                {
+                    SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(node);
+                    client.ping(ConfigLoader.Instance.ConfigGetSelfId().ToBase());
+                    clientManager.ReturnClient(node);
+                }
+                catch 
+                {
+
+                    clientManager.ReturnClient(node);
+                    swamManager.BeginElection(new TransferID(transfer));
+                }
+            }
+            catch { }
         }
 
         public void stop()

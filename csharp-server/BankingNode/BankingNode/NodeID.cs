@@ -81,6 +81,8 @@ namespace BankingNode
             if (node == null)
             {
                 internalObject = new SRBanking.ThriftInterface.NodeID();
+                internalObject.IP = "";
+                internalObject.Port = 0;
             }
             else
             {
@@ -109,7 +111,17 @@ namespace BankingNode
         }
         public override string ToString()
         {
-            return "[" + IP.ToString() + "|" + Port.ToString() + "]";
+            string txt = "[";
+            if (IP == null)
+            {
+                txt += "null";
+            }
+            else
+            {
+                txt += IP.ToString();
+            }
+            txt+="|" + Port.ToString() + "]";
+            return txt;
         }
 
     }

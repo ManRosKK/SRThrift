@@ -141,10 +141,17 @@ namespace BankingNode
         {
             string text = "swarm:";
             text += Transfer.ToString();
-            text+= "<"+Leader.ToString()+"> --->";
+            if(Leader == null)
+                text += "<null" +   "> --->";
+            else
+                text+= "<"+Leader.ToString()+"> --->";
             foreach(NodeID x in Members)
             {
-                text += x.ToString() + ",";
+                if (x == null)
+                {
+                    text += "null,";
+                }else
+                    text += x.ToString() + ",";
             }
             return text;
         }
