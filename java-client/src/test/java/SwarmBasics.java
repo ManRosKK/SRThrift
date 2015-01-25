@@ -47,7 +47,7 @@ public class SwarmBasics {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        int value = 5;
+         long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
 
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
@@ -66,7 +66,7 @@ public class SwarmBasics {
         Util.runServer(IP2, port2, balance2, configFile);
         Util.runServer(IP3, port3, balance3, configFile);
 
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
         assertEquals(swarmList.size(),1);
@@ -77,7 +77,7 @@ public class SwarmBasics {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         EasyClient.makeTransfer(IP2, port2, IPReceiver, portReceiver, value);
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
@@ -90,7 +90,7 @@ public class SwarmBasics {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
@@ -103,7 +103,7 @@ public class SwarmBasics {
         Util.runServer(IP, port, balance, configFileTooBig);
         Util.runServer(IP2, port2, balance2, configFileTooBig);
 
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
     }
 }

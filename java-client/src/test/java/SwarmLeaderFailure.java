@@ -55,7 +55,7 @@ public class SwarmLeaderFailure {
         Util.runServer(IP2, port2, balance2, configFile);
 
         //act
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         Util.killServerNoException(IP,port);
 
@@ -74,7 +74,7 @@ public class SwarmLeaderFailure {
         Util.runServer(IP2, port2, balance2, configFile);
 
         //act
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         Util.killServerNoException(IP,port);
 
@@ -108,7 +108,7 @@ public class SwarmLeaderFailure {
         Util.runServer(IP2, port2, balance2, configFile);
 
         //act
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         Util.killServerNoException(IP,port);
         Util.runServer(IP3, port3, balance3, configFile);
@@ -142,7 +142,7 @@ public class SwarmLeaderFailure {
         Util.runNServers(IPN,portLow,Util.defaultBalance,configBig,count);
 
         //act
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IPN, portLow+count/2, IPReceiver, portReceiver, value);
         Util.killServerNoException(IPN,portLow+count/2);
 

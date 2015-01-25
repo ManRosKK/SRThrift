@@ -25,6 +25,9 @@
         <module name="java-client" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="java-client" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 

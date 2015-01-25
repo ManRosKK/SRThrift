@@ -178,7 +178,7 @@ class ServerHandler(NodeService.Iface):
         address = receiver.IP
         port = receiver.port
         if(self.accountBalance >= value):
-            self.accountBalance -= value
+            pass
         else:
             raise NotEnoughMoney(moneyAvailable=self.accountBalance, moneyRequested=value)
         try:
@@ -412,6 +412,7 @@ class ServerHandler(NodeService.Iface):
             swarm = Swarm(transfer=transferData.transferID, leader=self.nodeID, members=neighbours[0:how_much]+[self.nodeID])
             self.mySwarms += [swarm]
             self.pendingTransfers += [transferData]
+            self.accountBalance -= transferData.value
             for i in xrange(how_much):
                 with AutoClient(neighbours[i].IP,neighbours[i].port) as client:
                     client.addToSwarm(self.nodeID,swarm,transferData)

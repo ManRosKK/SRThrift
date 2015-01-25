@@ -43,7 +43,7 @@ public class SwarmDeliver {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
 
         Util.runServer(IPReceiver, portReceiver, balanceReceiver, configFile);
@@ -75,7 +75,7 @@ public class SwarmDeliver {
         //arrange
         Util.runServer(IP, port, balance, configFileOne);
 
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
 
         Util.runServer(IPReceiver, portReceiver, balanceReceiver, configFileOne);
@@ -104,8 +104,8 @@ public class SwarmDeliver {
         Util.runServer(IP, port, balance, configFile);
         Util.runServer(IP2, port2, balance2, configFile);
 
-        int value1 = 10;
-        int value2 = 20;
+        long value1 = 10;
+        long value2 = 20;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value1);
         EasyClient.makeTransfer(IP2, port2, IPReceiver, portReceiver, value2);
 

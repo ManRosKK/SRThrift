@@ -94,7 +94,7 @@ public class IntegrationBasics {
                     Util.runServer(IP2, port2, balance2, configFile,language2);
 
                     //test
-                    int value = 5;
+                    long value = 5;
                     EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
 
                     List<Swarm> swarmList = EasyClient.getSwarmList(IP, port);
@@ -134,7 +134,7 @@ public class IntegrationBasics {
                     Util.runServer(IP2, port2, balance2, configFile);
 
                     //test
-                    int value = 5;
+                    long value = 5;
                     EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
 
                     Util.runServer(IPReceiver, portReceiver, balanceReceiver, configFile);
@@ -185,12 +185,14 @@ public class IntegrationBasics {
 
                 try {
                     //set up
+                    Reporter.log("\n\n----------------------\n",true);
                     Reporter.log("Connecting " + language1 + " and " + language2,true);
+                    Reporter.log("\n\n----------------------\n",true);
                     Util.runServer(IP, port, balance, configFile);
                     Util.runServer(IP2, port2, balance2, configFile);
 
                     //act
-                    int value = 5;
+                    long value = 5;
                     EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
                     Util.killServerNoException(IP,port);
 
@@ -202,7 +204,9 @@ public class IntegrationBasics {
                     assertEquals(swarmList.get(0).getLeader().getPort(),port2);
 
                     //report
+                    Reporter.log("\n\n----------------------\n",true);
                     Reporter.log("Test " + language1 + " and " + language2 + " succeeded!",true);
+                    Reporter.log("\n\n----------------------\n",true);
                 }
                 finally
                 {
@@ -238,12 +242,13 @@ public class IntegrationBasics {
                         Util.runNServers(IPN,portLow+lowerHalf+i,Util.defaultBalance,configBig,language2,upperHalf-i);
 
                         //act
-                        int value = 5;
+                        long value = 5;
                         EasyClient.makeTransfer(IPN, portLow+lowerHalf, IPReceiver, portReceiver, value);
+                        Thread.sleep(5000);
                         Util.killServerNoException(IPN,portLow+lowerHalf);
 
                         //wait for new leader election and adding to swarm
-                        Thread.sleep(15000);
+                        Thread.sleep(10000);
 
                         //assert
                         List<Swarm> swarmList = EasyClient.getSwarmList(IP2, portLow+count-1);

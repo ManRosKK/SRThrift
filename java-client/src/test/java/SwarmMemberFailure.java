@@ -49,7 +49,7 @@ public class SwarmMemberFailure {
         Util.runServer(IP2, port2, balance2, configFile);
 
         //act
-        int value = 5;
+        long value = 5;
         EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
         Util.runServer(IP3, port3, balance3, configFile);
         Util.killServerNoException(IP2,port2);
