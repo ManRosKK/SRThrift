@@ -285,7 +285,13 @@ namespace BankingNode
                     }
                     else
                     {
-                        toInform.Add(x);
+                        if (!toInform.Contains(x))
+                            toInform.Add(x);
+                        else
+                        {
+
+                            logerr.Info("Hey we've already add: " + x+" to list to inform");
+                        }
                     }
                     clientManager.ReturnClient(x);
 
@@ -300,12 +306,15 @@ namespace BankingNode
             {
                 swarm.Leader = we;
                 swarm.Members = toInform;
+                logerr.Info("We are suprised that we are the leader so: "+ swarm);
                 swamManager.EndElection(id);
                 swamManager.UpdateSwarm(swarm);
                 foreach (NodeID x in toInform)
                 {
                     try
                     {
+
+                        logerr.Info("Notice End to all:  " + x);
                         SRBanking.ThriftInterface.NodeService.Client client = clientManager.TakeClient(x);
                         client.electionEndedSwarm(we.ToBase(), swarm.ToBase());
                         clientManager.ReturnClient(x);
@@ -338,6 +347,11 @@ namespace BankingNode
                     clientManager.ReturnClient(swarm.Leader);
                 }
                 logerr.Info("Not Pinged " + id.ToString() + "|" + swarm.Leader.ToString());
+                if (swamManager.isInElectionState(id))
+                {
+                    logerr.Info("Already in Election state " + id.ToString() + "|" + swarm.Leader.ToString());
+                    return;
+                }
                 electionKingIteration(id);
                 logerr.Info("Koniec elekcji swarmu " + id.ToString() + "|" + swarm.Leader.ToString());
             }
@@ -719,7 +733,11 @@ namespace BankingNode
             {
                 throw new SRBanking.ThriftInterface.NotEnoughMoney();
             }
-            swamManager.UpdateSwarm(new Swarm(swarm));
+            /*lock (swamManager.GetLockObject(new TransferID( swarm.Transfer) ))
+            {*/
+                logerr.Info("UPDATE SWARM started: " + new NodeID(sender) + " " +new Swarm( swarm));
+                swamManager.UpdateSwarm(new Swarm(swarm));
+            /*}*/
         }
 
         public void setBlacklist(List<SRBanking.ThriftInterface.NodeID> blacklist)
