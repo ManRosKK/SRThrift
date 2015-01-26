@@ -1,20 +1,15 @@
 import SRBanking.ThriftInterface.*;
 import model.Account;
 import model.Configuration;
+import model.DeliverTask;
 import org.apache.thrift.TException;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.transport.TSocket;
-import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ConfigService;
+import service.ConnectionManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by sven on 2015-01-09.
@@ -27,6 +22,7 @@ public class ThriftServerHandler implements NodeService.Iface{
     private Account account;
     private long messageCounter;
     private ConfigService configService;
+    private ConnectionManager connectionManager;
 
     private Map<String, TransferData> pendingTransfers;
     private Map<String, Swarm> mySwarms;
@@ -38,18 +34,20 @@ public class ThriftServerHandler implements NodeService.Iface{
         this.nodeID = new NodeID();
         this.nodeID.setIP(ip);
         this.nodeID.setPort(port);
-
         this.messageCounter = 0;
+
+        connectionManager = new ConnectionManager();
 
         //key in both maps is transferID saved as string
         pendingTransfers = new HashMap<String, TransferData>();
         mySwarms = new HashMap<String, Swarm>();
     }
 
-    private void createSwarm(TransferData transferData) throws TException
+    private Swarm createSwarm(TransferData transferData) throws TException
     {
         Swarm swarm = new Swarm();
         List<NodeID> members = new ArrayList<NodeID>();
+        members.add(this.nodeID);
         List<NodeID> potentialMembers = configService.getShuffledNodes(config);
         for(NodeID node : potentialMembers)
         {
@@ -59,10 +57,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                 try
                 {
                     //open connection
-                    TTransport transport = new TSocket(node.getIP(), node.getPort());
-                    transport.open();
-                    TProtocol protocol = new TBinaryProtocol(transport);
-                    NodeService.Client client = new NodeService.Client(protocol);
+                    NodeService.Client client = connectionManager.getConnection(node);
 
                     log.info("Ping and add " + node.getIP() + ":" + node.getPort() + " to swarm");
 
@@ -74,7 +69,6 @@ public class ThriftServerHandler implements NodeService.Iface{
                     {
                         break;
                     }
-                    transport.close();
                 }
                 catch(TException e)
                 {
@@ -93,11 +87,19 @@ public class ThriftServerHandler implements NodeService.Iface{
         swarm.setLeader(this.nodeID);
         swarm.setMembers(members);
         mySwarms.put(account.makeTransferKey(transferData.getTransferID()),swarm);
+        return swarm;
+    }
+
+    private void createDeliverTask(NodeID destinationNode, TransferData transferData, Swarm swarm)
+    {
+        Timer timer = new Timer();
+        timer.schedule(new DeliverTask(this.nodeID, destinationNode, transferData, connectionManager, swarm), new Date(), config.getDeliveryInterval());
     }
 
     @Override
     public void ping(NodeID sender) throws TException {
         //intentionally empty
+        log.info(sender.getIP() + ":" + sender.getPort() + " has pinged me");
     }
 
     @Override
@@ -112,6 +114,13 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, TException {
+        //I added myself to the swarm earlier
+        if(this.nodeID.getIP().equals(sender.getIP())
+                && this.nodeID.getPort() == sender.getPort())
+        {
+            return;
+        }
+
         if(pendingTransfers.containsKey(account.makeTransferKey(transferData.getTransferID())))
         {
             log.error("Node " + this.nodeID.getIP() + ":" + this.nodeID.getPort() + " is already a swarm member");
@@ -123,7 +132,9 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void delSwarm(NodeID sender, TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, TException {
-
+        String key = account.makeTransferKey(swarmID);
+        pendingTransfers.remove(key);
+        mySwarms.remove(key);
     }
 
     @Override
@@ -145,19 +156,12 @@ public class ThriftServerHandler implements NodeService.Iface{
     public void deliverTransfer(NodeID sender, TransferData transfer) throws TException {
         if(!account.isTransferInHistory(transfer))
         {
-            account.setBalance(account.getBalance() + transfer.getValue());
-            account.addTransferToHistory(transfer);
+            account.takeTransfer(transfer);
         }
-        //TODO: Delete Swarm here.
     }
-
 
     @Override
     public void makeTransfer(NodeID receiver, long value) throws TException {
-        //get params for connection
-        String address = receiver.getIP();
-        int port = receiver.getPort();
-
         //set params
         TransferData transferData = new TransferData();
         TransferID transferID = new TransferID();
@@ -173,10 +177,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
             try {
                 //open connection
-                TTransport transport = new TSocket(address, port);
-                transport.open();
-                TProtocol protocol = new TBinaryProtocol(transport);
-                NodeService.Client client = new NodeService.Client(protocol);
+                NodeService.Client client = connectionManager.getConnection(receiver);
 
                 //set params
                 log.info("About to make transfer");
@@ -185,11 +186,10 @@ public class ThriftServerHandler implements NodeService.Iface{
                 log.info("Transfer delivered!");
 
                 log.info("Transfer complete");
-
-                transport.close();
             } catch (TTransportException e) {
                 pendingTransfers.put(account.makeTransferKey(transferData.getTransferID()), transferData);
-                createSwarm(transferData);
+                Swarm swarm = createSwarm(transferData);
+                createDeliverTask(receiver, transferData, swarm);
                 log.info("Transfer failed, added to pending transfers");
             }
 
@@ -234,6 +234,7 @@ public class ThriftServerHandler implements NodeService.Iface{
     @Override
     public void stop() throws TException {
         log.info("Server stopped");
+        connectionManager.cleanUp();
         System.exit(0);
     }
 }

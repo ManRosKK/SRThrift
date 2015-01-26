@@ -52,4 +52,10 @@ public class Account implements Serializable{
         String key = makeTransferKey(transferData.getTransferID());
         return transferHistory.containsKey(key);
     }
+
+    public synchronized void takeTransfer(TransferData transferData)
+    {
+        balance += transferData.getValue();
+        transferHistory.put(makeTransferKey(transferData.getTransferID()), transferData);
+    }
 }
