@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -95,6 +96,13 @@ public class ConfigService {
         }
 
         return nodes;
+    }
+
+    public List<NodeID> getShuffledNodes(Configuration config)
+    {
+        List<NodeID> retList = new ArrayList<NodeID>(config.getKnownNodes());
+        Collections.shuffle(retList);
+        return retList;
     }
 
 }

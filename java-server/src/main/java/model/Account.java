@@ -33,10 +33,9 @@ public class Account implements Serializable{
         return balance > transferMoney;
     }
 
-    private String makeTransferKey(TransferData transferData)
+    public String makeTransferKey(TransferID transferID)
     {
-        TransferID tmpTransferID = transferData.getTransferID();
-        return tmpTransferID.getSender().getIP() + tmpTransferID.getSender().getPort() + tmpTransferID.getCounter();
+        return transferID.getSender().getIP() + transferID.getSender().getPort() + transferID.getCounter();
     }
 
     public List<TransferData> getTransferHistory() {
@@ -45,12 +44,12 @@ public class Account implements Serializable{
 
     public void addTransferToHistory(TransferData transferData)
     {
-        transferHistory.put(makeTransferKey(transferData), transferData);
+        transferHistory.put(makeTransferKey(transferData.getTransferID()), transferData);
     }
 
     public boolean isTransferInHistory(TransferData transferData)
     {
-        String key = makeTransferKey(transferData);
+        String key = makeTransferKey(transferData.getTransferID());
         return transferHistory.containsKey(key);
     }
 }
