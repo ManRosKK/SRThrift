@@ -21,15 +21,16 @@ public class ConfigService {
 
     private static Logger log = LoggerFactory.getLogger(ConfigService.class);
     private String path;
+    Configuration config;
 
     public ConfigService(String path)
     {
         this.path = path;
     }
 
-    public Configuration readConfiguration()
+    public void readConfiguration()
     {
-        Configuration config = new Configuration();
+        config = new Configuration();
 
         Ini ini = null;
 
@@ -57,8 +58,6 @@ public class ConfigService {
             log.error("Can't parse one of the number arguments");
             System.exit(1);
         }
-
-        return config;
     }
 
     private List<NodeID> processNodes(Profile.Section section)
@@ -98,11 +97,17 @@ public class ConfigService {
         return nodes;
     }
 
-    public List<NodeID> getShuffledNodes(Configuration config)
+    public List<NodeID> getShuffledNodes()
     {
         List<NodeID> retList = new ArrayList<NodeID>(config.getKnownNodes());
         Collections.shuffle(retList);
         return retList;
     }
+
+    public Configuration getConfig()
+    {
+        return config;
+    }
+
 
 }

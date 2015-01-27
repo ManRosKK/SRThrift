@@ -2,6 +2,7 @@ package service;
 
 import SRBanking.ThriftInterface.NodeID;
 import SRBanking.ThriftInterface.NodeService;
+import model.Connection;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -18,11 +19,11 @@ import java.util.Map;
  */
 public class ConnectionManager {
     private static Logger log = LoggerFactory.getLogger(ConnectionManager.class);
-    private Map<String, TTransport> connections;
+    private Map<String, Connection> connections;
 
     public ConnectionManager()
     {
-        connections = new HashMap<String, TTransport>();
+        connections = new HashMap<String, Connection>();
     }
 
     private String makeKey(NodeID nodeID)
@@ -32,29 +33,44 @@ public class ConnectionManager {
 
     public synchronized NodeService.Client getConnection(NodeID nodeID) throws TException
     {
-        TTransport transport = null;
+        NodeService.Client client = null;
         String key = makeKey(nodeID);
         if(connections.containsKey(key))
         {
-            transport = connections.get(key);
+            Connection connection = connections.get(key);
+            TTransport transport = connection.getTransport();
+            if(!transport.isOpen())
+            {
+                TProtocol protocol = new TBinaryProtocol(transport);
+                client = new NodeService.Client(protocol);
+                connection.setClient(client);
+                transport.open();
+            }
+            else
+            {
+                client = connection.getClient();
+            }
         }
         else
         {
             log.info("Opening connection to " + key);
-            transport = new TSocket(nodeID.getIP(), nodeID.getPort());
+            TTransport transport = new TSocket(nodeID.getIP(), nodeID.getPort());
+            TProtocol protocol = new TBinaryProtocol(transport);
+            client = new NodeService.Client(protocol);
+            Connection connection = new Connection(client, transport);
+            connections.put(key, connection);
             transport.open();
-            connections.put(key, transport);
         }
-        TProtocol protocol = new TBinaryProtocol(transport);
-        NodeService.Client client = new NodeService.Client(protocol);
+
         return client;
     }
 
     public synchronized void cleanUp()
     {
-        for(TTransport transport: connections.values())
+        for(Connection connection: connections.values())
         {
-            transport.close();
+            connection.getTransport().close();
         }
+        connections.clear();
     }
 }
