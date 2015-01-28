@@ -8,6 +8,7 @@ import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ConnectionManager;
+import service.SwarmManager;
 
 import java.util.TimerTask;
 
@@ -22,15 +23,21 @@ public class DeliverTask extends TimerTask {
     private NodeID destinationNode;
     private TransferData transferData;
     private ConnectionManager connectionManager;
-    private Swarm swarm;
+    private SwarmManager swarmManager;
 
-    public DeliverTask(NodeID sender, NodeID destinationNode, TransferData transferData, ConnectionManager connectionManager, Swarm swarm)
+    public DeliverTask(NodeID sender, NodeID destinationNode, TransferData transferData, ConnectionManager connectionManager, SwarmManager swarmManager)
     {
         this.sender = sender;
         this.destinationNode = destinationNode;
         this.transferData = transferData;
         this.connectionManager = connectionManager;
-        this.swarm = swarm;
+        this.swarmManager = swarmManager;
+    }
+
+
+    private String makeKey()
+    {
+        return transferData.transferID.getSender().getIP() + transferData.transferID.getSender().getPort() + transferData.transferID.getCounter();
     }
 
     @Override
@@ -43,12 +50,12 @@ public class DeliverTask extends TimerTask {
             Connection connection = connectionManager.getConnection(destinationNode);
             NodeService.Client client = connection.getClient();
             client.deliverTransfer(sender, transferData);
-            log.info("Transfer " +  transferData.getTransferID().getSender().getIP() + " "
+            log.info("Transfer " + transferData.getTransferID().getSender().getIP() + " "
                     + transferData.getTransferID().getSender().getPort() + " "
                     + transferData.getTransferID().getCounter() + " delivered");
             connectionManager.closeConnection(connection);
             //if we succeeded we kill the swarm
-            for(NodeID member: swarm.getMembers())
+            for(NodeID member: swarmManager.getSwarm(makeKey()).getMembers())
             {
                 connection = connectionManager.getConnection(member);
                 client = connection.getClient();

@@ -104,10 +104,10 @@ public class ThriftServerHandler implements NodeService.Iface{
         return swarm;
     }
 
-    private void createDeliverTask(NodeID destinationNode, TransferData transferData, Swarm swarm)
+    private void createDeliverTask(NodeID destinationNode, TransferData transferData)
     {
         Timer timer = new Timer();
-        timer.schedule(new DeliverTask(this.nodeID, destinationNode, transferData, connectionManager, swarm), new Date(), configService.getConfig().getDeliveryInterval());
+        timer.schedule(new DeliverTask(this.nodeID, destinationNode, transferData, connectionManager, swarmManager), new Date(), configService.getConfig().getDeliveryInterval());
     }
 
     private void createPingSwarmTask(TransferData transferData)
@@ -235,7 +235,7 @@ public class ThriftServerHandler implements NodeService.Iface{
             } catch (TTransportException e) {
                 swarmManager.updatePendingTransfers(account.makeTransferKey(transferData.getTransferID()), transferData);
                 Swarm swarm = createSwarm(transferData);
-                createDeliverTask(receiver, transferData, swarm);
+                createDeliverTask(receiver, transferData);
                 createPingSwarmTask(transferData);
                 log.info("Transfer failed, added to pending transfers");
             }
