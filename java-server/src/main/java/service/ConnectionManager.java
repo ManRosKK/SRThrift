@@ -19,11 +19,9 @@ import java.util.Map;
  */
 public class ConnectionManager {
     private static Logger log = LoggerFactory.getLogger(ConnectionManager.class);
-    private Map<String, Connection> connections;
 
     public ConnectionManager()
     {
-        connections = new HashMap<String, Connection>();
     }
 
     private String makeKey(NodeID nodeID)
@@ -31,48 +29,21 @@ public class ConnectionManager {
         return nodeID.getIP() + ":" + nodeID.getPort();
     }
 
-    public synchronized NodeService.Client getConnection(NodeID nodeID) throws TException
+    public synchronized Connection getConnection(NodeID nodeID) throws TException
     {
         NodeService.Client client = null;
         String key = makeKey(nodeID);
-        if(connections.containsKey(key))
-        {
-            Connection connection = connections.get(key);
-            TTransport transport = connection.getTransport();
-            if(!transport.isOpen())
-            {
-                log.info("Connection to "  + key + " closed. Opening new one.");
-                TProtocol protocol = new TBinaryProtocol(transport);
-                client = new NodeService.Client(protocol);
-                connection.setClient(client);
-                transport.open();
-            }
-            else
-            {
-                log.info("Client for " + key + " returned.");
-                client = connection.getClient();
-            }
-        }
-        else
-        {
-            log.info("Opening connection to " + key);
-            TTransport transport = new TSocket(nodeID.getIP(), nodeID.getPort());
-            TProtocol protocol = new TBinaryProtocol(transport);
-            client = new NodeService.Client(protocol);
-            Connection connection = new Connection(client, transport);
-            connections.put(key, connection);
-            transport.open();
-        }
-
-        return client;
+        log.info("Opening connection to " + key);
+        TTransport transport = new TSocket(nodeID.getIP(), nodeID.getPort());
+        TProtocol protocol = new TBinaryProtocol(transport);
+        client = new NodeService.Client(protocol);
+        Connection connection = new Connection(client, transport);
+        transport.open();
+        return connection;
     }
 
-    public synchronized void cleanUp()
+    public synchronized void closeConnection(Connection connection)
     {
-        for(Connection connection: connections.values())
-        {
-            connection.getTransport().close();
-        }
-        connections.clear();
+        connection.getTransport().close();
     }
 }

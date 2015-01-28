@@ -40,16 +40,20 @@ public class DeliverTask extends TimerTask {
             log.info("Trying to deliver transfer " +  transferData.getTransferID().getSender().getIP() + " "
                     + transferData.getTransferID().getSender().getPort() + " "
                     + transferData.getTransferID().getCounter());
-            NodeService.Client client = connectionManager.getConnection(destinationNode);
+            Connection connection = connectionManager.getConnection(destinationNode);
+            NodeService.Client client = connection.getClient();
             client.deliverTransfer(sender, transferData);
             log.info("Transfer " +  transferData.getTransferID().getSender().getIP() + " "
                     + transferData.getTransferID().getSender().getPort() + " "
                     + transferData.getTransferID().getCounter() + " delivered");
+            connectionManager.closeConnection(connection);
             //if we succeeded we kill the swarm
             for(NodeID member: swarm.getMembers())
             {
-                client = connectionManager.getConnection(member);
+                connection = connectionManager.getConnection(member);
+                client = connection.getClient();
                 client.delSwarm(sender, transferData.transferID);
+                connectionManager.closeConnection(connection);
             }
 
             //stop the timer

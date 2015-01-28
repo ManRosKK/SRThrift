@@ -1,8 +1,5 @@
 import SRBanking.ThriftInterface.*;
-import model.Account;
-import model.Configuration;
-import model.DeliverTask;
-import model.PingMembersTask;
+import model.*;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
@@ -54,13 +51,15 @@ public class ThriftServerHandler implements NodeService.Iface{
                 try
                 {
                     //open connection
-                    NodeService.Client client = connectionManager.getConnection(node);
+                    Connection connection = connectionManager.getConnection(node);
+                    NodeService.Client client = connection.getClient();
 
                     log.info("Ping and add " + node.getIP() + ":" + node.getPort() + " to swarm");
 
                     client.ping(this.nodeID);
                     members.add(node);
                     log.info("Added " + node.getIP() + ":" + node.getPort() + " to swarm");
+                    connectionManager.closeConnection(connection);
                     if(members.size() == config.getSwarmSize())
                     {
                         break;
@@ -88,8 +87,10 @@ public class ThriftServerHandler implements NodeService.Iface{
         {
             try
             {
-                NodeService.Client client = connectionManager.getConnection(member);
+                Connection connection = connectionManager.getConnection(member);
+                NodeService.Client client = connection.getClient();
                 client.addToSwarm(this.nodeID, swarm, transferData);
+                connectionManager.closeConnection(connection);
             }
             catch(TException e)
             {
@@ -221,14 +222,15 @@ public class ThriftServerHandler implements NodeService.Iface{
 
             try {
                 //open connection
-                NodeService.Client client = connectionManager.getConnection(receiver);
+                Connection connection = connectionManager.getConnection(receiver);
+                NodeService.Client client = connection.getClient();
 
                 //set params
                 log.info("About to make transfer");
 
                 client.deliverTransfer(this.nodeID, transferData);
                 log.info("Transfer delivered!");
-
+                connectionManager.closeConnection(connection);
                 log.info("Transfer complete");
             } catch (TTransportException e) {
                 swarmManager.updatePendingTransfers(account.makeTransferKey(transferData.getTransferID()), transferData);
@@ -279,7 +281,6 @@ public class ThriftServerHandler implements NodeService.Iface{
     @Override
     public void stop() throws TException {
         log.info("Server " + this.nodeID.getIP() + ":" + this.nodeID.getPort() + " stopped");
-        connectionManager.cleanUp();
         System.exit(0);
     }
 }

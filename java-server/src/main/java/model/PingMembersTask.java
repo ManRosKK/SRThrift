@@ -41,13 +41,15 @@ public class PingMembersTask extends TimerTask{
                 try
                 {
                     //open connection
-                    NodeService.Client client = connectionManager.getConnection(node);
+                    Connection connection = connectionManager.getConnection(node);
+                    NodeService.Client client = connection.getClient();
 
                     log.info("Ping and add " + node.getIP() + ":" + node.getPort() + " to swarm after member death");
 
                     client.ping(this.sender);
                     swarmManager.addMemberToSwarm(key, node);
                     client.addToSwarm(this.sender, swarmManager.getSwarm(key), swarmManager.getPendingTransfer(key));
+                    connectionManager.closeConnection(connection);
                     log.info("Added " + node.getIP() + ":" + node.getPort() + " to swarm after member death");
                     if( swarmManager.getSwarm(key).getMembers().size() == config.getSwarmSize())
                     {
@@ -68,8 +70,10 @@ public class PingMembersTask extends TimerTask{
         {
             try
             {
-                NodeService.Client client = connectionManager.getConnection(member);
+                Connection connection = connectionManager.getConnection(member);
+                NodeService.Client client = connection.getClient();
                 client.updateSwarmMembers(sender, swarm);
+                connectionManager.closeConnection(connection);
             }
             catch(TException e)
             {
@@ -88,8 +92,10 @@ public class PingMembersTask extends TimerTask{
         {
             try
             {
-                NodeService.Client client = connectionManager.getConnection(testNode);
+                Connection connection = connectionManager.getConnection(testNode);
+                NodeService.Client client = connection.getClient();
                 client.pingSwarm(sender, transferData.getTransferID());
+                connectionManager.closeConnection(connection);
             }
             catch(TException e)
             {
