@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ConfigService;
 import service.ConnectionManager;
+import service.SwarmManager;
 
 import java.util.*;
 
@@ -23,10 +24,7 @@ public class ThriftServerHandler implements NodeService.Iface{
     private long messageCounter;
     private ConfigService configService;
     private ConnectionManager connectionManager;
-
-    private Map<String, TransferData> pendingTransfers;
-    private Map<String, Swarm> mySwarms;
-    private Map<String, Timer> pingTimers;
+    private SwarmManager swarmManager;
 
     public ThriftServerHandler(String ip, int port, long accountBalance, String iniPath) {
         account = new Account(accountBalance);
@@ -38,11 +36,7 @@ public class ThriftServerHandler implements NodeService.Iface{
         this.messageCounter = 0;
 
         connectionManager = new ConnectionManager();
-
-        //key in both maps is transferID saved as string
-        pendingTransfers = new HashMap<String, TransferData>();
-        mySwarms = new HashMap<String, Swarm>();
-        pingTimers = new HashMap<String, Timer>();
+        swarmManager = new SwarmManager();
     }
 
     private Swarm createSwarm(TransferData transferData) throws TException
@@ -100,11 +94,12 @@ public class ThriftServerHandler implements NodeService.Iface{
             catch(TException e)
             {
                 log.error("Man down after pinged - I can't make a swarm " + member.getIP() + ":" + member.getPort());
+                log.error(e.getMessage());
                 throw new NotEnoughMembersToMakeTransfer(members.size(), config.getSwarmSize());
             }
         }
         log.info("Swarm created.");
-        mySwarms.put(account.makeTransferKey(transferData.getTransferID()),swarm);
+        swarmManager.updateSwarm(account.makeTransferKey(transferData.getTransferID()),swarm);
         return swarm;
     }
 
@@ -114,11 +109,12 @@ public class ThriftServerHandler implements NodeService.Iface{
         timer.schedule(new DeliverTask(this.nodeID, destinationNode, transferData, connectionManager, swarm), new Date(), configService.getConfig().getDeliveryInterval());
     }
 
-    private void createPingSwarmTask(TransferData transferData, Swarm swarm)
+    private void createPingSwarmTask(TransferData transferData)
     {
         Timer timer = new Timer();
-        timer.schedule(new PingMembersTask(this.nodeID, transferData, connectionManager, swarm, configService), new Date(), configService.getConfig().getSwarmPingInterval());
-        pingTimers.put(account.makeTransferKey(transferData.getTransferID()), timer);
+        String key = account.makeTransferKey(transferData.getTransferID());
+        timer.schedule(new PingMembersTask(key, this.nodeID, connectionManager, configService, swarmManager), new Date(), configService.getConfig().getSwarmPingInterval());
+        swarmManager.updateTimer(key, timer);
     }
 
     @Override
@@ -130,8 +126,7 @@ public class ThriftServerHandler implements NodeService.Iface{
     @Override
     public void pingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, TException {
         String key = account.makeTransferKey(transfer);
-        if(!pendingTransfers.containsKey(key)
-                || !mySwarms.containsKey(key))
+        if(swarmManager.getPendingTransfer(key) == null || swarmManager.getSwarm(key) == null)
         {
             throw new NotSwarmMemeber(leader, transfer);
         }
@@ -141,12 +136,11 @@ public class ThriftServerHandler implements NodeService.Iface{
     @Override
     public void updateSwarmMembers(NodeID sender, Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, TException {
         String key = account.makeTransferKey(swarm.getTransfer());
-        if(!pendingTransfers.containsKey(key)
-                || !mySwarms.containsKey(key))
+        if(swarmManager.getPendingTransfer(key) == null || swarmManager.getSwarm(key) == null)
         {
             throw new NotSwarmMemeber(sender, swarm.getTransfer());
         }
-        mySwarms.put(key, swarm);
+        swarmManager.updateSwarm(key, swarm);
     }
 
     @Override
@@ -157,40 +151,33 @@ public class ThriftServerHandler implements NodeService.Iface{
         {
             return;
         }
-        if(pendingTransfers.containsKey(account.makeTransferKey(transferData.getTransferID())))
+        String key = account.makeTransferKey(transferData.getTransferID());
+        if(swarmManager.getPendingTransfer(key) != null)
         {
             log.error("Node " + this.nodeID.getIP() + ":" + this.nodeID.getPort() + " is already a swarm member");
             throw new AlreadySwarmMemeber(this.nodeID, swarm.getLeader(), swarm.getTransfer());
         }
-        pendingTransfers.put(account.makeTransferKey(transferData.getTransferID()), transferData);
-        mySwarms.put(account.makeTransferKey(transferData.getTransferID()), swarm);
+        swarmManager.updatePendingTransfers(key, transferData);
+        swarmManager.updateSwarm(key, swarm);
         log.info("I (" + this.nodeID.getIP() + ":" + this.nodeID.getPort() + ") am a swarm member now");
     }
 
     @Override
     public void delSwarm(NodeID sender, TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, TException {
         String key = account.makeTransferKey(swarmID);
-        if(!pendingTransfers.containsKey(key)
-                || !mySwarms.containsKey(key))
+        if(swarmManager.getPendingTransfer(key) == null || swarmManager.getSwarm(key) == null)
         {
             throw new NotSwarmMemeber(sender, swarmID);
         }
-        Swarm swarm = mySwarms.get(key);
+        Swarm swarm = swarmManager.getSwarm(key);
         if(!swarm.getLeader().getIP().equals(sender.getIP())
                 || swarm.getLeader().getPort() != sender.getPort())
         {
             throw new WrongSwarmLeader(this.nodeID, sender, swarmID);
         }
-        pendingTransfers.remove(key);
-        mySwarms.remove(key);
-        Timer timer = pingTimers.get(key);
-        if(timer != null)
-        {
-            log.info("Killing a timer for transfer " + key);
-            timer.cancel();
-            timer.purge();
-            pingTimers.remove(key);
-        }
+        swarmManager.deliverTransfer(key);
+        swarmManager.killSwarm(key);
+        swarmManager.stopAndKillTimer(key);
     }
 
     @Override
@@ -244,10 +231,10 @@ public class ThriftServerHandler implements NodeService.Iface{
 
                 log.info("Transfer complete");
             } catch (TTransportException e) {
-                pendingTransfers.put(account.makeTransferKey(transferData.getTransferID()), transferData);
+                swarmManager.updatePendingTransfers(account.makeTransferKey(transferData.getTransferID()), transferData);
                 Swarm swarm = createSwarm(transferData);
                 createDeliverTask(receiver, transferData, swarm);
-                createPingSwarmTask(transferData, swarm);
+                createPingSwarmTask(transferData);
                 log.info("Transfer failed, added to pending transfers");
             }
 
@@ -266,7 +253,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public List<Swarm> getSwarmList() throws TException {
-        return new ArrayList<Swarm>(mySwarms.values());
+        return swarmManager.getSwarms();
     }
 
     @Override

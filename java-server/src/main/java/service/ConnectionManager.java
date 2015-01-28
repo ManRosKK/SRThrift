@@ -41,6 +41,7 @@ public class ConnectionManager {
             TTransport transport = connection.getTransport();
             if(!transport.isOpen())
             {
+                log.info("Connection to "  + key + " closed. Opening new one.");
                 TProtocol protocol = new TBinaryProtocol(transport);
                 client = new NodeService.Client(protocol);
                 connection.setClient(client);
@@ -48,6 +49,7 @@ public class ConnectionManager {
             }
             else
             {
+                log.info("Client for " + key + " returned.");
                 client = connection.getClient();
             }
         }

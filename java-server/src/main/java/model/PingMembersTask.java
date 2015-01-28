@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ConfigService;
 import service.ConnectionManager;
+import service.SwarmManager;
 
 import java.util.List;
 import java.util.TimerTask;
@@ -18,17 +19,17 @@ public class PingMembersTask extends TimerTask{
     private static Logger log = LoggerFactory.getLogger(PingMembersTask.class);
 
     private NodeID sender;
-    private TransferData transferData;
     private ConnectionManager connectionManager;
-    private Swarm swarm;
     private ConfigService configService;
+    private SwarmManager swarmManager;
+    private String key;
 
-    public PingMembersTask(NodeID sender, TransferData transferData, ConnectionManager connectionManager, Swarm swarm, ConfigService configService) {
+    public PingMembersTask(String key, NodeID sender, ConnectionManager connectionManager, ConfigService configService, SwarmManager swarmManager) {
+        this.key = key;
         this.sender = sender;
-        this.transferData = transferData;
         this.connectionManager = connectionManager;
-        this.swarm = swarm;
         this.configService = configService;
+        this.swarmManager = swarmManager;
     }
 
     private void addSwarmMember()
@@ -45,10 +46,10 @@ public class PingMembersTask extends TimerTask{
                     log.info("Ping and add " + node.getIP() + ":" + node.getPort() + " to swarm after member death");
 
                     client.ping(this.sender);
-                    client.addToSwarm(this.sender, swarm, transferData);
-                    swarm.addToMembers(node);
+                    swarmManager.addMemberToSwarm(key, node);
+                    client.addToSwarm(this.sender, swarmManager.getSwarm(key), swarmManager.getPendingTransfer(key));
                     log.info("Added " + node.getIP() + ":" + node.getPort() + " to swarm after member death");
-                    if(swarm.getMembers().size() == config.getSwarmSize())
+                    if( swarmManager.getSwarm(key).getMembers().size() == config.getSwarmSize())
                     {
                         break;
                     }
@@ -62,7 +63,8 @@ public class PingMembersTask extends TimerTask{
 
     private void updateMembers()
     {
-        for(NodeID member: swarm.getMembers())
+        Swarm swarm = swarmManager.getSwarm(key);
+        for(NodeID member:  swarm.getMembers())
         {
             try
             {
@@ -79,21 +81,37 @@ public class PingMembersTask extends TimerTask{
     @Override
     public void run()
     {
-        //ping all the swarm members
-        for(NodeID member: swarm.getMembers())
+        Swarm swarm = swarmManager.getSwarm(key);
+        TransferData transferData = swarmManager.getPendingTransfer(key);
+        NodeID testNode = swarm.getMembers().size() > 0 ? swarm.getMembers().get(0) : null;
+        if(testNode != null)
         {
-            //log.info("Just pinging " + member.getIP() + ":" + member.getPort());
             try
             {
-                NodeService.Client client = connectionManager.getConnection(member);
-                //client.pingSwarm(sender, transferData.getTransferID());
+                NodeService.Client client = connectionManager.getConnection(testNode);
+                client.pingSwarm(sender, transferData.getTransferID());
             }
             catch(TException e)
             {
-//                swarm.getMembers().remove(member);
-//                addSwarmMember();
-//                updateMembers();
+
             }
+
         }
+        //ping all the swarm members
+//        for(NodeID member: swarm.getMembers())
+//        {
+//            //log.info("Just pinging " + member.getIP() + ":" + member.getPort());
+//            try
+//            {
+//                NodeService.Client client = connectionManager.getConnection(member);
+//                //client.pingSwarm(sender, transferData.getTransferID());
+//            }
+//            catch(TException e)
+//            {
+////                swarm.getMembers().remove(member);
+////                addSwarmMember();
+////                updateMembers();
+//            }
+//        }
     }
 }
