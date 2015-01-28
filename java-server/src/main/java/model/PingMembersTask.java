@@ -66,7 +66,7 @@ public class PingMembersTask extends TimerTask{
     private void updateMembers()
     {
         Swarm swarm = swarmManager.getSwarm(key);
-        for(NodeID member:  swarm.getMembers())
+        for(NodeID member: swarm.getMembers())
         {
             try
             {
@@ -87,37 +87,23 @@ public class PingMembersTask extends TimerTask{
     {
         Swarm swarm = swarmManager.getSwarm(key);
         TransferData transferData = swarmManager.getPendingTransfer(key);
-        NodeID testNode = swarm.getMembers().size() > 0 ? swarm.getMembers().get(0) : null;
-        if(testNode != null)
+        //ping all the swarm members
+        for(NodeID member: swarm.getMembers())
         {
+            //log.info("Just pinging " + member.getIP() + ":" + member.getPort());
             try
             {
-                Connection connection = connectionManager.getConnection(testNode);
+                Connection connection = connectionManager.getConnection(member);
                 NodeService.Client client = connection.getClient();
                 client.pingSwarm(sender, transferData.getTransferID());
                 connectionManager.closeConnection(connection);
             }
             catch(TException e)
             {
-
+                swarmManager.removeMemberFromSwarm(key, member);
+                addSwarmMember();
+                updateMembers();
             }
-
         }
-        //ping all the swarm members
-//        for(NodeID member: swarm.getMembers())
-//        {
-//            //log.info("Just pinging " + member.getIP() + ":" + member.getPort());
-//            try
-//            {
-//                NodeService.Client client = connectionManager.getConnection(member);
-//                //client.pingSwarm(sender, transferData.getTransferID());
-//            }
-//            catch(TException e)
-//            {
-////                swarm.getMembers().remove(member);
-////                addSwarmMember();
-////                updateMembers();
-//            }
-//        }
     }
 }
