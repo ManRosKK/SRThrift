@@ -8,6 +8,7 @@ import service.ConfigService;
 import service.ConnectionManager;
 import service.SwarmManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -87,6 +88,7 @@ public class PingMembersTask extends TimerTask{
     {
         Swarm swarm = swarmManager.getSwarm(key);
         TransferData transferData = swarmManager.getPendingTransfer(key);
+        List<NodeID> membersToRemove = new ArrayList<NodeID>();
         //ping all the swarm members
         for(NodeID member: swarm.getMembers())
         {
@@ -100,10 +102,16 @@ public class PingMembersTask extends TimerTask{
             }
             catch(TException e)
             {
-                swarmManager.removeMemberFromSwarm(key, member);
-                addSwarmMember();
-                updateMembers();
+                membersToRemove.add(member);
             }
         }
+
+        for(NodeID memberToRemove :membersToRemove)
+        {
+            swarmManager.removeMemberFromSwarm(key, memberToRemove);
+            addSwarmMember();
+        }
+        //I can do it outside the loop - once is enough
+        updateMembers();
     }
 }

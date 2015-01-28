@@ -87,10 +87,15 @@ public class ThriftServerHandler implements NodeService.Iface{
         {
             try
             {
-                Connection connection = connectionManager.getConnection(member);
-                NodeService.Client client = connection.getClient();
-                client.addToSwarm(this.nodeID, swarm, transferData);
-                connectionManager.closeConnection(connection);
+                //I don't have to check if I'm alive - I just add myself to the swarm
+                if(!member.equals(this.nodeID))
+                {
+                    Connection connection = connectionManager.getConnection(member);
+                    NodeService.Client client = connection.getClient();
+                    client.addToSwarm(this.nodeID, swarm, transferData);
+                    connectionManager.closeConnection(connection);
+                }
+
             }
             catch(TException e)
             {
@@ -147,11 +152,6 @@ public class ThriftServerHandler implements NodeService.Iface{
     @Override
     public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, TException {
         //I added myself to the swarm earlier
-        if(sender == null || (this.nodeID.getIP().equals(sender.getIP())
-                && this.nodeID.getPort() == sender.getPort()))
-        {
-            return;
-        }
         String key = account.makeTransferKey(transferData.getTransferID());
         if(swarmManager.getPendingTransfer(key) != null)
         {
