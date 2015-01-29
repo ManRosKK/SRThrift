@@ -185,6 +185,7 @@ class ServerHandler(NodeService.Iface):
             with AutoClient(address,port) as client:
                 logging.info(("port open"))
                 client.deliverTransfer(self.nodeID,transferData)
+                self.accountBalance -= transferData.value
                 logging.info(("transfer send"))
         except:
             logging.info(("transfer not made",sys.exc_info()[0]))

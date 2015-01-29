@@ -130,8 +130,8 @@ public class IntegrationBasics {
                 try {
                     //set up
                     Reporter.log("Connecting " + language1 + " and " + language2,true);
-                    Util.runServer(IP, port, balance, configFile);
-                    Util.runServer(IP2, port2, balance2, configFile);
+                    Util.runServer(IP, port, balance, configFile,language1);
+                    Util.runServer(IP2, port2, balance2, configFile,language2);
 
                     //test
                     long value = 5;
@@ -168,6 +168,7 @@ public class IntegrationBasics {
                     //tear down
                     Util.killServerNoException(IP, port);
                     Util.killServerNoException(IP2, port2);
+                    Util.killServerNoException(IPReceiver, portReceiver);
                 }
             }
 
@@ -188,15 +189,15 @@ public class IntegrationBasics {
                     Reporter.log("\n\n----------------------\n",true);
                     Reporter.log("Connecting " + language1 + " and " + language2,true);
                     Reporter.log("\n\n----------------------\n",true);
-                    Util.runServer(IP, port, balance, configFile);
-                    Util.runServer(IP2, port2, balance2, configFile);
+                    Util.runServer(IP, port, balance, configFile,language1);
+                    Util.runServer(IP2, port2, balance2, configFile,language2);
 
                     //act
                     long value = 5;
                     EasyClient.makeTransfer(IP, port, IPReceiver, portReceiver, value);
                     Util.killServerNoException(IP,port);
 
-                    Thread.sleep(5000);
+                    Thread.sleep(10000);
 
                     //assert
                     List<Swarm> swarmList = EasyClient.getSwarmList(IP2, port2);
