@@ -41,6 +41,7 @@ public class PingMembersTask extends TimerTask{
         {
                 try
                 {
+                    connectionManager.checkIfNodeIsAlive(node);
                     //open connection
                     Connection connection = connectionManager.getConnection(node);
                     NodeService.Client client = connection.getClient();
@@ -72,6 +73,7 @@ public class PingMembersTask extends TimerTask{
         {
             try
             {
+                connectionManager.checkIfNodeIsAlive(member);
                 Connection connection = connectionManager.getConnection(member);
                 NodeService.Client client = connection.getClient();
                 client.updateSwarmMembers(sender, swarm);
@@ -89,6 +91,12 @@ public class PingMembersTask extends TimerTask{
     {
         Swarm swarm = swarmManager.getSwarm(key);
         TransferData transferData = swarmManager.getPendingTransfer(key);
+        if(transferData == null)
+        {
+            //swarm has been killed
+            cancel();
+            return;
+        }
         List<NodeID> membersToRemove = new ArrayList<NodeID>();
         //ping all the swarm members
         log.info("I'm going to ping my members");
@@ -96,6 +104,7 @@ public class PingMembersTask extends TimerTask{
         {
             try
             {
+                connectionManager.checkIfNodeIsAlive(member);
                 Connection connection = connectionManager.getConnection(member);
                 NodeService.Client client = connection.getClient();
                 client.pingSwarm(sender, transferData.getTransferID());

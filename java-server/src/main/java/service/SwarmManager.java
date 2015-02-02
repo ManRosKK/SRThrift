@@ -105,7 +105,12 @@ public class SwarmManager {
 
     public synchronized TransferData getPendingTransfer(String key)
     {
-        return pendingTransfers.get(key);
+        TransferData transferData = pendingTransfers.get(key);
+        if(transferData != null)
+        {
+            return new TransferData(transferData);
+        }
+        return null;
     }
 
     public synchronized void deliverTransfer(String key)
@@ -144,7 +149,7 @@ public class SwarmManager {
         Timer electionTimer = electionTimers.get(key);
         if(electionTimer != null)
         {
-            log.info("Cleaning after old timer");
+            //log.info("Cleaning after old timer");
             electionTimer.cancel();
             electionTimer.purge();
         }

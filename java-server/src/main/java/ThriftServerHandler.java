@@ -62,6 +62,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                 //I don't have to check if I'm alive - I just add myself to the swarm
                 if(!member.equals(this.nodeID))
                 {
+                    connectionManager.checkIfNodeIsAlive(member);
                     Connection connection = connectionManager.getConnection(member);
                     NodeService.Client client = connection.getClient();
                     client.addToSwarm(this.nodeID, swarm, transferData);
@@ -120,6 +121,7 @@ public class ThriftServerHandler implements NodeService.Iface{
             {
                 try
                 {
+                    connectionManager.checkIfNodeIsAlive(member);
                     Connection connection = connectionManager.getConnection(member);
                     NodeService.Client client = connection.getClient();
                     leader &= client.electSwarmLeader(this.nodeID, this.nodeID, transfer);
@@ -142,6 +144,7 @@ public class ThriftServerHandler implements NodeService.Iface{
         {
             try
             {
+                connectionManager.checkIfNodeIsAlive(member);
                 Connection connection = connectionManager.getConnection(member);
                 NodeService.Client client = connection.getClient();
                 client.ping(this.nodeID);
@@ -168,6 +171,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                 try
                 {
                     //open connection
+                    connectionManager.checkIfNodeIsAlive(node);
                     Connection connection = connectionManager.getConnection(node);
                     NodeService.Client client = connection.getClient();
                     client.ping(this.nodeID);
@@ -197,6 +201,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                 //I don't have to check if I'm alive - I just add myself to the swarm
                 if(!member.equals(this.nodeID))
                 {
+                    connectionManager.checkIfNodeIsAlive(member);
                     Connection connection = connectionManager.getConnection(member);
                     NodeService.Client client = connection.getClient();
                     client.addToSwarm(this.nodeID, swarm, transferData);
@@ -214,13 +219,12 @@ public class ThriftServerHandler implements NodeService.Iface{
     private void endElection(Swarm swarm)
     {
         log.info("End election");
-        swarm.setLeader(this.nodeID);
-
         //Now let's update only
         for(NodeID member : swarm.getMembers())
         {
             try
             {
+                connectionManager.checkIfNodeIsAlive(member);
                 Connection connection = connectionManager.getConnection(member);
                 NodeService.Client client = connection.getClient();
                 client.electionEndedSwarm(this.nodeID, swarm);
@@ -236,12 +240,14 @@ public class ThriftServerHandler implements NodeService.Iface{
     @Override
     public void ping(NodeID sender) throws TException {
         //intentionally empty
-        log.info("I'm " + this.nodeID.getIP() + ":" + this.nodeID.getPort() + " and " + sender.getIP() + ":" + sender.getPort() + " has pinged me");
+        connectionManager.checkIfNodeIsAlive(sender);
+        //log.info("I'm " + this.nodeID.getIP() + ":" + this.nodeID.getPort() + " and " + sender.getIP() + ":" + sender.getPort() + " has pinged me");
     }
 
     @Override
     public void pingSwarm(NodeID leader, TransferID transfer) throws NotSwarmMemeber, TException {
         String key = account.makeTransferKey(transfer);
+        connectionManager.checkIfNodeIsAlive(leader);
         if(swarmManager.getPendingTransfer(key) == null || swarmManager.getSwarm(key) == null)
         {
             throw new NotSwarmMemeber(leader, transfer);
@@ -253,6 +259,7 @@ public class ThriftServerHandler implements NodeService.Iface{
     @Override
     public void updateSwarmMembers(NodeID sender, Swarm swarm) throws NotSwarmMemeber, WrongSwarmLeader, TException {
         String key = account.makeTransferKey(swarm.getTransfer());
+        connectionManager.checkIfNodeIsAlive(sender);
         if(swarmManager.getPendingTransfer(key) == null || swarmManager.getSwarm(key) == null)
         {
             throw new NotSwarmMemeber(sender, swarm.getTransfer());
@@ -263,6 +270,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, TException {
+        connectionManager.checkIfNodeIsAlive(sender);
         //if transferData is null
         if(transferData == null)
         {
@@ -283,6 +291,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void delSwarm(NodeID sender, TransferID swarmID) throws NotSwarmMemeber, WrongSwarmLeader, TException {
+        connectionManager.checkIfNodeIsAlive(sender);
         String key = account.makeTransferKey(swarmID);
         if(swarmManager.getPendingTransfer(key) == null || swarmManager.getSwarm(key) == null)
         {
@@ -313,6 +322,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public boolean electSwarmLeader(NodeID sender, NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, TException {
+        connectionManager.checkIfNodeIsAlive(sender);
         String key = account.makeTransferKey(Transfer);
         if(!swarmManager.isElectionPending(key))
         {
@@ -331,6 +341,7 @@ public class ThriftServerHandler implements NodeService.Iface{
             {
                 swarmManager.stopElection(key);
                 TransferData transferData = swarmManager.getPendingTransfer(key);
+                swarm.setLeader(this.nodeID);
                 //let's get rid of inactive nodes
                 removeMembers(swarm);
                 //add new ones if neccessary
@@ -339,6 +350,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                 swarmManager.updateSwarm(key, swarm);
                 createDeliverTask(transferData.getReceiver(), transferData);
                 createPingSwarmTask(transferData);
+                log.info("Election has ended, I am new leader");
             }
             return false;
         }
@@ -347,6 +359,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void electionEndedSwarm(NodeID sender, Swarm swarm) throws NotSwarmMemeber, TException {
+        connectionManager.checkIfNodeIsAlive(sender);
         String key = account.makeTransferKey(swarm.getTransfer());
         if(!swarmManager.isElectionPending(key))
         {
@@ -365,6 +378,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void deliverTransfer(NodeID sender, TransferData transfer) throws TException {
+        connectionManager.checkIfNodeIsAlive(sender);
         if(!account.isTransferInHistory(transfer))
         {
             account.takeTransfer(transfer);
@@ -374,6 +388,7 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void makeTransfer(NodeID receiver, long value) throws TException {
+        connectionManager.checkIfNodeIsAlive(receiver);
         //set params
         TransferData transferData = new TransferData();
         TransferID transferID = new TransferID();
@@ -399,7 +414,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                 log.info("Transfer delivered!");
                 connectionManager.closeConnection(connection);
                 log.info("Transfer complete");
-            } catch (TTransportException e) {
+            } catch (TException e) {
                 swarmManager.updatePendingTransfers(account.makeTransferKey(transferData.getTransferID()), transferData);
                 Swarm swarm = createSwarm(transferData);
                 createDeliverTask(receiver, transferData);
@@ -441,12 +456,12 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void setBlacklist(List<NodeID> blacklist) throws TException {
-
+        connectionManager.setBlackList(blacklist);
     }
 
     @Override
     public void virtualStop(boolean shouldStop) throws TException {
-
+        connectionManager.setStopped(shouldStop);
     }
 
     @Override

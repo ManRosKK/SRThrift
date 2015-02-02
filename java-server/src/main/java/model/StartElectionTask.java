@@ -45,6 +45,7 @@ public class StartElectionTask extends TimerTask{
         //Let the succession war begin...
         log.info("Let's check if my leader is alive - he doesn't ping me");
         try {
+            connectionManager.checkIfNodeIsAlive(swarm.getLeader());
             Connection connection = connectionManager.getConnection(swarm.getLeader());
             NodeService.Client client = connection.getClient();
             client.ping(sender);
@@ -57,6 +58,7 @@ public class StartElectionTask extends TimerTask{
             {
                 try
                 {
+                    connectionManager.checkIfNodeIsAlive(member);
                     Connection connection = connectionManager.getConnection(member);
                     NodeService.Client client = connection.getClient();
                     client.startSwarmElection(transferData.getTransferID());
@@ -71,6 +73,7 @@ public class StartElectionTask extends TimerTask{
             log.info("Let's candidate first");
             try
             {
+                connectionManager.checkIfNodeIsAlive(sender);
                 Connection connection = connectionManager.getConnection(sender);
                 NodeService.Client client = connection.getClient();
                 client.electSwarmLeader(sender, sender, transferData.getTransferID());

@@ -47,6 +47,7 @@ public class DeliverTask extends TimerTask {
             log.info("Trying to deliver transfer " +  transferData.getTransferID().getSender().getIP() + " "
                     + transferData.getTransferID().getSender().getPort() + " "
                     + transferData.getTransferID().getCounter());
+            connectionManager.checkIfNodeIsAlive(destinationNode);
             Connection connection = connectionManager.getConnection(destinationNode);
             NodeService.Client client = connection.getClient();
             client.deliverTransfer(sender, transferData);
@@ -60,6 +61,7 @@ public class DeliverTask extends TimerTask {
             {
                 try
                 {
+                    connectionManager.checkIfNodeIsAlive(member);
                     connection = connectionManager.getConnection(member);
                     client = connection.getClient();
                     client.delSwarm(sender, transferData.transferID);
