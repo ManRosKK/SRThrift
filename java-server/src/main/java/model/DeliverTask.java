@@ -55,12 +55,20 @@ public class DeliverTask extends TimerTask {
                     + transferData.getTransferID().getCounter() + " delivered");
             connectionManager.closeConnection(connection);
             //if we succeeded we kill the swarm
+
             for(NodeID member: swarmManager.getSwarm(makeKey()).getMembers())
             {
-                connection = connectionManager.getConnection(member);
-                client = connection.getClient();
-                client.delSwarm(sender, transferData.transferID);
-                connectionManager.closeConnection(connection);
+                try
+                {
+                    connection = connectionManager.getConnection(member);
+                    client = connection.getClient();
+                    client.delSwarm(sender, transferData.transferID);
+                    connectionManager.closeConnection(connection);
+                }
+                catch(TException ex)
+                {
+                    log.info("I guess member " + member.getIP() + ":" + member.getPort() + " is dead");
+                }
             }
 
             //stop the timer

@@ -33,7 +33,7 @@ public class PingMembersTask extends TimerTask{
         this.swarmManager = swarmManager;
     }
 
-    private void addSwarmMember()
+    private void addSwarmMembers()
     {
         List<NodeID> potentialMembers = configService.getShuffledNodes();
         Configuration config = configService.getConfig();
@@ -67,6 +67,7 @@ public class PingMembersTask extends TimerTask{
     private void updateMembers()
     {
         Swarm swarm = swarmManager.getSwarm(key);
+        if(swarm == null) return;
         for(NodeID member: swarm.getMembers())
         {
             try
@@ -90,9 +91,9 @@ public class PingMembersTask extends TimerTask{
         TransferData transferData = swarmManager.getPendingTransfer(key);
         List<NodeID> membersToRemove = new ArrayList<NodeID>();
         //ping all the swarm members
+        log.info("I'm going to ping my members");
         for(NodeID member: swarm.getMembers())
         {
-            //log.info("Just pinging " + member.getIP() + ":" + member.getPort());
             try
             {
                 Connection connection = connectionManager.getConnection(member);
@@ -102,6 +103,7 @@ public class PingMembersTask extends TimerTask{
             }
             catch(TException e)
             {
+                log.info("Swarm member " + member.getIP() + ":" + member.getPort() + " is dead.");
                 membersToRemove.add(member);
             }
         }
@@ -109,9 +111,12 @@ public class PingMembersTask extends TimerTask{
         for(NodeID memberToRemove :membersToRemove)
         {
             swarmManager.removeMemberFromSwarm(key, memberToRemove);
-            addSwarmMember();
         }
         //I can do it outside the loop - once is enough
-        updateMembers();
+        if(membersToRemove.size() > 0)
+        {
+            addSwarmMembers();
+            updateMembers();
+        }
     }
 }

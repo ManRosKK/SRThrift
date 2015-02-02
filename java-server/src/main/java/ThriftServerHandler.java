@@ -41,36 +41,8 @@ public class ThriftServerHandler implements NodeService.Iface{
         Swarm swarm = new Swarm();
         List<NodeID> members = new ArrayList<NodeID>();
         members.add(this.nodeID);
-        List<NodeID> potentialMembers = configService.getShuffledNodes();
+        getPotentialMemberList(members);
         Configuration config = configService.getConfig();
-        for(NodeID node : potentialMembers)
-        {
-            //if potential member is not myself try to add a new member to the swarm
-            if(!(this.nodeID.getIP().equals(node.getIP()) && this.nodeID.getPort() == node.getPort()))
-            {
-                try
-                {
-                    //open connection
-                    Connection connection = connectionManager.getConnection(node);
-                    NodeService.Client client = connection.getClient();
-
-                    log.info("Ping and add " + node.getIP() + ":" + node.getPort() + " to swarm");
-
-                    client.ping(this.nodeID);
-                    members.add(node);
-                    log.info("Added " + node.getIP() + ":" + node.getPort() + " to swarm");
-                    connectionManager.closeConnection(connection);
-                    if(members.size() == config.getSwarmSize())
-                    {
-                        break;
-                    }
-                }
-                catch(TException e)
-                {
-                    log.info("Can't add node " + node.getIP()+ ":" + node.getPort() + " to the swarm");
-                }
-            }
-        }
 
         if(members.size() < config.getSwarmSize())
         {
@@ -123,6 +95,144 @@ public class ThriftServerHandler implements NodeService.Iface{
         swarmManager.updateTimer(key, timer);
     }
 
+    private void createStartElectionTask(TransferID transferID)
+    {
+        Timer timer = new Timer();
+        String key = account.makeTransferKey(transferID);
+        timer.schedule(new StartElectionTask(this.nodeID ,key, swarmManager, connectionManager, configService), configService.getConfig().getSwarmPingTimeout());
+        swarmManager.updateElectionTimer(key, timer);
+    }
+
+    private boolean compareNodeID(NodeID nodeA, NodeID nodeB)
+    {
+        String keyA = nodeA.getIP() + nodeA.getPort();
+        String keyB = nodeB.getIP() + nodeB.getPort();
+        return keyA.compareTo(keyB) < 0;
+    }
+
+    private boolean amILeader(Swarm swarm, TransferID transfer)
+    {
+        boolean leader = true;
+        for(NodeID member : swarm.getMembers())
+        {
+            //if someone would be a better tyrant than me I've got to let him know
+            if(compareNodeID(member, this.nodeID))
+            {
+                try
+                {
+                    Connection connection = connectionManager.getConnection(member);
+                    NodeService.Client client = connection.getClient();
+                    leader &= client.electSwarmLeader(this.nodeID, this.nodeID, transfer);
+                    connectionManager.closeConnection(connection);
+                }
+                catch(Exception e)
+                {
+                    log.info("I guess member " + member.getIP() + ":" + member.getPort() + " is dead");
+                }
+            }
+        }
+        return leader;
+    }
+
+    private void removeMembers(Swarm swarm)
+    {
+        log.info("Removing dead members");
+        List<NodeID> membersToRemove = new ArrayList<NodeID>();
+        for(NodeID member : swarm.getMembers())
+        {
+            try
+            {
+                Connection connection = connectionManager.getConnection(member);
+                NodeService.Client client = connection.getClient();
+                client.ping(this.nodeID);
+                connectionManager.closeConnection(connection);
+            }
+            catch(Exception e)
+            {
+                log.info("I guess member " + member.getIP() + ":" + member.getPort() + " is dead.Let's remove him from a swarm.");
+                membersToRemove.add(member);
+            }
+        }
+        swarm.getMembers().removeAll(membersToRemove);
+    }
+
+    private void getPotentialMemberList(List<NodeID> currentMembers)
+    {
+        List<NodeID> potentialMembers = configService.getShuffledNodes();
+        Configuration config = configService.getConfig();
+        for(NodeID node : potentialMembers)
+        {
+            //if potential member is not myself try to add a new member to the swarm
+            if(!currentMembers.contains(node))
+            {
+                try
+                {
+                    //open connection
+                    Connection connection = connectionManager.getConnection(node);
+                    NodeService.Client client = connection.getClient();
+                    client.ping(this.nodeID);
+                    currentMembers.add(node);
+                    connectionManager.closeConnection(connection);
+                    if(currentMembers.size() == config.getSwarmSize())
+                    {
+                        break;
+                    }
+                }
+                catch(TException e)
+                {
+                }
+            }
+        }
+    }
+
+    private void refillSwarm(Swarm swarm, TransferData transferData)
+    {
+        log.info("Reffilling swarm");
+        getPotentialMemberList(swarm.getMembers());
+
+        for(NodeID member: swarm.getMembers())
+        {
+            try
+            {
+                //I don't have to check if I'm alive - I just add myself to the swarm
+                if(!member.equals(this.nodeID))
+                {
+                    Connection connection = connectionManager.getConnection(member);
+                    NodeService.Client client = connection.getClient();
+                    client.addToSwarm(this.nodeID, swarm, transferData);
+                    connectionManager.closeConnection(connection);
+                    log.info("Added " + member.getIP() + ":" + member.getPort() + " during refill");
+                }
+
+            }
+            catch(TException e)
+            {
+            }
+        }
+    }
+
+    private void endElection(Swarm swarm)
+    {
+        log.info("End election");
+        swarm.setLeader(this.nodeID);
+
+        //Now let's update only
+        for(NodeID member : swarm.getMembers())
+        {
+            try
+            {
+                Connection connection = connectionManager.getConnection(member);
+                NodeService.Client client = connection.getClient();
+                client.electionEndedSwarm(this.nodeID, swarm);
+                connectionManager.closeConnection(connection);
+            }
+            catch(Exception e)
+            {
+                log.info("I guess member " + member.getIP() + ":" + member.getPort() + " is dead");
+            }
+        }
+    }
+
     @Override
     public void ping(NodeID sender) throws TException {
         //intentionally empty
@@ -136,7 +246,8 @@ public class ThriftServerHandler implements NodeService.Iface{
         {
             throw new NotSwarmMemeber(leader, transfer);
         }
-        //log.info("My leader " +  leader.getIP() + ":" + leader.getPort() + " has pinged me " + this.nodeID.getIP() + ":" + this.nodeID.getPort());
+        log.info("My leader " +  leader.getIP() + ":" + leader.getPort() + " has pinged me " + this.nodeID.getIP() + ":" + this.nodeID.getPort());
+        createStartElectionTask(transfer);
     }
 
     @Override
@@ -147,10 +258,16 @@ public class ThriftServerHandler implements NodeService.Iface{
             throw new NotSwarmMemeber(sender, swarm.getTransfer());
         }
         swarmManager.updateSwarm(key, swarm);
+        createStartElectionTask(swarm.getTransfer());
     }
 
     @Override
     public void addToSwarm(NodeID sender, Swarm swarm, TransferData transferData) throws AlreadySwarmMemeber, TException {
+        //if transferData is null
+        if(transferData == null)
+        {
+            throw new TException("Swarm has been deleted in a meantime");
+        }
         //I added myself to the swarm earlier
         String key = account.makeTransferKey(transferData.getTransferID());
         if(swarmManager.getPendingTransfer(key) != null)
@@ -160,6 +277,7 @@ public class ThriftServerHandler implements NodeService.Iface{
         }
         swarmManager.updatePendingTransfers(key, transferData);
         swarmManager.updateSwarm(key, swarm);
+        createStartElectionTask(transferData.getTransferID());
         log.info("I (" + this.nodeID.getIP() + ":" + this.nodeID.getPort() + ") am a swarm member now");
     }
 
@@ -176,24 +294,73 @@ public class ThriftServerHandler implements NodeService.Iface{
         {
             throw new WrongSwarmLeader(this.nodeID, sender, swarmID);
         }
+        log.info("Transfer delivered - cleaning swarm");
         swarmManager.deliverTransfer(key);
         swarmManager.killSwarm(key);
         swarmManager.stopAndKillTimer(key);
+        swarmManager.stopAndKillElectionTimer(key);
     }
 
     @Override
     public Swarm getSwarm(NodeID sender, TransferID transfer) throws NotSwarmMemeber, TException {
-        return null;
+        Swarm swarm = swarmManager.getSwarm(account.makeTransferKey(transfer));
+        if(swarm == null)
+        {
+            throw new NotSwarmMemeber(this.nodeID, transfer);
+        }
+        return swarm;
     }
 
     @Override
     public boolean electSwarmLeader(NodeID sender, NodeID cadidate, TransferID Transfer) throws NotSwarmMemeber, TException {
-        return false;
+        String key = account.makeTransferKey(Transfer);
+        if(!swarmManager.isElectionPending(key))
+        {
+            return false;
+        }
+        Swarm swarm = swarmManager.getSwarm(key);
+        if(swarm == null)
+        {
+            throw new NotSwarmMemeber(this.nodeID, Transfer);
+        }
+        if((this.nodeID.getIP().equals(cadidate.getIP()) && this.nodeID.getPort() == cadidate.getPort() //I'm the sender - i've got to start an election
+                || compareNodeID(this.nodeID, cadidate))) //or my nodeID is smaller than candidate's one
+        {
+            boolean amILeader = amILeader(swarm, Transfer);
+            if(amILeader)
+            {
+                swarmManager.stopElection(key);
+                TransferData transferData = swarmManager.getPendingTransfer(key);
+                //let's get rid of inactive nodes
+                removeMembers(swarm);
+                //add new ones if neccessary
+                refillSwarm(swarm, transferData);
+                endElection(swarm);
+                swarmManager.updateSwarm(key, swarm);
+                createDeliverTask(transferData.getReceiver(), transferData);
+                createPingSwarmTask(transferData);
+            }
+            return false;
+        }
+        return true; //if my nodeID is bigger than he's more despotic than I am
     }
 
     @Override
     public void electionEndedSwarm(NodeID sender, Swarm swarm) throws NotSwarmMemeber, TException {
-
+        String key = account.makeTransferKey(swarm.getTransfer());
+        if(!swarmManager.isElectionPending(key))
+        {
+            return;
+        }
+        Swarm localSwarm = swarmManager.getSwarm(key);
+        if(localSwarm == null)
+        {
+            throw new NotSwarmMemeber(this.nodeID, swarm.getTransfer());
+        }
+        log.info("Election has ended, new leader is " + swarm.getLeader().getIP() + ":" + swarm.getLeader().getPort());
+        swarmManager.updateSwarm(key, swarm);
+        swarmManager.stopElection(key);
+        createStartElectionTask(swarm.getTransfer());
     }
 
     @Override
@@ -260,7 +427,11 @@ public class ThriftServerHandler implements NodeService.Iface{
 
     @Override
     public void startSwarmElection(TransferID transfer) throws NotSwarmMemeber, TException {
-
+        log.info("Start the succession war - candidate " + this.nodeID.getIP() + ":" + this.nodeID.getPort());
+        String key = account.makeTransferKey(transfer);
+        //we don't need election timer any more - an election has just started
+        swarmManager.stopAndKillElectionTimer(key);
+        swarmManager.startElection(key);
     }
 
     @Override

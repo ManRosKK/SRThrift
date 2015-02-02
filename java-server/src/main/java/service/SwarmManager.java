@@ -18,6 +18,8 @@ public class SwarmManager {
     private Map<String, TransferData> pendingTransfers;
     private Map<String, Swarm> swarms;
     private Map<String, Timer> timers;
+    private Map<String, Timer> electionTimers;
+    private Set<String> pendingElections;
 
 
     public SwarmManager()
@@ -25,6 +27,8 @@ public class SwarmManager {
         pendingTransfers = new HashMap<String, TransferData>();
         swarms = new HashMap<String, Swarm>();
         timers = new HashMap<String, Timer>();
+        electionTimers = new HashMap<String, Timer>();
+        pendingElections = new HashSet<String>();
     }
 
     public synchronized List<Swarm> getSwarms()
@@ -69,7 +73,12 @@ public class SwarmManager {
 
     public synchronized Swarm getSwarm(String key)
     {
-        return swarms.get(key);
+        Swarm swarm = swarms.get(key);
+        if(swarm != null)
+        {
+            return new Swarm(swarm);
+        }
+        return null;
     }
 
     public synchronized void killSwarm(String key)
@@ -106,6 +115,50 @@ public class SwarmManager {
         {
             log.info("Transfer " + key + " deliverd. Removing it from pending transfers.");
             pendingTransfers.remove(key);
+        }
+    }
+
+    public synchronized void startElection(String key)
+    {
+        if(!pendingElections.contains(key))
+        {
+            pendingElections.add(key);
+        }
+    }
+
+    public synchronized boolean isElectionPending(String key)
+    {
+        return pendingElections.contains(key);
+    }
+
+    public synchronized void stopElection(String key)
+    {
+        if(pendingElections.contains(key))
+        {
+            pendingElections.remove(key);
+        }
+    }
+
+    public synchronized void updateElectionTimer(String key, Timer timer)
+    {
+        Timer electionTimer = electionTimers.get(key);
+        if(electionTimer != null)
+        {
+            log.info("Cleaning after old timer");
+            electionTimer.cancel();
+            electionTimer.purge();
+        }
+        electionTimers.put(key, timer);
+    }
+
+    public synchronized void stopAndKillElectionTimer(String key)
+    {
+        Timer timer = electionTimers.get(key);
+        if(timer != null)
+        {
+            timer.cancel();
+            timer.purge();
+            electionTimers.remove(key);
         }
     }
 }
