@@ -400,8 +400,6 @@ public class ThriftServerHandler implements NodeService.Iface{
 
         if(account.isTransferPossible(value))
         {
-            account.setBalance(account.getBalance() - value);
-
             try {
                 //open connection
                 Connection connection = connectionManager.getConnection(receiver);
@@ -421,7 +419,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                 createPingSwarmTask(transferData);
                 log.info("Transfer failed, added to pending transfers");
             }
-
+            account.setBalance(account.getBalance() - value);
         }
         else
         {
