@@ -69,7 +69,9 @@ def smaller(node1,node2):
 
 class ServerHandler(NodeService.Iface):
     """
-    List of fields:
+    Main class implementing NodeService.Iface.
+
+    List of important fields:
     - nodeID
     - accountBalance
     - counter
@@ -80,6 +82,8 @@ class ServerHandler(NodeService.Iface):
     """
 
     def run_leader_thread(self):
+        """ Method which will be run in another thread responsible for leader and member cyclic tasks"""
+
         while not self.endThread:
             #for every swarm
             #logging.info((len(self.mySwarms),"to look at"))
@@ -342,14 +346,16 @@ class ServerHandler(NodeService.Iface):
             self.virtualStopLock.release()
             self.virtualStoped = False
 
+    @overrides(NodeService.Iface)
     def setBlacklist(self, blacklist):
         global globalBlacklist
         globalBlacklist = blacklist
         logging.info(("Blacklist set", blacklist))
 
-    #UTILLLLLLLLLLLLLLS
 
     def localElectNewLeader(self,swarm):
+        """ Elects new leader in swarm. If old leader is alive, returns immediately. """
+
         logging.info(("Electing new leader...",swarm))
         #get alive ppl
         alive_ppl = self.getAlivePpl(swarm.members)
@@ -399,6 +405,8 @@ class ServerHandler(NodeService.Iface):
                 pass
 
     def getAlivePpl(self,list_of_nodes):
+        """ Filters list_of_nodes returning only available nodes"""
+
         alive = []
         for node in list_of_nodes:
             try:
@@ -411,6 +419,8 @@ class ServerHandler(NodeService.Iface):
         return alive
 
     def makeSwarm(self,transferData):
+        """ Composes a swarm for given transferData"""
+
         logging.info(("making swarm"))
         #scan for ppl
         how_much = self.getSwarmSize() - 1
@@ -433,6 +443,8 @@ class ServerHandler(NodeService.Iface):
         logging.info(("makeSwarm exit: mySwarm is now: ",self.mySwarms))
 
     def unmakeSwarm(self,swarm):
+        """ Destroys given swarm """
+
         logging.info(("unmaking swarm", swarm))
 
         #get members
@@ -448,6 +460,8 @@ class ServerHandler(NodeService.Iface):
         logging.info(("unmade swarm", swarm))
 
     def funeral(self,swarm,nodeID):
+        """ Takes care of all actions related to losing connection to the node """
+
         #remove from swarm members
         swarm.members.remove(nodeID)
         #inform everyone
@@ -462,6 +476,9 @@ class ServerHandler(NodeService.Iface):
                     logging.info(("client not informed about funeral...",sys.exc_info()[0],node.IP,node.port))
 
     def getNeighbours(self,how_much_max,blacklist):
+        """ Gets alive neighbours (neighbourhood defined in config file)
+        which are not on blacklist. After finding how_much_max neighbours, returns earlier with the list """
+
         nlist = []
         iplist = self.getIPList()
         portlist = self.getPortList()
@@ -488,7 +505,6 @@ class ServerHandler(NodeService.Iface):
                     pass
         return nlist
 
-    #localutils
     def getTransferByID(self,transferID):
         transfersByID = [i for i in self.pendingTransfers if i.transferID==transferID]
         return transfersByID[0]
