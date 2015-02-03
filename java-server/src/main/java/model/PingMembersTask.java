@@ -74,6 +74,7 @@ public class PingMembersTask extends TimerTask{
             try
             {
                 connectionManager.checkIfNodeIsAlive(member);
+                log.info("Updating swarm member " + member.getIP() + ":" + member.getPort());
                 Connection connection = connectionManager.getConnection(member);
                 NodeService.Client client = connection.getClient();
                 client.updateSwarmMembers(sender, swarm);

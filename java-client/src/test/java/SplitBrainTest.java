@@ -40,6 +40,7 @@ public class SplitBrainTest {
     int maxcount = 6;
 
     String config_p10_s2 = "config\\testSwarm_p10_s2.ini";
+    String config_p10_s3 = "config\\testSwarm_p10_s3.ini";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -134,6 +135,8 @@ public class SplitBrainTest {
         assertEquals(swarmList.get(0).getMembersSize(),2);
         assertEquals(swarmList.get(0).getLeader().getPort(),portLow+1);
     }
+
+
 
     @Test
     public void FirstSurgeryDeliver() throws Exception {

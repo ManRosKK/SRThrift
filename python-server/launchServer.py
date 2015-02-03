@@ -100,22 +100,23 @@ class ServerHandler(NodeService.Iface):
                     except:
                         logging.info(("Not delivered",sys.exc_info()[0]))
 
-                    logging.info(("Pinging swarm members"))
+                    logging.info(("Pinging swarm members",swarm.members))
                     #check whether others are alive
-                    for node in swarm.members:
+                    for node in list(swarm.members):
                         if(node != self.nodeID):
                             try:
+                                logging.info(("Pinging swarm member",node))
                                 with AutoClient(node.IP,node.port) as client:
                                     client.pingSwarm(self.nodeID,swarm.transfer)
                             except TTransportException:
                                 logging.info(("Unable to ping, gotta find someone else"))
                                 deathCounter = self.deathCounter.get(node)
                                 if(deathCounter is None):
-                                    logging.info(("Death counter on!"))
+                                    logging.info(("Death counter on!",node))
                                     deathCounter = 1
                                     self.deathCounter[node]=deathCounter
                                 else:
-                                    logging.info(("Death!"))
+                                    logging.info(("Death!",node))
                                     self.deathCounter[node]= deathCounter + 1
                                     if self.deathCounter[node] > 1:
                                         self.funeral(swarm,node)
