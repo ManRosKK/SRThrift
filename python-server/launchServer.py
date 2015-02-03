@@ -123,7 +123,7 @@ class ServerHandler(NodeService.Iface):
                     logging.info(("Checking fellows"))
                     #check whether there is enough members in swarm
                     if self.getSwarmSize() > len(swarm.members):
-                        logging.info(("Call to arms!",len(swarm.members),"of",self.getSwarmSize()))
+                        logging.info(("Call to arms!",len(swarm.members),"of",self.getSwarmSize(),swarm))
                         how_much = self.getSwarmSize() - len(swarm.members)
                         neighbours = self.getNeighbours(how_much,swarm.members)
                         logging.info(("Got some fresh blood!", neighbours))
@@ -451,6 +451,7 @@ class ServerHandler(NodeService.Iface):
             if(node != self.nodeID):
                 try:
                     with AutoClient(node.IP,node.port) as client:
+                        logging.info(("update swarm members for ",node,swarm.members))
                         client.updateSwarmMembers(self.nodeID,swarm)
                 except:
                     traceback.print_exc()

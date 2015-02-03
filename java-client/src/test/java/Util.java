@@ -53,7 +53,7 @@ public class Util {
     }
 
 
-    public static void runServer(String IP, final int port, long balance, String configFile, String language) throws IOException {
+    public static void runServer(String IP, final int port, long balance, String configFile,final String language) throws IOException {
         String execString = shellStrings.get(language) + " " + IP + " " + port + " " +
                 balance + " " + (new File(configFile).getAbsolutePath());
         System.out.println(execString);
@@ -80,7 +80,7 @@ public class Util {
                     String line;
                     while ((line = readerStdout.readLine()) != null) {
                         //stdoutMap.get(port).append("Stdout" + port + ": " + line + "\n");
-                        System.out.println("Stdout" + port + ": " + line);
+                        System.out.println("Stdout" + language.toUpperCase() + port + ": " + line);
                         System.out.flush();
                 }
                 } catch (IOException e) {
@@ -98,7 +98,7 @@ public class Util {
                     String line;
                     while ((line = readerStderr.readLine()) != null) {
                         //stderrMap.get(port).append("StdErr" + port + ": " + line + "\n");
-                        System.out.println("StdErr" + port + ": " + line);
+                        System.out.println("StdErr" + language.toUpperCase()  + port + ": " + line);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

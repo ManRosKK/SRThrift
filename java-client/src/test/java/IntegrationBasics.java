@@ -1,3 +1,4 @@
+import SRBanking.ThriftInterface.NodeID;
 import SRBanking.ThriftInterface.NotEnoughMoney;
 import SRBanking.ThriftInterface.Swarm;
 import SRBanking.ThriftInterface.TransferData;
@@ -6,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -32,6 +34,7 @@ public class IntegrationBasics {
     String configFile = "config\\testSwarmBasics.ini";
     String configBig = "config\\testSwarmBig.ini";
     String configp10s3 = "config\\testSwarm_p10_s3.ini";
+    String configp10s6 = "config\\testSwarm_p10_s6.ini";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -289,8 +292,6 @@ public class IntegrationBasics {
                         continue;
 
                     try {
-                        int lowerHalf = 5;
-                        int upperHalf = 5;
 
                         Reporter.log("\n\n----------------------\n", true);
                         Reporter.log("Connecting " + language1 + ", " + language2 + " and " + language3, true);
@@ -327,12 +328,134 @@ public class IntegrationBasics {
                         //report
                         Reporter.log("Test  " + language1 + "," + language2 + " and " + language3 + "succeeded!", true);
                     } finally {
+                        Reporter.log("\n\n----------------------\n", true);
                         Reporter.log("Tear Down!", true);
+                        Reporter.log("\n\n----------------------\n", true);
 
                         //tear down
                         Util.killServerNoException(IPN,portLow);
                         Util.killServerNoException(IPN,portLow+1);
                         Util.killServerNoException(IPN,portLow+2);
+                    }
+
+
+                }
+            }
+        }
+    }
+
+    /**
+     * 3-3 split brain test
+     */
+    @Test
+    public void SplitBrain33() throws Exception {
+
+        for(String language1: Util.shellStrings.keySet()) {
+            for(String language2: Util.shellStrings.keySet()) {
+                for (String language3 : Util.shellStrings.keySet()) {
+
+                    if (language1.equals(language2) || language1.equals(language3) || language2.equals(language3))
+                        continue;
+                    if(!language1.equals("java") || !language2.equals("python") || !language3.equals("csharp"))
+                        continue;
+
+                    try {
+
+                        Reporter.log("\n\n----------------------\n", true);
+                        Reporter.log("Connecting " + language1 + ", " + language2 + " and " + language3, true);
+                        Reporter.log("\n\n----------------------\n", true);
+
+                        //run three servers
+                        Util.runServer(IPN, portLow, Util.defaultBalance, configp10s6, language1);
+                        Util.runServer(IPN, portLow+1, Util.defaultBalance, configp10s6, language2);
+                        Util.runServer(IPN, portLow+2, Util.defaultBalance, configp10s6, language3);
+
+                        //run three more servers
+                        Util.runServer(IPN, portLow+3, Util.defaultBalance, configp10s6, language3);
+                        Util.runServer(IPN, portLow+4, Util.defaultBalance, configp10s6, language1);
+                        Util.runServer(IPN, portLow+5, Util.defaultBalance, configp10s6, language2);
+
+
+                        //act: transfer
+                        long value = 5;
+                        EasyClient.makeTransfer(IPN, portLow, IPReceiver, portReceiver, value);
+                        Thread.sleep(5000);
+
+                        Reporter.log("\n\n----------------------\n", true);
+                        Reporter.log("BLACKLIST", true);
+                        Reporter.log("\n\n----------------------\n", true);
+
+                        //act splitBrain
+                        List<NodeID> blacklist0 = Arrays.asList();
+
+                        List<NodeID> blacklist1 = Arrays.asList(
+                                new NodeID(IPN, portLow),
+                                new NodeID(IPN, portLow + 1),
+                                new NodeID(IPN, portLow + 2)
+                        );
+
+                        List<NodeID> blacklist2 = Arrays.asList(
+                                new NodeID(IPN, portLow + 3),
+                                new NodeID(IPN, portLow + 4),
+                                new NodeID(IPN, portLow + 5)
+                        );
+                        EasyClient.setBlacklist(IPN, portLow, blacklist2);
+                        EasyClient.setBlacklist(IPN, portLow+1, blacklist2);
+                        EasyClient.setBlacklist(IPN, portLow+2, blacklist2);
+                        EasyClient.setBlacklist(IPN, portLow+3, blacklist1);
+                        EasyClient.setBlacklist(IPN, portLow+4, blacklist1);
+                        EasyClient.setBlacklist(IPN, portLow+5, blacklist1);
+                        Thread.sleep(25000);
+
+                        //assert
+                        List<Swarm> swarmList = null;
+
+                        //assert first miniswarm
+                        swarmList = EasyClient.getSwarmList(IPN, portLow);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow);
+
+                        swarmList = EasyClient.getSwarmList(IPN, portLow+1);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow);
+
+                        swarmList = EasyClient.getSwarmList(IPN, portLow+2);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow);
+
+                        //assert second miniswarm
+                        swarmList = EasyClient.getSwarmList(IPN, portLow+3);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow+3);
+
+                        swarmList = EasyClient.getSwarmList(IPN, portLow+4);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow+3);
+
+                        swarmList = EasyClient.getSwarmList(IPN, portLow+5);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow+3);
+
+                        //report
+                        Reporter.log("Test  " + language1 + "," + language2 + " and " + language3 + "succeeded!", true);
+                    } finally {
+                        Reporter.log("\n\n----------------------\n", true);
+                        Reporter.log("Tear Down  " + language1 + ", " + language2 + " and " + language3, true);
+                        Reporter.log("\n\n----------------------\n", true);
+
+                        //tear down
+                        Util.killServerNoException(IPN,portLow);
+                        Util.killServerNoException(IPN,portLow+1);
+                        Util.killServerNoException(IPN,portLow+2);
+                        Util.killServerNoException(IPN,portLow+3);
+                        Util.killServerNoException(IPN,portLow+4);
+                        Util.killServerNoException(IPN,portLow+5);
                     }
 
 
