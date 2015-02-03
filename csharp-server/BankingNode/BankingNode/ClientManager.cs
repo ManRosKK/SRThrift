@@ -70,7 +70,7 @@ namespace BankingNode
         {
             logerr.Warn("oddaje: " + node);
             if(clients.ContainsKey(node))
-                Monitor.Exit(clients[node]);    
+                Monitor.Exit(clients[node]);   
         }
         public void SetBlackList(List<SRBanking.ThriftInterface.NodeID> list)
         {

@@ -13,6 +13,10 @@ namespace BankingNode
         public Int64 Balance { set; get; }
         private Int64 counter = 0;
         private object _lock = new object();
+        public List<TransferData> Transacitons = new List<TransferData>();
+        /// <summary>
+        /// Dostęp do listy tranzakcji
+        /// </summary>
         public List<SRBanking.ThriftInterface.TransferData> BaseTransactions
         {
             get
@@ -25,7 +29,10 @@ namespace BankingNode
                 return t;
             }
         }
-        public List<TransferData> Transacitons = new List<TransferData>();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns> Zwraca nowy numer transakcji</returns>
         public TransferID generateTransactionID()
         {
             TransferID t = new TransferID();
@@ -36,6 +43,10 @@ namespace BankingNode
             }
             return t;
         }
+        /// <summary>
+        /// Sprawdza czy możliwe jest dokonanie tranzakcji tego typu
+        /// </summary>
+        /// <param name="transaction"></param>
         public void checkTransfer(TransferData transaction)
         {
             if (Balance - transaction.Value < 0)
@@ -43,6 +54,10 @@ namespace BankingNode
                 throw new SRBanking.ThriftInterface.NotEnoughMoney();
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transaction"></param>
         public void CommitTransfer(TransferData transaction)
         {
             logerr.Info(transaction.TransferID.Sender.ToString() + " vs " + transaction.Receiver.ToString());

@@ -50,7 +50,8 @@ namespace BankingNode
                 if (value != null)
                 {
                     internalObject.Members = new List<SRBanking.ThriftInterface.NodeID>();
-                    foreach (NodeID x in value)
+                    List<NodeID> tmp = value.Distinct().ToList();
+                    foreach (NodeID x in tmp)
                     {
                         internalObject.Members.Add(x.ToBase());
                     }
@@ -63,11 +64,13 @@ namespace BankingNode
                 {
                     tmp.Add(new NodeID(x));
                 }
-                return tmp;
+                return tmp.Distinct().ToList();
             }
         }
         public void AddToSwarm(NodeID node)
         {
+            if(this.Members.Contains(node))
+                return;
             internalObject.Members.Add(node.ToBase());
         }
         public static bool operator ==(Swarm c1, Swarm c2)
