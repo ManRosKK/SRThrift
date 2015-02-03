@@ -366,6 +366,16 @@ class ServerHandler(NodeService.Iface):
             #if leader is up, no need to elect new one
             return
 
+        try:
+            with AutoClient(swarm.leader.IP,swarm.leader.port) as client:
+                client.ping(self.nodeID)
+            logging.info(("Leader is alive! Election cancelled",swarm))
+            #if leader is up, no need to elect new one
+            return
+        except:
+            #leader is dead, it's ok
+            pass
+
         #start election
         #for everyone and not me
         for node in alive_ppl:
