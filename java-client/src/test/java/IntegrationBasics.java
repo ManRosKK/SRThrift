@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * Created by sven on 2015-01-09.
@@ -329,7 +330,7 @@ public class IntegrationBasics {
                         Reporter.log("Test  " + language1 + "," + language2 + " and " + language3 + "succeeded!", true);
                     } finally {
                         Reporter.log("\n\n----------------------\n", true);
-                        Reporter.log("Tear Down!", true);
+                        Reporter.log("Tear Down!" + language1 + "," + language2 + " and " + language3, true);
                         Reporter.log("\n\n----------------------\n", true);
 
                         //tear down
@@ -432,16 +433,25 @@ public class IntegrationBasics {
                         //assert second miniswarm
                         swarmList = EasyClient.getSwarmList(IPN, portLow+3);
                         assertEquals(swarmList.size(), 1);
+                        assertNotNull(swarmList.get(0));
+                        assertNotNull(swarmList.get(0).getLeader());
+                        assertNotNull(swarmList.get(0).getLeader().getPort());
                         assertEquals(swarmList.get(0).getLeader().getPort(), portLow+3,swarmList.get(0).toString());
                         assertEquals(swarmList.get(0).getMembersSize(), 3);
 
                         swarmList = EasyClient.getSwarmList(IPN, portLow+4);
                         assertEquals(swarmList.size(), 1);
+                        assertNotNull(swarmList.get(0));
+                        assertNotNull(swarmList.get(0).getLeader());
+                        assertNotNull(swarmList.get(0).getLeader().getPort());
                         assertEquals(swarmList.get(0).getLeader().getPort(), portLow+3,swarmList.get(0).toString());
                         assertEquals(swarmList.get(0).getMembersSize(), 3);
 
                         swarmList = EasyClient.getSwarmList(IPN, portLow+5);
                         assertEquals(swarmList.size(), 1);
+                        assertNotNull(swarmList.get(0));
+                        assertNotNull(swarmList.get(0).getLeader());
+                        assertNotNull(swarmList.get(0).getLeader().getPort());
                         assertEquals(swarmList.get(0).getLeader().getPort(), portLow+3,swarmList.get(0).toString());
                         assertEquals(swarmList.get(0).getMembersSize(), 3);
 
