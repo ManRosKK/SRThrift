@@ -124,7 +124,7 @@ public class ThriftServerHandler implements NodeService.Iface{
                     connectionManager.checkIfNodeIsAlive(member);
                     Connection connection = connectionManager.getConnection(member);
                     NodeService.Client client = connection.getClient();
-                    leader &= client.electSwarmLeader(this.nodeID, this.nodeID, transfer);
+                    leader &= !client.electSwarmLeader(this.nodeID, this.nodeID, transfer);
                     connectionManager.closeConnection(connection);
                 }
                 catch(Exception e)
@@ -264,6 +264,11 @@ public class ThriftServerHandler implements NodeService.Iface{
         {
             throw new NotSwarmMemeber(sender, swarm.getTransfer());
         }
+        if(!swarm.getLeader().getIP().equals(sender.getIP())
+                || swarm.getLeader().getPort() != sender.getPort())
+        {
+            throw new WrongSwarmLeader(this.nodeID, sender, swarm.getTransfer());
+        }
         swarmManager.updateSwarm(key, swarm);
         createStartElectionTask(swarm.getTransfer());
     }
@@ -326,7 +331,11 @@ public class ThriftServerHandler implements NodeService.Iface{
         String key = account.makeTransferKey(Transfer);
         if(!swarmManager.isElectionPending(key))
         {
-            return false;
+            return true;
+        }
+        if(swarmManager.amIElecting(key))
+        {
+            return compareNodeID(this.nodeID, cadidate);
         }
         Swarm swarm = swarmManager.getSwarm(key);
         if(swarm == null)
@@ -336,6 +345,7 @@ public class ThriftServerHandler implements NodeService.Iface{
         if((this.nodeID.getIP().equals(cadidate.getIP()) && this.nodeID.getPort() == cadidate.getPort() //I'm the sender - i've got to start an election
                 || compareNodeID(this.nodeID, cadidate))) //or my nodeID is smaller than candidate's one
         {
+            swarmManager.setElectionPending(key, Boolean.TRUE);
             boolean amILeader = amILeader(swarm, Transfer);
             if(amILeader)
             {
@@ -352,9 +362,10 @@ public class ThriftServerHandler implements NodeService.Iface{
                 createPingSwarmTask(transferData);
                 log.info("Election has ended, I am new leader");
             }
-            return false;
+            swarmManager.setElectionPending(key, Boolean.FALSE);
+            return true;
         }
-        return true; //if my nodeID is bigger than he's more despotic than I am
+        return false; //if my nodeID is bigger than he's more despotic than I am
     }
 
     @Override

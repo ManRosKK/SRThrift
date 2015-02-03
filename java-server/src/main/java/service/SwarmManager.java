@@ -19,7 +19,7 @@ public class SwarmManager {
     private Map<String, Swarm> swarms;
     private Map<String, Timer> timers;
     private Map<String, Timer> electionTimers;
-    private Set<String> pendingElections;
+    private Map<String, Boolean> pendingElections;
 
 
     public SwarmManager()
@@ -28,7 +28,7 @@ public class SwarmManager {
         swarms = new HashMap<String, Swarm>();
         timers = new HashMap<String, Timer>();
         electionTimers = new HashMap<String, Timer>();
-        pendingElections = new HashSet<String>();
+        pendingElections = new HashMap<String, Boolean>();
     }
 
     public synchronized List<Swarm> getSwarms()
@@ -125,20 +125,34 @@ public class SwarmManager {
 
     public synchronized void startElection(String key)
     {
-        if(!pendingElections.contains(key))
+        if(pendingElections.get(key) == null)
         {
-            pendingElections.add(key);
+            pendingElections.put(key, false);
         }
     }
 
     public synchronized boolean isElectionPending(String key)
     {
-        return pendingElections.contains(key);
+        return pendingElections.get(key) != null;
+    }
+
+    public synchronized void setElectionPending(String key, Boolean isPending)
+    {
+        pendingElections.put(key, isPending);
+    }
+
+    public synchronized boolean amIElecting(String key)
+    {
+        if(pendingElections.get(key) == null)
+        {
+            return false;
+        }
+        return pendingElections.get(key);
     }
 
     public synchronized void stopElection(String key)
     {
-        if(pendingElections.contains(key))
+        if(pendingElections.get(key) != null)
         {
             pendingElections.remove(key);
         }
