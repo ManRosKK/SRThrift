@@ -531,7 +531,7 @@ namespace BankingNode
 
         public bool electSwarmLeader(SRBanking.ThriftInterface.NodeID sender, SRBanking.ThriftInterface.NodeID cadidate, SRBanking.ThriftInterface.TransferID Transfer)
         {
-            logerr.Fatal("ELECT SWARM FROM:::: "+sender);
+            logerr.Fatal("ELECT SWARM FROM:::: "+sender+" Candidate:  "+new NodeID(cadidate));
             if (clientManager.IsOnBlackList(new NodeID(sender)))
             {
                 throw new SRBanking.ThriftInterface.NotEnoughMoney();
