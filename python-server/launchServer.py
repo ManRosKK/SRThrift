@@ -232,7 +232,10 @@ class ServerHandler(NodeService.Iface):
             raise TTransportException("Call from blacklisted member!")
         if self.virtualStoped:
             raise TTransportException("Virtual stopped")
+        logging.info(("updateSwarmMembers",sender,swarm))
         swarmlocal = self.getSwarmByID(swarm.transfer)
+        if (swarmlocal.leader != sender):
+            raise WrongSwarmLeader(receiverNode=self.nodeID, leader=swarm.leader, transfer=swarm.transfer)
         swarmlocal.members = swarm.members
 
     @overrides(NodeService.Iface)

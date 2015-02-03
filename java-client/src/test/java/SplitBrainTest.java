@@ -37,7 +37,7 @@ public class SplitBrainTest {
 
     String IPN = "127.0.0.1";
     int portLow = 9080;
-    int maxcount = 4;
+    int maxcount = 6;
 
     String config_p10_s2 = "config\\testSwarm_p10_s2.ini";
 
@@ -65,7 +65,8 @@ public class SplitBrainTest {
         //set first zone
         List<NodeID> blacklist1 = Arrays.asList(
                 new NodeID(IPN,portLow+1),
-                new NodeID(IPN,portLow+3)
+                new NodeID(IPN,portLow+3),
+                new NodeID(IPN,portLow+5)
         );
         EasyClient.setBlacklist(IPN,portLow+0, blacklist1);
         EasyClient.setBlacklist(IPN,portLow+2, blacklist1);
@@ -73,24 +74,65 @@ public class SplitBrainTest {
         //set second zone
         List<NodeID> blacklist2 = Arrays.asList(
                 new NodeID(IPN,portLow+0),
-                new NodeID(IPN,portLow+2)
+                new NodeID(IPN,portLow+2),
+                new NodeID(IPN,portLow+4)
         );
         EasyClient.setBlacklist(IPN,portLow+1, blacklist2);
         EasyClient.setBlacklist(IPN,portLow+3, blacklist2);
 
         //wait to see what will happen
-        Thread.sleep(10000);
+        Thread.sleep(15000);
 
         List<Swarm> swarmList = null;
 
         swarmList = EasyClient.getSwarmList(IPN, portLow + 0);
         assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow);
+
         swarmList = EasyClient.getSwarmList(IPN, portLow + 1);
         assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow+1);
+
         swarmList = EasyClient.getSwarmList(IPN, portLow + 2);
         assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow);
+
         swarmList = EasyClient.getSwarmList(IPN, portLow + 3);
         assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow+1);
+
+
+        //add new
+        Util.runNServers(IPN, portLow+4,Util.defaultBalance,config_p10_s2,2);
+        EasyClient.setBlacklist(IPN,portLow+4, blacklist1);
+        EasyClient.setBlacklist(IPN,portLow+5, blacklist2);
+
+        //kill normal members servers
+        Util.killServerNoException(IPN,portLow+2);
+        Util.killServerNoException(IPN,portLow+3);
+
+        //wait
+        Thread.sleep(30000);
+
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 0);
+        assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow);
+
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 1);
+        assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow+1);
+
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 4);
+        assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow);
+
+        swarmList = EasyClient.getSwarmList(IPN, portLow + 5);
+        assertEquals(swarmList.size(),1);
+        assertEquals(swarmList.get(0).getMembersSize(),2);
+        assertEquals(swarmList.get(0).getLeader().getPort(),portLow+1);
     }
 
     @Test

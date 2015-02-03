@@ -48,9 +48,9 @@ public class PingMembersTask extends TimerTask{
 
                     log.info("Ping and add " + node.getIP() + ":" + node.getPort() + " to swarm after member death");
 
-                    client.ping(this.sender);
-                    swarmManager.addMemberToSwarm(key, node);
+                    client.ping(this.sender);                   
                     client.addToSwarm(this.sender, swarmManager.getSwarm(key), swarmManager.getPendingTransfer(key));
+                    swarmManager.addMemberToSwarm(key, node);
                     connectionManager.closeConnection(connection);
                     log.info("Added " + node.getIP() + ":" + node.getPort() + " to swarm after member death");
                     if( swarmManager.getSwarm(key).getMembers().size() == config.getSwarmSize())
