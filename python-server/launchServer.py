@@ -8,7 +8,7 @@ from threading import BoundedSemaphore
 from SRBanking.ThriftInterface import NodeService
 from SRBanking.ThriftInterface.ttypes import TransferData, NodeID, TransferID,\
     Swarm, NotEnoughMembersToMakeTransfer, NotEnoughMoney, NotSwarmMemeber,\
-    WrongSwarmLeader
+    WrongSwarmLeader, AlreadySwarmMemeber
 from SRBanking.ThriftInterface import NodeService
 from ConfigParser import ConfigParser
 import time
@@ -238,15 +238,21 @@ class ServerHandler(NodeService.Iface):
     @overrides(NodeService.Iface)
     def addToSwarm(self,sender,swarm,transferData):
         global globalBlacklist
+        logging.info(("Got add to swarm from ",sender,swarm))
         if sender in globalBlacklist:
             raise TTransportException("Call from blacklisted member!")
         if self.virtualStoped:
             raise TTransportException("Virtual stopped")
-        logging.info(("Setting hb for ",swarm.transfer))
-        self.hb[str(swarm.transfer.sender)+str(swarm.transfer.counter)] = time.time()
-        self.pendingTransfers += [transferData]
-        self.mySwarms += [swarm]
-        logging.info(("added to swarm!",swarm))
+        try:
+            swarmOld = self.getSwarmByID(swarm.transfer)
+            logging.info(("Already in swarm ",swarmOld))
+            raise AlreadySwarmMemeber(receiverNode=self, leader=swarmOld.leader, transfer=swarm.transfer)
+        except IndexError:
+            logging.info(("Add to swarm: Setting hb for ",swarm.transfer))
+            self.hb[str(swarm.transfer.sender)+str(swarm.transfer.counter)] = time.time()
+            self.pendingTransfers += [transferData]
+            self.mySwarms += [swarm]
+            logging.info(("added to swarm!",swarm))
 
     @overrides(NodeService.Iface)
     def delSwarm(self,sender,transferID):
@@ -416,6 +422,7 @@ class ServerHandler(NodeService.Iface):
             self.accountBalance -= transferData.value
             for i in xrange(how_much):
                 with AutoClient(neighbours[i].IP,neighbours[i].port) as client:
+                    logging.info(("adding ",neighbours[i],"to new swarm",swarm))
                     client.addToSwarm(self.nodeID,swarm,transferData)
         else:
             raise NotEnoughMembersToMakeTransfer(membersAvailable=len(neighbours),membersRequested=how_much)

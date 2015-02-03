@@ -31,6 +31,7 @@ public class IntegrationBasics {
 
     String configFile = "config\\testSwarmBasics.ini";
     String configBig = "config\\testSwarmBig.ini";
+    String configp10s3 = "config\\testSwarm_p10_s3.ini";
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -84,7 +85,7 @@ public class IntegrationBasics {
         {
             for(String language2: Util.shellStrings.keySet())
             {
-                if (language1.equals(language2) || language1.equals("java") || language2.equals("java"))
+                if (language1.equals(language2))
                     continue;
 
                 try {
@@ -124,7 +125,7 @@ public class IntegrationBasics {
         {
             for(String language2: Util.shellStrings.keySet())
             {
-                if (language1.equals(language2) || language1.equals("java") || language2.equals("java"))
+                if (language1.equals(language2) )
                     continue;
 
                 try {
@@ -181,7 +182,7 @@ public class IntegrationBasics {
         {
             for(String language2: Util.shellStrings.keySet())
             {
-                if (language1.equals(language2) || language1.equals("java") || language2.equals("java"))
+                if (language1.equals(language2))
                     continue;
 
                 try {
@@ -226,16 +227,19 @@ public class IntegrationBasics {
         {
             for(String language2: Util.shellStrings.keySet())
             {
-                if (language1.equals(language2) || language1.equals("java") || language2.equals("java"))
+                if (language1.equals(language2))
                     continue;
 
                 for(int i=1;i>=0;--i)
                 {
                     try {
-                        Reporter.log("Connecting " + language1 + " and " + language2 + ", killing " + i + "...",true);
-
                         int lowerHalf = 5;
                         int upperHalf = 5;
+
+                        Reporter.log("\n\n----------------------\n",true);
+                        Reporter.log("Connecting " + language1 + " and " + language2 + ", killing " + i + "...",true);
+                        Reporter.log("\n\n----------------------\n",true);
+
 
                         //servers will range <portLow;portLow+lowerHalf+i)
                         Util.runNServers(IPN,portLow,Util.defaultBalance,configBig,language1,lowerHalf+i);
@@ -271,6 +275,70 @@ public class IntegrationBasics {
         }
     }
 
+    /**
+     * Create three servers , one for each language
+     */
+    @Test
+    public void ThreeOfAKind() throws Exception {
 
+        for(String language1: Util.shellStrings.keySet()) {
+            for(String language2: Util.shellStrings.keySet()) {
+                for (String language3 : Util.shellStrings.keySet()) {
+
+                    if (language1.equals(language2) || language1.equals(language3) || language2.equals(language3))
+                        continue;
+
+                    try {
+                        int lowerHalf = 5;
+                        int upperHalf = 5;
+
+                        Reporter.log("\n\n----------------------\n", true);
+                        Reporter.log("Connecting " + language1 + ", " + language2 + " and " + language3, true);
+                        Reporter.log("\n\n----------------------\n", true);
+
+                        //run three servers
+                        Util.runServer(IPN, portLow, Util.defaultBalance, configp10s3, language1);
+                        Util.runServer(IPN, portLow+1, Util.defaultBalance, configp10s3, language2);
+                        Util.runServer(IPN, portLow+2, Util.defaultBalance, configp10s3, language3);
+
+                        //act
+                        long value = 5;
+                        EasyClient.makeTransfer(IPN, portLow, IPReceiver, portReceiver, value);
+                        Thread.sleep(5000);
+
+                        //assert
+                        List<Swarm> swarmList = null;
+
+                        swarmList = EasyClient.getSwarmList(IPN, portLow);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow);
+
+                        swarmList = EasyClient.getSwarmList(IPN, portLow+1);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow);
+
+                        swarmList = EasyClient.getSwarmList(IPN, portLow+2);
+                        assertEquals(swarmList.size(), 1);
+                        assertEquals(swarmList.get(0).getMembersSize(), 3);
+                        assertEquals(swarmList.get(0).getLeader().getPort(), portLow);
+
+                        //report
+                        Reporter.log("Test  " + language1 + "," + language2 + " and " + language3 + "succeeded!", true);
+                    } finally {
+                        Reporter.log("Tear Down!", true);
+
+                        //tear down
+                        Util.killServerNoException(IPN,portLow);
+                        Util.killServerNoException(IPN,portLow+1);
+                        Util.killServerNoException(IPN,portLow+2);
+                    }
+
+
+                }
+            }
+        }
+    }
 
 }
